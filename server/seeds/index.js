@@ -9,19 +9,27 @@ mongoose.connect('mongodb://localhost:27017/reddit-clone', {
 })
 
 const db = mongoose.connection
+
 db.on('error', console.error.bind(console, 'connection error'))
 db.once('open', () => {
   console.log('connected to mongo database')
 })
 
 const seedDB = async () => {
+  await Post.deleteMany({})
   const response = await getReddit()
-  response.forEach(async post => {
-    let newPost = new Post(post)
+
+  for (let i = 0; i < response.length; i++) {
+    let newPost = new Post(response[i])
     await newPost.save()
-  })
+  }
 }
 
-seedDB().then(() => {
-  mongoose.connection.close()
-})
+seedDB()
+  .then(() => {
+    console.log('closing seed files')
+    mongoose.connection.close()
+  })
+  .catch(err => {
+    console.log(err)
+  })
