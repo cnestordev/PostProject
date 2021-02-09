@@ -14,12 +14,13 @@ const getReddit = async () => {
       ups,
       downs,
       num_comments,
+      selftext,
     } = response.data.data.children[i].data
     const newPost = {
       title,
       author,
       timestamp: created,
-      body: 'Temp',
+      body: selftext,
       image: url,
       likes: ups,
       dislikes: downs,

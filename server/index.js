@@ -31,6 +31,12 @@ app.get('/posts', async (req, res) => {
   res.status(200).json({ data: posts })
 })
 
+app.get('/posts/:id', async (req, res) => {
+  const { id } = req.params
+  const post = await Post.findById(id)
+  res.status(200).json({ data: post })
+})
+
 const PORT = process.env.PORT || 3001
 
 app.listen(PORT, () => {

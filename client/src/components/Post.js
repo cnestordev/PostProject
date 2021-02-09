@@ -10,7 +10,6 @@ const Post = ({ data }) => {
         <h4>{data.author}</h4>
         <h5>{data.timestamp}</h5>
         <img style={{ width: '500px' }} src={data.image} />
-        <p>{data.body}</p>
         <hr />
         <p>Likes: {data.likes}</p>
         <p>Comments: {data.comments}</p>
