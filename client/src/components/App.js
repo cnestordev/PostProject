@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+
 import axios from 'axios'
 import Posts from './Posts'
+import PostDetails from './PostDetails'
 
 function App() {
   const [data, setData] = useState({})
@@ -8,12 +11,13 @@ function App() {
   useEffect(async () => {
     const res = await axios.get('http://localhost:3001')
     setData(res.data)
-  })
+  }, [])
 
   return (
-    <div className="App">
-      <Posts />
-    </div>
+    <Router>
+      <Route exact path="/posts" component={Posts} />
+      <Route path="/posts/:id" component={PostDetails} />
+    </Router>
   )
 }
 

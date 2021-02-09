@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { getPosts } from '../redux/actions/posts.actions'
+import Post from './Post'
 
 const Posts = props => {
-  useEffect(async () => {
-    console.log('-------------------------')
-    console.log(props)
-    console.log('-------------------------')
-    console.log(props)
+  useEffect(() => {
+    props.getPosts()
   }, [])
 
-  return <div>Posts Component</div>
+  const postArr = props.posts.map(post => {
+    return <Post key={post['_id']} data={post} />
+  })
+
+  return <div>{postArr}</div>
 }
 
 const mapStateToProps = state => {
   return {
-    blah: state.postsReducer,
+    posts: state.postsReducer,
   }
 }
 

@@ -6,13 +6,24 @@ const getReddit = async () => {
 
   const response = await axios.get('http://www.reddit.com/r/memes.json')
   for (let i = 0; i < 10; i++) {
-    const { title, author, created, url } = response.data.data.children[i]
+    const {
+      title,
+      author,
+      created,
+      url,
+      ups,
+      downs,
+      num_comments,
+    } = response.data.data.children[i].data
     const newPost = {
       title,
       author,
       timestamp: created,
       body: 'Temp',
       image: url,
+      likes: ups,
+      dislikes: downs,
+      comments: num_comments,
     }
     seedPosts[i] = newPost
   }
