@@ -11,6 +11,7 @@ const PostSchema = new Schema({
   likes: [String],
   dislikes: [String],
   comments: [Object],
+  tags: [String],
 })
 
 module.exports = mongoose.model('Post', PostSchema)

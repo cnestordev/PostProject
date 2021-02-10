@@ -48,6 +48,33 @@ app.post('/posts/new', async (req, res) => {
   }
 })
 
+app.get('/posts/:id/edit', async (req, res) => {
+  const { id } = req.params
+  const post = await Post.findById(id)
+  res.status(200).json({ data: post })
+})
+
+app.put('/posts/:id/edit', async (req, res) => {
+  const { id } = req.params
+  try {
+    const response = await Post.findByIdAndUpdate(id, { ...req.body })
+  } catch (err) {
+    res.status(404).json({ error: err.message })
+  }
+})
+
+app.delete('/posts/:id/delete', async (req, res) => {
+  const { id } = req.params
+  console.log('deleting....')
+  try {
+    const response = await Post.findByIdAndDelete(id)
+    console.log('deleted')
+    res.status(201).json({ message: response })
+  } catch (err) {
+    res.status(404).json({ message: err.message })
+  }
+})
+
 const PORT = process.env.PORT || 3001
 
 app.listen(PORT, () => {

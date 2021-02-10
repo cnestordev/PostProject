@@ -6,6 +6,7 @@ import Posts from './Posts'
 import PostDetails from './PostDetails'
 import CreatePost from './CreatePost'
 import Test from './Test'
+import EditPost from './EditPost'
 
 function App() {
   // const [data, setData] = useState({})
@@ -21,7 +22,8 @@ function App() {
       <Switch>
         <Route exact path="/posts" component={Posts} />
         <Route exact path="/posts/new" component={CreatePost} />
-        <Route path="/posts/:id" component={PostDetails} />
+        <Route exact path="/posts/:id" component={PostDetails} />
+        <Route path="/posts/:id/edit" component={EditPost} />
       </Switch>
     </Router>
   )
