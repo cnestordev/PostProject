@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
 const EditPost = props => {
+  console.log(process.env.REACT_APP_CLOUDINARY_URL)
+  console.log(process.env.REACT_APP_CLOUDINARY_NAME)
   const id = props.match.params.id
 
   const [data, setData] = useState({
