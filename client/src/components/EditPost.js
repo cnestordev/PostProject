@@ -2,9 +2,6 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
 const EditPost = props => {
-  const url = 'https://api.cloudinary.com/v1_1/ddnwhl52j'
-  const name = 'nesdev'
-
   const id = props.match.params.id
 
   const [data, setData] = useState({
@@ -52,10 +49,10 @@ const EditPost = props => {
     const image = e.target.files[0]
     const formData = new FormData()
     formData.append('file', image)
-    formData.append('upload_preset', 'fkathmv7')
+    formData.append('upload_preset', process.env.REACT_APP_CLOUDINARY_NAME)
     try {
       const res = await axios.post(
-        'https://api.cloudinary.com/v1_1/ddnwhl52j/image/upload',
+        process.env.REACT_APP_CLOUDINARY_URL,
         formData
       )
       setData({
