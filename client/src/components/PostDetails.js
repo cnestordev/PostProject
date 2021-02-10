@@ -20,9 +20,9 @@ const PostDetails = props => {
       <h4>{postData.timestamp}</h4>
       <p>{postData.body}</p>
       <img src={postData.image} style={{ width: '500px' }} />
-      <p>{postData.comments}</p>
-      <p>{postData.likes}</p>
-      <p>{postData.dislikes}</p>
+      <p>Comments: {postData.comments}</p>
+      <p>Likes: {postData.likes}</p>
+      <p>Dislikes: {postData.dislikes}</p>
     </div>
   )
 }

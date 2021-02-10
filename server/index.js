@@ -20,6 +20,7 @@ db.once('open', () => {
 
 const app = express()
 
+app.use(express.json())
 app.use(cors())
 
 app.get('/', (req, res) => {
@@ -35,6 +36,16 @@ app.get('/posts/:id', async (req, res) => {
   const { id } = req.params
   const post = await Post.findById(id)
   res.status(200).json({ data: post })
+})
+
+app.post('/posts/new', async (req, res) => {
+  try {
+    const post = new Post(req.body)
+    await post.save()
+    res.status(201).json({ message: 'post was successfully uploaded' })
+  } catch (err) {
+    res.status(500).json({ message: 'there was an error uploading new post' })
+  }
 })
 
 const PORT = process.env.PORT || 3001
