@@ -224,3 +224,73 @@ p.postDetailsBody {
   border-color: rgb(112, 112, 112);
   color: rgb(112, 112, 112);
 }
+
+/* ---- hashtag ----------------------------- */
+
+.tagsContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  color: #fff;
+  width: 22%;
+  margin: 1.5% 0;
+}
+
+.hashtag {
+  background: #414141;
+  border-radius: 50px;
+  display: inline-block;
+  padding: 4% 8%;
+  font-size: 1rem;
+  margin: 0 1%;
+}
+
+/* --- ERROR --------------------- */
+
+.errorContainer {
+  background: #ff5f5f;
+  color: #323232;
+  text-align: center;
+  width: 50%;
+  margin: 10% auto;
+  display: flex;
+  flex-direction: column;
+  padding: 3% 0;
+}
+
+.errorIcon {
+  font-size: 7rem;
+  color: #ffc268;
+}
+
+h2.errorHeader {
+  font-size: 1.8rem;
+  margin-top: 1%;
+}
+
+.errorStatus {
+  font-size: 3rem;
+  margin-top: 2.5%;
+}
+
+.errorMessage {
+  font-size: 1.5rem;
+  margin-top: 2%;
+}
+
+.errorBtn {
+  border: 1px solid transparent;
+  background: #323232;
+  color: #f7e9e9;
+  width: 19%;
+  margin: 2% auto 0 auto;
+  padding: 1% 0;
+  cursor: pointer;
+  transition: 300ms;
+}
+
+.errorBtn:hover {
+  background: #000;
+  color: #fff;
+  transition: 300ms;
+}

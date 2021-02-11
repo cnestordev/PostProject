@@ -32,10 +32,18 @@ app.get('/posts', async (req, res) => {
   res.status(200).json({ data: posts })
 })
 
-app.get('/posts/:id', async (req, res) => {
+app.get('/posts/:id', async (req, res, next) => {
   const { id } = req.params
-  const post = await Post.findById(id)
-  res.status(200).json({ data: post })
+  try {
+    const post = await Post.findById(id)
+    if (!post) {
+      return next({ message: 'No Post Found', status: 404 })
+    }
+    res.status(200).json({ data: post })
+  } catch (error) {
+    console.log('ERROR!!!')
+    return next({ message: 'Invalid URL', status: 400 })
+  }
 })
 
 app.post('/posts/new', async (req, res) => {
@@ -75,8 +83,10 @@ app.delete('/posts/:id/delete', async (req, res) => {
   }
 })
 
-app.use((req, res) => {
-  res.status(404).json({ message: 'Page Not Found' })
+app.use((err, req, res, next) => {
+  console.log('triggered')
+  const { status, message } = err
+  res.status(status).json({ message })
 })
 
 const PORT = process.env.PORT || 3001

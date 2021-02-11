@@ -4,18 +4,40 @@ import { Link } from 'react-router-dom'
 
 import timeago from 'epoch-timeago'
 import imageHandler from '../controllers/imageHandler'
+import ErrorPage from './ErrorPage'
 
 const PostDetails = props => {
   const id = props.match.params.id
 
   const [postData, setPostDate] = useState({})
 
+  const [error, setError] = useState(false)
+
   useEffect(async () => {
     console.log('fetching............')
-    const response = await axios.get(`http://localhost:3001/posts/${id}`)
-    const data = response.data.data
-    setPostDate(data)
+    try {
+      const response = await axios.get(`http://localhost:3001/posts/${id}`)
+      const { data } = response.data
+      console.log('successfully fetched post data')
+      setPostDate(data)
+    } catch (err) {
+      console.log('entering error')
+      console.dir(err)
+      setPostDate({
+        message: err.response.data.message,
+        status: err.response.status,
+      })
+      setError(true)
+    }
   }, [])
+
+  if (error) {
+    return (
+      <div>
+        <ErrorPage status={postData.status} message={postData.message} />
+      </div>
+    )
+  }
 
   return (
     <div className="postDetailsContainer">
