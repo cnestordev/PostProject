@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import { useHistory } from 'react-router-dom'
+
+import Loader from 'react-loader-spinner'
 
 const CreatePost = () => {
   const [data, setData] = useState({
@@ -15,7 +18,11 @@ const CreatePost = () => {
     comments: [],
   })
 
+  const history = useHistory()
+
   const [loading, setLoading] = useState(false)
+
+  const [sending, setSending] = useState(false)
 
   const handleChange = e => {
     const { name, value } = e.target
@@ -41,7 +48,7 @@ const CreatePost = () => {
       console.log(res)
       setData({
         ...data,
-        image: res.data.url,
+        image: res.data.secure_url,
       })
       setLoading(false)
     } catch (err) {
@@ -51,8 +58,15 @@ const CreatePost = () => {
 
   const handleSubmit = async e => {
     e.preventDefault()
-    const response = await axios.post('http://localhost:3001/posts/new', data)
-    console.log(response)
+    setSending(true)
+    try {
+      const response = await axios.post('http://localhost:3001/posts/new', data)
+      console.log(response)
+      setSending(false)
+      history.push('/posts')
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   return (
@@ -85,7 +99,17 @@ const CreatePost = () => {
           className="createFile"
         />
         <button className="createPostBtn" disabled={loading}>
-          Create
+          {sending ? (
+            <Loader
+              type="ThreeDots"
+              color="c3c3c3"
+              height={11}
+              width={100}
+              timeout={5000} //3 secs
+            />
+          ) : (
+            'Create'
+          )}
         </button>
       </form>
     </div>

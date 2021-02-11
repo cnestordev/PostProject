@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import '../cssReset.css'
 import '../styles.css'
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
 
 import axios from 'axios'
 import Posts from './Posts'

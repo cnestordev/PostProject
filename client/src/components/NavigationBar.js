@@ -18,7 +18,7 @@ const NavigationBar = () => {
           </li>
           <li>
             <Link to="/posts/new" className="navbarItem">
-              +
+              <i className="fas fa-plus fasBorder"></i>
             </Link>
           </li>
           <li>
