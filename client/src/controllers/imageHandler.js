@@ -1,11 +1,15 @@
 import React from 'react'
 
-const imageHandler = img => {
+const imageHandler = (img, nameclass) => {
   const ext = img.slice(-3)
   if (ext === 'jpg' || ext === 'png') {
-    return <img src={img} />
+    return <img className={nameclass || 'postImage'} src={img} />
   } else {
-    return <h5>No Image</h5>
+    return (
+      <div className="noImageContainer">
+        <p className="noImageText">No Image</p>
+      </div>
+    )
   }
 }
 

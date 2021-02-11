@@ -2,12 +2,29 @@ body {
   background: rgb(241, 241, 252);
 }
 
-* {
-  background: red;
+/* ----------NavigationBar---------------------- */
+
+.navbarContainer {
+  background: #607d8b;
+  height: 5vh;
 }
 
+.navbarList {
+  display: flex;
+  justify-content: space-around;
+  width: 50%;
+  font-size: 3rem;
+}
+
+.navbarItem {
+  color: #272727;
+  text-decoration: none;
+}
+
+/* ---------POST--------------------------------- */
+
 .postContainer {
-  border: 1px solid #000;
+  border: 1px solid #c3c3c3;
   background: #fff;
   margin: 1% 0;
   text-align: center;
@@ -15,10 +32,167 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 40%;
+  margin: 1% auto;
+  padding: 2%;
 }
 
-/* ----CreatePost------ */
+.postLink {
+  text-decoration: none;
+  color: #000;
+}
 
-.createForm {
-  border: 1px solid #000 !important;
+.postTitle {
+  font-size: 2rem;
+  text-decoration: none;
+}
+
+h4.postAuthor {
+  font-size: 1.1rem;
+  margin-top: 1.5%;
+}
+
+h5.postTimestamp {
+  font-size: 0.8rem;
+  margin-top: 1%;
+  color: #404040;
+}
+
+.postImage {
+  width: 60%;
+}
+
+.socialContainer {
+  background: #e1e1e1;
+  width: 30%;
+  font-size: 1.8rem;
+  display: flex;
+  justify-content: space-between;
+  padding: 1%;
+  margin-top: 1%;
+}
+
+.socialContainer .fas {
+  font-size: inherit;
+  margin-right: 3px;
+}
+
+/* ------ POST DETAILS --------------------------------- */
+
+.postDetailsContainer {
+  background: white;
+  width: 55%;
+  margin: 0 auto;
+  text-align: center;
+  padding: 2% 1%;
+}
+
+h2.postDetailsTitle {
+  font-size: 3rem;
+  color: #272727;
+}
+
+h3.postDetailsAuthor {
+  font-size: 1.4rem;
+  margin-top: 1.3%;
+}
+
+h4.postDetailsTimestamp {
+  font-size: 1rem;
+  color: #484848;
+  margin-top: 0.5%;
+}
+
+img.postDetailsImage {
+  width: 75%;
+}
+
+p.postDetailsBody {
+  font-size: 1.7rem;
+  line-height: 1.4;
+  text-align: left;
+  margin: 2.5% 0;
+}
+
+/* ---NO IMAGE-------------------------- */
+
+.noImageContainer {
+  background: lightgrey;
+  width: 50%;
+  font-size: 3rem;
+  height: 14vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2% auto;
+}
+
+.noImageText {
+  color: #1e1e1e;
+  font-weight: bold;
+}
+
+/* ------ EDIT POST / CREATE POST ------------------------------ */
+
+.editHeader,
+.createHeader {
+  font-size: 3rem;
+  margin: 2% 0;
+}
+
+.editFormContainer,
+.createFormContainer {
+  background: #f1f1fc;
+  height: 50vh;
+  text-align: center;
+}
+
+.editFormElement,
+.createFormElement {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.editInputText,
+.createInputText {
+  margin: 1% 0;
+  border-radius: 2px;
+  border: none;
+  padding: 1.5%;
+}
+
+.editTextarea,
+.createTextarea {
+  border: none;
+  border-radius: 2px;
+  height: 27vh;
+  margin: 1% 0;
+}
+
+.editFile,
+.createFile {
+  border: 2px solid #cfcfcf;
+  border-radius: 3px;
+  padding: 1%;
+}
+
+.editPostBtn,
+.createPostBtn {
+  border: 2px solid #000;
+  border-radius: 2px;
+  width: 21%;
+  margin: 1% auto;
+  padding: 1%;
+  background: white;
+  transition: 500ms;
+  cursor: pointer;
+}
+
+.editPostBtn:hover,
+.createPostBtn:hover {
+  background: #000;
+  color: #fff;
+  transition: 300ms;
 }

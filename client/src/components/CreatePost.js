@@ -2,9 +2,6 @@ import React, { useState } from 'react'
 import axios from 'axios'
 
 const CreatePost = () => {
-  console.log(process.env.REACT_APP_CLOUDINARY_URL)
-  console.log(process.env.REACT_APP_CLOUDINARY_NAME)
-
   const [data, setData] = useState({
     title: '',
     author: 'predefined',
@@ -59,23 +56,37 @@ const CreatePost = () => {
   }
 
   return (
-    <div className="createForm">
-      <form onSubmit={handleSubmit}>
+    <div className="createFormContainer">
+      <h1 className="createHeader">Create Post</h1>
+      <form className="createFormElement" onSubmit={handleSubmit}>
         <input
           onChange={handleChange}
           type="text"
           name="title"
           placeholder="Title"
+          className="createInputText"
         />
-        <textarea onChange={handleChange} name="body" />
-        <input type="file" name="image" onChange={handleImage} />
+        <textarea
+          className="createTextarea"
+          onChange={handleChange}
+          name="body"
+        />
+        <input
+          className="createFile"
+          type="file"
+          name="image"
+          onChange={handleImage}
+        />
         <input
           onChange={handleChange}
           type="text"
           placeholder="tags"
           name="tags"
+          className="createFile"
         />
-        <button disabled={loading}>Create</button>
+        <button className="createPostBtn" disabled={loading}>
+          Create
+        </button>
       </form>
     </div>
   )

@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
+import timeago from 'epoch-timeago'
+import imageHandler from '../controllers/imageHandler'
+
 const PostDetails = props => {
   const id = props.match.params.id
 
@@ -15,12 +18,14 @@ const PostDetails = props => {
   }, [])
 
   return (
-    <div>
-      <h2>{postData.title}</h2>
-      <h3>{postData.author}</h3>
-      <h4>{postData.timestamp}</h4>
-      <p>{postData.body}</p>
-      <img src={postData.image} style={{ width: '500px' }} />
+    <div className="postDetailsContainer">
+      <h2 className="postDetailsTitle">{postData.title}</h2>
+      <h3 className="postDetailsAuthor">{postData.author}</h3>
+      <h4 className="postDetailsTimestamp">
+        {timeago((postData.timestamp || 1610849840) * 1000)}
+      </h4>
+      <p className="postDetailsBody">{postData.body}</p>
+      {imageHandler(postData.image || 'none', 'postDetailsImage')}
       <p>Comments: {postData.comments}</p>
       <p>Likes: {postData.likes}</p>
       <p>Dislikes: {postData.dislikes}</p>

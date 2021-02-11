@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
 const EditPost = props => {
-  console.log(process.env.REACT_APP_CLOUDINARY_URL)
-  console.log(process.env.REACT_APP_CLOUDINARY_NAME)
   const id = props.match.params.id
 
   const [data, setData] = useState({
@@ -85,26 +83,40 @@ const EditPost = props => {
   }
 
   return (
-    <div className="editForm">
-      <h1>Edit Form</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="editFormContainer">
+      <h1 className="editHeader">Edit Form</h1>
+      <form className="editFormElement" onSubmit={handleSubmit}>
         <input
           onChange={handleChange}
           type="text"
           name="title"
           placeholder="Title"
           value={data.title}
+          className="editInputText"
         />
-        <textarea onChange={handleChange} name="body" value={data.body} />
-        <input type="file" name="image" onChange={handleImage} />
+        <textarea
+          className="editTextarea"
+          onChange={handleChange}
+          name="body"
+          value={data.body}
+        />
+        <input
+          className="editFile"
+          type="file"
+          name="image"
+          onChange={handleImage}
+        />
         <input
           onChange={handleChange}
           type="text"
           placeholder="tags"
           name="tags"
           value={data.tags}
+          className="editInputText"
         />
-        <button disabled={loading}>Update</button>
+        <button className="editPostBtn" disabled={loading}>
+          Update
+        </button>
       </form>
       <button onClick={() => handleDelete(data['_id'])}>DELETE</button>
     </div>

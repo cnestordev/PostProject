@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
+import '../cssReset.css'
+import '../styles.css'
+
 import axios from 'axios'
 import Posts from './Posts'
 import PostDetails from './PostDetails'
 import CreatePost from './CreatePost'
-import Test from './Test'
 import EditPost from './EditPost'
+import NavigationBar from './NavigationBar'
 
 function App() {
   // const [data, setData] = useState({})
@@ -18,7 +21,7 @@ function App() {
 
   return (
     <Router>
-      <Test />
+      <NavigationBar />
       <Switch>
         <Route exact path="/posts" component={Posts} />
         <Route exact path="/posts/new" component={CreatePost} />
