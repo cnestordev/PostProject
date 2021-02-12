@@ -5,6 +5,7 @@ import * as yup from 'yup'
 import formSchema from '../validation/FormSchema'
 
 import Loader from 'react-loader-spinner'
+import imageUploader from '../util/imageUploader'
 
 const CreatePost = () => {
   const [data, setData] = useState({
@@ -27,6 +28,8 @@ const CreatePost = () => {
 
   const history = useHistory()
 
+  const [imageData, setImageData] = useState(null)
+
   const [loading, setLoading] = useState(false)
 
   const [sending, setSending] = useState(false)
@@ -38,6 +41,19 @@ const CreatePost = () => {
       setDisabled(!valid)
     })
   }, [data])
+
+  useEffect(async () => {
+    try {
+      console.log('entering try')
+      const response = await axios.post('http://localhost:3001/posts/new', data)
+      console.log(response)
+      setSending(false)
+      history.push('/posts')
+    } catch (err) {
+      console.log('ERROR, entering catch')
+      console.dir(err)
+    }
+  }, [data.image])
 
   const handleChange = e => {
     const { name, value } = e.target
@@ -69,41 +85,22 @@ const CreatePost = () => {
 
   const handleImage = async e => {
     e.preventDefault()
-    setLoading(true)
     const image = e.target.files[0]
-    const formData = new FormData()
-    formData.append('file', image)
-    formData.append('upload_preset', process.env.REACT_APP_CLOUDINARY_NAME)
-    try {
-      const res = await axios.post(
-        process.env.REACT_APP_CLOUDINARY_URL,
-        formData
-      )
-      console.log(res)
-      setData({
-        ...data,
-        image: res.data.secure_url,
-      })
-      setLoading(false)
-    } catch (err) {
-      console.log(err)
-    }
+    setImageData(image)
   }
 
   const handleSubmit = async e => {
     console.log('creating NEW post...')
     e.preventDefault()
     setSending(true)
-    try {
-      console.log('entering try')
-      const response = await axios.post('http://localhost:3001/posts/new', data)
-      console.log(response)
-      setSending(false)
-      history.push('/posts')
-    } catch (err) {
-      console.log('ERROR, entering catch')
-      console.dir(err)
-    }
+    console.log('starting upload image function')
+    const img = await imageUploader(imageData)
+    console.log('image function has been returned, url is: ', img)
+    setData({
+      ...data,
+      image: img,
+    })
+    return
   }
 
   return (

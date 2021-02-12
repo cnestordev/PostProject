@@ -9,6 +9,7 @@ const getReddit = async () => {
     const {
       title,
       author,
+      authorId = 'Anon',
       created,
       url,
       ups,
@@ -19,6 +20,7 @@ const getReddit = async () => {
     const newPost = {
       title,
       author,
+      authorId,
       timestamp: created,
       body: selftext,
       image: url,
