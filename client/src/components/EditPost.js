@@ -17,7 +17,7 @@ const EditPost = props => {
     timestamp: Math.round(new Date().getTime() / 1000),
     body: '',
     image: '',
-    tags: [],
+    tags: '',
     likes: [],
     dislikes: [],
     comments: [],
@@ -40,12 +40,6 @@ const EditPost = props => {
 
   const history = useHistory()
 
-  useEffect(() => {
-    formSchema.isValid(data).then(valid => {
-      setDisabled(!valid)
-    })
-  }, [data])
-
   useEffect(async () => {
     const response = await axios.get(`http://localhost:3001/posts/${id}/edit`)
     console.log(response.data.data)
@@ -62,6 +56,12 @@ const EditPost = props => {
     })
   }, [])
 
+  useEffect(() => {
+    formSchema.isValid(data).then(valid => {
+      setDisabled(!valid)
+    })
+  }, [data])
+
   useEffect(async () => {
     if (data.title || data.tags.length > 0) {
       try {
@@ -70,6 +70,7 @@ const EditPost = props => {
           `http://localhost:3001/posts/${id}/edit`,
           data
         )
+        setSending(false)
         history.push(`/posts/${id}`)
       } catch (err) {
         console.log('EDIT POST ERROR')
@@ -115,6 +116,7 @@ const EditPost = props => {
   const handleSubmit = async e => {
     console.log('EDITING...')
     e.preventDefault()
+    setSending(true)
     const img = (await imageUploader(imageData)) || data.image
     setData({
       ...data,
@@ -166,15 +168,9 @@ const EditPost = props => {
           value={data.tags}
           className="editInputText"
         />
-        <button className="createPostBtn" disabled={disabled}>
+        <button className="createPostBtn" disabled={disabled || sending}>
           {sending ? (
-            <Loader
-              type="ThreeDots"
-              color="c3c3c3"
-              height={11}
-              width={100}
-              timeout={5000} //3 secs
-            />
+            <Loader type="ThreeDots" color="c3c3c3" height={11} width={100} />
           ) : (
             'Update'
           )}

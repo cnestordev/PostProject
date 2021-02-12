@@ -15,7 +15,7 @@ const CreatePost = () => {
     timestamp: Math.round(new Date().getTime() / 1000),
     body: '',
     image: '',
-    tags: [],
+    tags: '',
     likes: [],
     dislikes: [],
     comments: [],
@@ -139,14 +139,14 @@ const CreatePost = () => {
           name="tags"
           className="createFile"
         />
-        <button className="createPostBtn" disabled={disabled}>
+        <button className="createPostBtn" disabled={disabled || sending}>
           {sending ? (
             <Loader
               type="ThreeDots"
-              color="c3c3c3"
+              color="#c3c3c3"
               height={11}
               width={100}
-              timeout={5000} //3 secs
+              timeout={5000} //5 secs
             />
           ) : (
             'Create'

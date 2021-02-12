@@ -23,7 +23,7 @@ const PostSchema = new Schema({
   likes: { type: [String], required: true },
   dislikes: { type: [String], required: true },
   comments: { type: [Object], required: true },
-  tags: [String],
+  tags: String,
   editCount: {
     type: Number,
     default: 0,

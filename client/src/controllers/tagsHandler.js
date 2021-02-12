@@ -2,8 +2,8 @@ import React from 'react'
 import Tags from '../components/Tags'
 
 const tagsHandler = tags => {
-  if (tags[0]) {
-    const hash = tags[0]
+  if (tags) {
+    const hash = tags
     const hashtags = hash.split(' ')
     return hashtags.map(item => {
       const id = Math.random() * 100000
