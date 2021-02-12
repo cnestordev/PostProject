@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
+import * as yup from 'yup'
+import formSchema from '../validation/FormSchema'
 
 import Loader from 'react-loader-spinner'
 
@@ -18,14 +20,46 @@ const CreatePost = () => {
     comments: [],
   })
 
+  const [errors, setErrors] = useState({
+    title: '',
+    tags: '',
+  })
+
   const history = useHistory()
 
   const [loading, setLoading] = useState(false)
 
   const [sending, setSending] = useState(false)
 
+  const [disabled, setDisabled] = useState(true)
+
+  useEffect(() => {
+    formSchema.isValid(data).then(valid => {
+      setDisabled(!valid)
+    })
+  }, [data])
+
   const handleChange = e => {
     const { name, value } = e.target
+
+    yup
+      .reach(formSchema, name)
+
+      .validate(value)
+
+      .then(valid => {
+        setErrors({
+          ...errors,
+          [name]: '',
+        })
+      })
+
+      .catch(err => {
+        setErrors({
+          ...errors,
+          [name]: err.errors[0],
+        })
+      })
 
     setData({
       ...data,
@@ -57,15 +91,18 @@ const CreatePost = () => {
   }
 
   const handleSubmit = async e => {
+    console.log('creating NEW post...')
     e.preventDefault()
     setSending(true)
     try {
+      console.log('entering try')
       const response = await axios.post('http://localhost:3001/posts/new', data)
       console.log(response)
       setSending(false)
       history.push('/posts')
     } catch (err) {
-      console.log(err)
+      console.log('ERROR, entering catch')
+      console.dir(err)
     }
   }
 
@@ -90,6 +127,7 @@ const CreatePost = () => {
           type="file"
           name="image"
           onChange={handleImage}
+          accept="image/x-png,image/gif,image/jpeg"
         />
         <input
           onChange={handleChange}
@@ -98,7 +136,7 @@ const CreatePost = () => {
           name="tags"
           className="createFile"
         />
-        <button className="createPostBtn" disabled={loading}>
+        <button className="createPostBtn" disabled={disabled}>
           {sending ? (
             <Loader
               type="ThreeDots"
@@ -112,6 +150,14 @@ const CreatePost = () => {
           )}
         </button>
       </form>
+      <div className="validatinErrorsContainer">
+        {errors.title.length > 0 && (
+          <p className="validationErrorMessage">{errors.title}</p>
+        )}
+        {errors.tags.length > 0 && (
+          <p className="validationErrorMessage">{errors.tags}</p>
+        )}
+      </div>
     </div>
   )
 }

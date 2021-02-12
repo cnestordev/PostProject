@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import { useHistory } from 'react-router-dom'
+import * as yup from 'yup'
+import formSchema from '../validation/FormSchema'
 
 import Loader from 'react-loader-spinner'
 
@@ -19,9 +22,24 @@ const EditPost = props => {
     comments: [],
   })
 
+  const [errors, setErrors] = useState({
+    title: '',
+    tags: '',
+  })
+
   const [loading, setLoading] = useState(false)
 
   const [sending, setSending] = useState(false)
+
+  const [disabled, setDisabled] = useState(true)
+
+  const history = useHistory()
+
+  useEffect(() => {
+    formSchema.isValid(data).then(valid => {
+      setDisabled(!valid)
+    })
+  }, [data])
 
   useEffect(async () => {
     const response = await axios.get(`http://localhost:3001/posts/${id}/edit`)
@@ -40,6 +58,25 @@ const EditPost = props => {
 
   const handleChange = e => {
     const { name, value } = e.target
+
+    yup
+      .reach(formSchema, name)
+
+      .validate(value)
+
+      .then(valid => {
+        setErrors({
+          ...errors,
+          [name]: '',
+        })
+      })
+
+      .catch(err => {
+        setErrors({
+          ...errors,
+          [name]: err.errors[0],
+        })
+      })
 
     setData({
       ...data,
@@ -70,12 +107,19 @@ const EditPost = props => {
   }
 
   const handleSubmit = async e => {
+    console.log('EDITING...')
     e.preventDefault()
-    const response = await axios.put(
-      `http://localhost:3001/posts/${id}/edit`,
-      data
-    )
-    console.log(response)
+    try {
+      console.log('edit try')
+      const response = await axios.put(
+        `http://localhost:3001/posts/${id}/edit`,
+        data
+      )
+      history.push(`/posts/${id}`)
+    } catch (err) {
+      console.log('EDIT POST ERROR')
+      console.log(err)
+    }
   }
 
   const handleDelete = async id => {
@@ -118,7 +162,7 @@ const EditPost = props => {
           value={data.tags}
           className="editInputText"
         />
-        <button className="createPostBtn" disabled={loading}>
+        <button className="createPostBtn" disabled={disabled}>
           {sending ? (
             <Loader
               type="ThreeDots"
@@ -132,6 +176,14 @@ const EditPost = props => {
           )}
         </button>
       </form>
+      <div className="validatinErrorsContainer">
+        {errors.title.length > 0 && (
+          <p className="validationErrorMessage">{errors.title}</p>
+        )}
+        {errors.tags.length > 0 && (
+          <p className="validationErrorMessage">{errors.tags}</p>
+        )}
+      </div>
       <button onClick={() => handleDelete(data['_id'])}>DELETE</button>
     </div>
   )

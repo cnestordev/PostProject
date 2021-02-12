@@ -222,7 +222,8 @@ p.postDetailsBody {
 .createPostBtn:disabled,
 .createPostBtn[disabled] {
   border-color: rgb(112, 112, 112);
-  color: rgb(112, 112, 112);
+  color: rgb(86 86 86);
+  background: rgb(132 132 132);
 }
 
 /* ---- hashtag ----------------------------- */
@@ -293,4 +294,18 @@ h2.errorHeader {
   background: #000;
   color: #fff;
   transition: 300ms;
+}
+
+/* -------- VALIDATION ERRORS------------- */
+.validatinErrorsContainer {
+  font-size: 2rem;
+  width: 15%;
+  margin: 1% auto;
+}
+
+.validationErrorMessage {
+  background: red;
+  border-radius: 2px;
+  margin: 3% 0;
+  color: black;
 }

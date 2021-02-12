@@ -46,13 +46,14 @@ app.get('/posts/:id', async (req, res, next) => {
   }
 })
 
-app.post('/posts/new', async (req, res) => {
+app.post('/posts/new', async (req, res, next) => {
   try {
     const post = new Post(req.body)
     await post.save()
     res.status(201).json({ message: 'post was successfully uploaded' })
   } catch (err) {
-    res.status(500).json({ message: 'there was an error uploading new post' })
+    console.log('There is a problem!')
+    return next({ message: err })
   }
 })
 
@@ -62,12 +63,14 @@ app.get('/posts/:id/edit', async (req, res) => {
   res.status(200).json({ data: post })
 })
 
-app.put('/posts/:id/edit', async (req, res) => {
+app.put('/posts/:id/edit', async (req, res, next) => {
   const { id } = req.params
   try {
     const response = await Post.findByIdAndUpdate(id, { ...req.body })
+    console.log(response)
+    res.status(201).json({ message: 'successfully updated post', id })
   } catch (err) {
-    res.status(404).json({ error: err.message })
+    return next(err)
   }
 })
 
