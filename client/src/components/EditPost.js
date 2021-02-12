@@ -5,6 +5,7 @@ import * as yup from 'yup'
 import formSchema from '../validation/FormSchema'
 
 import Loader from 'react-loader-spinner'
+import imageUploader from '../util/imageUploader'
 
 const EditPost = props => {
   const id = props.match.params.id
@@ -27,11 +28,15 @@ const EditPost = props => {
     tags: '',
   })
 
+  const [imageData, setImageData] = useState(null)
+
   const [loading, setLoading] = useState(false)
 
   const [sending, setSending] = useState(false)
 
   const [disabled, setDisabled] = useState(true)
+
+  const [edited, setHasEdited] = useState(false)
 
   const history = useHistory()
 
@@ -53,8 +58,25 @@ const EditPost = props => {
       body: data.body,
       authorId: 'predetermined',
       _id: data['_id'],
+      editCount: data.editCount,
     })
   }, [])
+
+  useEffect(async () => {
+    if (data.title || data.tags.length > 0) {
+      try {
+        console.log('edit try')
+        const response = await axios.put(
+          `http://localhost:3001/posts/${id}/edit`,
+          data
+        )
+        history.push(`/posts/${id}`)
+      } catch (err) {
+        console.log('EDIT POST ERROR')
+        console.log(err)
+      }
+    }
+  }, [edited])
 
   const handleChange = e => {
     const { name, value } = e.target
@@ -86,40 +108,21 @@ const EditPost = props => {
 
   const handleImage = async e => {
     e.preventDefault()
-    setLoading(true)
     const image = e.target.files[0]
-    const formData = new FormData()
-    formData.append('file', image)
-    formData.append('upload_preset', process.env.REACT_APP_CLOUDINARY_NAME)
-    try {
-      const res = await axios.post(
-        process.env.REACT_APP_CLOUDINARY_URL,
-        formData
-      )
-      setData({
-        ...data,
-        image: res.data.secure_url,
-      })
-      setLoading(false)
-    } catch (err) {
-      console.log(err)
-    }
+    setImageData(image)
   }
 
   const handleSubmit = async e => {
     console.log('EDITING...')
     e.preventDefault()
-    try {
-      console.log('edit try')
-      const response = await axios.put(
-        `http://localhost:3001/posts/${id}/edit`,
-        data
-      )
-      history.push(`/posts/${id}`)
-    } catch (err) {
-      console.log('EDIT POST ERROR')
-      console.log(err)
-    }
+    const img = (await imageUploader(imageData)) || data.image
+    setData({
+      ...data,
+      image: img,
+      editCount: data.editCount + 1,
+    })
+    setHasEdited(true)
+    return
   }
 
   const handleDelete = async id => {
@@ -128,6 +131,7 @@ const EditPost = props => {
       `http://localhost:3001/posts/${id}/delete`
     )
     console.log(response)
+    history.push('/posts')
   }
 
   return (

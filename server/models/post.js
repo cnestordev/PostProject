@@ -24,6 +24,10 @@ const PostSchema = new Schema({
   dislikes: { type: [String], required: true },
   comments: { type: [Object], required: true },
   tags: [String],
+  editCount: {
+    type: Number,
+    default: 0,
+  },
 })
 
 module.exports = mongoose.model('Post', PostSchema)

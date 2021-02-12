@@ -30,7 +30,7 @@ const CreatePost = () => {
 
   const [imageData, setImageData] = useState(null)
 
-  const [loading, setLoading] = useState(false)
+  const [querying, setQuerying] = useState(false)
 
   const [sending, setSending] = useState(false)
 
@@ -43,17 +43,22 @@ const CreatePost = () => {
   }, [data])
 
   useEffect(async () => {
-    try {
-      console.log('entering try')
-      const response = await axios.post('http://localhost:3001/posts/new', data)
-      console.log(response)
-      setSending(false)
-      history.push('/posts')
-    } catch (err) {
-      console.log('ERROR, entering catch')
-      console.dir(err)
+    if (data.title || data.tags.length > 0) {
+      try {
+        console.log('entering try')
+        const response = await axios.post(
+          'http://localhost:3001/posts/new',
+          data
+        )
+        console.log(response)
+        setSending(false)
+        history.push('/posts')
+      } catch (err) {
+        console.log('ERROR, entering catch')
+        console.dir(err)
+      }
     }
-  }, [data.image])
+  }, [querying])
 
   const handleChange = e => {
     const { name, value } = e.target
@@ -100,6 +105,7 @@ const CreatePost = () => {
       ...data,
       image: img,
     })
+    setQuerying(true)
     return
   }
 
