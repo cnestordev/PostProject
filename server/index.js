@@ -2,6 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const mongoose = require('mongoose')
 const Post = require('./models/post')
+const { postSchema } = require('./validation/postValidation.js')
 
 //----------------------------------------------- Connect to MongoDB ------------------------------------------------
 mongoose.connect('mongodb://localhost:27017/reddit-clone', {
@@ -22,6 +23,16 @@ const app = express()
 
 app.use(express.json())
 app.use(cors())
+
+const validatePost = (req, res, next) => {
+  const validation = postSchema.validate(req.body)
+  if (validation.error) {
+    console.log('-----------------------------')
+    console.log(validation.error.details[0].message)
+    return next({ message: validation.error.details[0].message, status: 400 })
+  }
+  next()
+}
 
 app.get('/', (req, res) => {
   res.json({ data: 'working' })
@@ -46,7 +57,7 @@ app.get('/posts/:id', async (req, res, next) => {
   }
 })
 
-app.post('/posts/new', async (req, res, next) => {
+app.post('/posts/new', validatePost, async (req, res, next) => {
   try {
     const post = new Post(req.body)
     await post.save()
@@ -63,7 +74,7 @@ app.get('/posts/:id/edit', async (req, res) => {
   res.status(200).json({ data: post })
 })
 
-app.put('/posts/:id/edit', async (req, res, next) => {
+app.put('/posts/:id/edit', validatePost, async (req, res, next) => {
   const { id } = req.params
   try {
     const response = await Post.findByIdAndUpdate(id, { ...req.body })
@@ -94,7 +105,7 @@ app.all('*', (req, res) => {
 app.use((err, req, res, next) => {
   console.log('triggered')
   const { status, message } = err
-  res.status(status).json({ message })
+  res.status(status).json({ message, status })
 })
 
 const PORT = process.env.PORT || 3001

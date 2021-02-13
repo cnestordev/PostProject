@@ -55,7 +55,8 @@ const CreatePost = () => {
         history.push('/posts')
       } catch (err) {
         console.log('ERROR, entering catch')
-        console.dir(err)
+        console.dir(err.response.data)
+        setSending(false)
       }
     }
   }, [querying])
@@ -119,11 +120,13 @@ const CreatePost = () => {
           name="title"
           placeholder="Title"
           className="createInputText"
+          value={data.title}
         />
         <textarea
           className="createTextarea"
           onChange={handleChange}
           name="body"
+          value={data.body}
         />
         <input
           className="createFile"
@@ -138,6 +141,7 @@ const CreatePost = () => {
           placeholder="tags"
           name="tags"
           className="createFile"
+          value={data.tags}
         />
         <button className="createPostBtn" disabled={disabled || sending}>
           {sending ? (

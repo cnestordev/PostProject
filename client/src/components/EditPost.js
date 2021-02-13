@@ -50,6 +50,7 @@ const EditPost = props => {
       tags: data.tags,
       image: data.image,
       body: data.body,
+      author: 'predetermined',
       authorId: 'predetermined',
       _id: data['_id'],
       editCount: data.editCount,
@@ -74,7 +75,7 @@ const EditPost = props => {
         history.push(`/posts/${id}`)
       } catch (err) {
         console.log('EDIT POST ERROR')
-        console.log(err)
+        console.dir(err)
       }
     }
   }, [edited])
