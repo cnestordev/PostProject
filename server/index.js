@@ -154,6 +154,17 @@ app.post(
   }
 )
 
+app.delete('/posts/:id/comments/:commentId/', async (req, res) => {
+  const { id, commentId } = req.params
+  try {
+    await Post.findByIdAndUpdate(id, { $pull: { comments: commentId } })
+    await Comment.findByIdAndDelete(commentId)
+    res.status(201).json({ message: 'deleted comment', status: 201 })
+  } catch (err) {
+    res.status(500).json({ message: 'could not delete', status: 500 })
+  }
+})
+
 // -------------------------------------------------------
 
 app.all('*', (req, res) => {

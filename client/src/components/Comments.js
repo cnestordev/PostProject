@@ -1,13 +1,13 @@
 import React from 'react'
 import Comment from './Comment'
 
-const Comments = ({ data }) => {
+const Comments = ({ data, postId }) => {
   const commentArr = data
     .sort(function (x, y) {
       return y.timestamp - x.timestamp
     })
     .map(comment => {
-      return <Comment key={comment['_id']} comment={comment} />
+      return <Comment postId={postId} key={comment['_id']} comment={comment} />
     })
   return (
     <div className="commentsContainer">

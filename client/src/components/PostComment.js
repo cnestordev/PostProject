@@ -104,7 +104,7 @@ const PostComment = props => {
           </button>
         </form>
       </div>
-      <Comments data={comments} />
+      <Comments postId={props.postId} data={comments} />
     </>
   )
 }
