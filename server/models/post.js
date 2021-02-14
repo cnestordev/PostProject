@@ -24,9 +24,15 @@ const PostSchema = new Schema(
       id: String,
       url: String,
     },
-    likes: { type: [String], required: true },
-    dislikes: { type: [String], required: true },
-    comments: { type: [Object], required: true },
+    likes: [{ type: Schema.Types.ObjectId, required: true }],
+    dislikes: [{ type: Schema.Types.ObjectId, required: true }],
+    comments: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Comment',
+        required: true,
+      },
+    ],
     tags: String,
     editCount: {
       type: Number,

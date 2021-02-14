@@ -6,6 +6,8 @@ import timeago from 'epoch-timeago'
 import imageHandler from '../controllers/imageHandler'
 import ErrorPage from './ErrorPage'
 
+import PostComment from './PostComment'
+
 const PostDetails = props => {
   const id = props.match.params.id
 
@@ -49,12 +51,13 @@ const PostDetails = props => {
         </h4>
         <p className="postDetailsBody">{postData.body}</p>
         {imageHandler(postData.image, 'full')}
-        <p>Comments: {postData.comments}</p>
-        <p>Likes: {postData.likes}</p>
-        <p>Dislikes: {postData.dislikes}</p>
+        <p>Comments: {postData.comments.length}</p>
+        <p>Likes: {postData.likes.length}</p>
+        <p>Dislikes: {postData.dislikes.length}</p>
         <Link to={`/posts/${postData['_id']}/edit`}>
           <button>EDIT</button>
         </Link>
+        <PostComment postId={postData['_id']} />
       </div>
     )
   } else {

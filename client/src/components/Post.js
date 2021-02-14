@@ -20,13 +20,13 @@ const Post = ({ data }) => {
         <div className="socialContainer">
           <p className="postSocial">
             <i className="fas fa-chevron-up"></i>
-            {data.likes}
+            {data.likes.length}
           </p>
           <p className="postSocial">
-            <i className="fas fa-chevron-down"></i> {data.dislikes}
+            <i className="fas fa-chevron-down"></i> {data.dislikes.length}
           </p>
           <p className="postSocial">
-            <i className="fas fa-comments"></i> {data.comments}
+            <i className="fas fa-comments"></i> {data.comments.length}
           </p>
         </div>
       </div>

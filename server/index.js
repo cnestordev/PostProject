@@ -2,6 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const mongoose = require('mongoose')
 const Post = require('./models/post')
+const Comment = require('./models/comment')
 const { postSchema } = require('./validation/postValidation.js')
 
 //----------------------------------------------- Connect to MongoDB ------------------------------------------------
@@ -58,6 +59,8 @@ app.get('/posts/:id', async (req, res, next) => {
 })
 
 app.post('/posts/new', validatePost, async (req, res, next) => {
+  // Destructure the req.body obj so we can control timestamp, likes, dislikes, comments
+  req.body.timestamp = Math.round(new Date().getTime() / 1000)
   try {
     const post = new Post(req.body)
     const resul = await post.save()
@@ -97,6 +100,33 @@ app.delete('/posts/:id/delete', async (req, res) => {
     res.status(404).json({ message: err.message })
   }
 })
+
+// ----comments-------------------------------------------
+
+app.post('/posts/:id/comments', async (req, res) => {
+  const { id } = req.params
+  const { body, author, authorId, timestamp, likes, dislikes } = req.body
+  try {
+    const post = await Post.findById(id)
+    const comment = new Comment({
+      body,
+      author,
+      authorId,
+      timestamp: Math.round(new Date().getTime() / 1000),
+      likes: [],
+      dislikes: [],
+    })
+    post.comments.push(comment)
+    await comment.save()
+    await post.save()
+    res.status(201).json({ message: 'successfully added comment', status: 201 })
+  } catch (err) {
+    console.log(err)
+    res.status(404).json({ message: 'Post Not Found', status: 404 })
+  }
+})
+
+// -------------------------------------------------------
 
 app.all('*', (req, res) => {
   console.log('404 NO PAGE EXISTS')

@@ -12,7 +12,7 @@ const imageHandler = (img, scale) => {
     )
   } else if (img.url) {
     const ext = img.url.slice(-3)
-    if (ext === 'jpg' || ext === 'png' || 'ebp') {
+    if (ext === 'jpg' || ext === 'png' || ext === 'ebp') {
       return <img className="postImage" src={img.url} />
     } else {
       return (

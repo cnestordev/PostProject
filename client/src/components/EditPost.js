@@ -64,9 +64,12 @@ const EditPost = props => {
   }, [data])
 
   useEffect(async () => {
+    console.log(1)
     if (data.title || data.tags.length > 0) {
+      console.log(2)
       try {
         console.log('edit try')
+        console.log(data)
         const response = await axios.put(
           `http://localhost:3001/posts/${id}/edit`,
           data
@@ -74,6 +77,7 @@ const EditPost = props => {
         setSending(false)
         history.push(`/posts/${id}`)
       } catch (err) {
+        console.log(3)
         console.log('EDIT POST ERROR')
         console.dir(err)
       }
@@ -118,7 +122,8 @@ const EditPost = props => {
     console.log('EDITING...')
     e.preventDefault()
     setSending(true)
-    const img = (await imageUploader(imageData)) || data.image
+    let img = await imageUploader(imageData)
+    img = Object.keys(img).length ? img : data.image
     setData({
       ...data,
       image: img,
