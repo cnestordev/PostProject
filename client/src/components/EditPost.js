@@ -15,7 +15,7 @@ const EditPost = props => {
     title: '',
     author: 'predefined',
     authorId: 'predefined',
-    timestamp: Math.round(new Date().getTime() / 1000),
+    timestamp: '',
     body: '',
     image: '',
     tags: '',

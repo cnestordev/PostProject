@@ -62,8 +62,7 @@ const PostDetails = props => {
           </Link>
         </div>
         <div className="commentSection">
-          <PostComment postId={postData['_id']} />
-          <Comments data={postData.comments} />
+          <PostComment postData={postData} postId={postData['_id']} />
         </div>
       </>
     )

@@ -125,6 +125,8 @@ app.post(
   async (req, res) => {
     const { id } = req.params
     const { body, author, authorId, timestamp, likes, dislikes } = req.body
+    console.log('-------------------------------')
+    console.log(req.body.timestamp)
     try {
       const post = await Post.findById(id)
       const comment = new Comment({
@@ -137,10 +139,14 @@ app.post(
       })
       post.comments.push(comment)
       await comment.save()
-      await post.save()
-      res
-        .status(201)
-        .json({ data:  message: 'successfully added comment', status: 201 })
+      const updatedPost = await (await post.save())
+        .populate('comments')
+        .execPopulate()
+      res.status(201).json({
+        data: updatedPost,
+        message: 'successfully added comment',
+        status: 201,
+      })
     } catch (err) {
       console.log(err)
       res.status(404).json({ message: 'Post Not Found', status: 404 })

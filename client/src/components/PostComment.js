@@ -4,16 +4,19 @@ import axios from 'axios'
 import axiosCall from '../api/axiosCall'
 import * as yup from 'yup'
 import commentSchema from '../validation/CommentSchema'
+import Comments from './Comments'
 
 const PostComment = props => {
   const history = useHistory()
 
-  const [postData, setPostData] = useState({
+  const commentDataValues = {
     body: '',
     author: 'predetermined',
     authorId: 'predetermined',
     timestamp: '',
-  })
+  }
+
+  const [commentData, setCommentData] = useState(commentDataValues)
 
   const initialErrorValues = {
     body: '',
@@ -31,11 +34,14 @@ const PostComment = props => {
 
   const [serverError, setServerError] = useState(errorData)
 
+  const [comments, setComments] = useState(props.postData.comments)
+
   useEffect(() => {
-    commentSchema.isValid(postData).then(valid => {
+    console.log('Re-rendered')
+    commentSchema.isValid(commentData).then(valid => {
       setDisabled(!valid)
     })
-  }, [postData])
+  }, [commentData])
 
   const handleChange = e => {
     const { name, value } = e.target
@@ -59,8 +65,8 @@ const PostComment = props => {
         })
       })
 
-    setPostData({
-      ...postData,
+    setCommentData({
+      ...commentData,
       [name]: value,
     })
   }
@@ -70,31 +76,36 @@ const PostComment = props => {
     console.log('making POST request to comments')
     const id = props.postId
     try {
-      await axiosCall.post(`/posts/${id}/comments`, postData)
+      const response = await axiosCall.post(
+        `/posts/${id}/comments`,
+        commentData
+      )
       console.log('success')
-      //  .go() looks like it refreshes the page, might need to use a different
-      // method so it doesn't refersh page
-      history.push(`/posts/${id}`)
+      setCommentData(commentDataValues)
+      setComments(response.data.data.comments)
     } catch (err) {
       console.log('entering error on POST comments')
     }
   }
 
   return (
-    <div className="postCommentContainer">
-      <form className="postCommentForm" onSubmit={handleSubmit}>
-        <textarea
-          className="postCommentInput"
-          onChange={handleChange}
-          name="body"
-          value={postData.body}
-          placeholder={errors.body}
-        />
-        <button disabled={disabled} className="postCommentBtn">
-          comment
-        </button>
-      </form>
-    </div>
+    <>
+      <div className="postCommentContainer">
+        <form className="postCommentForm" onSubmit={handleSubmit}>
+          <textarea
+            className="postCommentInput"
+            onChange={handleChange}
+            name="body"
+            value={commentData.body}
+            placeholder={errors.body}
+          />
+          <button disabled={disabled} className="postCommentBtn">
+            comment
+          </button>
+        </form>
+      </div>
+      <Comments data={comments} />
+    </>
   )
 }
 
