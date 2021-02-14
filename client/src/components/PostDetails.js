@@ -39,23 +39,27 @@ const PostDetails = props => {
     )
   }
 
-  return (
-    <div className="postDetailsContainer">
-      <h2 className="postDetailsTitle">{postData.title}</h2>
-      <h3 className="postDetailsAuthor">{postData.author}</h3>
-      <h4 className="postDetailsTimestamp">
-        {timeago((postData.timestamp || 1610849840) * 1000)}
-      </h4>
-      <p className="postDetailsBody">{postData.body}</p>
-      {imageHandler(postData.image || 'none', 'postDetailsImage')}
-      <p>Comments: {postData.comments}</p>
-      <p>Likes: {postData.likes}</p>
-      <p>Dislikes: {postData.dislikes}</p>
-      <Link to={`/posts/${postData['_id']}/edit`}>
-        <button>EDIT</button>
-      </Link>
-    </div>
-  )
+  if (Object.keys(postData).length > 0) {
+    return (
+      <div className="postDetailsContainer">
+        <h2 className="postDetailsTitle">{postData.title}</h2>
+        <h3 className="postDetailsAuthor">{postData.author}</h3>
+        <h4 className="postDetailsTimestamp">
+          {timeago((postData.timestamp || 1610849840) * 1000)}
+        </h4>
+        <p className="postDetailsBody">{postData.body}</p>
+        {imageHandler(postData.image, 'full')}
+        <p>Comments: {postData.comments}</p>
+        <p>Likes: {postData.likes}</p>
+        <p>Dislikes: {postData.dislikes}</p>
+        <Link to={`/posts/${postData['_id']}/edit`}>
+          <button>EDIT</button>
+        </Link>
+      </div>
+    )
+  } else {
+    return <h1>Loading......</h1>
+  }
 }
 
 export default PostDetails

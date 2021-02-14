@@ -12,9 +12,10 @@ const imageUploader = async image => {
         process.env.REACT_APP_CLOUDINARY_URL,
         formData
       )
+      console.log(res)
       console.log(res.data['secure_url'])
       console.log('image function is now returning')
-      return res.data['secure_url']
+      return { url: res.data['secure_url'], id: res.data['public_id'] }
     } catch (err) {
       return new Error({ message: 'There was a problem uploading your image' })
     }

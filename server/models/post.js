@@ -19,7 +19,10 @@ const PostSchema = new Schema({
     required: true,
   },
   body: String,
-  image: String,
+  image: {
+    id: String,
+    url: String,
+  },
   likes: { type: [String], required: true },
   dislikes: { type: [String], required: true },
   comments: { type: [Object], required: true },

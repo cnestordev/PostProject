@@ -23,7 +23,10 @@ const getReddit = async () => {
       authorId,
       timestamp: created,
       body: selftext,
-      image: url,
+      image: {
+        url: url,
+        id: '',
+      },
       likes: ups,
       dislikes: downs,
       comments: num_comments,

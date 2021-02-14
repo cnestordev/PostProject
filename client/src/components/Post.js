@@ -13,7 +13,7 @@ const Post = ({ data }) => {
         <h4 className="postAuthor">{data.author}</h4>
         <h5 className="postTimestamp">{timeago(data.timestamp * 1000)}</h5>
         <div className="tagsContainer">{tagsHandler(data.tags)}</div>
-        {imageHandler(data.image)}
+        {imageHandler(data.image, 'thumbnail')}
         <div className="socialContainer">
           <p className="postSocial">
             <i className="fas fa-chevron-up"></i>

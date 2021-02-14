@@ -26,6 +26,12 @@ const CreatePost = () => {
     tags: '',
   })
 
+  const defaultErrorValues = {
+    hasError: false,
+    message: '',
+    status: '',
+  }
+
   const history = useHistory()
 
   const [imageData, setImageData] = useState(null)
@@ -36,6 +42,8 @@ const CreatePost = () => {
 
   const [disabled, setDisabled] = useState(true)
 
+  const [serverError, setServerError] = useState(defaultErrorValues)
+
   useEffect(() => {
     formSchema.isValid(data).then(valid => {
       setDisabled(!valid)
@@ -44,6 +52,7 @@ const CreatePost = () => {
 
   useEffect(async () => {
     if (data.title || data.tags.length > 0) {
+      console.log('sending post to server')
       try {
         console.log('entering try')
         const response = await axios.post(
@@ -57,6 +66,11 @@ const CreatePost = () => {
         console.log('ERROR, entering catch')
         console.dir(err.response.data)
         setSending(false)
+        setServerError({
+          hasError: true,
+          message: err.response.data.message,
+          status: err.response.data.status,
+        })
       }
     }
   }, [querying])
@@ -98,6 +112,7 @@ const CreatePost = () => {
   const handleSubmit = async e => {
     console.log('creating NEW post...')
     e.preventDefault()
+    setServerError(defaultErrorValues)
     setSending(true)
     console.log('starting upload image function')
     const img = await imageUploader(imageData)
@@ -113,6 +128,7 @@ const CreatePost = () => {
   return (
     <div className="createFormContainer">
       <h1 className="createHeader">Create Post</h1>
+      {serverError.hasError && <h3>{serverError.message}</h3>}
       <form className="createFormElement" onSubmit={handleSubmit}>
         <input
           onChange={handleChange}

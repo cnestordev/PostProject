@@ -3,7 +3,7 @@ const Joi = require('joi')
 module.exports.postSchema = Joi.object({
   title: Joi.string().required(),
   body: Joi.string().allow(''),
-  image: Joi.string().allow(''),
+  image: Joi.object().allow(),
   tags: Joi.string().required(),
   author: Joi.string().required(),
   authorId: Joi.string().required(),
