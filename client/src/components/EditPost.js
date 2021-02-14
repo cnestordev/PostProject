@@ -6,6 +6,7 @@ import formSchema from '../validation/FormSchema'
 
 import Loader from 'react-loader-spinner'
 import imageUploader from '../util/imageUploader'
+import axiosCall from '../api/axiosCall'
 
 const EditPost = props => {
   const id = props.match.params.id
@@ -41,7 +42,7 @@ const EditPost = props => {
   const history = useHistory()
 
   useEffect(async () => {
-    const response = await axios.get(`http://localhost:3001/posts/${id}/edit`)
+    const response = await axiosCall.get(`/posts/${id}/edit`)
     console.log(response.data.data)
     const { data } = response.data
     setData({
@@ -70,10 +71,7 @@ const EditPost = props => {
       try {
         console.log('edit try')
         console.log(data)
-        const response = await axios.put(
-          `http://localhost:3001/posts/${id}/edit`,
-          data
-        )
+        const response = await axiosCall.put(`/posts/${id}/edit`, data)
         setSending(false)
         history.push(`/posts/${id}`)
       } catch (err) {
@@ -135,9 +133,7 @@ const EditPost = props => {
 
   const handleDelete = async id => {
     console.log(id)
-    const response = await axios.delete(
-      `http://localhost:3001/posts/${id}/delete`
-    )
+    const response = await axiosCall.delete(`/posts/${id}/delete`)
     console.log(response)
     history.push('/posts')
   }

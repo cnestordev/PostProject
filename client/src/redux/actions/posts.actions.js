@@ -1,4 +1,5 @@
 import axios from 'axios'
+import axiosCall from '../../api/axiosCall'
 
 // export const getPosts = () => {
 
@@ -11,7 +12,7 @@ import axios from 'axios'
 export const getPosts = () => async dispatch => {
   console.log('GET POST ACTION DEPLOYED')
   try {
-    const response = await axios.get('http://localhost:3001/posts')
+    const response = await axiosCall.get(`/posts`)
     dispatch({
       type: 'GET_POSTS',
       payload: response.data.data,

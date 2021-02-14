@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 import * as yup from 'yup'
 import formSchema from '../validation/FormSchema'
 
 import Loader from 'react-loader-spinner'
 import imageUploader from '../util/imageUploader'
+import axiosCall from '../api/axiosCall'
 
 const CreatePost = () => {
   const [data, setData] = useState({
@@ -56,10 +56,7 @@ const CreatePost = () => {
       console.log(data)
       try {
         console.log('entering try')
-        const response = await axios.post(
-          'http://localhost:3001/posts/new',
-          data
-        )
+        const response = await axiosCall.post('/posts/new', data)
         console.log(response)
         setSending(false)
         history.push('/posts')

@@ -139,6 +139,12 @@ p.postDetailsBody {
   margin: 2.5% 0;
 }
 
+.commentSection {
+  border-top: 1px solid black;
+  width: 57%;
+  margin: 1% auto;
+}
+
 /* ---NO IMAGE-------------------------- */
 
 .noImageContainer {
@@ -314,4 +320,111 @@ h2.errorHeader {
   border-radius: 2px;
   margin: 3% 0;
   color: black;
+}
+
+/* --- POST COMMENT COMPONENT ------------------- */
+
+.postCommentContainer {
+  box-sizing: border-box;
+  margin: 1% auto;
+  width: 100%;
+  padding: 0;
+}
+
+.postCommentForm {
+  display: flex;
+  flex-direction: column;
+  padding: 1%;
+}
+
+.postCommentInput {
+  border: 1px solid #d9d9d9;
+  background: #d9d9d9;
+  border-radius: 3px;
+  height: 10vh;
+}
+
+.postCommentInput::placeholder {
+  color: rgb(226, 50, 50);
+  font-weight: bold;
+}
+
+.postCommentBtn {
+  border: 1px solid #262626;
+  color: #fff;
+  border-radius: 3px;
+  background: #262726;
+  font-size: 1.6rem;
+  padding: 1.5% 4%;
+  margin: 0 auto;
+  margin-top: 3%;
+  width: 30%;
+  cursor: pointer;
+}
+
+.postCommentBtn:disabled,
+.postCommentBtn[disabled],
+.postCommentBtn:disabled,
+.postCommentBtn[disabled] {
+  border: 1px solid #d9d9d9;
+  background: #d9d9d9;
+}
+
+/* ---- COMMENTS COMPONENT ----- */
+
+.commentsContainer {
+  background: white;
+}
+
+.commentsHeader {
+  font-size: 1.7rem;
+  padding: 0.8%;
+}
+
+/* ---- COMMENT COMPONENT ----------- */
+.commentBox {
+  box-sizing: border-box;
+  background: rgb(248, 247, 247);
+  width: 98%;
+  margin: 2% auto;
+  padding: 1%;
+}
+
+h3.commentAuthor {
+  color: #404040;
+  font-size: 1.2rem;
+  display: inline-block;
+}
+
+p.commentTimestamp {
+  display: inline-block;
+  font-size: 1.2rem;
+  color: #868686;
+  margin-top: 0.7%;
+  margin-left: 2%;
+}
+
+p.commentTimestamp::before {
+  content: '|';
+  margin-right: 0.7rem;
+}
+
+p.commentBody {
+  font-size: 1.6rem;
+  margin-top: 1.5%;
+}
+
+div.commentSocial {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 1.5% auto;
+  width: 70%;
+}
+
+p.commentRating {
+  font-size: 1.6rem;
+}
+
+p.commentRating .far {
+  font-size: 1.8rem;
 }

@@ -3,7 +3,7 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 const Post = require('./models/post')
 const Comment = require('./models/comment')
-const { postSchema } = require('./validation/postValidation.js')
+const { postSchema, commentSchema } = require('./validation/postValidation.js')
 
 //----------------------------------------------- Connect to MongoDB ------------------------------------------------
 mongoose.connect('mongodb://localhost:27017/reddit-clone', {
@@ -35,8 +35,24 @@ const validatePost = (req, res, next) => {
   next()
 }
 
+const validateComment = (req, res, next) => {
+  const validation = commentSchema.validate(req.body)
+  if (validation.error) {
+    console.log('-----------------------------')
+    console.log(validation.error.details[0].message)
+    return next({ message: validation.error.details[0].message, status: 400 })
+  }
+  next()
+}
+
+const addTimestamp = (req, res, next) => {
+  req.body.timestamp = Math.round(new Date().getTime() / 1000)
+  next()
+}
+
 app.get('/', (req, res) => {
-  res.json({ data: 'working' })
+  console.log(req.headers.host)
+  res.json({ data: 'working' }).end()
 })
 
 app.get('/posts', async (req, res) => {
@@ -47,7 +63,8 @@ app.get('/posts', async (req, res) => {
 app.get('/posts/:id', async (req, res, next) => {
   const { id } = req.params
   try {
-    const post = await Post.findById(id)
+    const post = await await Post.findById(id).populate('comments')
+    console.log(post)
     if (!post) {
       return next({ message: 'No Post Found', status: 404 })
     }
@@ -58,9 +75,7 @@ app.get('/posts/:id', async (req, res, next) => {
   }
 })
 
-app.post('/posts/new', validatePost, async (req, res, next) => {
-  // Destructure the req.body obj so we can control timestamp, likes, dislikes, comments
-  req.body.timestamp = Math.round(new Date().getTime() / 1000)
+app.post('/posts/new', addTimestamp, validatePost, async (req, res, next) => {
   try {
     const post = new Post(req.body)
     const resul = await post.save()
@@ -103,28 +118,35 @@ app.delete('/posts/:id/delete', async (req, res) => {
 
 // ----comments-------------------------------------------
 
-app.post('/posts/:id/comments', async (req, res) => {
-  const { id } = req.params
-  const { body, author, authorId, timestamp, likes, dislikes } = req.body
-  try {
-    const post = await Post.findById(id)
-    const comment = new Comment({
-      body,
-      author,
-      authorId,
-      timestamp: Math.round(new Date().getTime() / 1000),
-      likes: [],
-      dislikes: [],
-    })
-    post.comments.push(comment)
-    await comment.save()
-    await post.save()
-    res.status(201).json({ message: 'successfully added comment', status: 201 })
-  } catch (err) {
-    console.log(err)
-    res.status(404).json({ message: 'Post Not Found', status: 404 })
+app.post(
+  '/posts/:id/comments',
+  addTimestamp,
+  validateComment,
+  async (req, res) => {
+    const { id } = req.params
+    const { body, author, authorId, timestamp, likes, dislikes } = req.body
+    try {
+      const post = await Post.findById(id)
+      const comment = new Comment({
+        body,
+        author,
+        authorId,
+        timestamp,
+        likes: [],
+        dislikes: [],
+      })
+      post.comments.push(comment)
+      await comment.save()
+      await post.save()
+      res
+        .status(201)
+        .json({ data:  message: 'successfully added comment', status: 201 })
+    } catch (err) {
+      console.log(err)
+      res.status(404).json({ message: 'Post Not Found', status: 404 })
+    }
   }
-})
+)
 
 // -------------------------------------------------------
 
