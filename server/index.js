@@ -60,7 +60,8 @@ app.get('/posts/:id', async (req, res, next) => {
 app.post('/posts/new', validatePost, async (req, res, next) => {
   try {
     const post = new Post(req.body)
-    await post.save()
+    const resul = await post.save()
+    console.log(resul)
     res.status(201).json({ message: 'post was successfully uploaded' })
   } catch (err) {
     console.log('There is a problem!')

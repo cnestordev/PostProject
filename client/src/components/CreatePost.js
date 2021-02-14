@@ -52,7 +52,8 @@ const CreatePost = () => {
 
   useEffect(async () => {
     if (data.title || data.tags.length > 0) {
-      console.log('sending post to server')
+      console.log('sending post to server, data sending:')
+      console.log(data)
       try {
         console.log('entering try')
         const response = await axios.post(

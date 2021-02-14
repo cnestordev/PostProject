@@ -4,14 +4,18 @@ import { getPosts } from '../redux/actions/posts.actions'
 import Post from './Post'
 
 const Posts = props => {
-  console.log(props.posts.posts)
   useEffect(() => {
     props.getPosts()
   }, [])
 
-  const postArr = props.posts.posts.map(post => {
-    return <Post key={post['_id']} data={post} />
-  })
+  //sorts the array of posts first, then maps through them to create Post components
+  const postArr = props.posts.posts
+    .sort(function (x, y) {
+      return y.timestamp - x.timestamp
+    })
+    .map(post => {
+      return <Post key={post['_id']} data={post} />
+    })
 
   return <div>{postArr}</div>
 }

@@ -77,6 +77,12 @@ h5.postTimestamp {
   color: #404040;
 }
 
+.editedFlair {
+  color: #6c6c6c;
+  font-size: 0.8rem;
+  display: inline-block;
+}
+
 .postImage {
   width: 70%;
 }

@@ -11,7 +11,10 @@ const Post = ({ data }) => {
       <div className="postContainer">
         <h3 className="postTitle">{data.title}</h3>
         <h4 className="postAuthor">{data.author}</h4>
-        <h5 className="postTimestamp">{timeago(data.timestamp * 1000)}</h5>
+        <h5 className="postTimestamp">
+          {timeago(data.timestamp * 1000)} |{' '}
+          {data.editCount > 0 && <p className="editedFlair">Edited</p>}
+        </h5>
         <div className="tagsContainer">{tagsHandler(data.tags)}</div>
         {imageHandler(data.image, 'thumbnail')}
         <div className="socialContainer">

@@ -21,7 +21,7 @@ const imageUploader = async image => {
     }
   }
   console.log('NO image has been entered')
-  return ''
+  return {}
 }
 
 export default imageUploader
