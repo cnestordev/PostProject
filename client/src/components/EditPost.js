@@ -120,7 +120,7 @@ const EditPost = props => {
     console.log('EDITING...')
     e.preventDefault()
     setSending(true)
-    let img = await imageUploader(imageData)
+    let img = await imageUploader(imageData, 'main')
     img = Object.keys(img).length ? img : data.image
     setData({
       ...data,

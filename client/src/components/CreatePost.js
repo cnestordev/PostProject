@@ -114,7 +114,7 @@ const CreatePost = () => {
     setServerError(defaultErrorValues)
     setSending(true)
     console.log('starting upload image function')
-    const img = await imageUploader(imageData)
+    const img = await imageUploader(imageData, 'main')
     console.log('image function has been returned, url is: ', img)
     setData({
       ...data,

@@ -11,6 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.21.1",
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "csurf": "^1.11.0",
     "dotenv": "^8.2.0",
@@ -19,6 +21,8 @@
     "helmet": "^4.4.1",
     "hpp": "^0.2.3",
     "joi": "^17.4.0",
-    "mongoose": "^5.11.15"
+    "mongoose": "^5.11.15",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0"
   }
 }

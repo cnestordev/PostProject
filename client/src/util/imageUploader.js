@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const imageUploader = async image => {
+const imageUploader = async (image, directory = 'main') => {
   console.log('entering image uploader, image is ')
   console.log(image)
   if (image) {
@@ -10,6 +10,7 @@ const imageUploader = async image => {
     const formData = new FormData()
     formData.append('file', image)
     formData.append('upload_preset', process.env.REACT_APP_CLOUDINARY_NAME)
+    formData.append('folder', directory)
     try {
       console.log('TRY')
       const res = await axios.post(
