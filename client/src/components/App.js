@@ -12,6 +12,7 @@ import CreatePost from './CreatePost'
 import EditPost from './EditPost'
 import NavigationBar from './NavigationBar'
 import Error404 from './Error404'
+import Home from './Home'
 
 function App() {
   // const [data, setData] = useState({})
@@ -25,6 +26,7 @@ function App() {
     <Router>
       <NavigationBar />
       <Switch>
+        <Route exact path="/" component={Home} />
         <Route exact path="/posts" component={Posts} />
         <Route exact path="/posts/new" component={CreatePost} />
         <Route exact path="/posts/:id" component={PostDetails} />

@@ -37,7 +37,6 @@ const PostComment = props => {
   const [comments, setComments] = useState(props.postData.comments)
 
   useEffect(() => {
-    console.log('Re-rendered')
     commentSchema.isValid(commentData).then(valid => {
       setDisabled(!valid)
     })

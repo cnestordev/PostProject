@@ -384,10 +384,12 @@ h2.errorHeader {
 /* ---- COMMENT COMPONENT ----------- */
 .commentBox {
   box-sizing: border-box;
-  background: rgb(248, 247, 247);
+  border: 1px solid rgb(180, 179, 179);
+  border-radius: 5px;
+  background: #fff;
   width: 98%;
   margin: 2% auto;
-  padding: 1%;
+  padding: 2%;
 }
 
 h3.commentAuthor {
