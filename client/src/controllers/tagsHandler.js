@@ -5,10 +5,12 @@ const tagsHandler = tags => {
   if (tags) {
     const hash = tags
     const hashtags = hash.split(' ')
-    return hashtags.map(item => {
-      const id = Math.random() * 100000
-      return <Tags key={id} data={item} />
-    })
+    return React.Children.toArray(
+      hashtags.map(item => {
+        const id = Math.random() * 100000
+        return <Tags data={item} />
+      })
+    )
   }
 }
 

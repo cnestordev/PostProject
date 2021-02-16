@@ -58,8 +58,9 @@ const CreatePost = () => {
         console.log('entering try')
         const response = await axiosCall.post('/posts/new', data)
         console.log(response)
+        const { postId } = response.data
         setSending(false)
-        history.push('/posts')
+        history.push(`/posts/${postId}`)
       } catch (err) {
         console.log('ERROR, entering catch')
         console.dir(err.response.data)

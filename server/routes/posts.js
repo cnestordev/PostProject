@@ -28,8 +28,8 @@ router.post('/new', addTimestamp, validatePost, async (req, res, next) => {
     const post = new Post(req.body)
     const result = await post.save()
     console.log('successfully posted')
-    // console.log(resul)
-    res.status(201).json({ message: 'post was successfully uploaded' })
+    const postId = result['_id']
+    res.status(201).json({ message: 'post was successfully uploaded', postId })
   } catch (err) {
     console.log('There is a problem!')
     return next({ message: err })
