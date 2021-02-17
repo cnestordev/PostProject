@@ -22,8 +22,8 @@ const NavigationBar = () => {
             </Link>
           </li>
           <li>
-            <Link to="/user/new" className="navbarItem">
-              Sign Up
+            <Link to="/login" className="navbarItem">
+              Login
             </Link>
           </li>
         </ul>

@@ -13,6 +13,8 @@ import EditPost from './EditPost'
 import NavigationBar from './NavigationBar'
 import Error404 from './Error404'
 import Home from './Home'
+import Register from './Register'
+import Login from './Login'
 
 function App() {
   // const [data, setData] = useState({})
@@ -27,6 +29,8 @@ function App() {
       <NavigationBar />
       <Switch>
         <Route exact path="/" component={Home} />
+        <Route path="/register" component={Register} />
+        <Route path="/login" component={Login} />
         <Route exact path="/posts" component={Posts} />
         <Route exact path="/posts/new" component={CreatePost} />
         <Route exact path="/posts/:id" component={PostDetails} />
