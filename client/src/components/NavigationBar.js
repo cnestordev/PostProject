@@ -23,7 +23,7 @@ const NavigationBar = () => {
           </li>
           <li>
             <Link to="/login" className="navbarItem">
-              Login
+              Sign Up
             </Link>
           </li>
         </ul>

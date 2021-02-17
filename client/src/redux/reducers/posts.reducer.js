@@ -1,5 +1,4 @@
 const initialState = {
-  user: {},
   posts: [],
 }
 

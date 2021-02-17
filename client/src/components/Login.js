@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { connect } from 'react-redux'
 import axiosCall from '../api/axiosCall'
 import axios from 'axios'
 
@@ -24,7 +23,7 @@ const Login = () => {
     try {
       console.log('entering TRY for LOGIN')
       const response = await axiosCall.post('/login', formData)
-      console.log('successfully logged')
+      console.log('successfully logged in')
       console.log(response.data)
     } catch (err) {
       console.log('entering CATCH for LOGIN')
