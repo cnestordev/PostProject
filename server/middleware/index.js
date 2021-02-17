@@ -25,8 +25,16 @@ const validateComment = (req, res, next) => {
   next()
 }
 
+const isLoggedIn = (req, res, next) => {
+  if (!req.isAuthenticated()) {
+    return res.status(401).end()
+  }
+  next()
+}
+
 module.exports = {
   addTimestamp,
   validatePost,
   validateComment,
+  isLoggedIn,
 }

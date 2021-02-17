@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const { addTimestamp, validatePost } = require('../middleware')
 const Post = require('../models/post')
+const { isLoggedIn } = require('../middleware')
 
 router.get('/', async (req, res) => {
   const posts = await Post.find({})
@@ -23,20 +24,28 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
-router.post('/new', addTimestamp, validatePost, async (req, res, next) => {
-  try {
-    const post = new Post(req.body)
-    const result = await post.save()
-    console.log('successfully posted')
-    const postId = result['_id']
-    res.status(201).json({ message: 'post was successfully uploaded', postId })
-  } catch (err) {
-    console.log('There is a problem!')
-    return next({ message: err })
+router.post(
+  '/new',
+  isLoggedIn,
+  addTimestamp,
+  validatePost,
+  async (req, res, next) => {
+    try {
+      const post = new Post(req.body)
+      const result = await post.save()
+      console.log('successfully posted')
+      const postId = result['_id']
+      res
+        .status(201)
+        .json({ message: 'post was successfully uploaded', postId })
+    } catch (err) {
+      console.log('There is a problem!')
+      return next({ message: err })
+    }
   }
-})
+)
 
-router.get('/:id/edit', async (req, res) => {
+router.get('/:id/edit', isLoggedIn, async (req, res) => {
   const { id } = req.params
   const post = await Post.findById(id)
   res.status(200).json({ data: post })
