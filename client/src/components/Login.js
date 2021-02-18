@@ -26,6 +26,8 @@ const Login = props => {
 
   const [disabled, setDisabled] = useState(true)
 
+  const [serverError, setServerError] = useState('')
+
   useEffect(() => {
     loginSchema.isValid(formData).then(valid => {
       setDisabled(!valid)
@@ -71,13 +73,18 @@ const Login = props => {
       history.push('/posts')
     } catch (err) {
       console.log('entering CATCH for LOGIN')
-      console.log(err)
+      console.dir(err)
+      console.dir(err.response.data.message)
+      setServerError(err.response.data.message)
     }
   }
 
   return (
     <div className="loginContainer">
       <h1 className="loginHeader">Login User:</h1>
+      {serverError.length > 0 && (
+        <p className="serverErrorMessage">{serverError}</p>
+      )}
       <form autoComplete="off" className="loginForm" onSubmit={handleSubmit}>
         <input
           type="text"

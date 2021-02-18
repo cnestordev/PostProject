@@ -312,6 +312,11 @@ h2.errorHeader {
   font-weight: bold;
 }
 
+.serverErrorMessage {
+  font-size: 1.2rem;
+  color: rgb(216, 83, 83);
+}
+
 /* --- POST COMMENT COMPONENT ------------------- */
 
 .postCommentContainer {

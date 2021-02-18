@@ -30,6 +30,8 @@ const Register = props => {
 
   const [disabled, setDisabled] = useState(true)
 
+  const [serverError, setServerError] = useState('')
+
   useEffect(() => {
     registerSchema.isValid(formData).then(valid => {
       setDisabled(!valid)
@@ -75,12 +77,16 @@ const Register = props => {
     } catch (err) {
       console.log('entering CATCH for REGISTER')
       console.log(err.response.data.message)
+      setServerError(err.response.data.message)
     }
   }
 
   return (
     <div className="registerContainer">
       <h1 className="registerHeader">Reigster User:</h1>
+      {serverError.length > 0 && (
+        <p className="serverErrorMessage">{serverError}</p>
+      )}
       <form autoComplete="off" className="registerForm" onSubmit={handleSubmit}>
         <input
           type="text"

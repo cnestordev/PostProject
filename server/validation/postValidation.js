@@ -24,3 +24,8 @@ module.exports.commentSchema = Joi.object({
   dislikes: Joi.array().allow(),
   _id: Joi.allow(),
 })
+
+module.exports.userSchema = Joi.object({
+  username: Joi.string().required().min(3).max(15),
+  password: Joi.string().required().min(3).max(15),
+})

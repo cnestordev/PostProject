@@ -2,6 +2,7 @@ const express = require('express')
 const passport = require('passport')
 const router = express.Router()
 const User = require('../models/user')
+const { validateUser } = require('../middleware')
 
 router.get('/', (req, res) => {
   console.log('hit root route')
@@ -26,7 +27,7 @@ router.get('/register', async (req, res) => {
   res.send('working')
 })
 
-router.post('/register', async (req, res) => {
+router.post('/register', validateUser, async (req, res) => {
   const { username, password } = req.body
   try {
     const user = new User({ username })
@@ -56,18 +57,63 @@ router.get('/login', (req, res) => {
   //   console.log(req.user)
 })
 
-router.post('/login', passport.authenticate('local'), async (req, res) => {
-  console.log('successfully logged in')
-  const { comments, likedComments, posts, likedPosts, username, id } = req.user
-  const user = {
-    comments,
-    likedComments,
-    posts,
-    likedPosts,
-    username,
-    id,
-  }
-  res.status(201).json(user)
+// router.post(
+//   '/login',
+//   validateUser,
+//   passport.authenticate('local'),
+//   async (req, res) => {
+//     console.log('successfully logged in')
+//     const {
+//       comments,
+//       likedComments,
+//       posts,
+//       likedPosts,
+//       username,
+//       id,
+//     } = req.user
+//     const user = {
+//       comments,
+//       likedComments,
+//       posts,
+//       likedPosts,
+//       username,
+//       id,
+//     }
+//     res.status(201).json(user)
+//   }
+// )
+
+router.post('/login', (req, res, next) => {
+  passport.authenticate('local', (err, user, info) => {
+    if (err) {
+      return next(err)
+    }
+    if (info) {
+      return next({ message: info.message, status: 401 })
+    }
+    if (user) {
+      req.logIn(user, err => {
+        if (err) console.log(err)
+        const {
+          posts,
+          likedPosts,
+          comments,
+          likedComments,
+          id,
+          username,
+        } = req.user
+        const user = {
+          posts,
+          likedPosts,
+          comments,
+          likedComments,
+          id,
+          username,
+        }
+        res.status(201).json(user)
+      })
+    }
+  })(req, res, next)
 })
 
 router.get('/logout', async (req, res) => {
