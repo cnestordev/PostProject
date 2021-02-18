@@ -39,7 +39,7 @@ const validateUser = (req, res, next) => {
 
 const isLoggedIn = (req, res, next) => {
   if (!req.isAuthenticated()) {
-    return res.status(401).end()
+    return next({ message: 'You must be logged in to do that', status: 401 })
   }
   next()
 }

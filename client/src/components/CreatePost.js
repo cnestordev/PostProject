@@ -63,7 +63,7 @@ const CreatePost = () => {
         history.push(`/posts/${postId}`)
       } catch (err) {
         console.log('ERROR, entering catch')
-        console.dir(err.response.data)
+        console.log(err.response.data.message)
         setSending(false)
         setServerError({
           hasError: true,
@@ -127,7 +127,9 @@ const CreatePost = () => {
   return (
     <div className="createFormContainer">
       <h1 className="createHeader">Create Post</h1>
-      {serverError.hasError && <h3>{serverError.message}</h3>}
+      {serverError.hasError && (
+        <p className="serverErrorMessage">{serverError.message}</p>
+      )}
       <form className="createFormElement" onSubmit={handleSubmit}>
         <input
           onChange={handleChange}

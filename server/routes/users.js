@@ -17,9 +17,19 @@ router.get('/', (req, res) => {
     .end()
 })
 
+//route for development only
 router.get('/user', async (req, res) => {
   if (req.isAuthenticated()) {
     res.json(req.user)
+  }
+})
+
+router.get('/isloggedin', (req, res) => {
+  console.log('is logged in route')
+  if (req.isAuthenticated()) {
+    res.send(true)
+  } else {
+    res.send(false)
   }
 })
 

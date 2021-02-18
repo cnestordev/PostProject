@@ -11,6 +11,12 @@ import axiosCall from '../api/axiosCall'
 const EditPost = props => {
   const id = props.match.params.id
 
+  const defaultErrorValues = {
+    hasError: false,
+    message: '',
+    status: '',
+  }
+
   const [data, setData] = useState({
     title: '',
     author: 'predefined',
@@ -31,13 +37,15 @@ const EditPost = props => {
 
   const [imageData, setImageData] = useState(null)
 
-  const [loading, setLoading] = useState(false)
+  // const [loading, setLoading] = useState(false)
 
   const [sending, setSending] = useState(false)
 
   const [disabled, setDisabled] = useState(true)
 
   const [edited, setHasEdited] = useState(false)
+
+  const [serverError, setServerError] = useState(defaultErrorValues)
 
   const history = useHistory()
 
@@ -78,6 +86,12 @@ const EditPost = props => {
         console.log(3)
         console.log('EDIT POST ERROR')
         console.dir(err)
+        setSending(false)
+        setServerError({
+          hasError: true,
+          message: err.response.data.message,
+          status: err.response.data.status,
+        })
       }
     }
   }, [edited])
@@ -121,7 +135,9 @@ const EditPost = props => {
     e.preventDefault()
     setSending(true)
     let img = await imageUploader(imageData, 'main')
+    console.log(img)
     img = Object.keys(img).length ? img : data.image
+    console.log(img)
     setData({
       ...data,
       image: img,
