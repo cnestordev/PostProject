@@ -1,10 +1,11 @@
 import axios from 'axios'
 import React, { useEffect } from 'react'
+import axiosCall from '../api/axiosCall'
 
 const Home = () => {
   useEffect(async () => {
     try {
-      const res = await axios.get('http://localhost:3001', {
+      const res = await axiosCall.get('/', {
         withCredentials: true,
       })
       console.log('home component ajax successful')

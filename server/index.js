@@ -31,11 +31,10 @@ const app = express()
 
 app.set('views', path.join(__dirname, 'views'))
 
-app.use(cookieParser())
 app.use(express.json())
 app.use(
   cors({
-    origin: 'http://localhost:3000',
+    origin: 'http://192.168.1.14:3000',
     credentials: true,
   })
 )
@@ -57,6 +56,8 @@ app.use(
   })
 )
 
+app.use(cookieParser('secretcode'))
+
 // passport middleware
 app.use(passport.initialize())
 app.use(passport.session())
@@ -67,19 +68,6 @@ passport.deserializeUser(User.deserializeUser())
 app.use('/posts', postsRouter)
 app.use('/posts/:id/comments', commentsRouter)
 app.use('/', usersRouter)
-
-app.get('/', (req, res) => {
-  console.log(req.headers.host)
-  console.log(req.isAuthenticated())
-  console.log(req.user)
-  res
-    .json({
-      user: { 1: 'hey', 2: req.user },
-      data: 'working',
-      status: req.isAuthenticated(),
-    })
-    .end()
-})
 
 app.all('*', (req, res) => {
   console.log('404 NO PAGE EXISTS')

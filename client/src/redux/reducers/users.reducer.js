@@ -1,6 +1,4 @@
-const initialState = {
-  user: null,
-}
+const initialState = {}
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -8,7 +6,8 @@ const reducer = (state = initialState, action) => {
       console.log('setting user to state')
       return action.payload
     case 'LOGOUT_USER':
-      return state
+      console.log('setting user to logout')
+      return action.payload
     default:
       return state
   }

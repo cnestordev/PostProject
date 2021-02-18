@@ -8,8 +8,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #607d8b;
-  height: 5vh;
+  background: #0a5c8b;
+  height: 6vh;
 }
 
 .navbarList {
@@ -20,24 +20,14 @@ body {
 }
 
 .navbarItem {
-  color: #272727;
+  color: #f1f1f1;
   text-decoration: none;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   font-weight: 700;
 }
 
-.fasBorder {
-  font-size: 1.4rem;
-  border: 1px solid black;
-  padding: 13% 22%;
-  border-radius: 50px;
-  transition: 300ms;
-}
-
-.fasBorder:hover {
-  background: #000;
-  color: #fff;
-  transition: 300ms;
+.fas {
+  font-size: 1.8rem;
 }
 
 /* ---------POST--------------------------------- */
@@ -310,16 +300,16 @@ h2.errorHeader {
 
 /* -------- VALIDATION ERRORS------------- */
 .validatinErrorsContainer {
-  font-size: 2rem;
-  width: 15%;
+  font-size: 2.3rem;
+  width: 70%;
   margin: 1% auto;
 }
 
 .validationErrorMessage {
-  background: red;
   border-radius: 2px;
   margin: 3% 0;
-  color: black;
+  color: rgb(255, 133, 133);
+  font-weight: bold;
 }
 
 /* --- POST COMMENT COMPONENT ------------------- */
@@ -429,4 +419,67 @@ p.commentRating {
 
 p.commentRating .far {
   font-size: 1.8rem;
+}
+
+/* ----LOGIN COMPONENT ---------- */
+
+.loginContainer,
+.registerContainer {
+  border: 1px solid rgb(200, 200, 200);
+  background: #fff;
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 5%;
+}
+
+.loginHeader,
+.registerHeader {
+  font-size: 3rem;
+  margin: 3% 0;
+}
+
+.loginForm,
+.registerForm {
+  display: flex;
+  flex-direction: column;
+  margin: 4% auto;
+}
+
+.loginForm input,
+.registerForm input {
+  width: 50%;
+  margin: 1% auto;
+  font-size: 2rem;
+  padding: 1%;
+}
+
+.loginForm button,
+.registerForm button {
+  width: 25%;
+  margin: 1% auto;
+  font-size: 1.8rem;
+  background: #fff;
+  border: 2px solid #000;
+  padding: 1.2% 1%;
+  transition: 300ms;
+}
+
+.loginForm button:hover,
+.registerForm button:hover {
+  background: #000;
+  color: #fff;
+  transition: 300ms;
+  cursor: pointer;
+}
+
+.redirectContainer {
+  margin-bottom: 2%;
+}
+
+.accountRedirect {
+  font-size: 1.5rem;
+  color: inherit;
+  padding-bottom: 2%;
+  text-decoration: none;
 }
