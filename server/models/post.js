@@ -9,11 +9,13 @@ const PostSchema = new Schema(
       required: true,
     },
     author: {
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: 'User',
       required: true,
     },
     authorId: {
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: 'User',
       required: true,
     },
     timestamp: {
@@ -25,8 +27,8 @@ const PostSchema = new Schema(
       id: String,
       url: String,
     },
-    likes: [{ type: Schema.Types.ObjectId, required: true }],
-    dislikes: [{ type: Schema.Types.ObjectId, required: true }],
+    likes: [{ type: Schema.Types.ObjectId, ref: 'User', required: true }],
+    dislikes: [{ type: Schema.Types.ObjectId, ref: 'User', required: true }],
     comments: [
       {
         type: Schema.Types.ObjectId,

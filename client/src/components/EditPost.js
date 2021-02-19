@@ -19,8 +19,9 @@ const EditPost = props => {
 
   const [data, setData] = useState({
     title: '',
-    author: 'predefined',
-    authorId: 'predefined',
+    author: '',
+    authorId: '',
+    _id: '',
     timestamp: '',
     body: '',
     image: '',
@@ -50,20 +51,30 @@ const EditPost = props => {
   const history = useHistory()
 
   useEffect(async () => {
-    const response = await axiosCall.get(`/posts/${id}/edit`)
-    console.log(response.data.data)
-    const { data } = response.data
-    setData({
-      title: data.title,
-      timestamp: data.timestamp,
-      tags: data.tags,
-      image: data.image,
-      body: data.body,
-      author: 'predetermined',
-      authorId: 'predetermined',
-      _id: data['_id'],
-      editCount: data.editCount,
-    })
+    try {
+      const response = await axiosCall.get(`/posts/${id}/edit`)
+      console.log(response.data.data)
+      const { data } = response.data
+      setData({
+        title: data.title,
+        timestamp: data.timestamp,
+        tags: data.tags,
+        image: data.image,
+        body: data.body,
+        author: data.author,
+        authorId: data.authorId,
+        _id: data['_id'],
+        editCount: data.editCount,
+      })
+    } catch (err) {
+      console.log('ENTERING CATCH, failure to populate edit form')
+      console.dir(err.response.data.message)
+      setServerError({
+        hasError: true,
+        message: err.response.data.message,
+        status: err.response.data.status,
+      })
+    }
   }, [])
 
   useEffect(() => {
@@ -147,17 +158,17 @@ const EditPost = props => {
     return
   }
 
-  const handleDelete = async id => {
-    console.log(id)
-    const response = await axiosCall.delete(`/posts/${id}/delete`)
-    console.log(response)
-    history.push('/posts')
-  }
-
   return (
     <div className="editFormContainer">
       <h1 className="editHeader">Edit Form</h1>
-      <form className="editFormElement" onSubmit={handleSubmit}>
+      {serverError.hasError && (
+        <p className="serverErrorMessage">{serverError.message}</p>
+      )}
+      <form
+        autoComplete="off"
+        className="editFormElement"
+        onSubmit={handleSubmit}
+      >
         <input
           onChange={handleChange}
           type="text"
@@ -202,7 +213,6 @@ const EditPost = props => {
           <p className="validationErrorMessage">{errors.tags}</p>
         )}
       </div>
-      <button onClick={() => handleDelete(data['_id'])}>DELETE</button>
     </div>
   )
 }

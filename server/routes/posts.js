@@ -1,19 +1,24 @@
 const express = require('express')
 const router = express.Router()
-const { addTimestamp, validatePost } = require('../middleware')
+const { addMetaData, validatePost, isAuthorized } = require('../middleware')
 const Post = require('../models/post')
 const { isLoggedIn } = require('../middleware')
 
 router.get('/', async (req, res) => {
-  const posts = await Post.find({})
+  const posts = await Post.find({}).populate({
+    path: 'author',
+    select: 'username -_id',
+  })
   res.status(200).json({ data: posts })
 })
 
 router.get('/:id', async (req, res, next) => {
   const { id } = req.params
   try {
-    const post = await await Post.findById(id).populate('comments')
-    // console.log(post)
+    const post = await await Post.findById(id)
+      .populate('comments')
+      // .populate({ path: 'author', select: 'username -_id' })
+      .populate({ path: 'author', select: 'username -_id' })
     if (!post) {
       return next({ message: 'No Post Found', status: 404 })
     }
@@ -27,7 +32,7 @@ router.get('/:id', async (req, res, next) => {
 router.post(
   '/new',
   isLoggedIn,
-  addTimestamp,
+  addMetaData,
   validatePost,
   async (req, res, next) => {
     try {
@@ -40,30 +45,36 @@ router.post(
         .json({ message: 'post was successfully uploaded', postId })
     } catch (err) {
       console.log('There is a problem!')
-      return next({ message: err })
+      return next({ message: err.message, status: 500 })
     }
   }
 )
 
-router.get('/:id/edit', isLoggedIn, async (req, res) => {
+router.get('/:id/edit', isLoggedIn, isAuthorized, async (req, res) => {
   const { id } = req.params
   const post = await Post.findById(id)
   res.status(200).json({ data: post })
 })
 
-router.put('/:id/edit', validatePost, async (req, res, next) => {
-  const { id } = req.params
-  try {
-    const response = await Post.findByIdAndUpdate(id, { ...req.body })
-    // console.log(response)
-    console.log('successfully edited')
-    res.status(201).json({ message: 'successfully updated post', id })
-  } catch (err) {
-    return next(err)
+router.put(
+  '/:id/edit',
+  isLoggedIn,
+  isAuthorized,
+  validatePost,
+  async (req, res, next) => {
+    console.log('here')
+    const { id } = req.params
+    try {
+      const response = await Post.findByIdAndUpdate(id, { ...req.body })
+      console.log('successfully edited')
+      res.status(201).json({ message: 'successfully updated post', id })
+    } catch (err) {
+      return next(err)
+    }
   }
-})
+)
 
-router.delete('/:id/delete', async (req, res) => {
+router.delete('/:id/delete', isLoggedIn, isAuthorized, async (req, res) => {
   const { id } = req.params
   console.log('deleting....')
   try {

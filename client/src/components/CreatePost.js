@@ -130,7 +130,11 @@ const CreatePost = () => {
       {serverError.hasError && (
         <p className="serverErrorMessage">{serverError.message}</p>
       )}
-      <form className="createFormElement" onSubmit={handleSubmit}>
+      <form
+        autoComplete="off"
+        className="createFormElement"
+        onSubmit={handleSubmit}
+      >
         <input
           onChange={handleChange}
           type="text"

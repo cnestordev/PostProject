@@ -12,21 +12,26 @@ const commentSchema = Schema(
       required: true,
     },
     authorId: {
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: 'User',
       required: true,
     },
     timestamp: {
       type: String,
       required: true,
     },
-    likes: {
-      type: [String],
-      required: true,
-    },
-    dislikes: {
-      type: [String],
-      required: true,
-    },
+    likes: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+      },
+    ],
+    dislikes: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+      },
+    ],
   },
   { minimize: false }
 )

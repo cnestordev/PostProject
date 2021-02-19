@@ -10,7 +10,7 @@ const Post = ({ data }) => {
     <Link className="postLink" to={`/posts/${data['_id']}`}>
       <div className="postContainer">
         <h3 className="postTitle">{data.title}</h3>
-        <h4 className="postAuthor">{data.author}</h4>
+        <h4 className="postAuthor">Posted by {data.author.username}</h4>
         <h5 className="postTimestamp">
           {timeago(data.timestamp * 1000)}{' '}
           {data.editCount > 0 && <p className="editedFlair">| Edited</p>}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import '../cssReset.css'
@@ -18,13 +18,6 @@ import Login from './Login'
 import Logout from './Logout'
 
 function App() {
-  // const [data, setData] = useState({})
-
-  // useEffect(async () => {
-  //   const res = await axios.get('http://localhost:3001')
-  //   setData(res.data)
-  // }, [])
-
   return (
     <Router>
       <NavigationBar />

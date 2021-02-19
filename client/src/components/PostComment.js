@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
-import axios from 'axios'
+import { connect } from 'react-redux'
 import axiosCall from '../api/axiosCall'
 import * as yup from 'yup'
 import commentSchema from '../validation/CommentSchema'
 import Comments from './Comments'
+import LoginPrompt from './LoginPrompt'
 
 const PostComment = props => {
+  console.log('***************')
+  console.log(props.user)
+  console.log('***************')
+
   const history = useHistory()
 
   const commentDataValues = {
@@ -90,22 +95,34 @@ const PostComment = props => {
   return (
     <>
       <div className="postCommentContainer">
-        <form className="postCommentForm" onSubmit={handleSubmit}>
-          <textarea
-            className="postCommentInput"
-            onChange={handleChange}
-            name="body"
-            value={commentData.body}
-            placeholder={errors.body}
-          />
-          <button disabled={disabled} className="postCommentBtn">
-            comment
-          </button>
-        </form>
+        {Object.keys(props.user).length > 0 ? (
+          <form
+            autoComplete="off"
+            className="postCommentForm"
+            onSubmit={handleSubmit}
+          >
+            <textarea
+              className="postCommentInput"
+              onChange={handleChange}
+              name="body"
+              value={commentData.body}
+              placeholder={errors.body}
+            />
+            <button disabled={disabled} className="postCommentBtn">
+              comment
+            </button>
+          </form>
+        ) : (
+          <LoginPrompt />
+        )}
       </div>
       <Comments postId={props.postId} data={comments} />
     </>
   )
 }
 
-export default PostComment
+const mapStateToProps = state => ({
+  user: state.usersReducer,
+})
+
+export default connect(mapStateToProps, null)(PostComment)

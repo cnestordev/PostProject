@@ -117,7 +117,7 @@ router.post('/login', (req, res, next) => {
           likedPosts,
           comments,
           likedComments,
-          id,
+          _id: id,
           username,
         }
         res.status(201).json(user)

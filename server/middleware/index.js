@@ -1,11 +1,15 @@
+const Post = require('../models/post')
+
 const {
   postSchema,
   commentSchema,
   userSchema,
 } = require('../validation/postValidation')
 
-const addTimestamp = (req, res, next) => {
+const addMetaData = (req, res, next) => {
   req.body.timestamp = Math.round(new Date().getTime() / 1000)
+  req.body.author = req.user.id
+  req.body.authorId = req.user.id
   next()
 }
 
@@ -44,10 +48,24 @@ const isLoggedIn = (req, res, next) => {
   next()
 }
 
+const isAuthorized = async (req, res, next) => {
+  const { id } = req.params
+
+  const post = await Post.findById(id)
+  if (String(post.authorId) !== String(req.user._id)) {
+    return next({
+      message: 'Only the owner of this post can modify it',
+      status: 401,
+    })
+  }
+  return next()
+}
+
 module.exports = {
-  addTimestamp,
+  addMetaData,
   validatePost,
   validateComment,
   isLoggedIn,
   validateUser,
+  isAuthorized,
 }

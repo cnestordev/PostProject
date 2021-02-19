@@ -18,7 +18,7 @@ const Comment = ({ comment, postId }) => {
   return (
     <>
       <div className="commentBox" key={comment['_id']}>
-        <h3 className="commentAuthor">{comment.author}</h3>
+        <h3 className="commentAuthor">{comment.author.username}</h3>
         <p className="commentTimestamp">{timeago(comment.timestamp * 1000)}</p>
         <p className="commentBody">{comment.body}</p>
         <div className="commentSocial">

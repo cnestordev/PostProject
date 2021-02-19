@@ -1,43 +1,37 @@
 const express = require('express')
 const router = express.Router({ mergeParams: true })
-const { addTimestamp, validateComment, isLoggedIn } = require('../middleware')
+const { addMetaData, validateComment, isLoggedIn } = require('../middleware')
 const Post = require('../models/post')
 const Comment = require('../models/comment')
 
-router.post(
-  '/',
-  isLoggedIn,
-  addTimestamp,
-  validateComment,
-  async (req, res) => {
-    const { id } = req.params
-    const { body, author, authorId, timestamp } = req.body
-    try {
-      const post = await Post.findById(id)
-      const comment = new Comment({
-        body,
-        author,
-        authorId,
-        timestamp,
-        likes: [],
-        dislikes: [],
-      })
-      post.comments.push(comment)
-      await comment.save()
-      const updatedPost = await (await post.save())
-        .populate('comments')
-        .execPopulate()
-      res.status(201).json({
-        data: updatedPost,
-        message: 'successfully added comment',
-        status: 201,
-      })
-    } catch (err) {
-      console.log(err)
-      res.status(404).json({ message: 'Post Not Found', status: 404 })
-    }
+router.post('/', isLoggedIn, addMetaData, validateComment, async (req, res) => {
+  const { id } = req.params
+  const { body, author, authorId, timestamp } = req.body
+  try {
+    const post = await Post.findById(id)
+    const comment = new Comment({
+      body,
+      author,
+      authorId,
+      timestamp,
+      likes: [],
+      dislikes: [],
+    })
+    post.comments.push(comment)
+    await comment.save()
+    const updatedPost = await (await post.save())
+      .populate('comments')
+      .execPopulate()
+    res.status(201).json({
+      data: updatedPost,
+      message: 'successfully added comment',
+      status: 201,
+    })
+  } catch (err) {
+    console.log(err)
+    res.status(404).json({ message: 'Post Not Found', status: 404 })
   }
-)
+})
 
 router.delete('/:commentId/', isLoggedIn, async (req, res) => {
   const { id, commentId } = req.params

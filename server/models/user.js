@@ -6,10 +6,12 @@ const Schema = mongoose.Schema
 
 const UserSchema = new Schema(
   {
-    posts: [{ type: Schema.Types.ObjectId, required: true }],
-    likedPosts: [{ type: Schema.Types.ObjectId, required: true }],
-    comments: [{ type: Schema.Types.ObjectId, required: true }],
-    likedComments: [{ type: Schema.Types.ObjectId, required: true }],
+    posts: [{ type: Schema.Types.ObjectId, ref: 'Post', required: true }],
+    likedPosts: [{ type: Schema.Types.ObjectId, ref: 'Post', required: true }],
+    comments: [{ type: Schema.Types.ObjectId, ref: 'Comment', required: true }],
+    likedComments: [
+      { type: Schema.Types.ObjectId, ref: 'Comment', required: true },
+    ],
     isAdmin: Boolean,
     avatar: String,
     created: Number,
