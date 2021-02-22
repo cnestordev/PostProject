@@ -34,13 +34,28 @@ router.post('/:id/like', isLoggedIn, async (req, res, next) => {
 
   const userObjectId = mongoose.Types.ObjectId(userId)
 
+  // 0. If user has disliked, remove it
+  if (post.dislikes.includes(userObjectId)) {
+    const updatedDislikes = post.dislikes.filter(obj => {
+      return obj.toString() !== userId.toString()
+    })
+    post.set('dislikes', updatedDislikes)
+    post.markModified('dislikes')
+    await post.save()
+    console.log('removed dislike')
+  }
+
   // 1. If user hasn't liked, it likes.
   if (!post.likes.includes(userObjectId)) {
     try {
       post.likes.push(userId)
-      await post.save()
+      const result = await post.save()
       console.log('user liked the post!!')
-      return res.status(201).json({ message: 1, status: 201 })
+      const metrics = {
+        likes: result.likes.length,
+        dislikes: result.dislikes.length,
+      }
+      return res.status(201).json({ message: metrics, status: 201 })
     } catch (err) {
       return next({ message: err.message, status: 500 })
     }
@@ -56,7 +71,11 @@ router.post('/:id/like', isLoggedIn, async (req, res, next) => {
       post.set('likes', updatedLikes)
       post.markModified('likes')
       const result = await post.save()
-      return res.status(201).json({ message: -1, status: 201 })
+      const metrics = {
+        likes: result.likes.length,
+        dislikes: result.dislikes.length,
+      }
+      return res.status(201).json({ message: metrics, status: 201 })
     } catch (err) {
       return next({ message: err.message, status: 500 })
     }
@@ -73,15 +92,28 @@ router.post('/:id/dislike', isLoggedIn, async (req, res, next) => {
 
   const userObjectId = mongoose.Types.ObjectId(userId)
 
+  // 0. If user has liked, remove like
+  if (post.likes.includes(userObjectId)) {
+    const updatedLikes = post.likes.filter(obj => {
+      return obj.toString() !== userId.toString()
+    })
+    post.set('likes', updatedLikes)
+    post.markModified('likes')
+    await post.save()
+    console.log('removed like')
+  }
+
   // 1. If user hasn't disliked, it dislikes.
   if (!post.dislikes.includes(userObjectId)) {
     try {
       post.dislikes.push(userId)
       const result = await post.save()
       console.log('user disliked the post!!')
-      return res
-        .status(201)
-        .json({ message: result.dislikes.length, status: 201 })
+      const metrics = {
+        likes: result.likes.length,
+        dislikes: result.dislikes.length,
+      }
+      return res.status(201).json({ message: metrics, status: 201 })
     } catch (err) {
       return next({ message: err.message, status: 500 })
     }
@@ -96,9 +128,11 @@ router.post('/:id/dislike', isLoggedIn, async (req, res, next) => {
       post.set('dislikes', updatedDisikes)
       post.markModified('dislikes')
       const result = await post.save()
-      return res
-        .status(201)
-        .json({ message: result.dislikes.length, status: 201 })
+      const metrics = {
+        likes: result.likes.length,
+        dislikes: result.dislikes.length,
+      }
+      return res.status(201).json({ message: metrics, status: 201 })
     } catch (err) {
       return next({ message: err.message, status: 500 })
     }

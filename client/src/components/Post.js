@@ -7,13 +7,15 @@ import tagsHandler from '../controllers/tagsHandler'
 import axiosCall from '../api/axiosCall'
 
 const Post = ({ data }) => {
-  const [likes, setLikes] = useState(data.likes.length)
-  const [dislikes, setDislikes] = useState(data.dislikes.length)
+  const [metrics, setMetrics] = useState({
+    likes: data.likes.length,
+    dislikes: data.dislikes.length,
+  })
 
   const handleLike = async () => {
     try {
       const response = await axiosCall.post(`/posts/${data._id}/like`)
-      setLikes(response.data.message)
+      setMetrics(response.data.message)
     } catch (err) {
       console.dir(err)
     }
@@ -23,7 +25,7 @@ const Post = ({ data }) => {
     try {
       const response = await axiosCall.post(`/posts/${data._id}/dislike`)
       console.log(response.data.message)
-      setDislikes(response.data.message)
+      setMetrics(response.data.message)
     } catch (err) {
       console.dir(err)
     }
@@ -44,10 +46,10 @@ const Post = ({ data }) => {
       <div className="socialContainer">
         <p onClick={handleLike} className="postSocial">
           <i className="fas fa-chevron-up"></i>
-          {likes}
+          {metrics.likes}
         </p>
         <p onClick={handleDisike} className="postSocial">
-          <i className="fas fa-chevron-down"></i> {dislikes}
+          <i className="fas fa-chevron-down"></i> {metrics.dislikes}
         </p>
         <p className="postSocial">
           <i className="fas fa-comments"></i> {data.comments.length}
