@@ -49,6 +49,7 @@ body {
 .postLink {
   text-decoration: none;
   color: #000;
+  text-align: center;
 }
 
 .postTitle {
@@ -78,18 +79,24 @@ h5.postTimestamp {
 }
 
 .socialContainer {
-  background: #e1e1e1;
+  border: 1px solid #000;
+  border-radius: 50px;
+  padding: 1% 2%;
   width: 30%;
-  font-size: 1.8rem;
   display: flex;
   justify-content: space-between;
-  padding: 1%;
-  margin-top: 1%;
+  margin-top: 1.5%;
 }
 
 .socialContainer .fas {
   font-size: inherit;
   margin-right: 3px;
+}
+
+.postSocial {
+  padding: 1%;
+  cursor: pointer;
+  font-size: 1.5rem;
 }
 
 /* ------ POST DETAILS --------------------------------- */
@@ -260,7 +267,7 @@ p.postDetailsBody {
   justify-content: space-evenly;
   color: #fff;
   width: 22%;
-  margin: 1.5% 0;
+  margin: 2% auto;
 }
 
 .hashtag {

@@ -24,7 +24,6 @@ const getPostById = async (req, res, next) => {
     if (!post) {
       return next({ message: 'No Post Found', status: 404 })
     }
-    console.log(post)
     res.status(200).json({ data: post })
   } catch (error) {
     console.log('ERROR!!!')
