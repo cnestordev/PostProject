@@ -1,6 +1,11 @@
 const express = require('express')
 const router = express.Router({ mergeParams: true })
-const { addMetaData, validateComment, isLoggedIn } = require('../middleware')
+const {
+  addMetaData,
+  validateComment,
+  isLoggedIn,
+  commentAuthor,
+} = require('../middleware')
 const Post = require('../models/post')
 const Comment = require('../models/comment')
 
@@ -20,7 +25,13 @@ router.post('/', isLoggedIn, addMetaData, validateComment, async (req, res) => {
     post.comments.push(comment)
     await comment.save()
     const updatedPost = await (await post.save())
-      .populate('comments')
+      .populate({
+        path: 'comments',
+        populate: {
+          path: 'author',
+          select: 'username -_id',
+        },
+      })
       .execPopulate()
     res.status(201).json({
       data: updatedPost,
@@ -33,12 +44,15 @@ router.post('/', isLoggedIn, addMetaData, validateComment, async (req, res) => {
   }
 })
 
-router.delete('/:commentId/', isLoggedIn, async (req, res) => {
+router.delete('/:commentId/', isLoggedIn, commentAuthor, async (req, res) => {
   const { id, commentId } = req.params
   try {
-    await Post.findByIdAndUpdate(id, { $pull: { comments: commentId } })
+    const result = await Post.findByIdAndUpdate(id, {
+      $pull: { comments: commentId },
+    })
     await Comment.findByIdAndDelete(commentId)
-    res.status(201).json({ message: 'deleted comment', status: 201 })
+    // console.log(result)
+    res.status(201).json({ data: result, status: 201 })
   } catch (err) {
     res.status(500).json({ message: 'could not delete', status: 500 })
   }

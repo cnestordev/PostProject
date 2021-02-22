@@ -1,4 +1,5 @@
 const Post = require('../models/post')
+const Comment = require('../models/comment')
 
 const {
   postSchema,
@@ -50,7 +51,6 @@ const isLoggedIn = (req, res, next) => {
 
 const isAuthorized = async (req, res, next) => {
   const { id } = req.params
-
   const post = await Post.findById(id)
   if (String(post.authorId) !== String(req.user._id)) {
     return next({
@@ -61,6 +61,23 @@ const isAuthorized = async (req, res, next) => {
   return next()
 }
 
+const commentAuthor = async (req, res, next) => {
+  console.log('%c hitting is comment auth', 'color: red;')
+  const { commentId } = req.params
+  try {
+    const comment = await Comment.findById(commentId)
+    if (String(comment.authorId) !== String(req.user._id)) {
+      return next({
+        message: 'Only the owner of this post can modify it',
+        status: 401,
+      })
+    }
+    return next()
+  } catch (err) {
+    return next({ message: err.message, status: 500 })
+  }
+}
+
 module.exports = {
   addMetaData,
   validatePost,
@@ -68,4 +85,5 @@ module.exports = {
   isLoggedIn,
   validateUser,
   isAuthorized,
+  commentAuthor,
 }

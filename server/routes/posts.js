@@ -16,12 +16,19 @@ router.get('/:id', async (req, res, next) => {
   const { id } = req.params
   try {
     const post = await await Post.findById(id)
-      .populate('comments')
+      .populate({
+        path: 'comments',
+        populate: {
+          path: 'author',
+          select: 'username -_id',
+        },
+      })
       // .populate({ path: 'author', select: 'username -_id' })
       .populate({ path: 'author', select: 'username -_id' })
     if (!post) {
       return next({ message: 'No Post Found', status: 404 })
     }
+    console.log(post)
     res.status(200).json({ data: post })
   } catch (error) {
     console.log('ERROR!!!')

@@ -1,24 +1,32 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useLocation, useHistory } from 'react-router-dom'
 import timeago from 'epoch-timeago'
 import axiosCall from '../api/axiosCall'
+import { connect } from 'react-redux'
 
-const Comment = ({ comment, postId }) => {
+const Comment = ({ comment, postId, user }) => {
+  const [hasDeleted, setHasDeleted] = useState(false)
+
   const handleDelete = async id => {
-    console.log(id)
-    console.log(postId)
     try {
       const response = await axiosCall.delete(`/posts/${postId}/comments/${id}`)
       console.log('successfully deleted')
-      console.log(response)
+      console.dir(response)
+      setHasDeleted(true)
     } catch (err) {
       console.log('comment deleting error')
+      console.dir(err)
     }
+  }
+
+  if (hasDeleted) {
+    return <></>
   }
 
   return (
     <>
       <div className="commentBox" key={comment['_id']}>
-        <h3 className="commentAuthor">{comment.author.username}</h3>
+        <h3 className="commentAuthor">By {comment.author.username}</h3>
         <p className="commentTimestamp">{timeago(comment.timestamp * 1000)}</p>
         <p className="commentBody">{comment.body}</p>
         <div className="commentSocial">
@@ -29,10 +37,25 @@ const Comment = ({ comment, postId }) => {
             <i className="far fa-thumbs-down"></i> {comment.dislikes.length}
           </p>
         </div>
-        <button onClick={() => handleDelete(comment['_id'])}>Delete</button>
+        {user._id === comment.authorId && (
+          <div className="deleteCommentContainer">
+            <p
+              className="deleteCommentLink"
+              onClick={() => handleDelete(comment['_id'])}
+            >
+              Delete
+            </p>
+          </div>
+        )}
       </div>
     </>
   )
 }
 
-export default Comment
+const mapStateToProps = state => {
+  return {
+    user: state.usersReducer,
+  }
+}
+
+export default connect(mapStateToProps, null)(Comment)

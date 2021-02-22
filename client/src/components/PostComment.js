@@ -8,16 +8,12 @@ import Comments from './Comments'
 import LoginPrompt from './LoginPrompt'
 
 const PostComment = props => {
-  console.log('***************')
-  console.log(props.user)
-  console.log('***************')
-
   const history = useHistory()
 
   const commentDataValues = {
     body: '',
-    author: 'predetermined',
-    authorId: 'predetermined',
+    author: 'tbd',
+    authorId: 'tbd',
     timestamp: '',
   }
 
@@ -86,6 +82,7 @@ const PostComment = props => {
       )
       console.log('success')
       setCommentData(commentDataValues)
+      console.log(response.data)
       setComments(response.data.data.comments)
     } catch (err) {
       console.log('entering error on POST comments')
