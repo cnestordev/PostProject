@@ -54,6 +54,8 @@ router.post('/:id/like', isLoggedIn, async (req, res, next) => {
       const metrics = {
         likes: result.likes.length,
         dislikes: result.dislikes.length,
+        liked: true,
+        disliked: false,
       }
       return res.status(201).json({ message: metrics, status: 201 })
     } catch (err) {
@@ -74,6 +76,8 @@ router.post('/:id/like', isLoggedIn, async (req, res, next) => {
       const metrics = {
         likes: result.likes.length,
         dislikes: result.dislikes.length,
+        liked: false,
+        disliked: false,
       }
       return res.status(201).json({ message: metrics, status: 201 })
     } catch (err) {
@@ -112,6 +116,8 @@ router.post('/:id/dislike', isLoggedIn, async (req, res, next) => {
       const metrics = {
         likes: result.likes.length,
         dislikes: result.dislikes.length,
+        liked: false,
+        disliked: true,
       }
       return res.status(201).json({ message: metrics, status: 201 })
     } catch (err) {
@@ -131,6 +137,8 @@ router.post('/:id/dislike', isLoggedIn, async (req, res, next) => {
       const metrics = {
         likes: result.likes.length,
         dislikes: result.dislikes.length,
+        disliked: false,
+        liked: false,
       }
       return res.status(201).json({ message: metrics, status: 201 })
     } catch (err) {

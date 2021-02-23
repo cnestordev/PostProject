@@ -28,6 +28,7 @@ const PostDetails = props => {
       console.log('successfully fetched post data')
       setPostDate(data)
     } catch (err) {
+      console.log('CATCH post details')
       if (err.response.data.status === 400) {
         return setError(true)
       }

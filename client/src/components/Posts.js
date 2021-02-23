@@ -1,21 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { getPosts } from '../redux/actions/posts.actions'
+import { getPosts, removePosts } from '../redux/actions/posts.actions'
 import Post from './Post'
 
 const Posts = props => {
   useEffect(() => {
     props.getPosts()
+    return () => {
+      props.removePosts()
+    }
   }, [])
-
-  //sorts the array of posts first, then maps through them to create Post components
-  // const postArr = props.posts.posts
-  //   .sort(function (x, y) {
-  //     return y.timestamp - x.timestamp
-  //   })
-  //   .map(post => {
-  //     return <Post key={post['_id']} data={post} />
-  //   })
 
   const postArr = React.Children.toArray(
     props.posts.posts
@@ -36,4 +30,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { getPosts })(Posts)
+export default connect(mapStateToProps, { getPosts, removePosts })(Posts)

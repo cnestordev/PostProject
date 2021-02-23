@@ -13,3 +13,9 @@ export const getPosts = () => async dispatch => {
     console.log(err)
   }
 }
+
+export const removePosts = () => async dispatch => {
+  dispatch({
+    type: 'REMOVE_POSTS',
+  })
+}

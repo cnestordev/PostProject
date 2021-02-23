@@ -10,6 +10,10 @@ const reducer = (state = initialState, action) => {
         ...state,
         posts: action.payload,
       }
+
+    case 'REMOVE_POSTS':
+      console.log('emptying out all posts')
+      return initialState
     default:
       console.log('DEFAULT REDUCER DEPLOYED')
       return state

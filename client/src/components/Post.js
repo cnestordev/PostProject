@@ -1,15 +1,18 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 import imageHandler from '../controllers/imageHandler'
 import timeago from 'epoch-timeago'
 import tagsHandler from '../controllers/tagsHandler'
 import axiosCall from '../api/axiosCall'
 
-const Post = ({ data }) => {
+const Post = ({ data, user }) => {
   const [metrics, setMetrics] = useState({
     likes: data.likes.length,
     dislikes: data.dislikes.length,
+    liked: data.likes.includes(user._id),
+    disliked: data.dislikes.includes(user._id),
   })
 
   const handleLike = async () => {
@@ -44,11 +47,17 @@ const Post = ({ data }) => {
         {imageHandler(data.image, 'thumbnail')}
       </Link>
       <div className="socialContainer">
-        <p onClick={handleLike} className="postSocial">
+        <p
+          onClick={handleLike}
+          className={`postSocial ${metrics.liked && 'red'}`}
+        >
           <i className="fas fa-chevron-up"></i>
           {metrics.likes}
         </p>
-        <p onClick={handleDisike} className="postSocial">
+        <p
+          onClick={handleDisike}
+          className={`postSocial ${metrics.disliked && 'red'}`}
+        >
           <i className="fas fa-chevron-down"></i> {metrics.dislikes}
         </p>
         <p className="postSocial">
@@ -59,4 +68,8 @@ const Post = ({ data }) => {
   )
 }
 
-export default Post
+const mapStateToProps = state => ({
+  user: state.usersReducer,
+})
+
+export default connect(mapStateToProps, null)(Post)

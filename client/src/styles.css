@@ -99,6 +99,10 @@ h5.postTimestamp {
   font-size: 1.5rem;
 }
 
+.red {
+  color: #ff5620;
+}
+
 /* ------ POST DETAILS --------------------------------- */
 
 .postDetailsContainer {
