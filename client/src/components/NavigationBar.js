@@ -50,13 +50,6 @@ const NavigationBar = ({ user, logInUser }) => {
           </li>
         </ul>
       </nav>
-      <button
-        onClick={() => {
-          console.log(user)
-        }}
-      >
-        USER
-      </button>
     </header>
   )
 }

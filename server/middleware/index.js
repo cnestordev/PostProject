@@ -78,6 +78,14 @@ const commentAuthor = async (req, res, next) => {
   }
 }
 
+const isUser = async (req, res, next) => {
+  const { userId } = req.params
+  if (userId !== String(req.user._id)) {
+    return next({ message: 'You are not authorized to do that!', status: 401 })
+  }
+  return next()
+}
+
 module.exports = {
   addMetaData,
   validatePost,
@@ -86,4 +94,5 @@ module.exports = {
   validateUser,
   isAuthorized,
   commentAuthor,
+  isUser,
 }

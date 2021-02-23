@@ -1,4 +1,6 @@
 const Post = require('../models/post')
+const User = require('../models/user')
+const mongoose = require('mongoose')
 
 const index = async (req, res) => {
   const posts = await Post.find({}).populate({
@@ -32,12 +34,26 @@ const getPostById = async (req, res, next) => {
 }
 
 const createNewPost = async (req, res, next) => {
+  // add post to Post schema
   try {
     const post = new Post(req.body)
     const result = await post.save()
+    console.log(result._id)
     console.log('successfully posted')
-    const postId = result['_id']
-    res.status(201).json({ message: 'post was successfully uploaded', postId })
+    const postId = result._id
+    // add post reference to the User schema
+    try {
+      const user = await User.findById(req.user._id)
+      user.posts.push(result._id)
+      await user.save()
+    } catch (err) {
+      console.log('woops!')
+      console.log(err)
+      return next({ message: err.message, status: 500 })
+    }
+    res
+      .status(201)
+      .json({ message: 'post was successfully uploaded', postId, status: 201 })
   } catch (err) {
     console.log('There is a problem!')
     return next({ message: err.message, status: 500 })
@@ -72,6 +88,128 @@ const deletePostById = async (req, res) => {
   }
 }
 
+const likePost = async (req, res, next) => {
+  const postId = req.params.id
+  const userId = req.user._id
+
+  // find post by id
+  const post = await Post.findById(postId)
+
+  const userObjectId = mongoose.Types.ObjectId(userId)
+
+  // 1. If user has disliked, remove it
+  if (post.dislikes.includes(userObjectId)) {
+    const updatedDislikes = post.dislikes.filter(obj => {
+      return obj.toString() !== userId.toString()
+    })
+    post.set('dislikes', updatedDislikes)
+    post.markModified('dislikes')
+    await post.save()
+    console.log('removed dislike')
+  }
+
+  // 2. If user hasn't liked, it likes.
+  if (!post.likes.includes(userObjectId)) {
+    try {
+      post.likes.push(userId)
+      const result = await post.save()
+      console.log('user liked the post!!')
+      const metrics = {
+        likes: result.likes.length,
+        dislikes: result.dislikes.length,
+        liked: true,
+        disliked: false,
+      }
+      return res.status(201).json({ message: metrics, status: 201 })
+    } catch (err) {
+      return next({ message: err.message, status: 500 })
+    }
+  }
+
+  // 3. If user has already liked, it unlikes
+  if (post.likes.includes(userObjectId)) {
+    try {
+      const updatedLikes = post.likes.filter(obj => {
+        console.log(obj.toString() === userId.toString())
+        return obj.toString() !== userId.toString()
+      })
+      post.set('likes', updatedLikes)
+      post.markModified('likes')
+      const result = await post.save()
+      const metrics = {
+        likes: result.likes.length,
+        dislikes: result.dislikes.length,
+        liked: false,
+        disliked: false,
+      }
+      return res.status(201).json({ message: metrics, status: 201 })
+    } catch (err) {
+      return next({ message: err.message, status: 500 })
+    }
+  }
+}
+
+const dislikePost = async (req, res, next) => {
+  console.log('dislike route hit')
+  const postId = req.params.id
+  const userId = req.user._id
+
+  // find post by id
+  const post = await Post.findById(postId)
+
+  const userObjectId = mongoose.Types.ObjectId(userId)
+
+  // 0. If user has liked, remove like
+  if (post.likes.includes(userObjectId)) {
+    const updatedLikes = post.likes.filter(obj => {
+      return obj.toString() !== userId.toString()
+    })
+    post.set('likes', updatedLikes)
+    post.markModified('likes')
+    await post.save()
+    console.log('removed like')
+  }
+
+  // 1. If user hasn't disliked, it dislikes.
+  if (!post.dislikes.includes(userObjectId)) {
+    try {
+      post.dislikes.push(userId)
+      const result = await post.save()
+      console.log('user disliked the post!!')
+      const metrics = {
+        likes: result.likes.length,
+        dislikes: result.dislikes.length,
+        liked: false,
+        disliked: true,
+      }
+      return res.status(201).json({ message: metrics, status: 201 })
+    } catch (err) {
+      return next({ message: err.message, status: 500 })
+    }
+  }
+
+  // 2. If user has already disliked, it dislikes
+  if (post.dislikes.includes(userObjectId)) {
+    try {
+      const updatedDisikes = post.dislikes.filter(obj => {
+        return obj.toString() !== userId.toString()
+      })
+      post.set('dislikes', updatedDisikes)
+      post.markModified('dislikes')
+      const result = await post.save()
+      const metrics = {
+        likes: result.likes.length,
+        dislikes: result.dislikes.length,
+        disliked: false,
+        liked: false,
+      }
+      return res.status(201).json({ message: metrics, status: 201 })
+    } catch (err) {
+      return next({ message: err.message, status: 500 })
+    }
+  }
+}
+
 module.exports = {
   index,
   getPostById,
@@ -79,4 +217,6 @@ module.exports = {
   getPostFormById,
   editFormById,
   deletePostById,
+  likePost,
+  dislikePost,
 }

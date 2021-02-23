@@ -79,7 +79,7 @@ h5.postTimestamp {
 }
 
 .socialContainer {
-  border: 1px solid #000;
+  border: 1px solid rgb(148, 148, 148);
   border-radius: 50px;
   padding: 1% 2%;
   width: 30%;
@@ -97,9 +97,11 @@ h5.postTimestamp {
   padding: 1%;
   cursor: pointer;
   font-size: 1.5rem;
+  position: relative;
+  z-index: 1;
 }
 
-.red {
+.selected {
   color: #ff5620;
 }
 
@@ -162,6 +164,11 @@ p.postDetailsBody {
   line-height: 1.4;
   text-align: left;
   margin: 2.5% 0;
+}
+
+.voteContainer {
+  display: flex;
+  justify-content: center;
 }
 
 .commentSection {
@@ -572,4 +579,15 @@ p.commentRating .far {
   background: #000;
   color: #fff;
   transition: 300ms;
+}
+
+/* Account Component */
+
+.accountContainer {
+  background: orange;
+  text-align: center;
+}
+
+.accountHeader {
+  font-size: 3rem;
 }

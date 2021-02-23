@@ -16,6 +16,7 @@ import Home from './Home'
 import Register from './Register'
 import Login from './Login'
 import Logout from './Logout'
+import Account from './Account'
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
       <NavigationBar />
       <Switch>
         <Route exact path="/" component={Home} />
+        <Route path="/account" component={Account} />
         <Route path="/register" component={Register} />
         <Route path="/login" component={Login} />
         <Route path="/logout" component={Logout} />

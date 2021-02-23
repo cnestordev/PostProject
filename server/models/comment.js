@@ -25,12 +25,14 @@ const commentSchema = Schema(
       {
         type: Schema.Types.ObjectId,
         ref: 'User',
+        required: true,
       },
     ],
     dislikes: [
       {
         type: Schema.Types.ObjectId,
         ref: 'User',
+        required: true,
       },
     ],
   },

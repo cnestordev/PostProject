@@ -22,7 +22,7 @@ const userData = async (req, res) => {
 }
 
 // route for dev only
-const isLoggedIn = (req, res) => {
+const isLoggedOn = (req, res) => {
   console.log('is logged in route')
   if (req.isAuthenticated()) {
     res.send(true)
@@ -96,11 +96,21 @@ const loginUser = (req, res, next) => {
   })(req, res, next)
 }
 
+const deleteUser = async (req, res) => {
+  try {
+    const response = await User.findByIdAndDelete(req.user._id)
+    res.status(201).json({ message: response, status: 201 })
+  } catch (err) {
+    return next({ message: err.message, status: 500 })
+  }
+}
+
 module.exports = {
   index,
   userData,
-  isLoggedIn,
+  isLoggedOn,
   register,
   logoutUser,
   loginUser,
+  deleteUser,
 }

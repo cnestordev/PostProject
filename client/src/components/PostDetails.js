@@ -10,6 +10,7 @@ import ErrorPage from './ErrorPage'
 import PostComment from './PostComment'
 import axiosCall from '../api/axiosCall'
 import Comments from './Comments'
+import Voting from './Voting'
 
 const PostDetails = props => {
   const id = props.match.params.id
@@ -90,9 +91,9 @@ const PostDetails = props => {
           <hr />
           <p className="postDetailsBody">{postData.body}</p>
           {imageHandler(postData.image, 'full')}
-          <p>Comments: {postData.comments.length}</p>
-          <p>Likes: {postData.likes.length}</p>
-          <p>Dislikes: {postData.dislikes.length}</p>
+          <div className="voteContainer">
+            <Voting data={postData} />
+          </div>
         </div>
         <div className="commentSection">
           <PostComment postData={postData} postId={postData['_id']} />

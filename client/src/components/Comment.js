@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { useLocation, useHistory } from 'react-router-dom'
 import timeago from 'epoch-timeago'
+import VotingComment from './VotingComment'
 import axiosCall from '../api/axiosCall'
 import { connect } from 'react-redux'
 
@@ -29,14 +29,7 @@ const Comment = ({ comment, postId, user }) => {
         <h3 className="commentAuthor">By {comment.author.username}</h3>
         <p className="commentTimestamp">{timeago(comment.timestamp * 1000)}</p>
         <p className="commentBody">{comment.body}</p>
-        <div className="commentSocial">
-          <p className="commentRating">
-            <i className="far fa-thumbs-up"></i> {comment.likes.length}
-          </p>
-          <p className="commentRating">
-            <i className="far fa-thumbs-down"></i> {comment.dislikes.length}
-          </p>
-        </div>
+        <VotingComment comment={comment} postId={postId} user={user} />
         {user._id === comment.authorId && (
           <div className="deleteCommentContainer">
             <p
