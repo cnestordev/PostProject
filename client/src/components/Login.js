@@ -8,12 +8,9 @@ import { logInUser } from '../redux/actions/users.actions'
 import { Link } from 'react-router-dom'
 
 const Login = props => {
-  console.log('%c LOGIN MOUNTED', 'color: blue;')
   const prevPage = props.location.state
     ? props.location.state.from.pathname
     : '/posts'
-  console.log(prevPage)
-  console.log(props)
   const history = useHistory()
 
   const initialValues = {

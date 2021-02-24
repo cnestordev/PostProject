@@ -12,10 +12,19 @@ const UserSchema = new Schema(
     likedComments: [
       { type: Schema.Types.ObjectId, ref: 'Comment', required: true },
     ],
-    isAdmin: Boolean,
+    isAdmin: {
+      type: Boolean,
+      default: false,
+    },
     avatar: String,
-    created: Number,
-    darkMode: Boolean,
+    created: {
+      type: Date,
+      default: new Date(),
+    },
+    darkMode: {
+      type: Boolean,
+      default: false,
+    },
   },
   { minimize: false }
 )

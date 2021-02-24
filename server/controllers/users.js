@@ -5,7 +5,7 @@ const index = (req, res) => {
   console.log('hit root route')
   console.log(req.headers.host)
   console.log(req.isAuthenticated())
-  // console.log(req.user)
+  console.log(req.user)
   res
     .json({
       user: req.user,
@@ -45,6 +45,8 @@ const register = async (req, res) => {
         likedPosts: user.likedPosts,
         comments: user.comments,
         likedComments: user.likedComments,
+        isAdmin: user.isAdmin,
+        darkMode: user.darkMode,
       }
       res.status(201).json({ userData, status: 201 })
     })
@@ -81,6 +83,8 @@ const loginUser = (req, res, next) => {
           likedComments,
           id,
           username,
+          isAdmin,
+          darkMode,
         } = req.user
         const user = {
           posts,
@@ -89,6 +93,8 @@ const loginUser = (req, res, next) => {
           likedComments,
           _id: id,
           username,
+          isAdmin,
+          darkMode,
         }
         res.status(201).json(user)
       })
