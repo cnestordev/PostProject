@@ -5,7 +5,7 @@ import '../cssReset.css'
 import '../styles.css'
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
 
-import axios from 'axios'
+import RestrictedRoute from './RestrictedRoute'
 import Posts from './Posts'
 import PostDetails from './PostDetails'
 import CreatePost from './CreatePost'
@@ -25,8 +25,8 @@ function App() {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/account" component={Account} />
-        <Route path="/register" component={Register} />
-        <Route path="/login" component={Login} />
+        <RestrictedRoute path="/register" component={Register} />
+        <RestrictedRoute path="/login" component={Login} />
         <Route path="/logout" component={Logout} />
         <Route exact path="/posts" component={Posts} />
         <Route exact path="/posts/new" component={CreatePost} />
