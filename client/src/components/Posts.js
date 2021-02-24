@@ -4,8 +4,6 @@ import { getPosts, removePosts } from '../redux/actions/posts.actions'
 import Post from './Post'
 
 const Posts = props => {
-  console.log('%c *********!!!!!!!', 'color: red;')
-  console.log(props.location.state)
   useEffect(() => {
     props.getPosts()
     return () => {

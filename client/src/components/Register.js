@@ -10,9 +10,11 @@ import { Link } from 'react-router-dom'
 const Register = props => {
   const history = useHistory()
 
-  // console.log('*************************')
-  // console.log(props)
-  // console.log('*************************')
+  const prevPage = props.location.state
+    ? props.location.state.from.pathname
+    : '/posts'
+  console.log(prevPage)
+  console.log(props)
 
   const initialValues = {
     username: '',
@@ -73,7 +75,7 @@ const Register = props => {
       console.log('successful try for REGISTER')
       console.log(response.data.userData)
       props.logInUser(response.data.userData)
-      history.push('/posts')
+      history.push(prevPage)
     } catch (err) {
       console.log('entering CATCH for REGISTER')
       console.log(err.response.data.message)

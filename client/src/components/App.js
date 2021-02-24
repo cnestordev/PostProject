@@ -6,6 +6,7 @@ import '../styles.css'
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
 
 import RestrictedRoute from './RestrictedRoute'
+import PrivateRoute from './PrivateRoute'
 import Posts from './Posts'
 import PostDetails from './PostDetails'
 import CreatePost from './CreatePost'
@@ -24,14 +25,14 @@ function App() {
       <NavigationBar />
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route path="/account" component={Account} />
+        <PrivateRoute path="/account" component={Account} />
         <RestrictedRoute path="/register" component={Register} />
         <RestrictedRoute path="/login" component={Login} />
-        <Route path="/logout" component={Logout} />
+        <PrivateRoute path="/logout" component={Logout} />
         <Route exact path="/posts" component={Posts} />
-        <Route exact path="/posts/new" component={CreatePost} />
+        <PrivateRoute exact path="/posts/new" component={CreatePost} />
         <Route exact path="/posts/:id" component={PostDetails} />
-        <Route path="/posts/:id/edit" component={EditPost} />
+        <PrivateRoute path="/posts/:id/edit" component={EditPost} />
         <Route path="*" component={Error404} />
       </Switch>
     </Router>

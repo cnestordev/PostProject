@@ -8,6 +8,12 @@ import { logInUser } from '../redux/actions/users.actions'
 import { Link } from 'react-router-dom'
 
 const Login = props => {
+  console.log('%c LOGIN MOUNTED', 'color: blue;')
+  const prevPage = props.location.state
+    ? props.location.state.from.pathname
+    : '/posts'
+  console.log(prevPage)
+  console.log(props)
   const history = useHistory()
 
   const initialValues = {
@@ -70,7 +76,7 @@ const Login = props => {
       console.log('successfully logged in')
       console.log(response.data)
       props.logInUser(response.data)
-      history.push('/posts')
+      history.push(prevPage)
     } catch (err) {
       console.log('entering CATCH for LOGIN')
       console.dir(err)

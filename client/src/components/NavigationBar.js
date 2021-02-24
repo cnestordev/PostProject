@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { connect } from 'react-redux'
 import axiosCall from '../api/axiosCall'
 import { logInUser } from '../redux/actions/users.actions'
 
 const NavigationBar = ({ user, logInUser }) => {
+  const location = useLocation()
+
   useEffect(async () => {
     console.log('%c navbar has mounted', 'color: green')
     try {
@@ -39,11 +41,23 @@ const NavigationBar = ({ user, logInUser }) => {
           </li>
           <li>
             {user.username === undefined ? (
-              <Link to="/login" className="navbarItem">
+              <Link
+                to={{
+                  pathname: '/login',
+                  state: { from: { pathname: location.pathname } },
+                }}
+                className="navbarItem"
+              >
                 Login
               </Link>
             ) : (
-              <Link to="/logout" className="navbarItem">
+              <Link
+                to={{
+                  pathname: '/logout',
+                  state: { from: { pathname: location.pathname } },
+                }}
+                className="navbarItem"
+              >
                 {`Logout ${user.username}`}
               </Link>
             )}

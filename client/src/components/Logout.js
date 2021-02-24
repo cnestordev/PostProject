@@ -7,12 +7,16 @@ import { logOutUser } from '../redux/actions/users.actions'
 const Logout = props => {
   const history = useHistory()
 
+  const prevPage = props.location.state
+    ? props.location.state.from.pathname
+    : '/posts'
+
   useEffect(async () => {
     try {
       await axiosCall.get('/logout')
       console.log('successfully logged out')
       props.logOutUser()
-      history.push('/posts')
+      history.push(prevPage)
     } catch (err) {
       console.log('error logging out user')
     }
