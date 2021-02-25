@@ -1,35 +1,38 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
+import {
+  Container,
+  Header,
+  PromptLinkContainer,
+  PromptLink,
+} from '../styles/loginPrompt'
+
 const LoginPrompt = () => {
   const location = useLocation()
 
   return (
-    <div className="loginPromptContainer">
-      <h3 className="loginPromptHeader">
-        You must be logged in to post a comment
-      </h3>
-      <div className="loginPromptLinkContainer">
-        <Link
-          className="loginPromptLink"
+    <Container>
+      <Header>You must be logged in to post a comment</Header>
+      <PromptLinkContainer>
+        <PromptLink
           to={{
             pathname: '/login',
             state: { from: { pathname: location.pathname } },
           }}
         >
           Login
-        </Link>
-        <Link
-          className="loginPromptLink"
+        </PromptLink>
+        <PromptLink
           to={{
             pathname: '/register',
             state: { from: { pathname: location.pathname } },
           }}
         >
           Register
-        </Link>
-      </div>
-    </div>
+        </PromptLink>
+      </PromptLinkContainer>
+    </Container>
   )
 }
 

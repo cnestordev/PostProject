@@ -4,6 +4,15 @@ import VotingComment from './VotingComment'
 import axiosCall from '../api/axiosCall'
 import { connect } from 'react-redux'
 
+import {
+  Box,
+  Author,
+  Timestamp,
+  Body,
+  DeleteLink,
+  DeleteCommentContainer,
+} from '../styles/comment'
+
 const Comment = ({ comment, postId, user }) => {
   const [hasDeleted, setHasDeleted] = useState(false)
 
@@ -25,22 +34,19 @@ const Comment = ({ comment, postId, user }) => {
 
   return (
     <>
-      <div className="commentBox" key={comment['_id']}>
-        <h3 className="commentAuthor">By {comment.author.username}</h3>
-        <p className="commentTimestamp">{timeago(comment.timestamp * 1000)}</p>
-        <p className="commentBody">{comment.body}</p>
+      <Box key={comment['_id']}>
+        <Author>By {comment.author.username}</Author>
+        <Timestamp>{timeago(comment.timestamp * 1000)}</Timestamp>
+        <Body>{comment.body}</Body>
         <VotingComment comment={comment} postId={postId} user={user} />
         {user._id === comment.authorId && (
-          <div className="deleteCommentContainer">
-            <p
-              className="deleteCommentLink"
-              onClick={() => handleDelete(comment['_id'])}
-            >
+          <DeleteCommentContainer>
+            <DeleteLink onClick={() => handleDelete(comment['_id'])}>
               Delete
-            </p>
-          </div>
+            </DeleteLink>
+          </DeleteCommentContainer>
         )}
-      </div>
+      </Box>
     </>
   )
 }

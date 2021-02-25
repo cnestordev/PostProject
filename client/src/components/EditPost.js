@@ -8,6 +8,19 @@ import Loader from 'react-loader-spinner'
 import imageUploader from '../util/imageUploader'
 import axiosCall from '../api/axiosCall'
 
+import {
+  Container,
+  Header,
+  Form,
+  InputText,
+  TextArea,
+  File,
+  Button,
+  ErrorContainer,
+  ErrorMessage,
+  ServerMessage,
+} from '../styles/createPost'
+
 const EditPost = props => {
   const id = props.match.params.id
 
@@ -159,61 +172,41 @@ const EditPost = props => {
   }
 
   return (
-    <div className="editFormContainer">
-      <h1 className="editHeader">Edit Form</h1>
+    <Container>
+      <Header>Edit Form</Header>
       {serverError.hasError && (
-        <p className="serverErrorMessage">{serverError.message}</p>
+        <ServerMessage>{serverError.message}</ServerMessage>
       )}
-      <form
-        autoComplete="off"
-        className="editFormElement"
-        onSubmit={handleSubmit}
-      >
-        <input
+      <Form autoComplete="off" onSubmit={handleSubmit}>
+        <InputText
           onChange={handleChange}
           type="text"
           name="title"
           placeholder="Title"
           value={data.title}
-          className="editInputText"
         />
-        <textarea
-          className="editTextarea"
-          onChange={handleChange}
-          name="body"
-          value={data.body}
-        />
-        <input
-          className="editFile"
-          type="file"
-          name="image"
-          onChange={handleImage}
-        />
-        <input
+        <TextArea onChange={handleChange} name="body" value={data.body} />
+        <File type="file" name="image" onChange={handleImage} />
+        <InputText
           onChange={handleChange}
           type="text"
           placeholder="tags"
           name="tags"
           value={data.tags}
-          className="editInputText"
         />
-        <button className="createPostBtn" disabled={disabled || sending}>
+        <Button disabled={disabled || sending}>
           {sending ? (
             <Loader type="ThreeDots" color="c3c3c3" height={11} width={100} />
           ) : (
             'Update'
           )}
-        </button>
-      </form>
-      <div className="validatinErrorsContainer">
-        {errors.title.length > 0 && (
-          <p className="validationErrorMessage">{errors.title}</p>
-        )}
-        {errors.tags.length > 0 && (
-          <p className="validationErrorMessage">{errors.tags}</p>
-        )}
-      </div>
-    </div>
+        </Button>
+      </Form>
+      <ErrorContainer>
+        {errors.title.length > 0 && <ErrorMessage>{errors.title}</ErrorMessage>}
+        {errors.tags.length > 0 && <ErrorMessage>{errors.tags}</ErrorMessage>}
+      </ErrorContainer>
+    </Container>
   )
 }
 

@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import axiosCall from '../api/axiosCall'
 import { connect } from 'react-redux'
 
+import { Container, Icon, Paragraph } from '../styles/voting'
+
 const Voting = ({ data, user }) => {
   const [metrics, setMetrics] = useState({
     likes: data.likes.length,
@@ -30,24 +32,24 @@ const Voting = ({ data, user }) => {
   }
   return (
     <>
-      <div className="socialContainer">
-        <p
+      <Container>
+        <Paragraph
           onClick={handleLike}
           className={`postSocial ${metrics.liked && 'selected'}`}
         >
-          <i className="fas fa-chevron-up"></i>
+          <Icon className="fas fa-chevron-up"></Icon>
           {metrics.likes}
-        </p>
-        <p
+        </Paragraph>
+        <Paragraph
           onClick={handleDisike}
           className={`postSocial ${metrics.disliked && 'selected'}`}
         >
-          <i className="fas fa-chevron-down"></i> {metrics.dislikes}
-        </p>
-        <p className="postSocial">
-          <i className="fas fa-comments"></i> {data.comments.length}
-        </p>
-      </div>
+          <Icon className="fas fa-chevron-down"></Icon> {metrics.dislikes}
+        </Paragraph>
+        <Paragraph>
+          <Icon className="fas fa-comments"></Icon> {data.comments.length}
+        </Paragraph>
+      </Container>
     </>
   )
 }

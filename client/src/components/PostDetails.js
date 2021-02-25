@@ -12,6 +12,20 @@ import axiosCall from '../api/axiosCall'
 import Comments from './Comments'
 import Voting from './Voting'
 
+import {
+  Container,
+  Title,
+  Author,
+  Time,
+  EditContainer,
+  PostLink,
+  EditPara,
+  DelPara,
+  PostBody,
+  VoteContainer,
+  CommentSection,
+} from '../styles/postDetails'
+
 const PostDetails = props => {
   const id = props.match.params.id
 
@@ -64,40 +78,30 @@ const PostDetails = props => {
   if (Object.keys(postData).length > 0) {
     return (
       <>
-        <div className="postDetailsContainer">
-          <h2 className="postDetailsTitle">{postData.title}</h2>
-          <h3 className="postDetailsAuthor">
-            Posted by {postData.author.username}
-          </h3>
-          <h4 className="postDetailsTimestamp">
-            {timeago((postData.timestamp || 1610849840) * 1000)}
-          </h4>
+        <Container>
+          <Title>{postData.title}</Title>
+          <Author>Posted by {postData.author.username}</Author>
+          <Time>{timeago((postData.timestamp || 1610849840) * 1000)}</Time>
           {props.user._id === postData.authorId ? (
-            <div className="editPostContainer">
-              <Link
-                className="editPostLinkComponent"
-                to={`/posts/${postData['_id']}/edit`}
-              >
-                <p className="editPostLink edit">Edit</p>
-              </Link>{' '}
-              <p
-                onClick={() => handleDelete(postData._id)}
-                className="editPostLink delete"
-              >
+            <EditContainer>
+              <PostLink to={`/posts/${postData['_id']}/edit`}>
+                <EditPara>Edit</EditPara>
+              </PostLink>{' '}
+              <DelPara onClick={() => handleDelete(postData._id)}>
                 Delete
-              </p>
-            </div>
+              </DelPara>
+            </EditContainer>
           ) : null}
           <hr />
-          <p className="postDetailsBody">{postData.body}</p>
+          <PostBody>{postData.body}</PostBody>
           {imageHandler(postData.image, 'full')}
-          <div className="voteContainer">
+          <VoteContainer>
             <Voting data={postData} />
-          </div>
-        </div>
-        <div className="commentSection">
+          </VoteContainer>
+        </Container>
+        <CommentSection>
           <PostComment postData={postData} postId={postData['_id']} />
-        </div>
+        </CommentSection>
       </>
     )
   } else {

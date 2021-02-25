@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import axiosCall from '../api/axiosCall'
 
+import { CommentSocialContainer, Rating, Icon } from '../styles/comment'
+
 const VotingComment = ({ comment, postId, user }) => {
   const [metrics, setMetrics] = useState({
     likes: comment.likes.length,
@@ -33,20 +35,17 @@ const VotingComment = ({ comment, postId, user }) => {
 
   return (
     <>
-      <div className="commentSocial">
-        <p
-          onClick={handleLike}
-          className={`commentRating ${metrics.liked && 'selected'}`}
-        >
-          <i className="far fa-thumbs-up"></i> {metrics.likes}
-        </p>
-        <p
+      <CommentSocialContainer>
+        <Rating onClick={handleLike}>
+          <Icon className="far fa-thumbs-up"></Icon> {metrics.likes}
+        </Rating>
+        <Rating
           onClick={handleDislike}
           className={`commentRating ${metrics.disliked && 'selected'}`}
         >
-          <i className="far fa-thumbs-down"></i> {metrics.dislikes}
-        </p>
-      </div>
+          <Icon className="far fa-thumbs-down"></Icon> {metrics.dislikes}
+        </Rating>
+      </CommentSocialContainer>
     </>
   )
 }

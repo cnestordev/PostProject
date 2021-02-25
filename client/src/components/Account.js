@@ -2,6 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import axiosCall from '../api/axiosCall'
 
+import { Header, Container } from '../styles/account'
+
 const Account = ({ user }) => {
   const handleAcctDelete = async () => {
     const response = await axiosCall.delete(`/${user._id}/delete`)
@@ -9,10 +11,10 @@ const Account = ({ user }) => {
   }
 
   return (
-    <div className="accountContainer">
-      <h2 className="accountHeader">Welcome, {user.username}</h2>
+    <Container>
+      <Header>Welcome, {user.username}</Header>
       <button onClick={handleAcctDelete}>DELETE ACCOUNT</button>
-    </div>
+    </Container>
   )
 }
 

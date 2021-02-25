@@ -1,185 +1,10 @@
-body {
+/* body {
   background: rgb(241, 241, 252);
-}
-
-/* ----------NavigationBar---------------------- */
-
-.navbarContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #0a5c8b;
-  height: 6vh;
-}
-
-.navbarList {
-  display: flex;
-  justify-content: space-around;
-  width: 50%;
-  font-size: 3rem;
-}
-
-.navbarItem {
-  color: #f1f1f1;
-  text-decoration: none;
-  font-size: 1.5rem;
-  font-weight: 700;
-}
-
-.fas {
-  font-size: 1.8rem;
-}
-
-/* ---------POST--------------------------------- */
-
-.postContainer {
-  border: 1px solid #c3c3c3;
-  background: #fff;
-  margin: 1% 0;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 40%;
-  margin: 1% auto;
-  padding: 2%;
-}
-
-.postLink {
-  text-decoration: none;
-  color: #000;
-  text-align: center;
-}
-
-.postTitle {
-  font-size: 2.5rem;
-  text-decoration: none;
-}
-
-h4.postAuthor {
-  font-size: 1.1rem;
-  margin-top: 1.5%;
-}
-
-h5.postTimestamp {
-  font-size: 0.8rem;
-  margin-top: 1%;
-  color: #404040;
-}
-
-.editedFlair {
-  color: #6c6c6c;
-  font-size: 0.8rem;
-  display: inline-block;
-}
-
-.postImage {
-  width: 70%;
-}
-
-.socialContainer {
-  border: 1px solid rgb(148, 148, 148);
-  border-radius: 50px;
-  padding: 1% 2%;
-  width: 30%;
-  display: flex;
-  justify-content: space-between;
-  margin-top: 1.5%;
-}
-
-.socialContainer .fas {
-  font-size: inherit;
-  margin-right: 3px;
-}
-
-.postSocial {
-  padding: 1%;
-  cursor: pointer;
-  font-size: 1.5rem;
-  position: relative;
-  z-index: 1;
-}
-
-.selected {
-  color: #ff5620;
-}
-
-/* ------ POST DETAILS --------------------------------- */
-
-.postDetailsContainer {
-  background: white;
-  width: 55%;
-  margin: 0 auto;
-  text-align: center;
-  padding: 2% 1%;
-}
-
-h2.postDetailsTitle {
-  font-size: 3rem;
-  color: #272727;
-}
-
-h3.postDetailsAuthor {
-  font-size: 1.4rem;
-  margin-top: 1.3%;
-}
-
-h4.postDetailsTimestamp {
-  font-size: 1rem;
-  color: #484848;
-  margin-top: 0.5%;
-}
-
-.editPostContainer {
-  display: flex;
-  justify-content: space-evenly;
-  width: 10%;
-  margin: 0.5% auto;
-}
-
-.editPostLinkComponent {
-  text-decoration: none;
-  color: rgb(255, 145, 0);
-  font-size: 1.4rem;
-  cursor: pointer;
-}
-
-.editPostLink {
-  font-size: 1.4rem;
-}
-
-.delete {
-  color: rgb(255, 58, 58);
-  margin-left: 12%;
-  cursor: pointer;
-}
-
-img.postDetailsImage {
-  width: 90%;
-}
-
-p.postDetailsBody {
-  font-size: 1.7rem;
-  line-height: 1.4;
-  text-align: left;
-  margin: 2.5% 0;
-}
-
-.voteContainer {
-  display: flex;
-  justify-content: center;
-}
-
-.commentSection {
-  border-top: 1px solid black;
-  width: 57%;
-  margin: 1% auto;
-}
+} */
 
 /* ---NO IMAGE-------------------------- */
 
-.noImageContainer {
+/* .noImageContainer {
   background: lightgrey;
   width: 50%;
   font-size: 3rem;
@@ -193,86 +18,11 @@ p.postDetailsBody {
 .noImageText {
   color: #1e1e1e;
   font-weight: bold;
-}
-
-/* ------ EDIT POST / CREATE POST ------------------------------ */
-
-.editHeader,
-.createHeader {
-  font-size: 3rem;
-  margin: 2% 0;
-}
-
-.editFormContainer,
-.createFormContainer {
-  background: #f1f1fc;
-  height: 50vh;
-  text-align: center;
-}
-
-.editFormElement,
-.createFormElement {
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-  margin: 0 auto;
-}
-
-.editInputText,
-.createInputText {
-  margin: 1% 0;
-  border-radius: 2px;
-  border: none;
-  padding: 1.5%;
-}
-
-.editTextarea,
-.createTextarea {
-  border: none;
-  border-radius: 2px;
-  height: 27vh;
-  margin: 1% 0;
-}
-
-.editFile,
-.createFile {
-  border: 2px solid #cfcfcf;
-  border-radius: 3px;
-  padding: 1%;
-  margin-top: 1%;
-}
-
-.editPostBtn,
-.createPostBtn {
-  border: 2px solid #000;
-  border-radius: 2px;
-  width: 21%;
-  margin: 1% auto;
-  padding: 1%;
-  background: white;
-  transition: 500ms;
-  cursor: pointer;
-}
-
-.editPostBtn:hover,
-.createPostBtn:hover {
-  background: #000;
-  color: #fff;
-  transition: 300ms;
-}
-
-.editPostBtn:disabled,
-.editPostBtn[disabled],
-.createPostBtn:disabled,
-.createPostBtn[disabled] {
-  border-color: rgb(112, 112, 112);
-  color: rgb(86 86 86);
-  background: rgb(132 132 132);
-}
+} */
 
 /* ---- hashtag ----------------------------- */
 
-.tagsContainer {
+/* .tagsContainer {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -288,11 +38,11 @@ p.postDetailsBody {
   padding: 4% 8%;
   font-size: 1rem;
   margin: 0 1%;
-}
+} */
 
 /* --- ERROR --------------------- */
 
-.errorContainer {
+/* .errorContainer {
   background: #ff5f5f;
   color: #323232;
   text-align: center;
@@ -340,28 +90,9 @@ h2.errorHeader {
   transition: 300ms;
 }
 
-/* -------- VALIDATION ERRORS------------- */
-.validatinErrorsContainer {
-  font-size: 2.3rem;
-  width: 70%;
-  margin: 1% auto;
-}
-
-.validationErrorMessage {
-  border-radius: 2px;
-  margin: 3% 0;
-  color: rgb(255, 133, 133);
-  font-weight: bold;
-}
-
-.serverErrorMessage {
-  font-size: 1.2rem;
-  color: rgb(216, 83, 83);
-}
-
 /* --- POST COMMENT COMPONENT ------------------- */
 
-.postCommentContainer {
+/* .postCommentContainer {
   box-sizing: border-box;
   margin: 1% auto;
   width: 100%;
@@ -405,21 +136,21 @@ h2.errorHeader {
 .postCommentBtn[disabled] {
   border: 1px solid #d9d9d9;
   background: #d9d9d9;
-}
+} */
 
 /* ---- COMMENTS COMPONENT ----- */
 
-.commentsContainer {
+/* .commentsContainer {
   background: white;
 }
 
 .commentsHeader {
   font-size: 1.7rem;
   padding: 0.8%;
-}
+} */
 
 /* ---- COMMENT COMPONENT ----------- */
-.commentBox {
+/* .commentBox {
   box-sizing: border-box;
   border: 1px solid rgb(180, 179, 179);
   border-radius: 5px;
@@ -478,11 +209,11 @@ p.commentRating .far {
   color: rgb(255, 97, 97);
   font-size: 1.5rem;
   cursor: pointer;
-}
+} */
 
 /* ----LOGIN COMPONENT ---------- */
 
-.loginContainer,
+/* .loginContainer,
 .registerContainer {
   border: 1px solid rgb(200, 200, 200);
   background: #fff;
@@ -541,11 +272,11 @@ p.commentRating .far {
   color: inherit;
   padding-bottom: 2%;
   text-decoration: none;
-}
+} */
 
 /* ----- LOGIN PROMPT COMPONENT */
 
-.loginPromptContainer {
+/* .loginPromptContainer {
   background: rgb(199, 199, 199);
   border-radius: 2px;
   text-align: center;
@@ -579,15 +310,15 @@ p.commentRating .far {
   background: #000;
   color: #fff;
   transition: 300ms;
-}
+} */
 
 /* Account Component */
 
-.accountContainer {
+/* .accountContainer {
   background: orange;
   text-align: center;
 }
 
 .accountHeader {
   font-size: 3rem;
-}
+} */

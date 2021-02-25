@@ -7,6 +7,8 @@ import commentSchema from '../validation/CommentSchema'
 import Comments from './Comments'
 import LoginPrompt from './LoginPrompt'
 
+import { Container, Form, TextArea, Button } from '../styles/postComment'
+
 const PostComment = props => {
   const history = useHistory()
 
@@ -91,28 +93,26 @@ const PostComment = props => {
 
   return (
     <>
-      <div className="postCommentContainer">
+      <Container>
         {Object.keys(props.user).length > 0 ? (
-          <form
+          <Form
             autoComplete="off"
             className="postCommentForm"
             onSubmit={handleSubmit}
           >
-            <textarea
+            <TextArea
               className="postCommentInput"
               onChange={handleChange}
               name="body"
               value={commentData.body}
               placeholder={errors.body}
             />
-            <button disabled={disabled} className="postCommentBtn">
-              comment
-            </button>
-          </form>
+            <Button disabled={disabled}>comment</Button>
+          </Form>
         ) : (
           <LoginPrompt />
         )}
-      </div>
+      </Container>
       <Comments postId={props.postId} data={comments} />
     </>
   )

@@ -1,9 +1,10 @@
 import React from 'react'
+import { Hash } from '../styles/post'
 
 const Tags = ({ data: tag }) => {
   return (
     <>
-      <p className="hashtag">{tag}</p>
+      <Hash>{tag}</Hash>
     </>
   )
 }

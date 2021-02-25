@@ -8,21 +8,31 @@ import tagsHandler from '../controllers/tagsHandler'
 import axiosCall from '../api/axiosCall'
 import Voting from './Voting'
 
+import {
+  Container,
+  NavLink,
+  Time,
+  Author,
+  Title,
+  Flair,
+  TagsContainer,
+} from '../styles/post'
+
 const Post = ({ data, user }) => {
   return (
-    <div className="postContainer">
-      <h3 className="postTitle">{data.title}</h3>
-      <Link className="postLink" to={`/posts/${data['_id']}`}>
-        <h4 className="postAuthor">Posted by {data.author.username}</h4>
-        <h5 className="postTimestamp">
+    <Container>
+      <Title>{data.title}</Title>
+      <NavLink className="postLink" to={`/posts/${data['_id']}`}>
+        <Author>Posted by {data.author.username}</Author>
+        <Time>
           {timeago(data.timestamp * 1000)}{' '}
-          {data.editCount > 0 && <p className="editedFlair">| Edited</p>}
-        </h5>
-        <div className="tagsContainer">{tagsHandler(data.tags)}</div>
+          {data.editCount > 0 && <Flair>| Edited</Flair>}
+        </Time>
+        <TagsContainer>{tagsHandler(data.tags)}</TagsContainer>
         {imageHandler(data.image, 'thumbnail')}
-      </Link>
+      </NavLink>
       <Voting data={data} />
-    </div>
+    </Container>
   )
 }
 

@@ -7,6 +7,16 @@ import { connect } from 'react-redux'
 import { logInUser } from '../redux/actions/users.actions'
 import { Link } from 'react-router-dom'
 
+import {
+  Container,
+  Header,
+  Form,
+  Input,
+  Button,
+  RedirectContainer,
+  RedirectLink,
+} from '../styles/login'
+
 const Register = props => {
   const history = useHistory()
 
@@ -84,26 +94,26 @@ const Register = props => {
   }
 
   return (
-    <div className="registerContainer">
-      <h1 className="registerHeader">Reigster User:</h1>
+    <Container>
+      <Header>Reigster User:</Header>
       {serverError.length > 0 && (
         <p className="serverErrorMessage">{serverError}</p>
       )}
-      <form autoComplete="off" className="registerForm" onSubmit={handleSubmit}>
-        <input
+      <Form autoComplete="off" onSubmit={handleSubmit}>
+        <Input
           type="text"
           name="username"
           placeholder="username"
           onChange={handleChange}
         />
-        <input
+        <Input
           type="password"
           name="password"
           placeholder="password"
           onChange={handleChange}
         />
-        <button disabled={disabled}>Register</button>
-      </form>
+        <Button disabled={disabled}>Register</Button>
+      </Form>
       <div className="validatinErrorsContainer">
         {errors.username.length > 0 && (
           <p className="validationErrorMessage">{errors.username}</p>
@@ -112,12 +122,12 @@ const Register = props => {
           <p className="validationErrorMessage">{errors.password}</p>
         )}
       </div>
-      <div className="redirectContainer">
-        <Link className="accountRedirect" to="/login">
+      <RedirectContainer>
+        <RedirectLink className="accountRedirect" to="/login">
           Already have an account? Log in
-        </Link>
-      </div>
-    </div>
+        </RedirectLink>
+      </RedirectContainer>
+    </Container>
   )
 }
 

@@ -1,19 +1,28 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+import {
+  Container,
+  IconHeader,
+  SubHeader,
+  Status,
+  Message,
+  Btn,
+} from '../styles/errorPage'
+
 const ErrorPage = ({ status, message }) => {
   return (
-    <div className="errorContainer">
-      <h1 className="errorIcon">
-        <i class="fas fa-exclamation-circle"></i>
-      </h1>
-      <h2 className="errorHeader">Something Went Wrong!</h2>
-      <h3 className="errorStatus">Error {status}</h3>
-      <p className="errorMessage">{message}</p>
+    <Container>
+      <IconHeader>
+        <i className="fas fa-exclamation-circle"></i>
+      </IconHeader>
+      <SubHeader>Something Went Wrong!</SubHeader>
+      <Status>Error {status}</Status>
+      <Message>{message}</Message>
       <Link to="/posts">
-        <button className="errorBtn">Go Back</button>
+        <Btn>Go Back</Btn>
       </Link>
-    </div>
+    </Container>
   )
 }
 

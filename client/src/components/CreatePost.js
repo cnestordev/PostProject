@@ -7,6 +7,19 @@ import Loader from 'react-loader-spinner'
 import imageUploader from '../util/imageUploader'
 import axiosCall from '../api/axiosCall'
 
+import {
+  Container,
+  Header,
+  Form,
+  InputText,
+  TextArea,
+  File,
+  Button,
+  ErrorContainer,
+  ErrorMessage,
+  ServerMessage,
+} from '../styles/createPost'
+
 const CreatePost = () => {
   const [data, setData] = useState({
     title: '',
@@ -125,46 +138,34 @@ const CreatePost = () => {
   }
 
   return (
-    <div className="createFormContainer">
-      <h1 className="createHeader">Create Post</h1>
+    <Container>
+      <Header>Create Post</Header>
       {serverError.hasError && (
-        <p className="serverErrorMessage">{serverError.message}</p>
+        <ServerMessage>{serverError.message}</ServerMessage>
       )}
-      <form
-        autoComplete="off"
-        className="createFormElement"
-        onSubmit={handleSubmit}
-      >
-        <input
+      <Form autoComplete="off" onSubmit={handleSubmit}>
+        <InputText
           onChange={handleChange}
           type="text"
           name="title"
           placeholder="Title"
-          className="createInputText"
           value={data.title}
         />
-        <textarea
-          className="createTextarea"
-          onChange={handleChange}
-          name="body"
-          value={data.body}
-        />
-        <input
-          className="createFile"
+        <TextArea onChange={handleChange} name="body" value={data.body} />
+        <File
           type="file"
           name="image"
           onChange={handleImage}
           accept="image/x-png,image/gif,image/jpeg"
         />
-        <input
+        <InputText
           onChange={handleChange}
           type="text"
           placeholder="tags"
           name="tags"
-          className="createFile"
           value={data.tags}
         />
-        <button className="createPostBtn" disabled={disabled || sending}>
+        <Button disabled={disabled || sending}>
           {sending ? (
             <Loader
               type="ThreeDots"
@@ -176,17 +177,13 @@ const CreatePost = () => {
           ) : (
             'Create'
           )}
-        </button>
-      </form>
-      <div className="validatinErrorsContainer">
-        {errors.title.length > 0 && (
-          <p className="validationErrorMessage">{errors.title}</p>
-        )}
-        {errors.tags.length > 0 && (
-          <p className="validationErrorMessage">{errors.tags}</p>
-        )}
-      </div>
-    </div>
+        </Button>
+      </Form>
+      <ErrorContainer>
+        {errors.title.length > 0 && <ErrorMessage>{errors.title}</ErrorMessage>}
+        {errors.tags.length > 0 && <ErrorMessage>{errors.tags}</ErrorMessage>}
+      </ErrorContainer>
+    </Container>
   )
 }
 

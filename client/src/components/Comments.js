@@ -1,6 +1,8 @@
 import React from 'react'
 import Comment from './Comment'
 
+import { Container, Header } from '../styles/comments'
+
 const Comments = ({ data, postId }) => {
   const commentArr = React.Children.toArray(
     data
@@ -12,10 +14,10 @@ const Comments = ({ data, postId }) => {
       })
   )
   return (
-    <div className="commentsContainer">
-      <p className="commentsHeader">Comments:</p>
+    <Container>
+      <Header>Comments:</Header>
       {commentArr}
-    </div>
+    </Container>
   )
 }
 

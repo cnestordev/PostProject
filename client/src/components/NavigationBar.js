@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import axiosCall from '../api/axiosCall'
 import { logInUser } from '../redux/actions/users.actions'
 
+import { Nav, Ul, NavLink, Icon } from '../styles/navigation'
+
 const NavigationBar = ({ user, logInUser }) => {
   const location = useLocation()
 
@@ -20,28 +22,28 @@ const NavigationBar = ({ user, logInUser }) => {
   }, [])
   return (
     <header>
-      <nav className="navbarContainer">
-        <ul className="navbarList">
+      <Nav className="navbarContainer">
+        <Ul className="navbarList">
           <li>
-            <Link to="/" className="navbarItem">
+            <NavLink to="/" className="navbarItem">
               Home
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to="/posts" className="navbarItem">
+            <NavLink to="/posts" className="navbarItem">
               Posts
-            </Link>
+            </NavLink>
           </li>
           <li>
             <div>
-              <Link to="/posts/new" className="navbarItem">
-                <i className="fas fa-plus"></i>
-              </Link>
+              <NavLink to="/posts/new" className="navbarItem">
+                <Icon className="fas fa-plus"></Icon>
+              </NavLink>
             </div>
           </li>
           <li>
             {user.username === undefined ? (
-              <Link
+              <NavLink
                 to={{
                   pathname: '/login',
                   state: { from: { pathname: location.pathname } },
@@ -49,9 +51,9 @@ const NavigationBar = ({ user, logInUser }) => {
                 className="navbarItem"
               >
                 Login
-              </Link>
+              </NavLink>
             ) : (
-              <Link
+              <NavLink
                 to={{
                   pathname: '/logout',
                   state: { from: { pathname: location.pathname } },
@@ -59,11 +61,11 @@ const NavigationBar = ({ user, logInUser }) => {
                 className="navbarItem"
               >
                 {`Logout ${user.username}`}
-              </Link>
+              </NavLink>
             )}
           </li>
-        </ul>
-      </nav>
+        </Ul>
+      </Nav>
     </header>
   )
 }
