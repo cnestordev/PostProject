@@ -45,6 +45,7 @@ export const EditPara = styled.p`
 
 export const DelPara = styled.p`
   color: rgb(255, 58, 58);
+  font-size: 1.4rem;
   margin-left: 12%;
   cursor: pointer;
 `

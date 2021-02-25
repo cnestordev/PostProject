@@ -13,12 +13,14 @@ export const Form = styled.form`
   padding: 1%;
 `
 
-export const TextArea = styled.input`
+export const TextArea = styled.textarea`
   border: 1px solid #d9d9d9;
   background: #d9d9d9;
+  font-family: inherit;
   border-radius: 3px;
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   height: 10vh;
+  padding: 1%;
 
   &::placeholder {
     color: rgb(226, 50, 50);

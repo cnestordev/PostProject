@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link, useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
+import tagsHandler from '../controllers/tagsHandler'
 
 import timeago from 'epoch-timeago'
 import imageHandler from '../controllers/imageHandler'
@@ -25,6 +26,8 @@ import {
   VoteContainer,
   CommentSection,
 } from '../styles/postDetails'
+
+import { TagsContainer } from '../styles/post'
 
 const PostDetails = props => {
   const id = props.match.params.id
@@ -82,6 +85,7 @@ const PostDetails = props => {
           <Title>{postData.title}</Title>
           <Author>Posted by {postData.author.username}</Author>
           <Time>{timeago((postData.timestamp || 1610849840) * 1000)}</Time>
+          <TagsContainer>{tagsHandler(postData.tags)}</TagsContainer>
           {props.user._id === postData.authorId ? (
             <EditContainer>
               <PostLink to={`/posts/${postData['_id']}/edit`}>

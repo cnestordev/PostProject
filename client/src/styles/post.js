@@ -30,23 +30,23 @@ export const Title = styled.h3`
 `
 
 export const Author = styled.h4`
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   margin-top: 1.5%;
 `
 
 export const Time = styled.h5`
-  font-size: 0.8rem;
+  font-size: 1rem;
   margin-top: 1%;
   color: #404040;
 `
 
 export const Flair = styled.p`
   color: #6c6c6c;
-  font-size: 0.8rem;
+  font-size: 1rem;
   display: inline-block;
 `
 export const CloudImg = styled(Image)`
-  width: ${props => (props.scale === 'thumbnail' ? '50%' : '80%')};
+  width: ${props => (props.scale === 'thumbnail' ? '50%' : '70%')};
 `
 
 export const PostImg = styled.img`
@@ -66,6 +66,6 @@ export const Hash = styled.p`
   border-radius: 50px;
   display: inline-block;
   padding: 4% 8%;
-  font-size: 1rem;
+  font-size: 1.3rem;
   margin: 0 1%;
 `

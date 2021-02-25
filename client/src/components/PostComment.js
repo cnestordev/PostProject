@@ -101,7 +101,6 @@ const PostComment = props => {
             onSubmit={handleSubmit}
           >
             <TextArea
-              className="postCommentInput"
               onChange={handleChange}
               name="body"
               value={commentData.body}
