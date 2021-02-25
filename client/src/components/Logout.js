@@ -14,7 +14,6 @@ const Logout = props => {
   useEffect(async () => {
     try {
       await axiosCall.get('/logout')
-      console.log('successfully logged out')
       props.logOutUser()
       history.push(prevPage)
     } catch (err) {

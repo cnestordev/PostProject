@@ -17,9 +17,10 @@ export const TextArea = styled.input`
   border: 1px solid #d9d9d9;
   background: #d9d9d9;
   border-radius: 3px;
+  font-size: 1.5rem;
   height: 10vh;
 
-  &:placeholder {
+  &::placeholder {
     color: rgb(226, 50, 50);
     font-weight: bold;
   }

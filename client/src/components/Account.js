@@ -7,7 +7,7 @@ import { Header, Container } from '../styles/account'
 const Account = ({ user }) => {
   const handleAcctDelete = async () => {
     const response = await axiosCall.delete(`/${user._id}/delete`)
-    console.log(response.data)
+    // console.log(response.data)
   }
 
   return (

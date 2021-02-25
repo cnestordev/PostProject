@@ -15,6 +15,9 @@ import {
   Button,
   RedirectContainer,
   RedirectLink,
+  ErrorContainer,
+  ServerError,
+  ValidationError,
 } from '../styles/login'
 
 const Register = props => {
@@ -23,8 +26,8 @@ const Register = props => {
   const prevPage = props.location.state
     ? props.location.state.from.pathname
     : '/posts'
-  console.log(prevPage)
-  console.log(props)
+  // console.log(prevPage)
+  // console.log(props)
 
   const initialValues = {
     username: '',
@@ -82,8 +85,8 @@ const Register = props => {
     e.preventDefault()
     try {
       const response = await axiosCall.post('/register', formData)
-      console.log('successful try for REGISTER')
-      console.log(response.data.userData)
+      // console.log('successful try for REGISTER')
+      // console.log(response.data.userData)
       props.logInUser(response.data.userData)
       history.push(prevPage)
     } catch (err) {
@@ -96,9 +99,7 @@ const Register = props => {
   return (
     <Container>
       <Header>Reigster User:</Header>
-      {serverError.length > 0 && (
-        <p className="serverErrorMessage">{serverError}</p>
-      )}
+      {serverError.length > 0 && <ServerError>{serverError}</ServerError>}
       <Form autoComplete="off" onSubmit={handleSubmit}>
         <Input
           type="text"
@@ -114,14 +115,14 @@ const Register = props => {
         />
         <Button disabled={disabled}>Register</Button>
       </Form>
-      <div className="validatinErrorsContainer">
+      <ErrorContainer>
         {errors.username.length > 0 && (
-          <p className="validationErrorMessage">{errors.username}</p>
+          <ValidationError>{errors.username}</ValidationError>
         )}
         {errors.password.length > 0 && (
-          <p className="validationErrorMessage">{errors.password}</p>
+          <ValidationError>{errors.password}</ValidationError>
         )}
-      </div>
+      </ErrorContainer>
       <RedirectContainer>
         <RedirectLink className="accountRedirect" to="/login">
           Already have an account? Log in

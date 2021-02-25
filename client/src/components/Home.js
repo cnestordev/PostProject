@@ -8,7 +8,6 @@ const Home = () => {
       const res = await axiosCall.get('/', {
         withCredentials: true,
       })
-      console.log('home component ajax successful')
       console.log(res.data)
     } catch (err) {
       console.log('hit ERROR on Home component')

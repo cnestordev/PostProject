@@ -19,8 +19,8 @@ const Comment = ({ comment, postId, user }) => {
   const handleDelete = async id => {
     try {
       const response = await axiosCall.delete(`/posts/${postId}/comments/${id}`)
-      console.log('successfully deleted')
-      console.dir(response)
+      // console.log('successfully deleted')
+      // console.dir(response)
       setHasDeleted(true)
     } catch (err) {
       console.log('comment deleting error')

@@ -62,7 +62,7 @@ const isAuthorized = async (req, res, next) => {
 }
 
 const commentAuthor = async (req, res, next) => {
-  console.log('%c hitting is comment auth', 'color: red;')
+  // console.log('%c hitting is comment auth', 'color: red;')
   const { commentId } = req.params
   try {
     const comment = await Comment.findById(commentId)

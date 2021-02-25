@@ -4,7 +4,18 @@ import { connect } from 'react-redux'
 import axiosCall from '../api/axiosCall'
 import { logInUser } from '../redux/actions/users.actions'
 
-import { Nav, Ul, NavLink, Icon } from '../styles/navigation'
+import {
+  Nav,
+  Ul,
+  NavLink,
+  Icon,
+  NavAccountContainer,
+  NavButton,
+  Dropbox,
+  NavDropUl,
+  NavDropLi,
+  AccLink,
+} from '../styles/navigation'
 
 const NavigationBar = ({ user, logInUser }) => {
   const location = useLocation()
@@ -53,15 +64,35 @@ const NavigationBar = ({ user, logInUser }) => {
                 Login
               </NavLink>
             ) : (
-              <NavLink
-                to={{
-                  pathname: '/logout',
-                  state: { from: { pathname: location.pathname } },
-                }}
-                className="navbarItem"
-              >
-                {`Logout ${user.username}`}
-              </NavLink>
+              <NavAccountContainer>
+                <NavButton>{user.username}</NavButton>
+                <Dropbox>
+                  <NavDropUl>
+                    <NavDropLi>
+                      <AccLink
+                        to={{
+                          pathname: '/account',
+                          state: { from: { pathname: location.pathname } },
+                        }}
+                        className="navbarItem"
+                      >
+                        My Account
+                      </AccLink>
+                    </NavDropLi>
+                    <NavDropLi>
+                      <AccLink
+                        to={{
+                          pathname: '/logout',
+                          state: { from: { pathname: location.pathname } },
+                        }}
+                        className="navbarItem"
+                      >
+                        Logout
+                      </AccLink>
+                    </NavDropLi>
+                  </NavDropUl>
+                </Dropbox>
+              </NavAccountContainer>
             )}
           </li>
         </Ul>

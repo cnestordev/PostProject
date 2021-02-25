@@ -36,11 +36,11 @@ const PostDetails = props => {
   const [error, setError] = useState(false)
 
   useEffect(async () => {
-    console.log('fetching............')
+    // console.log('fetching............')
     try {
       const response = await axiosCall.get(`/posts/${id}`)
       const { data } = response.data
-      console.log('successfully fetched post data')
+      // console.log('successfully fetched post data')
       setPostDate(data)
     } catch (err) {
       console.log('CATCH post details')
@@ -56,11 +56,11 @@ const PostDetails = props => {
   }, [])
 
   const handleDelete = async id => {
-    console.log(id)
+    // console.log(id)
     try {
       const response = await axiosCall.delete(`/posts/${id}/delete`)
-      console.log('successfully deleted post')
-      console.dir(response)
+      // console.log('successfully deleted post')
+      // console.dir(response)
       history.push('/posts')
     } catch (err) {
       console.log(err)

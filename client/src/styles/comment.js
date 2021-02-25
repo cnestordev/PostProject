@@ -43,6 +43,7 @@ export const CommentSocialContainer = styled.div`
 
 export const Rating = styled.p`
   font-size: 1.6rem;
+  color: ${props => (props.active ? '#ff5c28' : '#000')};
 `
 
 export const Icon = styled.i`

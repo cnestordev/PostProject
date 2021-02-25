@@ -2,10 +2,10 @@ const User = require('../models/user')
 const passport = require('passport')
 
 const index = (req, res) => {
-  console.log('hit root route')
-  console.log(req.headers.host)
-  console.log(req.isAuthenticated())
-  console.log(req.user)
+  // console.log('hit root route')
+  // console.log(req.headers.host)
+  // console.log(req.isAuthenticated())
+  // console.log(req.user)
   res
     .json({
       user: req.user,
@@ -23,7 +23,6 @@ const userData = async (req, res) => {
 
 // route for dev only
 const isLoggedOn = (req, res) => {
-  console.log('is logged in route')
   if (req.isAuthenticated()) {
     res.send(true)
   } else {

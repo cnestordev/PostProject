@@ -38,8 +38,8 @@ const createNewPost = async (req, res, next) => {
   try {
     const post = new Post(req.body)
     const result = await post.save()
-    console.log(result._id)
-    console.log('successfully posted')
+    // console.log(result._id)
+    // console.log('successfully posted')
     const postId = result._id
     // add post reference to the User schema
     try {
@@ -67,11 +67,9 @@ const getPostFormById = async (req, res) => {
 }
 
 const editFormById = async (req, res, next) => {
-  console.log('here')
   const { id } = req.params
   try {
     const response = await Post.findByIdAndUpdate(id, { ...req.body })
-    console.log('successfully edited')
     res.status(201).json({ message: 'successfully updated post', id })
   } catch (err) {
     return next(err)
@@ -105,7 +103,6 @@ const likePost = async (req, res, next) => {
     post.set('dislikes', updatedDislikes)
     post.markModified('dislikes')
     await post.save()
-    console.log('removed dislike')
   }
 
   // 2. If user hasn't liked, it likes.
@@ -113,7 +110,6 @@ const likePost = async (req, res, next) => {
     try {
       post.likes.push(userId)
       const result = await post.save()
-      console.log('user liked the post!!')
       const metrics = {
         likes: result.likes.length,
         dislikes: result.dislikes.length,
@@ -130,7 +126,6 @@ const likePost = async (req, res, next) => {
   if (post.likes.includes(userObjectId)) {
     try {
       const updatedLikes = post.likes.filter(obj => {
-        console.log(obj.toString() === userId.toString())
         return obj.toString() !== userId.toString()
       })
       post.set('likes', updatedLikes)
@@ -150,7 +145,6 @@ const likePost = async (req, res, next) => {
 }
 
 const dislikePost = async (req, res, next) => {
-  console.log('dislike route hit')
   const postId = req.params.id
   const userId = req.user._id
 
@@ -167,7 +161,6 @@ const dislikePost = async (req, res, next) => {
     post.set('likes', updatedLikes)
     post.markModified('likes')
     await post.save()
-    console.log('removed like')
   }
 
   // 1. If user hasn't disliked, it dislikes.
@@ -175,7 +168,6 @@ const dislikePost = async (req, res, next) => {
     try {
       post.dislikes.push(userId)
       const result = await post.save()
-      console.log('user disliked the post!!')
       const metrics = {
         likes: result.likes.length,
         dislikes: result.dislikes.length,

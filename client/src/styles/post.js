@@ -1,8 +1,10 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import { Image } from 'cloudinary-react'
 
 export const Container = styled.div`
-  border: 1px solid #c3c3c3;
+  border: 1px solid #e3e3e3;
+  border-radius: 5px;
   background: #fff;
   margin: 1% 0;
   text-align: center;
@@ -12,7 +14,7 @@ export const Container = styled.div`
   justify-content: center;
   width: 40%;
   margin: 1% auto;
-  padding: 2%;
+  padding: 1% 0;
 `
 
 export const NavLink = styled(Link)`
@@ -23,7 +25,7 @@ export const NavLink = styled(Link)`
 `
 
 export const Title = styled.h3`
-  font-size: 2.5rem;
+  font-size: 3.2rem;
   text-decoration: none;
 `
 
@@ -42,6 +44,9 @@ export const Flair = styled.p`
   color: #6c6c6c;
   font-size: 0.8rem;
   display: inline-block;
+`
+export const CloudImg = styled(Image)`
+  width: ${props => (props.scale === 'thumbnail' ? '50%' : '80%')};
 `
 
 export const PostImg = styled.img`

@@ -43,6 +43,10 @@ export const Button = styled.button`
     transition: 300ms;
     cursor: pointer;
   }
+
+  &:disabled {
+    border-color: #c2c2c2;
+  }
 `
 
 export const RedirectContainer = styled.div`
@@ -54,4 +58,17 @@ export const RedirectLink = styled(Link)`
   color: inherit;
   padding-bottom: 2%;
   text-decoration: none;
+`
+
+export const ErrorContainer = styled.div`
+  padding: 1%;
+`
+
+export const ServerError = styled.p`
+  color: #f43c3c;
+  font-size: 1.6rem;
+`
+export const ValidationError = styled.p`
+  color: #f43c3c;
+  font-size: 1.4rem;
 `

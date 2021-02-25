@@ -65,12 +65,12 @@ const CreatePost = () => {
 
   useEffect(async () => {
     if (data.title || data.tags.length > 0) {
-      console.log('sending post to server, data sending:')
-      console.log(data)
+      // console.log('sending post to server, data sending:')
+      // console.log(data)
       try {
-        console.log('entering try')
+        // console.log('entering try')
         const response = await axiosCall.post('/posts/new', data)
-        console.log(response)
+        // console.log(response)
         const { postId } = response.data
         setSending(false)
         history.push(`/posts/${postId}`)
@@ -122,13 +122,13 @@ const CreatePost = () => {
   }
 
   const handleSubmit = async e => {
-    console.log('creating NEW post...')
+    // console.log('creating NEW post...')
     e.preventDefault()
     setServerError(defaultErrorValues)
     setSending(true)
-    console.log('starting upload image function')
+    // console.log('starting upload image function')
     const img = await imageUploader(imageData, 'main')
-    console.log('image function has been returned, url is: ', img)
+    // console.log('image function has been returned, url is: ', img)
     setData({
       ...data,
       image: img,

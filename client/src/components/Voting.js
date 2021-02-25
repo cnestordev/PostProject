@@ -24,7 +24,7 @@ const Voting = ({ data, user }) => {
   const handleDisike = async () => {
     try {
       const response = await axiosCall.post(`/posts/${data._id}/dislike`)
-      console.log(response.data.message)
+      // console.log(response.data.message)
       setMetrics(response.data.message)
     } catch (err) {
       console.dir(err)
@@ -33,17 +33,11 @@ const Voting = ({ data, user }) => {
   return (
     <>
       <Container>
-        <Paragraph
-          onClick={handleLike}
-          className={`postSocial ${metrics.liked && 'selected'}`}
-        >
+        <Paragraph onClick={handleLike} active={metrics.liked}>
           <Icon className="fas fa-chevron-up"></Icon>
           {metrics.likes}
         </Paragraph>
-        <Paragraph
-          onClick={handleDisike}
-          className={`postSocial ${metrics.disliked && 'selected'}`}
-        >
+        <Paragraph onClick={handleDisike} active={metrics.disliked}>
           <Icon className="fas fa-chevron-down"></Icon> {metrics.dislikes}
         </Paragraph>
         <Paragraph>

@@ -15,6 +15,9 @@ import {
   Button,
   RedirectContainer,
   RedirectLink,
+  ServerError,
+  ErrorContainer,
+  ValidationError,
 } from '../styles/login'
 
 const Login = props => {
@@ -78,10 +81,7 @@ const Login = props => {
   const handleSubmit = async e => {
     e.preventDefault()
     try {
-      console.log('entering TRY for LOGIN')
       const response = await axiosCall.post('/login', formData)
-      console.log('successfully logged in')
-      console.log(response.data)
       props.logInUser(response.data)
       history.push(prevPage)
     } catch (err) {
@@ -96,7 +96,7 @@ const Login = props => {
     <Container>
       <Header>Login User:</Header>
       {serverError.length > 0 && (
-        <p className="serverErrorMessage">{serverError}</p>
+        <ServerError className="serverErrorMessage">{serverError}</ServerError>
       )}
       <Form autoComplete="off" onSubmit={handleSubmit}>
         <Input
@@ -113,18 +113,18 @@ const Login = props => {
         />
         <Button disabled={disabled}>Login</Button>
       </Form>
-      <div className="validationErrorsContainer">
+      <ErrorContainer className="validationErrorsContainer">
         {errors.username.length > 0 && (
-          <p className="validationErrorMessage">{errors.username}</p>
+          <ValidationError>{errors.username}</ValidationError>
         )}
         {errors.password.length > 0 && (
-          <p className="validationErrorMessage">{errors.password}</p>
+          <ValidationError>{errors.password}</ValidationError>
         )}
-      </div>
+      </ErrorContainer>
       <div>
         <RedirectContainer>
           <RedirectLink className="accountRedirect" to="/register">
-            Create a account
+            Don't have an account? Register here
           </RedirectLink>
         </RedirectContainer>
       </div>

@@ -75,16 +75,16 @@ const PostComment = props => {
 
   const handleSubmit = async e => {
     e.preventDefault()
-    console.log('making POST request to comments')
+    // console.log('making POST request to comments')
     const id = props.postId
     try {
       const response = await axiosCall.post(
         `/posts/${id}/comments`,
         commentData
       )
-      console.log('success')
+      // console.log('success')
       setCommentData(commentDataValues)
-      console.log(response.data)
+      // console.log(response.data)
       setComments(response.data.data.comments)
     } catch (err) {
       console.log('entering error on POST comments')

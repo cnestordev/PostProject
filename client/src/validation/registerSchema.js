@@ -3,7 +3,7 @@ import * as yup from 'yup'
 const loginSchema = yup.object().shape({
   username: yup
     .string()
-    .required('a title is required')
+    .required('a username is required')
     .trim('username must contain only alphanumeric values')
     .strict(true)
     .min(3, 'username must be at least 3 characters')

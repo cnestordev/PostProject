@@ -1,16 +1,16 @@
 import React from 'react'
 import { Image, Transformation, CloudinaryContext } from 'cloudinary-react'
-import { PostImg } from '../styles/post'
 
 import { Container, Text } from '../styles/noImage'
+import { PostImg, CloudImg } from '../styles/post'
 
 const imageHandler = (img, scale) => {
   if (img.id) {
     return (
-      <Image
+      <CloudImg
         cloudName={process.env.REACT_APP_CLOUDINARY_ACCOUNT}
         publicId={img.id}
-        className={scale === 'thumbnail' ? 'postImage' : 'postDetailsImage'}
+        scale={scale}
       />
     )
   } else if (img.url) {
