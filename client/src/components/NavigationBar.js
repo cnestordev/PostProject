@@ -26,6 +26,7 @@ const NavigationBar = ({ user, logInUser }) => {
       const user = await axiosCall.get('/user')
       console.log(user.data)
       logInUser(user.data)
+      console.log(user.data.darkMode)
     } catch (err) {
       console.log('ERROR getting user')
       console.log(err.message)
@@ -33,7 +34,7 @@ const NavigationBar = ({ user, logInUser }) => {
   }, [])
   return (
     <header>
-      <Nav className="navbarContainer">
+      <Nav dark={user.darkMode} className="navbarContainer">
         <Ul className="navbarList">
           <li>
             <NavLink to="/" className="navbarItem">
@@ -67,7 +68,7 @@ const NavigationBar = ({ user, logInUser }) => {
               <NavAccountContainer>
                 <NavButton>{user.username}</NavButton>
                 <Dropbox>
-                  <NavDropUl>
+                  <NavDropUl dark={user.darkMode}>
                     <NavDropLi>
                       <AccLink
                         to={{

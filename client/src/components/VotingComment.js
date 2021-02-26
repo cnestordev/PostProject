@@ -36,10 +36,18 @@ const VotingComment = ({ comment, postId, user }) => {
   return (
     <>
       <CommentSocialContainer>
-        <Rating active={metrics.liked} onClick={handleLike}>
+        <Rating
+          dark={user.darkMode}
+          active={metrics.liked}
+          onClick={handleLike}
+        >
           <Icon className="far fa-thumbs-up"></Icon> {metrics.likes}
         </Rating>
-        <Rating active={metrics.disliked} onClick={handleDislike}>
+        <Rating
+          dark={user.darkMode}
+          active={metrics.disliked}
+          onClick={handleDislike}
+        >
           <Icon className="far fa-thumbs-down"></Icon> {metrics.dislikes}
         </Rating>
       </CommentSocialContainer>

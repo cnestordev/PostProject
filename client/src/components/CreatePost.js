@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
+import { connect } from 'react-redux'
 import * as yup from 'yup'
 import formSchema from '../validation/FormSchema'
 
@@ -20,7 +21,7 @@ import {
   ServerMessage,
 } from '../styles/createPost'
 
-const CreatePost = () => {
+const CreatePost = ({ user }) => {
   const [data, setData] = useState({
     title: '',
     author: 'predefined',
@@ -138,8 +139,8 @@ const CreatePost = () => {
   }
 
   return (
-    <Container>
-      <Header>Create Post</Header>
+    <Container dark={user.darkMode}>
+      <Header dark={user.darkMode}>Create Post</Header>
       {serverError.hasError && (
         <ServerMessage>{serverError.message}</ServerMessage>
       )}
@@ -150,13 +151,20 @@ const CreatePost = () => {
           name="title"
           placeholder="Title"
           value={data.title}
+          dark={user.darkMode}
         />
-        <TextArea onChange={handleChange} name="body" value={data.body} />
+        <TextArea
+          dark={user.darkMode}
+          onChange={handleChange}
+          name="body"
+          value={data.body}
+        />
         <File
           type="file"
           name="image"
           onChange={handleImage}
           accept="image/x-png,image/gif,image/jpeg"
+          dark={user.darkMode}
         />
         <InputText
           onChange={handleChange}
@@ -164,8 +172,9 @@ const CreatePost = () => {
           placeholder="tags"
           name="tags"
           value={data.tags}
+          dark={user.darkMode}
         />
-        <Button disabled={disabled || sending}>
+        <Button dark={user.darkMode} disabled={disabled || sending}>
           {sending ? (
             <Loader
               type="ThreeDots"
@@ -187,4 +196,8 @@ const CreatePost = () => {
   )
 }
 
-export default CreatePost
+const mapStateToProps = state => ({
+  user: state.usersReducer,
+})
+
+export default connect(mapStateToProps, null)(CreatePost)

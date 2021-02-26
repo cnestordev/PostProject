@@ -13,7 +13,7 @@ import {
   DeleteCommentContainer,
 } from '../styles/comment'
 
-const Comment = ({ comment, postId, user }) => {
+const Comment = ({ comment, postId, user, dark }) => {
   const [hasDeleted, setHasDeleted] = useState(false)
 
   const handleDelete = async id => {
@@ -34,10 +34,10 @@ const Comment = ({ comment, postId, user }) => {
 
   return (
     <>
-      <Box key={comment['_id']}>
-        <Author>By {comment.author.username}</Author>
-        <Timestamp>{timeago(comment.timestamp * 1000)}</Timestamp>
-        <Body>{comment.body}</Body>
+      <Box dark={dark} key={comment['_id']}>
+        <Author dark={dark}>By {comment.author.username}</Author>
+        <Timestamp dark={dark}>{timeago(comment.timestamp * 1000)}</Timestamp>
+        <Body dark={dark}>{comment.body}</Body>
         <VotingComment comment={comment} postId={postId} user={user} />
         {user._id === comment.authorId && (
           <DeleteCommentContainer>

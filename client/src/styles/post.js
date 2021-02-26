@@ -3,9 +3,16 @@ import { Link } from 'react-router-dom'
 import { Image } from 'cloudinary-react'
 
 export const Container = styled.div`
-  border: 1px solid #e3e3e3;
+  border: 1px solid ${props => (props.theme ? 'transparent' : '#e3e3e3')};
   border-radius: 5px;
-  background: #fff;
+  background: ${props => {
+    if (props.dark) {
+      document.body.style.backgroundColor = '#0e141b'
+      return '#151f28'
+    }
+    document.body.style.backgroundColor = 'ghostwhite'
+    return '#fff'
+  }};
   margin: 1% 0;
   text-align: center;
   display: flex;
@@ -25,19 +32,21 @@ export const NavLink = styled(Link)`
 `
 
 export const Title = styled.h3`
+  color: ${props => (props.dark ? '#a5a9ac' : '#313131')};
   font-size: 3.2rem;
   text-decoration: none;
 `
 
 export const Author = styled.h4`
+  color: ${props => (props.dark ? '#717374' : '#313131')};
   font-size: 1.3rem;
   margin-top: 1.5%;
 `
 
 export const Time = styled.h5`
+  color: ${props => (props.dark ? '#6c6c6c' : '#313131')};
   font-size: 1rem;
   margin-top: 1%;
-  color: #404040;
 `
 
 export const Flair = styled.p`
@@ -62,7 +71,7 @@ export const TagsContainer = styled.div`
 `
 
 export const Hash = styled.p`
-  background: #414141;
+  background: ${props => (props.dark ? '#681bf0' : '#414141')};
   border-radius: 50px;
   display: inline-block;
   padding: 4% 8%;

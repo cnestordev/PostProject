@@ -3,19 +3,19 @@ import Comment from './Comment'
 
 import { Container, Header } from '../styles/comments'
 
-const Comments = ({ data, postId }) => {
+const Comments = ({ data, postId, dark }) => {
   const commentArr = React.Children.toArray(
     data
       .sort(function (x, y) {
         return y.timestamp - x.timestamp
       })
       .map(comment => {
-        return <Comment postId={postId} comment={comment} />
+        return <Comment dark={dark} postId={postId} comment={comment} />
       })
   )
   return (
-    <Container>
-      <Header>Comments:</Header>
+    <Container dark={dark}>
+      <Header dark={dark}>Comments:</Header>
       {commentArr}
     </Container>
   )

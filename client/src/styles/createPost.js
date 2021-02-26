@@ -1,12 +1,13 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  background: #f1f1fc;
+  background: ${props => (props.dark ? '#0e141b' : '#f1f1fc')};
   height: 50vh;
   text-align: center;
 `
 
 export const Header = styled.h1`
+  color: ${props => (props.dark ? '#ddd' : '#000')};
   font-size: 3rem;
   margin: 2% 0;
 `
@@ -19,6 +20,8 @@ export const Form = styled.form`
 `
 
 export const InputText = styled.input`
+  color: ${props => (props.dark ? '#e1e1e1' : '#000')};
+  background: ${props => (props.dark ? '#2e4158' : '#fff')};
   margin: 1% 0;
   border-radius: 2px;
   border: none;
@@ -26,26 +29,29 @@ export const InputText = styled.input`
 `
 
 export const TextArea = styled.textarea`
+  background: ${props => (props.dark ? '#2e4158' : '#fff')};
   border: none;
   border-radius: 2px;
+  color: ${props => (props.dark ? '#e1e1e1' : '#000')};
   height: 27vh;
   margin: 1% 0;
 `
 
 export const File = styled.input`
-  border: 2px solid #cfcfcf;
+  background: ${props => (props.dark ? '#2e4158' : '#fff')};
+  border: 2px solid ${props => (props.dark ? '#2e4158' : '#cfcfcf')};
   border-radius: 3px;
   padding: 1%;
   margin-top: 1%;
 `
 
 export const Button = styled.button`
-  border: 2px solid #000;
+  background: ${props => (props.dark ? 'purple' : '#fff')};
+  border: 2px solid ${props => (props.dark ? 'transparent' : '#000')};
   border-radius: 2px;
   width: 21%;
   margin: 1% auto;
   padding: 1%;
-  background: white;
   transition: 500ms;
   cursor: pointer;
 

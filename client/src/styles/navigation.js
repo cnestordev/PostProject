@@ -5,7 +5,7 @@ export const Nav = styled.nav`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #0a5c8b;
+  background: ${props => (props.dark ? '#003157' : '#0a5c8b')};
   height: 6vh;
 `
 
@@ -54,7 +54,7 @@ export const NavButton = styled.button`
 `
 
 export const NavDropUl = styled.ul`
-  background: #0a5c8b;
+  background: ${props => (props.dark ? '#003157' : '#0a5c8b')};
   border-top: none;
   box-sizing: border-box;
   display: block;

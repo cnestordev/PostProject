@@ -2,7 +2,14 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
 export const Container = styled.div`
-  background: white;
+  background: ${props => {
+    if (props.dark) {
+      document.body.style.backgroundColor = '#0e141b'
+      return '#151f28'
+    }
+    document.body.style.backgroundColor = 'ghostwhite'
+    return '#fff'
+  }};
   width: 55%;
   margin: 0 auto;
   text-align: center;
@@ -11,17 +18,18 @@ export const Container = styled.div`
 
 export const Title = styled.h2`
   font-size: 3rem;
-  color: #272727;
+  color: ${props => (props.dark ? '#a5a9ac' : '#313131')};
 `
 
 export const Author = styled.h3`
+  color: ${props => (props.dark ? '#717374' : '#313131')};
   font-size: 1.4rem;
   margin-top: 1.3%;
 `
 
 export const Time = styled.h4`
   font-size: 1rem;
-  color: #484848;
+  color: ${props => (props.dark ? '#6c6c6c' : '#313131')};
   margin-top: 0.5%;
 `
 
@@ -66,4 +74,11 @@ export const CommentSection = styled.div`
   border-top: 1px solid black;
   width: 57%;
   margin: 1% auto;
+`
+
+export const Hr = styled.hr`
+  border: none;
+  border-top: 1px solid #050505;
+  width: 90%;
+  margin: 3% auto;
 `

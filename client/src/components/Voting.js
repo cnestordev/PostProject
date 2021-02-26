@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import { Container, Icon, Paragraph } from '../styles/voting'
 
-const Voting = ({ data, user }) => {
+const Voting = ({ data, user, dark }) => {
   const [metrics, setMetrics] = useState({
     likes: data.likes.length,
     dislikes: data.dislikes.length,
@@ -32,15 +32,15 @@ const Voting = ({ data, user }) => {
   }
   return (
     <>
-      <Container>
-        <Paragraph onClick={handleLike} active={metrics.liked}>
+      <Container dark={dark}>
+        <Paragraph dark={dark} onClick={handleLike} active={metrics.liked}>
           <Icon className="fas fa-chevron-up"></Icon>
           {metrics.likes}
         </Paragraph>
-        <Paragraph onClick={handleDisike} active={metrics.disliked}>
+        <Paragraph dark={dark} onClick={handleDisike} active={metrics.disliked}>
           <Icon className="fas fa-chevron-down"></Icon> {metrics.dislikes}
         </Paragraph>
-        <Paragraph>
+        <Paragraph dark={dark}>
           <Icon className="fas fa-comments"></Icon> {data.comments.length}
         </Paragraph>
       </Container>

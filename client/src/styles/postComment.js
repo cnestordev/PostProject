@@ -14,8 +14,8 @@ export const Form = styled.form`
 `
 
 export const TextArea = styled.textarea`
-  border: 1px solid #d9d9d9;
-  background: #d9d9d9;
+  border: 1px solid transparent;
+  background: ${props => (props.dark ? '#545d68' : '#d9d9d9')};
   font-family: inherit;
   border-radius: 3px;
   font-size: 1.7rem;
@@ -29,10 +29,10 @@ export const TextArea = styled.textarea`
 `
 
 export const Button = styled.button`
-  border: 1px solid #262626;
+  border: 1px solid ${props => (props.dark ? '#691bf0' : '#262626')};
   color: #fff;
   border-radius: 3px;
-  background: #262726;
+  background: ${props => (props.dark ? '#691bf0' : '#262626')};
   font-size: 1.6rem;
   padding: 1.5% 4%;
   margin: 0 auto;
@@ -41,7 +41,7 @@ export const Button = styled.button`
   cursor: pointer;
 
   &:disabled {
-    border: 1px solid #d9d9d9;
-    background: #d9d9d9;
+    border: 1px solid ${props => (props.dark ? 'transparent' : '#d9d9d9')};
+    background: ${props => (props.dark ? '#545d68' : '#262626')};
   }
 `

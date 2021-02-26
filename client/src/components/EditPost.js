@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import * as yup from 'yup'
 import formSchema from '../validation/FormSchema'
@@ -21,8 +21,8 @@ import {
   ServerMessage,
 } from '../styles/createPost'
 
-const EditPost = props => {
-  const id = props.match.params.id
+const EditPost = ({ user, match }) => {
+  const id = match.params.id
 
   const defaultErrorValues = {
     hasError: false,
@@ -164,8 +164,8 @@ const EditPost = props => {
   }
 
   return (
-    <Container>
-      <Header>Edit Form</Header>
+    <Container dark={user.darkMode}>
+      <Header dark={user.darkMode}>Edit Form</Header>
       {serverError.hasError && (
         <ServerMessage>{serverError.message}</ServerMessage>
       )}
@@ -176,17 +176,29 @@ const EditPost = props => {
           name="title"
           placeholder="Title"
           value={data.title}
+          dark={user.darkMode}
         />
-        <TextArea onChange={handleChange} name="body" value={data.body} />
-        <File type="file" name="image" onChange={handleImage} />
+        <TextArea
+          dark={user.darkMode}
+          onChange={handleChange}
+          name="body"
+          value={data.body}
+        />
+        <File
+          dark={user.darkMode}
+          type="file"
+          name="image"
+          onChange={handleImage}
+        />
         <InputText
+          dark={user.darkMode}
           onChange={handleChange}
           type="text"
           placeholder="tags"
           name="tags"
           value={data.tags}
         />
-        <Button disabled={disabled || sending}>
+        <Button dark={user.darkMode} disabled={disabled || sending}>
           {sending ? (
             <Loader type="ThreeDots" color="c3c3c3" height={11} width={100} />
           ) : (
@@ -202,4 +214,8 @@ const EditPost = props => {
   )
 }
 
-export default EditPost
+const mapStateToProps = state => ({
+  user: state.usersReducer,
+})
+
+export default connect(mapStateToProps, null)(EditPost)

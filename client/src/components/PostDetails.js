@@ -25,12 +25,13 @@ import {
   PostBody,
   VoteContainer,
   CommentSection,
+  Hr,
 } from '../styles/postDetails'
 
 import { TagsContainer } from '../styles/post'
 
-const PostDetails = props => {
-  const id = props.match.params.id
+const PostDetails = ({ user, match }) => {
+  const id = match.params.id
 
   const history = useHistory()
 
@@ -81,12 +82,18 @@ const PostDetails = props => {
   if (Object.keys(postData).length > 0) {
     return (
       <>
-        <Container>
-          <Title>{postData.title}</Title>
-          <Author>Posted by {postData.author.username}</Author>
-          <Time>{timeago((postData.timestamp || 1610849840) * 1000)}</Time>
-          <TagsContainer>{tagsHandler(postData.tags)}</TagsContainer>
-          {props.user._id === postData.authorId ? (
+        <Container dark={user.darkMode}>
+          <Title dark={user.darkMode}>{postData.title}</Title>
+          <Author dark={user.darkMode}>
+            Posted by {postData.author.username}
+          </Author>
+          <Time dark={user.darkMode}>
+            {timeago((postData.timestamp || 1610849840) * 1000)}
+          </Time>
+          <TagsContainer>
+            {tagsHandler(postData.tags, user.darkMode)}
+          </TagsContainer>
+          {user._id === postData.authorId ? (
             <EditContainer>
               <PostLink to={`/posts/${postData['_id']}/edit`}>
                 <EditPara>Edit</EditPara>
@@ -96,11 +103,11 @@ const PostDetails = props => {
               </DelPara>
             </EditContainer>
           ) : null}
-          <hr />
+          <Hr />
           <PostBody>{postData.body}</PostBody>
           {imageHandler(postData.image, 'full')}
           <VoteContainer>
-            <Voting data={postData} />
+            <Voting dark={user.darkMode} data={postData} />
           </VoteContainer>
         </Container>
         <CommentSection>
