@@ -87,7 +87,7 @@ const Register = props => {
       const response = await axiosCall.post('/register', formData)
       // console.log('successful try for REGISTER')
       // console.log(response.data.userData)
-      props.logInUser(response.data.userData)
+      await props.logInUser(response.data.userData)
       history.push(prevPage)
     } catch (err) {
       console.log('entering CATCH for REGISTER')

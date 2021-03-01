@@ -39,7 +39,7 @@ const register = async (req, res) => {
       if (err) return next(err)
       const userData = {
         username: user.username,
-        id: user.id,
+        _id: user.id,
         posts: user.posts,
         likedPosts: user.likedPosts,
         comments: user.comments,
@@ -80,7 +80,7 @@ const loginUser = (req, res, next) => {
           likedPosts,
           comments,
           likedComments,
-          id,
+          _id,
           username,
           isAdmin,
           darkMode,
@@ -90,7 +90,7 @@ const loginUser = (req, res, next) => {
           likedPosts,
           comments,
           likedComments,
-          _id: id,
+          _id: _id,
           username,
           isAdmin,
           darkMode,

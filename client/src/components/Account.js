@@ -2,7 +2,15 @@ import React from 'react'
 import { connect } from 'react-redux'
 import axiosCall from '../api/axiosCall'
 
-import { Header, Container } from '../styles/account'
+import {
+  Header,
+  Container,
+  ThemeContainer,
+  IconBox,
+  Icon,
+  Button,
+  AdminFlair,
+} from '../styles/account'
 
 const Account = ({ user, dark, toggler }) => {
   const handleAcctDelete = async () => {
@@ -11,11 +19,18 @@ const Account = ({ user, dark, toggler }) => {
   }
 
   return (
-    <Container>
-      <Header>Welcome, {user.username}</Header>
-      <button onClick={() => toggler(true)}>Dark</button>
-      <button onClick={() => toggler(false)}>Light</button>
-      <button onClick={handleAcctDelete}>DELETE ACCOUNT</button>
+    <Container dark={dark}>
+      <Header dark={dark}>Hello, {user.username}</Header>
+      {user.isAdmin && <AdminFlair dark={dark}>Admin</AdminFlair>}
+      <ThemeContainer>
+        <IconBox dark={dark} onClick={() => toggler(false)}>
+          <Icon className="fas fa-sun"></Icon>
+        </IconBox>
+        <IconBox dark={dark} onClick={() => toggler(true)}>
+          <Icon className="fas fa-moon"></Icon>
+        </IconBox>
+      </ThemeContainer>
+      <Button onClick={handleAcctDelete}>DELETE ACCOUNT</Button>
     </Container>
   )
 }

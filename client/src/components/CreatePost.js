@@ -21,7 +21,7 @@ import {
   ServerMessage,
 } from '../styles/createPost'
 
-const CreatePost = ({ user }) => {
+const CreatePost = ({ user, dark }) => {
   const [data, setData] = useState({
     title: '',
     author: 'predefined',
@@ -139,8 +139,8 @@ const CreatePost = ({ user }) => {
   }
 
   return (
-    <Container dark={user.darkMode}>
-      <Header dark={user.darkMode}>Create Post</Header>
+    <Container dark={dark}>
+      <Header dark={dark}>Create Post</Header>
       {serverError.hasError && (
         <ServerMessage>{serverError.message}</ServerMessage>
       )}
@@ -151,10 +151,10 @@ const CreatePost = ({ user }) => {
           name="title"
           placeholder="Title"
           value={data.title}
-          dark={user.darkMode}
+          dark={dark}
         />
         <TextArea
-          dark={user.darkMode}
+          dark={dark}
           onChange={handleChange}
           name="body"
           value={data.body}
@@ -164,7 +164,7 @@ const CreatePost = ({ user }) => {
           name="image"
           onChange={handleImage}
           accept="image/x-png,image/gif,image/jpeg"
-          dark={user.darkMode}
+          dark={dark}
         />
         <InputText
           onChange={handleChange}
@@ -172,9 +172,9 @@ const CreatePost = ({ user }) => {
           placeholder="tags"
           name="tags"
           value={data.tags}
-          dark={user.darkMode}
+          dark={dark}
         />
-        <Button dark={user.darkMode} disabled={disabled || sending}>
+        <Button dark={dark} disabled={disabled || sending}>
           {sending ? (
             <Loader
               type="ThreeDots"

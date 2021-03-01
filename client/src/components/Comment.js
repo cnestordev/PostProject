@@ -38,8 +38,13 @@ const Comment = ({ comment, postId, user, dark }) => {
         <Author dark={dark}>By {comment.author.username}</Author>
         <Timestamp dark={dark}>{timeago(comment.timestamp * 1000)}</Timestamp>
         <Body dark={dark}>{comment.body}</Body>
-        <VotingComment comment={comment} postId={postId} user={user} />
-        {user._id === comment.authorId && (
+        <VotingComment
+          dark={dark}
+          comment={comment}
+          postId={postId}
+          user={user}
+        />
+        {(user._id === comment.authorId || user.isAdmin) && (
           <DeleteCommentContainer>
             <DeleteLink onClick={() => handleDelete(comment['_id'])}>
               Delete

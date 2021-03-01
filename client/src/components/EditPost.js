@@ -21,7 +21,7 @@ import {
   ServerMessage,
 } from '../styles/createPost'
 
-const EditPost = ({ user, match }) => {
+const EditPost = ({ user, match, dark }) => {
   const id = match.params.id
 
   const defaultErrorValues = {
@@ -164,8 +164,8 @@ const EditPost = ({ user, match }) => {
   }
 
   return (
-    <Container dark={user.darkMode}>
-      <Header dark={user.darkMode}>Edit Form</Header>
+    <Container dark={dark}>
+      <Header dark={dark}>Edit Form</Header>
       {serverError.hasError && (
         <ServerMessage>{serverError.message}</ServerMessage>
       )}
@@ -176,29 +176,24 @@ const EditPost = ({ user, match }) => {
           name="title"
           placeholder="Title"
           value={data.title}
-          dark={user.darkMode}
+          dark={dark}
         />
         <TextArea
-          dark={user.darkMode}
+          dark={dark}
           onChange={handleChange}
           name="body"
           value={data.body}
         />
-        <File
-          dark={user.darkMode}
-          type="file"
-          name="image"
-          onChange={handleImage}
-        />
+        <File dark={dark} type="file" name="image" onChange={handleImage} />
         <InputText
-          dark={user.darkMode}
+          dark={dark}
           onChange={handleChange}
           type="text"
           placeholder="tags"
           name="tags"
           value={data.tags}
         />
-        <Button dark={user.darkMode} disabled={disabled || sending}>
+        <Button dark={dark} disabled={disabled || sending}>
           {sending ? (
             <Loader type="ThreeDots" color="c3c3c3" height={11} width={100} />
           ) : (

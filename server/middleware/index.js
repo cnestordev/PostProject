@@ -61,8 +61,25 @@ const isAuthorized = async (req, res, next) => {
   return next()
 }
 
+const isAuthOrAdmin = async (req, res, next) => {
+  const { id } = req.params
+  const post = await Post.findById(id)
+  if (req.user.isAdmin) {
+    return next()
+  }
+  if (String(post.authorId) !== String(req.user._id)) {
+    return next({
+      message: 'Only the owner of this post can modify it',
+      status: 401,
+    })
+  }
+  return next()
+}
+
 const commentAuthor = async (req, res, next) => {
-  // console.log('%c hitting is comment auth', 'color: red;')
+  if (req.user.isAdmin) {
+    return next()
+  }
   const { commentId } = req.params
   try {
     const comment = await Comment.findById(commentId)
@@ -93,6 +110,8 @@ module.exports = {
   isLoggedIn,
   validateUser,
   isAuthorized,
+  isAuthOrAdmin,
   commentAuthor,
   isUser,
+  isAuthOrAdmin,
 }

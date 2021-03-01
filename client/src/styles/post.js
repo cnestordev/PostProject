@@ -7,10 +7,8 @@ export const Container = styled.div`
   border-radius: 5px;
   background: ${props => {
     if (props.dark) {
-      document.body.style.backgroundColor = '#0e141b'
       return '#151f28'
     }
-    document.body.style.backgroundColor = 'ghostwhite'
     return '#fff'
   }};
   margin: 1% 0;

@@ -89,11 +89,14 @@ const PostDetails = ({ user, match, dark }) => {
             {timeago((postData.timestamp || 1610849840) * 1000)}
           </Time>
           <TagsContainer>{tagsHandler(postData.tags, dark)}</TagsContainer>
-          {user._id === postData.authorId ? (
+          {console.log(user)}
+          {user._id === postData.authorId || user.isAdmin ? (
             <EditContainer>
-              <PostLink to={`/posts/${postData['_id']}/edit`}>
-                <EditPara>Edit</EditPara>
-              </PostLink>{' '}
+              {user._id === postData.authorId && (
+                <PostLink to={`/posts/${postData['_id']}/edit`}>
+                  <EditPara>Edit</EditPara>
+                </PostLink>
+              )}
               <DelPara onClick={() => handleDelete(postData._id)}>
                 Delete
               </DelPara>
