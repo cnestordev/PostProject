@@ -46,6 +46,11 @@ export const Button = styled.button`
 
   &:disabled {
     border-color: #c2c2c2;
+    &:hover {
+      border-color: #c2c2c2;
+      color: #c2c2c2;
+      background: inherit;
+    }
   }
 `
 

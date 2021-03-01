@@ -35,7 +35,6 @@ const App = ({ user }) => {
   }
 
   useEffect(() => {
-    console.log('usefft')
     setTheme(user.darkMode)
     document.body.style.backgroundColor = user.darkMode
       ? '#0e141b'

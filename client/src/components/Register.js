@@ -121,12 +121,11 @@ const Register = props => {
           placeholder="password*"
           onChange={handleChange}
         />
-        <Button disabled={disabled}>Register</Button>
         <p style={{ fontSize: '1.4rem' }}>* required field</p>
         <p style={{ fontSize: '1.2rem' }}>
-          By entering your email, you'll opt to receive a confirmation email
-          from me.
+          By entering your email, you agree to receive a confirmation email.
         </p>
+        <Button disabled={disabled}>Register</Button>
       </Form>
       <ErrorContainer>
         {errors.username.length > 0 && (
@@ -134,6 +133,9 @@ const Register = props => {
         )}
         {errors.password.length > 0 && (
           <ValidationError>{errors.password}</ValidationError>
+        )}
+        {errors.email.length > 0 && (
+          <ValidationError>{errors.email}</ValidationError>
         )}
       </ErrorContainer>
       <RedirectContainer>
