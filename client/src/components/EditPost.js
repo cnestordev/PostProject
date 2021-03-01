@@ -20,6 +20,7 @@ import {
   ErrorMessage,
   ServerMessage,
 } from '../styles/createPost'
+import ImageEdit from './ImageEdit'
 
 const EditPost = ({ user, match, dark }) => {
   const id = match.params.id
@@ -184,7 +185,14 @@ const EditPost = ({ user, match, dark }) => {
           name="body"
           value={data.body}
         />
-        <File dark={dark} type="file" name="image" onChange={handleImage} />
+        <ImageEdit
+          dark={dark}
+          handler={handleImage}
+          postId={data._id}
+          image={data.image}
+          setData={setData}
+          data={data}
+        />
         <InputText
           dark={dark}
           onChange={handleChange}

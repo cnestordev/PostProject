@@ -1,6 +1,7 @@
 const Post = require('../models/post')
 const User = require('../models/user')
 const mongoose = require('mongoose')
+const cloudinary = require('../cloudinary')
 
 const index = async (req, res) => {
   const posts = await Post.find({}).populate({
@@ -80,6 +81,11 @@ const deletePostById = async (req, res) => {
   const { id } = req.params
   try {
     const response = await Post.findByIdAndDelete(id)
+    const imgageId = response.image.id
+    try {
+      const response = await cloudinary.uploader.destroy(imgageId)
+      console.log(response.result)
+    } catch (err) {}
     res.status(201).json({ message: response })
   } catch (err) {
     res.status(404).json({ message: err.message })
@@ -202,6 +208,19 @@ const dislikePost = async (req, res, next) => {
   }
 }
 
+const deleteImage = async (req, res, next) => {
+  // post id
+  const { id } = req.params
+  const image = `main/${req.params.imageId}`
+  try {
+    const results = await cloudinary.uploader.destroy(image)
+    const post = await Post.findByIdAndUpdate(id, { image: {} }, { new: true })
+    return res.status(201).end()
+  } catch (err) {
+    return next({ message: err.message, status: 500 })
+  }
+}
+
 module.exports = {
   index,
   getPostById,
@@ -211,4 +230,5 @@ module.exports = {
   deletePostById,
   likePost,
   dislikePost,
+  deleteImage,
 }

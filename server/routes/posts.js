@@ -17,8 +17,10 @@ const {
   deletePostById,
   likePost,
   dislikePost,
+  deleteImage,
 } = require('../controllers/posts')
-const mongoose = require('mongoose')
+
+const cloudinary = require('../cloudinary')
 
 router.get('/', index)
 
@@ -35,5 +37,7 @@ router.delete('/:id/delete', isLoggedIn, isAuthOrAdmin, deletePostById)
 router.post('/:id/like', isLoggedIn, likePost)
 
 router.post('/:id/dislike', isLoggedIn, dislikePost)
+
+router.delete('/:id/main/:imageId', deleteImage)
 
 module.exports = router
