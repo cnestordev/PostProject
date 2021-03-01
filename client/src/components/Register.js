@@ -32,11 +32,13 @@ const Register = props => {
   const initialValues = {
     username: '',
     password: '',
+    email: '',
   }
 
   const defaultErrorValues = {
     username: '',
     password: '',
+    email: '',
   }
 
   const [formData, setFormData] = useState(initialValues)
@@ -104,16 +106,27 @@ const Register = props => {
         <Input
           type="text"
           name="username"
-          placeholder="username"
+          placeholder="username*"
+          onChange={handleChange}
+        />
+        <Input
+          type="email"
+          name="email"
+          placeholder="email"
           onChange={handleChange}
         />
         <Input
           type="password"
           name="password"
-          placeholder="password"
+          placeholder="password*"
           onChange={handleChange}
         />
         <Button disabled={disabled}>Register</Button>
+        <p style={{ fontSize: '1.4rem' }}>* required field</p>
+        <p style={{ fontSize: '1.2rem' }}>
+          By entering your email, you'll opt to receive a confirmation email
+          from me.
+        </p>
       </Form>
       <ErrorContainer>
         {errors.username.length > 0 && (

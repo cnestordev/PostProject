@@ -25,6 +25,10 @@ const UserSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    email: {
+      type: String,
+      required: false,
+    },
   },
   { minimize: false }
 )

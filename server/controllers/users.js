@@ -1,5 +1,7 @@
 const User = require('../models/user')
 const passport = require('passport')
+const sgMail = require('@sendgrid/mail')
+sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
 const index = (req, res) => {
   // console.log('hit root route')
@@ -31,13 +33,14 @@ const isLoggedOn = (req, res) => {
 }
 
 const register = async (req, res) => {
-  const { username, password } = req.body
+  const { username, password, email } = req.body
   try {
-    const user = new User({ username })
+    const user = new User({ username, email })
     const newUser = await User.register(user, password)
-    req.login(newUser, err => {
+    await req.login(newUser, err => {
       if (err) return next(err)
       const userData = {
+        email: user.email,
         username: user.username,
         _id: user.id,
         posts: user.posts,
@@ -47,6 +50,25 @@ const register = async (req, res) => {
         isAdmin: user.isAdmin,
         darkMode: user.darkMode,
       }
+      if (userData.email) {
+        console.log('sending email')
+        const msg = {
+          to: userData.email, // Change to your recipient
+          from: 'nestor@nestordev.com', // Change to your verified sender
+          subject: 'Thanks for visiting!',
+          text: `Hello, ${userData.username}! Thank you for visiting one of my applications!  Feel free to respond to this email, if you have any further questions.`,
+          html: `<strong>Hello, ${userData.username}, Thank you for visiting one of my application.  Feel free to resond to this email, if you have any further questions.</strong>`,
+        }
+        sgMail
+          .send(msg)
+          .then(() => {
+            console.log('Email sent')
+          })
+          .catch(error => {
+            console.error(error)
+          })
+      }
+
       res.status(201).json({ userData, status: 201 })
     })
   } catch (err) {
