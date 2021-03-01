@@ -110,6 +110,21 @@ const deleteUser = async (req, res) => {
   }
 }
 
+const toggleTheme = async (req, res, next) => {
+  // theme is a boolean value
+  const { userId, theme } = req.params
+  try {
+    const response = await User.findByIdAndUpdate(
+      userId,
+      { darkMode: theme },
+      { new: true }
+    )
+    return res.status(200).json({ message: response, status: 200 })
+  } catch (err) {
+    return next({ message: err.message, status: 500 })
+  }
+}
+
 module.exports = {
   index,
   userData,
@@ -118,4 +133,5 @@ module.exports = {
   logoutUser,
   loginUser,
   deleteUser,
+  toggleTheme,
 }

@@ -101,13 +101,13 @@ const PostComment = props => {
             onSubmit={handleSubmit}
           >
             <TextArea
-              dark={props.user.darkMode}
+              dark={props.dark}
               onChange={handleChange}
               name="body"
               value={commentData.body}
               placeholder={errors.body}
             />
-            <Button dark={props.user.darkMode} disabled={disabled}>
+            <Button dark={props.dark} disabled={disabled}>
               comment
             </Button>
           </Form>
@@ -115,11 +115,7 @@ const PostComment = props => {
           <LoginPrompt />
         )}
       </Container>
-      <Comments
-        dark={props.user.darkMode}
-        postId={props.postId}
-        data={comments}
-      />
+      <Comments dark={props.dark} postId={props.postId} data={comments} />
     </>
   )
 }

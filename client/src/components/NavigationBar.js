@@ -17,7 +17,7 @@ import {
   AccLink,
 } from '../styles/navigation'
 
-const NavigationBar = ({ user, logInUser }) => {
+const NavigationBar = ({ user, logInUser, dark }) => {
   const location = useLocation()
 
   useEffect(async () => {
@@ -34,7 +34,7 @@ const NavigationBar = ({ user, logInUser }) => {
   }, [])
   return (
     <header>
-      <Nav dark={user.darkMode} className="navbarContainer">
+      <Nav dark={dark} className="navbarContainer">
         <Ul className="navbarList">
           <li>
             <NavLink to="/" className="navbarItem">
@@ -68,7 +68,7 @@ const NavigationBar = ({ user, logInUser }) => {
               <NavAccountContainer>
                 <NavButton>{user.username}</NavButton>
                 <Dropbox>
-                  <NavDropUl dark={user.darkMode}>
+                  <NavDropUl dark={dark}>
                     <NavDropLi>
                       <AccLink
                         to={{

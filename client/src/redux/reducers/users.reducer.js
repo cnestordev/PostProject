@@ -1,4 +1,4 @@
-const initialState = {}
+const initialState = { darkMode: false }
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -7,7 +7,7 @@ const reducer = (state = initialState, action) => {
       return action.payload
     case 'LOGOUT_USER':
       // console.log('setting user to logout')
-      return action.payload
+      return initialState
     default:
       return state
   }

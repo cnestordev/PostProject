@@ -12,6 +12,5 @@ export const logOutUser = () => async dispatch => {
   // console.log('LOGOUT USER ACTION DEPLOYED')
   dispatch({
     type: 'LOGOUT_USER',
-    payload: {},
   })
 }

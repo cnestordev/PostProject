@@ -17,7 +17,7 @@ const Posts = props => {
         return y.timestamp - x.timestamp
       })
       .map(post => {
-        return <Post data={post} />
+        return <Post dark={props.dark} data={post} />
       })
   )
 

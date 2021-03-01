@@ -2,13 +2,21 @@ import React from 'react'
 import { Redirect, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-const PrivateRoute = ({ component: Component, user, ...rest }) => {
+const PrivateRoute = ({
+  component: Component,
+  user,
+  dark,
+  toggler,
+  ...rest
+}) => {
   return (
     <Route
+      dark={dark}
+      toggler={toggler}
       {...rest}
       render={props => {
         if (user._id) {
-          return <Component {...props} />
+          return <Component dark={dark} toggler={toggler} {...props} />
         } else {
           return (
             <Redirect

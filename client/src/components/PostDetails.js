@@ -30,7 +30,7 @@ import {
 
 import { TagsContainer } from '../styles/post'
 
-const PostDetails = ({ user, match }) => {
+const PostDetails = ({ user, match, dark }) => {
   const id = match.params.id
 
   const history = useHistory()
@@ -82,17 +82,13 @@ const PostDetails = ({ user, match }) => {
   if (Object.keys(postData).length > 0) {
     return (
       <>
-        <Container dark={user.darkMode}>
-          <Title dark={user.darkMode}>{postData.title}</Title>
-          <Author dark={user.darkMode}>
-            Posted by {postData.author.username}
-          </Author>
-          <Time dark={user.darkMode}>
+        <Container dark={dark}>
+          <Title dark={dark}>{postData.title}</Title>
+          <Author dark={dark}>Posted by {postData.author.username}</Author>
+          <Time dark={dark}>
             {timeago((postData.timestamp || 1610849840) * 1000)}
           </Time>
-          <TagsContainer>
-            {tagsHandler(postData.tags, user.darkMode)}
-          </TagsContainer>
+          <TagsContainer>{tagsHandler(postData.tags, dark)}</TagsContainer>
           {user._id === postData.authorId ? (
             <EditContainer>
               <PostLink to={`/posts/${postData['_id']}/edit`}>
@@ -107,11 +103,15 @@ const PostDetails = ({ user, match }) => {
           <PostBody>{postData.body}</PostBody>
           {imageHandler(postData.image, 'full')}
           <VoteContainer>
-            <Voting dark={user.darkMode} data={postData} />
+            <Voting dark={dark} data={postData} />
           </VoteContainer>
         </Container>
         <CommentSection>
-          <PostComment postData={postData} postId={postData['_id']} />
+          <PostComment
+            dark={dark}
+            postData={postData}
+            postId={postData['_id']}
+          />
         </CommentSection>
       </>
     )

@@ -3,11 +3,7 @@ import { Link } from 'react-router-dom'
 
 export const Container = styled.div`
   background: ${props => {
-    if (props.dark) {
-      document.body.style.backgroundColor = '#0e141b'
-      return '#151f28'
-    }
-    document.body.style.backgroundColor = 'ghostwhite'
+    if (props.dark) return '#151f28'
     return '#fff'
   }};
   width: 55%;

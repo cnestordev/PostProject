@@ -16,22 +16,22 @@ import {
   TagsContainer,
 } from '../styles/post'
 
-const Post = ({ data, user }) => {
+const Post = ({ data, user, dark }) => {
   return (
-    <Container dark={user.darkMode}>
-      <Title dark={user.darkMode}>{data.title}</Title>
+    <Container dark={dark}>
+      <Title dark={dark}>{data.title}</Title>
       <NavLink className="postLink" to={`/posts/${data['_id']}`}>
-        <Author dark={user.darkMode}>Posted by {data.author.username}</Author>
-        <Time dark={user.darkMode}>
+        <Author dark={dark}>Posted by {data.author.username}</Author>
+        <Time dark={dark}>
           {timeago(data.timestamp * 1000)}{' '}
           {data.editCount > 0 && <Flair>| Edited</Flair>}
         </Time>
-        <TagsContainer dark={user.darkMode}>
-          {tagsHandler(data.tags, user.darkMode)}
+        <TagsContainer dark={dark}>
+          {tagsHandler(data.tags, dark)}
         </TagsContainer>
         {imageHandler(data.image, 'thumbnail')}
       </NavLink>
-      <Voting dark={user.darkMode} data={data} />
+      <Voting dark={dark} data={data} />
     </Container>
   )
 }

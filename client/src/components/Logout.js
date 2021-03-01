@@ -15,6 +15,7 @@ const Logout = props => {
     try {
       await axiosCall.get('/logout')
       props.logOutUser()
+      props.toggler(false)
       history.push(prevPage)
     } catch (err) {
       console.log('error logging out user')

@@ -11,6 +11,7 @@ const {
   logoutUser,
   loginUser,
   deleteUser,
+  toggleTheme,
 } = require('../controllers/users')
 
 router.get('/', index)
@@ -26,6 +27,8 @@ router.post('/register', validateUser, register)
 router.post('/login', loginUser)
 
 router.get('/logout', logoutUser)
+
+router.post('/:userId/themeToggle/:theme', isLoggedIn, isUser, toggleTheme)
 
 router.delete('/:userId/delete', isLoggedIn, isUser, deleteUser)
 
