@@ -28,7 +28,7 @@ const App = ({ user }) => {
       const response = await axiosCall.post(`/${user._id}/themeToggle/${theme}`)
       const val = response.data.message.darkMode
       setTheme(val)
-      document.body.style.backgroundColor = val ? '#0e141b' : 'ghostwhite'
+      document.body.style.backgroundColor = val ? '#0e141b' : '#f2f2f2'
     } catch (err) {
       console.dir(err)
     }
@@ -36,9 +36,7 @@ const App = ({ user }) => {
 
   useEffect(() => {
     setTheme(user.darkMode)
-    document.body.style.backgroundColor = user.darkMode
-      ? '#0e141b'
-      : 'ghostwhite'
+    document.body.style.backgroundColor = user.darkMode ? '#0e141b' : '#f2f2f2'
   }, [user])
 
   return (

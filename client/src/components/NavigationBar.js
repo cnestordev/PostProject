@@ -21,12 +21,9 @@ const NavigationBar = ({ user, logInUser, dark }) => {
   const location = useLocation()
 
   useEffect(async () => {
-    console.log('%c navbar has mounted', 'color: green')
     try {
       const user = await axiosCall.get('/user')
-      console.log(user.data)
       logInUser(user.data)
-      console.log(user.data.darkMode)
     } catch (err) {
       console.log('ERROR getting user')
       console.log(err.message)

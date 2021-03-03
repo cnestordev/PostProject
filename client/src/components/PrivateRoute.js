@@ -16,8 +16,6 @@ const PrivateRoute = ({
       {...rest}
       render={props => {
         if (user._id || user.id) {
-          console.log('user found')
-          console.log(user)
           return <Component dark={dark} toggler={toggler} {...props} />
         } else {
           console.log('user NOT found')

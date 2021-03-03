@@ -35,7 +35,7 @@ const PostDetails = ({ user, match, dark }) => {
 
   const history = useHistory()
 
-  const [postData, setPostDate] = useState({})
+  const [postData, setPostData] = useState({})
 
   const [error, setError] = useState(false)
 
@@ -45,13 +45,13 @@ const PostDetails = ({ user, match, dark }) => {
       const response = await axiosCall.get(`/posts/${id}`)
       const { data } = response.data
       // console.log('successfully fetched post data')
-      setPostDate(data)
+      setPostData(data)
     } catch (err) {
       console.log('CATCH post details')
       if (err.response.data.status === 400) {
         return setError(true)
       }
-      setPostDate({
+      setPostData({
         message: err.response.data.message,
         status: err.response.status,
       })
@@ -89,7 +89,6 @@ const PostDetails = ({ user, match, dark }) => {
             {timeago((postData.timestamp || 1610849840) * 1000)}
           </Time>
           <TagsContainer>{tagsHandler(postData.tags, dark)}</TagsContainer>
-          {console.log(user)}
           {user._id === postData.authorId || user.isAdmin ? (
             <EditContainer>
               {user._id === postData.authorId && (

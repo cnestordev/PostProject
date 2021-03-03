@@ -4,7 +4,7 @@ export const navBgLight = '#0a5c8b'
 
 // document body
 
-export const docBodyLight = 'ghostwhite'
+export const docBodyLight = '#f2f2f2'
 export const docBodyDark = '#0e141b'
 
 // posts

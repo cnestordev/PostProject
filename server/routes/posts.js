@@ -18,11 +18,14 @@ const {
   likePost,
   dislikePost,
   deleteImage,
+  searchPost,
 } = require('../controllers/posts')
 
 const cloudinary = require('../cloudinary')
 
 router.get('/', index)
+
+router.get('/search/:query', searchPost)
 
 router.get('/:id', getPostById)
 

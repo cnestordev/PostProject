@@ -52,13 +52,12 @@ export const Flair = styled.p`
   font-size: 1rem;
   display: inline-block;
 `
-export const CloudImg = styled(Image)`
-  width: ${props => (props.scale === 'thumbnail' ? '50%' : '70%')};
-`
 
 export const PostImg = styled.img`
-  width: 70%;
+  width: ${props => (props.scale === 'full' ? '95%' : '75%')};
+  border-radius: 5px;
 `
+
 export const TagsContainer = styled.div`
   display: flex;
   flex-direction: row;

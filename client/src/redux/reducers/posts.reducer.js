@@ -11,6 +11,12 @@ const reducer = (state = initialState, action) => {
         posts: action.payload,
       }
 
+    case 'FILTER_POSTS':
+      console.log('filter reducer deployed')
+      return {
+        posts: action.payload,
+      }
+
     case 'REMOVE_POSTS':
       // console.log('emptying out all posts')
       return initialState

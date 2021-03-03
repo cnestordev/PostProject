@@ -19,3 +19,11 @@ export const removePosts = () => async dispatch => {
     type: 'REMOVE_POSTS',
   })
 }
+
+export const getFilteredPosts = data => async dispatch => {
+  console.log('filter action deployed')
+  dispatch({
+    type: 'FILTER_POSTS',
+    payload: data,
+  })
+}

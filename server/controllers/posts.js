@@ -84,7 +84,6 @@ const deletePostById = async (req, res) => {
     const imgageId = response.image.id
     try {
       const response = await cloudinary.uploader.destroy(imgageId)
-      console.log(response.result)
     } catch (err) {}
     res.status(201).json({ message: response })
   } catch (err) {
@@ -221,6 +220,23 @@ const deleteImage = async (req, res, next) => {
   }
 }
 
+const searchPost = async (req, res, next) => {
+  const { query } = req.params
+  const searchKey = new RegExp(query, 'i')
+  try {
+    Post.find({ title: searchKey }, function (err, doc) {
+      if (err) return next({ message: err.message, status: 500 })
+      if (!doc) return next({ message: err.message, status: 404 })
+      if (doc) return res.status(201).json({ message: doc, status: 201 })
+    }).populate({
+      path: 'author',
+      select: 'username -_id',
+    })
+  } catch (err) {
+    return next({ message: 'Something went wrong!', status: 500 })
+  }
+}
+
 module.exports = {
   index,
   getPostById,
@@ -231,4 +247,5 @@ module.exports = {
   likePost,
   dislikePost,
   deleteImage,
+  searchPost,
 }
