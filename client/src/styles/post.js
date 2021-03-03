@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { Image } from 'cloudinary-react'
+
+import { tablet, phone } from './index'
 
 export const Container = styled.div`
   border: 1px solid ${props => (props.theme ? 'transparent' : '#e3e3e3')};
@@ -11,7 +12,6 @@ export const Container = styled.div`
     }
     return '#fff'
   }};
-  margin: 1% 0;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -20,6 +20,49 @@ export const Container = styled.div`
   width: 40%;
   margin: 1% auto;
   padding: 1% 0;
+
+  @media (max-width: 1105px) {
+    width: 45%;
+    margin: 2.5% auto;
+  }
+
+  @media (max-width: 992px) {
+    width: 50%;
+    margin: 2.5% auto;
+  }
+
+  @media (max-width: 945px) {
+    width: 55%;
+    margin: 2.5% auto;
+  }
+
+  @media (max-width: 862px) {
+    width: 60%;
+  }
+
+  @media (max-width: 780px) {
+    width: 65%;
+  }
+
+  @media (max-width: 730px) {
+    width: 68%;
+  }
+
+  @media (max-width: 711px) {
+    width: 70%;
+  }
+
+  @media (max-width: 670px) {
+    width: 75%;
+  }
+
+  @media (max-width: 630px) {
+    width: 80%;
+  }
+
+  @media (max-width: 588px) {
+    width: 90%;
+  }
 `
 
 export const NavLink = styled(Link)`
@@ -33,29 +76,66 @@ export const Title = styled.h3`
   color: ${props => (props.dark ? '#a5a9ac' : '#313131')};
   font-size: 3.2rem;
   text-decoration: none;
+  padding: 1%;
+
+  @media (max-width: 992px) {
+    font-size: 3.4rem;
+  }
+
+  @media (max-width: 945px) {
+    font-size: 2.9rem;
+  }
 `
 
 export const Author = styled.h4`
   color: ${props => (props.dark ? '#717374' : '#313131')};
   font-size: 1.3rem;
   margin-top: 1.5%;
+
+  @media (max-width: 992px) {
+    font-size: 1.5rem;
+  }
+
+  @media (max-width: 945px) {
+    font-size: 1.3rem;
+  }
 `
 
 export const Time = styled.h5`
   color: ${props => (props.dark ? '#6c6c6c' : '#313131')};
   font-size: 1rem;
   margin-top: 1%;
+
+  @media (max-width: 992px) {
+    font-size: 1.2rem;
+  }
+
+  @media (max-width: 945px) {
+    font-size: 1.2rem;
+  }
 `
 
 export const Flair = styled.p`
   color: #6c6c6c;
   font-size: 1rem;
   display: inline-block;
+
+  @media (max-width: 992px) {
+    font-size: 1.2rem;
+  }
 `
 
 export const PostImg = styled.img`
   width: ${props => (props.scale === 'full' ? '95%' : '75%')};
   border-radius: 5px;
+
+  @media (max-width: 992px) {
+    width: ${props => (props.scale === 'full' ? '95%' : '80%')};
+  }
+
+  @media (max-width: 945px) {
+    width: ${props => (props.scale === 'full' ? '95%' : '85%')};
+  }
 `
 
 export const TagsContainer = styled.div`
@@ -65,6 +145,10 @@ export const TagsContainer = styled.div`
   color: #fff;
   width: 22%;
   margin: 2% auto;
+
+  @media (max-width: 992px) {
+    width: 40%;
+  }
 `
 
 export const Hash = styled.p`
@@ -74,4 +158,9 @@ export const Hash = styled.p`
   padding: 4% 8%;
   font-size: 1.3rem;
   margin: 0 1%;
+
+  @media (max-width: 992px) {
+    font-size: 1.4rem;
+    padding: 3% 6%;
+  }
 `

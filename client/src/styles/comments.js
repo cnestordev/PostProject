@@ -2,6 +2,10 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   background: ${props => (props.dark ? '#151f28' : '#fff')};
+
+  @media (max-width: 767px) {
+    width: 100%;
+  }
 `
 
 export const Header = styled.p`

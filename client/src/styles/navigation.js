@@ -7,6 +7,10 @@ export const Nav = styled.nav`
   align-items: center;
   background: ${props => (props.dark ? '#003157' : '#0a5c8b')};
   height: 6vh;
+
+  @media (max-width: 767px) {
+    justify-content: flex-end;
+  }
 `
 
 export const Ul = styled.ul`
@@ -14,6 +18,14 @@ export const Ul = styled.ul`
   justify-content: space-around;
   width: 50%;
   font-size: 3rem;
+
+  @media (max-width: 992px) {
+    width: 70%;
+  }
+
+  @media (max-width: 767px) {
+    display: none;
+  }
 `
 
 export const NavLink = styled(Link)`
@@ -21,6 +33,10 @@ export const NavLink = styled(Link)`
   text-decoration: none;
   font-size: 1.5rem;
   font-weight: 700;
+
+  @media (max-width: 992px) {
+    font-size: 1.8rem;
+  }
 `
 
 export const Icon = styled.i`
@@ -61,6 +77,10 @@ export const NavDropUl = styled.ul`
   text-align: center;
   width: 10vw;
   padding: 5%;
+
+  @media (max-width: 992px) {
+    width: 16vh;
+  }
 `
 
 export const NavDropLi = styled.li`
@@ -81,5 +101,19 @@ export const AccLink = styled(Link)`
     background: #fff;
     color: #0a5c8b;
     transition: 300ms;
+  }
+
+  @media (max-width: 992px) {
+    font-size: 1.55rem;
+  }
+`
+export const Hamburger = styled.div`
+  display: none;
+  margin-right: 5%;
+  font-size: 4rem;
+  color: ${props => (props.dark ? '#a0a0a0' : '#fff')};
+
+  @media (max-width: 768px) {
+    display: block;
   }
 `

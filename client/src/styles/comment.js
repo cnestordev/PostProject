@@ -9,12 +9,21 @@ export const Box = styled.div`
   width: 98%;
   margin: 2% auto;
   padding: 1.5%;
+
+  @media (max-width: 767px) {
+    width: 98%;
+    margin-top: 3%;
+  }
 `
 
 export const Author = styled.h3`
   color: ${props => (props.dark ? '#717374' : '#313131')};
   font-size: 1.2rem;
   display: inline-block;
+
+  @media (max-width: 992px) {
+    font-size: 1.4rem;
+  }
 `
 
 export const Timestamp = styled.p`
@@ -28,6 +37,10 @@ export const Timestamp = styled.p`
     content: '|';
     margin-right: 0.7rem;
   }
+
+  @media (max-width: 992px) {
+    font-size: 1.3rem;
+  }
 `
 
 export const Body = styled.p`
@@ -35,6 +48,11 @@ export const Body = styled.p`
   line-height: 1.5;
   font-size: 1.6rem;
   margin-top: 1.5%;
+
+  @media (max-width: 992px) {
+    font-size: 1.6rem;
+    line-height: 1.65;
+  }
 `
 
 export const CommentSocialContainer = styled.div`
@@ -42,6 +60,10 @@ export const CommentSocialContainer = styled.div`
   justify-content: space-evenly;
   margin: 1.5% auto;
   width: 70%;
+
+  @media (max-width: 992px) {
+    margin: 2% auto 1% auto;
+  }
 `
 
 export const Rating = styled.p`
@@ -61,6 +83,10 @@ export const Rating = styled.p`
 
 export const Icon = styled.i`
   font-size: 1.8rem;
+
+  @media (max-width: 992px) {
+    font-size: 2rem;
+  }
 `
 
 export const DeleteCommentContainer = styled.div`
@@ -73,4 +99,8 @@ export const DeleteLink = styled.p`
   color: rgb(255, 97, 97);
   font-size: 1.2rem;
   cursor: pointer;
+
+  @media (max-width: 992px) {
+    font-size: 1.35rem;
+  }
 `

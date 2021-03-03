@@ -7,26 +7,61 @@ export const Container = styled.div`
     return '#fff'
   }};
   width: 55%;
-  margin: 0 auto;
+  box-sizing: border-box;
+  margin: 2% auto;
   text-align: center;
   padding: 2% 1%;
+
+  @media (max-width: 992px) {
+    width: 68%;
+    padding: 3%;
+  }
+
+  @media (max-width: 767px) {
+    width: 90%;
+  }
 `
 
 export const Title = styled.h2`
   font-size: 3rem;
   color: ${props => (props.dark ? '#a5a9ac' : '#313131')};
+
+  @media (max-width: 992px) {
+    font-size: 3.6rem;
+  }
+
+  @media (max-width: 767px) {
+    font-size: 2.8rem;
+  }
 `
 
 export const Author = styled.h3`
   color: ${props => (props.dark ? '#717374' : '#313131')};
   font-size: 1.4rem;
   margin-top: 1.3%;
+
+  @media (max-width: 992px) {
+    font-size: 1.5rem;
+    margin-top: 1.5%;
+  }
+
+  @media (max-width: 767px) {
+    font-size: 1.3rem;
+  }
 `
 
 export const Time = styled.h4`
   font-size: 1rem;
   color: ${props => (props.dark ? '#6c6c6c' : '#313131')};
   margin-top: 0.5%;
+
+  @media (max-width: 992px) {
+    font-size: 1.3rem;
+  }
+
+  @media (max-width: 767px) {
+    font-size: 1.2rem;
+  }
 `
 
 export const EditContainer = styled.div`
@@ -39,12 +74,19 @@ export const EditContainer = styled.div`
 export const PostLink = styled(Link)`
   text-decoration: none;
   color: rgb(255, 145, 0);
-  font-size: 1.4rem;
   cursor: pointer;
 `
 
 export const EditPara = styled.p`
   font-size: 1.4rem;
+
+  @media (max-width: 992px) {
+    font-size: 1.5rem;
+  }
+
+  @media (max-width: 767px) {
+    padding: 50%;
+  }
 `
 
 export const DelPara = styled.p`
@@ -52,13 +94,27 @@ export const DelPara = styled.p`
   font-size: 1.4rem;
   margin-left: 12%;
   cursor: pointer;
+
+  @media (max-width: 992px) {
+    font-size: 1.5rem;
+  }
+
+  @media (max-width: 767px) {
+    padding: 50%;
+  }
 `
 
 export const PostBody = styled.p`
+  color: ${props => (props.dark ? '#a5a9ac' : '#313131')};
   font-size: 1.7rem;
   line-height: 1.4;
   text-align: left;
   margin: 2.5% 0;
+
+  @media (max-width: 992px) {
+    font-size: 1.9rem;
+    line-height: 1.65;
+  }
 `
 
 export const VoteContainer = styled.div`
@@ -70,11 +126,19 @@ export const CommentSection = styled.div`
   border-top: 1px solid black;
   width: 57%;
   margin: 1% auto;
+
+  @media (max-width: 992px) {
+    width: 68%;
+  }
+
+  @media (max-width: 767px) {
+    width: 90%;
+  }
 `
 
 export const Hr = styled.hr`
   border: none;
-  border-top: 1px solid #050505;
+  border-top: 1px solid ${props => (props.dark ? '#a5a9ac' : '#313131')};
   width: 90%;
   margin: 3% auto;
 `

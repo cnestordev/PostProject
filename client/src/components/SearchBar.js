@@ -36,9 +36,15 @@ const SearchBar = ({
 
   return (
     <Container dark={dark}>
-      <form onSubmit={handleSearch}>
-        <Input value={query} onChange={handleChange} type="text" />
-      </form>
+      <Input
+        // onSubmit={handleSearch}
+        onKeyDown={e => e.key === 'Enter' && handleSearch(e)}
+        value={query}
+        onChange={handleChange}
+        type="text"
+        dark={dark}
+        placeholder="Search for posts"
+      />
       <Button
         active={filter === 'timestamp'}
         onClick={() => handleClick('timestamp')}

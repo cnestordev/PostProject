@@ -42,6 +42,12 @@ export const Button = styled.button`
 
   &:disabled {
     border: 1px solid ${props => (props.dark ? 'transparent' : '#d9d9d9')};
-    background: ${props => (props.dark ? '#545d68' : '#262626')};
+    background: ${props => (props.dark ? '#17212c' : '#262626')};
+  }
+
+  @media (max-width: 767px) {
+    width: 60%;
+    padding: 3%;
+    margin-bottom: 3%;
   }
 `

@@ -6,6 +6,10 @@ export const Container = styled.div`
   border-radius: 2px;
   text-align: center;
   padding: 1%;
+
+  @media (max-width: 767px) {
+    padding: 4% 0;
+  }
 `
 
 export const Header = styled.h3`
@@ -34,5 +38,16 @@ export const PromptLink = styled(Link)`
     background: #000;
     color: #fff;
     transition: 300ms;
+  }
+
+  @media (max-width: 767px) {
+    font-size: 2rem;
+    padding: 5% 20%;
+    margin-right: 25%;
+    margin-top: 20%;
+
+    &:last-of-type {
+      margin-right: 0;
+    }
   }
 `

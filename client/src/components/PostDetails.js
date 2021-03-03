@@ -101,8 +101,8 @@ const PostDetails = ({ user, match, dark }) => {
               </DelPara>
             </EditContainer>
           ) : null}
-          <Hr />
-          <PostBody>{postData.body}</PostBody>
+          <Hr dark={dark} />
+          <PostBody dark={dark}>{postData.body}</PostBody>
           {imageHandler(postData.image, 'full')}
           <VoteContainer>
             <Voting dark={dark} data={postData} />

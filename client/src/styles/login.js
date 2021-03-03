@@ -8,11 +8,29 @@ export const Container = styled.div`
   margin: 0 auto;
   text-align: center;
   margin-top: 5%;
+
+  @media (max-width: 992px) {
+    width: 65%;
+  }
+
+  @media (max-width: 767px) {
+    width: 100%;
+    border: none;
+    padding: 2% 0;
+  }
 `
 
 export const Header = styled.h1`
   font-size: 3rem;
   margin: 3% 0;
+
+  @media (max-width: 992px) {
+    font-size: 3.5rem;
+  }
+
+  @media (max-width: 767px) {
+    font-size: 2.8rem;
+  }
 `
 
 export const Form = styled.form`
@@ -26,6 +44,16 @@ export const Input = styled.input`
   margin: 1% auto;
   font-size: 2rem;
   padding: 1%;
+
+  @media (max-width: 992px) {
+    width: 60%;
+  }
+
+  @media (max-width: 767px) {
+    width: 90%;
+    margin-bottom: 3%;
+    padding: 3% 2%;
+  }
 `
 
 export const Button = styled.button`
@@ -51,6 +79,16 @@ export const Button = styled.button`
       color: #c2c2c2;
       background: inherit;
     }
+  }
+
+  @media (max-width: 992px) {
+    width: 30%;
+  }
+
+  @media (max-width: 767px) {
+    width: 55%;
+    padding: 2.2% 0;
+    margin-top: ${props => (props.registerBtn ? '5%' : '3%')};
   }
 `
 

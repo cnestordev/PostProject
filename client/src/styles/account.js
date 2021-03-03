@@ -4,11 +4,16 @@ export const Container = styled.div`
   background: ${props => (props.dark ? '#151f28' : '#fff')};
   text-align: center;
   height: 50vh;
+  padding-top: 3%;
 `
 
 export const Header = styled.h2`
   font-size: 3rem;
   color: ${props => (props.dark ? '#cbcbcb' : '#000')};
+
+  @media (max-width: 992px) {
+    font-size: 3.5rem;
+  }
 `
 
 export const ThemeContainer = styled.div`
@@ -18,6 +23,10 @@ export const ThemeContainer = styled.div`
   align-items: center;
   width: 7%;
   margin: 1% auto;
+
+  @media (max-width: 992px) {
+    width: 12%;
+  }
 `
 
 export const AdminFlair = styled.p`
@@ -29,7 +38,7 @@ export const AdminFlair = styled.p`
   font-weight: bold;
   font-size: 1.3rem;
   padding: 0.5% 1%;
-  margin-top: 0.5%;
+  margin: 1% 0;
 `
 
 export const IconBox = styled.div`
@@ -70,5 +79,10 @@ export const Button = styled.button`
     background: #ca2929;
     transition: 300ms;
     cursor: pointer;
+  }
+
+  @media (max-width: 992px) {
+    font-size: 1.5rem;
+    margin-top: 3%;
   }
 `

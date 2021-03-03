@@ -19,9 +19,12 @@ import Register from './Register'
 import Login from './Login'
 import Logout from './Logout'
 import Account from './Account'
+import Menu from './Menu'
 
 const App = ({ user }) => {
   const [theme, setTheme] = useState(user.darkMode)
+
+  const [display, setDisplay] = useState(false)
 
   const handleThemeToggle = async theme => {
     try {
@@ -34,6 +37,10 @@ const App = ({ user }) => {
     }
   }
 
+  const toggleMenu = value => {
+    setDisplay(value)
+  }
+
   useEffect(() => {
     setTheme(user.darkMode)
     document.body.style.backgroundColor = user.darkMode ? '#0e141b' : '#f2f2f2'
@@ -41,7 +48,8 @@ const App = ({ user }) => {
 
   return (
     <Router>
-      <NavigationBar dark={theme} />
+      {display && <Menu toggler={toggleMenu} user={user} dark={theme} />}
+      <NavigationBar toggler={toggleMenu} dark={theme} />
       <Switch>
         <Route
           exact

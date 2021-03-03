@@ -15,9 +15,10 @@ import {
   NavDropUl,
   NavDropLi,
   AccLink,
+  Hamburger,
 } from '../styles/navigation'
 
-const NavigationBar = ({ user, logInUser, dark }) => {
+const NavigationBar = ({ user, logInUser, dark, toggler }) => {
   const location = useLocation()
 
   useEffect(async () => {
@@ -94,6 +95,9 @@ const NavigationBar = ({ user, logInUser, dark }) => {
             )}
           </li>
         </Ul>
+        <Hamburger onClick={() => toggler(true)} dark={dark}>
+          <i className="fas fa-bars"></i>
+        </Hamburger>
       </Nav>
     </header>
   )

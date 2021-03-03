@@ -14,11 +14,30 @@ export const Container = styled.div`
     box-shadow: 0 0 4px 2px ${props => (props.dark ? '#383838' : '#d1d1d1')};
     transition: 300ms;
   }
+
+  @media (max-width: 992px) {
+    width: 35%;
+    margin-top: 4%;
+  }
+
+  @media (max-width: 767px) {
+    width: 60%;
+    flex-flow: wrap;
+    margin: 5% auto;
+  }
 `
 
 export const Icon = styled.i`
   font-size: inherit;
   margin-right: 3px;
+
+  @media (max-width: 992px) {
+    font-size: 1.8rem;
+  }
+
+  @media (max-width: 767px) {
+    font-size: 2rem;
+  }
 `
 
 export const Paragraph = styled.p`
@@ -38,6 +57,10 @@ export const Paragraph = styled.p`
       return '#44ff4c'
     }
   }};
+
+  @media (max-width: 767px) {
+    font-size: 2rem;
+  }
 `
 
 //   .selected {

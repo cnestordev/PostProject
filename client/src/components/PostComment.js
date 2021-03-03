@@ -94,7 +94,7 @@ const PostComment = props => {
   return (
     <>
       <Container>
-        {Object.keys(props.user).length > 0 ? (
+        {Object.keys(props.user).length > 1 ? (
           <Form
             autoComplete="off"
             className="postCommentForm"

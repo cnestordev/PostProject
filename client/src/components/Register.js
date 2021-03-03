@@ -125,7 +125,9 @@ const Register = props => {
         <p style={{ fontSize: '1.2rem' }}>
           By entering your email, you agree to receive a confirmation email.
         </p>
-        <Button disabled={disabled}>Register</Button>
+        <Button registerBtn={true} disabled={disabled}>
+          Register
+        </Button>
       </Form>
       <ErrorContainer>
         {errors.username.length > 0 && (
