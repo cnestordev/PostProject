@@ -103,7 +103,7 @@ const PostDetails = ({ user, match, dark }) => {
           ) : null}
           <Hr dark={dark} />
           <PostBody dark={dark}>{postData.body}</PostBody>
-          {imageHandler(postData.image, 'full')}
+          {imageHandler(postData.image, 'full', null)}
           <VoteContainer>
             <Voting dark={dark} data={postData} />
           </VoteContainer>

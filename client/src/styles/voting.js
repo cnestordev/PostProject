@@ -9,6 +9,8 @@ export const Container = styled.div`
   justify-content: space-between;
   margin-top: 1.5%;
   transition: 300ms;
+  position: relative;
+  z-index: 3;
 
   &:hover {
     box-shadow: 0 0 4px 2px ${props => (props.dark ? '#383838' : '#d1d1d1')};
@@ -21,9 +23,9 @@ export const Container = styled.div`
   }
 
   @media (max-width: 767px) {
-    width: 60%;
+    width: 45%;
     flex-flow: wrap;
-    margin: 5% auto;
+    margin: 3% auto 3% auto;
   }
 `
 

@@ -6,7 +6,7 @@ export const Container = styled.div`
     if (props.dark) return '#151f28'
     return '#fff'
   }};
-  width: 55%;
+  width: 57%;
   box-sizing: border-box;
   margin: 2% auto;
   text-align: center;

@@ -29,9 +29,18 @@ const Post = ({ data, user, dark }) => {
         <TagsContainer dark={dark}>
           {tagsHandler(data.tags, dark)}
         </TagsContainer>
-        {imageHandler(data.image, 'thumbnail')}
+        {imageHandler(data.image, 'thumbnail', data.body, dark)}
       </NavLink>
-      <Voting dark={dark} data={data} />
+      <div
+        style={{
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+          backdropFilter: 'blur(0px)',
+        }}
+      >
+        <Voting dark={dark} data={data} />
+      </div>
     </Container>
   )
 }

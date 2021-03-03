@@ -4,7 +4,11 @@ import { Image, Transformation, CloudinaryContext } from 'cloudinary-react'
 import { Container, Text } from '../styles/noImage'
 import { PostImg } from '../styles/post'
 
-const imageHandler = (img, scale) => {
+const imageHandler = (img, scale, text, dark) => {
+  function truncate(str, n) {
+    return str.length > n ? str.substr(0, n - 1) : str
+  }
+
   let image
   if (Object.keys(img).length) {
     image =
@@ -26,10 +30,10 @@ const imageHandler = (img, scale) => {
     if (ext === 'jpg' || ext === 'png' || ext === 'ebp') {
       return <PostImg scale={scale} src={image} />
     }
-  } else {
+  } else if (text) {
     return (
       <Container>
-        <Text>No Image</Text>
+        <Text dark={dark}>{truncate(text, 90)}</Text>
       </Container>
     )
   }
