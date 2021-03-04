@@ -65,7 +65,8 @@ export const NavButton = styled.button`
   border: none;
   box-sizing: border-box;
   background: transparent;
-  font-size: 1.5rem;
+  font-size: 1.7rem;
+  font-family: inherit;
   color: white;
   outline: none;
 `

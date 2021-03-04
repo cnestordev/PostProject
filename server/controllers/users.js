@@ -2,6 +2,7 @@ const User = require('../models/user')
 const passport = require('passport')
 const sgMail = require('@sendgrid/mail')
 sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+const words = require('naughty-words')
 
 const index = (req, res) => {
   // console.log('hit root route')
@@ -32,8 +33,16 @@ const isLoggedOn = (req, res) => {
   }
 }
 
-const register = async (req, res) => {
+const register = async (req, res, next) => {
   const { username, password, email } = req.body
+
+  for (const property in words) {
+    if (words[property].includes(username)) {
+      console.log('FOUND')
+      return next({ message: 'That username is not allowed', status: 500 })
+    }
+  }
+
   try {
     const user = new User({ username, email })
     const newUser = await User.register(user, password)

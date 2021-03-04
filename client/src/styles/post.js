@@ -41,12 +41,12 @@ export const Container = styled.div`
     width: 70%;
   }
 
-  @media (max-width: 500px) {
-    width: 80%;
+  @media (max-width: 600px) {
+    width: 85%;
   }
 
   @media (max-width: 457px) {
-    width: 85%;
+    width: 90%;
   }
 `
 

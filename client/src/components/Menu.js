@@ -13,12 +13,10 @@ import {
 const Menu = ({ dark, user, toggler, display }) => {
   const position = window.scrollY
 
-  useEffect(async () => {
-    console.log('mounted')
+  useEffect(() => {
     document.body.style.overflow = 'hidden'
     window.scrollTo(0, 0)
     return () => {
-      console.log('unmounted')
       window.scrollTo(0, position)
       document.body.style.overflow = 'scroll'
     }

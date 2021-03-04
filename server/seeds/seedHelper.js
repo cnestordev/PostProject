@@ -1,39 +1,58 @@
 const axios = require('axios')
-const { response } = require('express')
+const User = require('../models/user')
+const Post = require('../models/post')
+
+const users = [
+  'red',
+  'blue',
+  'yellow',
+  'gold',
+  'silver',
+  'green',
+  'orange',
+  'purple',
+  'pink',
+  'cyan',
+]
 
 const getReddit = async () => {
-  let seedPosts = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+  usersSeed = []
+  postsSeed = []
+  // create seed users
 
-  const response = await axios.get('http://www.reddit.com/r/funny.json')
   for (let i = 0; i < 10; i++) {
-    const {
+    const user = new User({ username: users[i], email: '' })
+    const password = users[i]
+    const newUser = await User.register(user, password)
+    usersSeed.push(newUser)
+  }
+
+  // create seed posts
+  const response = await axios.get('http://www.reddit.com/r/dankmemes.json')
+
+  for (let i = 1; i < 11; i++) {
+    const { title, url, selftext } = response.data.data.children[i].data
+    const newPost = await new Post({
       title,
-      author,
-      authorId = 'Anon',
-      created,
-      url,
-      ups,
-      downs,
-      num_comments,
-      selftext,
-    } = response.data.data.children[i].data
-    const newPost = {
-      title,
-      author,
-      authorId,
-      timestamp: created,
+      author: usersSeed[Math.floor(Math.random() * 10)]['_id'],
+      authorId: usersSeed[Math.floor(Math.random() * 10)]['_id'],
+      timestamp: Math.round(new Date().getTime() / 1000),
       body: selftext,
       image: {
         url: url,
         id: '',
       },
-      likes: ups,
-      dislikes: downs,
-      comments: num_comments,
-    }
-    seedPosts[i] = newPost
+      likes: [],
+      dislikes: [],
+      comments: [],
+    })
+    postsSeed.push(newPost)
   }
-  return seedPosts
+
+  return {
+    users: usersSeed,
+    posts: postsSeed,
+  }
 }
 
 module.exports = getReddit
