@@ -10,19 +10,23 @@ import {
   Btn,
 } from '../styles/errorPage'
 
+import { Section } from '../styles'
+
 const ErrorPage = ({ status, message }) => {
   return (
-    <Container>
-      <IconHeader>
-        <i className="fas fa-exclamation-circle"></i>
-      </IconHeader>
-      <SubHeader>Something Went Wrong!</SubHeader>
-      <Status>Error {status}</Status>
-      <Message>{message}</Message>
-      <Link to="/posts">
-        <Btn>Go Back</Btn>
-      </Link>
-    </Container>
+    <Section>
+      <Container>
+        <IconHeader>
+          <i className="fas fa-exclamation-circle"></i>
+        </IconHeader>
+        <SubHeader>Something Went Wrong!</SubHeader>
+        <Status>Error {status}</Status>
+        <Message>{message}</Message>
+        <Link to="/posts">
+          <Btn>Go Back</Btn>
+        </Link>
+      </Container>
+    </Section>
   )
 }
 

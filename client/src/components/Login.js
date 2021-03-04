@@ -20,6 +20,8 @@ import {
   ValidationError,
 } from '../styles/login'
 
+import { Section } from '../styles'
+
 const Login = props => {
   const prevPage = props.location.state
     ? props.location.state.from.pathname
@@ -93,42 +95,46 @@ const Login = props => {
   }
 
   return (
-    <Container>
-      <Header>Login User:</Header>
-      {serverError.length > 0 && (
-        <ServerError className="serverErrorMessage">{serverError}</ServerError>
-      )}
-      <Form autoComplete="off" onSubmit={handleSubmit}>
-        <Input
-          type="text"
-          name="username"
-          placeholder="username"
-          onChange={handleChange}
-        />
-        <Input
-          type="password"
-          name="password"
-          placeholder="password"
-          onChange={handleChange}
-        />
-        <Button disabled={disabled}>Login</Button>
-      </Form>
-      <ErrorContainer className="validationErrorsContainer">
-        {errors.username.length > 0 && (
-          <ValidationError>{errors.username}</ValidationError>
+    <Section>
+      <Container>
+        <Header>Login User:</Header>
+        {serverError.length > 0 && (
+          <ServerError className="serverErrorMessage">
+            {serverError}
+          </ServerError>
         )}
-        {errors.password.length > 0 && (
-          <ValidationError>{errors.password}</ValidationError>
-        )}
-      </ErrorContainer>
-      <div>
-        <RedirectContainer>
-          <RedirectLink className="accountRedirect" to="/register">
-            Don't have an account? Register here
-          </RedirectLink>
-        </RedirectContainer>
-      </div>
-    </Container>
+        <Form autoComplete="off" onSubmit={handleSubmit}>
+          <Input
+            type="text"
+            name="username"
+            placeholder="username"
+            onChange={handleChange}
+          />
+          <Input
+            type="password"
+            name="password"
+            placeholder="password"
+            onChange={handleChange}
+          />
+          <Button disabled={disabled}>Login</Button>
+        </Form>
+        <ErrorContainer className="validationErrorsContainer">
+          {errors.username.length > 0 && (
+            <ValidationError>{errors.username}</ValidationError>
+          )}
+          {errors.password.length > 0 && (
+            <ValidationError>{errors.password}</ValidationError>
+          )}
+        </ErrorContainer>
+        <div>
+          <RedirectContainer>
+            <RedirectLink className="accountRedirect" to="/register">
+              Don't have an account? Register here
+            </RedirectLink>
+          </RedirectContainer>
+        </div>
+      </Container>
+    </Section>
   )
 }
 

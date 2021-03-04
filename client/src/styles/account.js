@@ -17,15 +17,70 @@ export const Header = styled.h2`
 `
 
 export const ThemeContainer = styled.div`
-  box-sizing: border-box;
+  border: 2px solid ${props => (props.dark ? '#fff' : '#000')};
+  border-radius: 5px;
+  padding: 0.5% 0;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
-  width: 7%;
-  margin: 1% auto;
+  width: 10%;
+  margin: 3% auto;
+
+  @media (max-width: 1430px) {
+    width: 12%;
+  }
+
+  @media (max-width: 997px) {
+    width: 13%;
+  }
 
   @media (max-width: 992px) {
-    width: 12%;
+    width: 14%;
+  }
+
+  @media (max-width: 880px) {
+    width: 15%;
+  }
+
+  @media (max-width: 810px) {
+    width: 15%;
+  }
+
+  @media (max-width: 767px) {
+    width: 18%;
+  }
+
+  @media (max-width: 685px) {
+    width: 21%;
+  }
+
+  @media (max-width: 545px) {
+    width: 23%;
+  }
+
+  @media (max-width: 530px) {
+    width: 25%;
+  }
+
+  @media (max-width: 476px) {
+    width: 28%;
+    margin: 15% auto;
+  }
+
+  @media (max-width: 424px) {
+    width: 31%;
+  }
+
+  @media (max-width: 388px) {
+    width: 34%;
+  }
+
+  @media (max-width: 360px) {
+    width: 40%;
+  }
+
+  @media (max-width: 296px) {
+    width: 45%;
   }
 `
 
@@ -44,8 +99,9 @@ export const AdminFlair = styled.p`
 export const IconBox = styled.div`
   border: 1px solid #a3a3a3;
   border-radius: 3px;
-  padding: 7%;
   margin-right: 6%;
+  margin: 1% 0;
+  width: 45%;
 
   &:hover {
     cursor: pointer;
@@ -62,7 +118,7 @@ export const IconBox = styled.div`
 `
 
 export const Icon = styled.i`
-  font-size: 3rem;
+  font-size: 6rem;
 `
 
 export const Button = styled.button`

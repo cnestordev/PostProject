@@ -11,50 +11,36 @@ export const Container = styled.div`
   width: 40%;
   margin: 2% auto;
 
-  @media (max-width: 1105px) {
-    width: 45%;
-    margin: 2.5% auto;
+  @media (max-width: 1300px) {
+    width: 47%;
   }
 
-  @media (max-width: 992px) {
-    width: 50%;
+  @media (max-width: 1185px) {
+    width: 49%;
   }
 
-  @media (max-width: 945px) {
+  @media (max-width: 1000px) {
     width: 55%;
   }
 
-  @media (max-width: 862px) {
-    width: 60%;
-  }
-
-  @media (max-width: 780px) {
+  @media (max-width: 945px) {
     width: 65%;
   }
 
   @media (max-width: 767px) {
-    width: 67%;
     flex-flow: wrap;
   }
 
-  @media (max-width: 730px) {
-    width: 68%;
-  }
-
-  @media (max-width: 711px) {
+  @media (max-width: 805px) {
     width: 70%;
   }
 
-  @media (max-width: 670px) {
-    width: 75%;
-  }
-
-  @media (max-width: 630px) {
+  @media (max-width: 500px) {
     width: 80%;
   }
 
-  @media (max-width: 588px) {
-    width: 90%;
+  @media (max-width: 457px) {
+    width: 85%;
   }
 `
 
@@ -103,9 +89,13 @@ export const Input = styled.input`
 
   @media (max-width: 767px) {
     width: 100%;
-    margin: 5% 1% 10%;
+    margin: 3% 1%;
     font-size: 2rem;
     padding: 3%;
+  }
+
+  @media (max-width: 545px) {
+    margin: 5% 1%;
   }
 `
 

@@ -4,6 +4,8 @@ import { getPosts, removePosts } from '../redux/actions/posts.actions'
 import Post from './Post'
 import SearchBar from './SearchBar'
 
+import { Section } from '../styles/index'
+
 const Posts = props => {
   const [filter, setFilter] = useState('timestamp')
 
@@ -26,10 +28,10 @@ const Posts = props => {
   )
 
   return (
-    <div>
+    <Section>
       <SearchBar dark={props.dark} filter={filter} toggler={setFilter} />
       {postArr}
-    </div>
+    </Section>
   )
 }
 

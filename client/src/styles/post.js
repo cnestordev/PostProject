@@ -21,47 +21,32 @@ export const Container = styled.div`
   margin: 1% auto;
   padding: 1% 0;
 
-  @media (max-width: 1105px) {
-    width: 45%;
-    margin: 2.5% auto;
+  @media (max-width: 1300px) {
+    width: 47%;
   }
 
-  @media (max-width: 992px) {
-    width: 50%;
-    margin: 2.5% auto;
+  @media (max-width: 1185px) {
+    width: 49%;
+  }
+
+  @media (max-width: 1000px) {
+    width: 55%;
   }
 
   @media (max-width: 945px) {
-    width: 55%;
-    margin: 2.5% auto;
-  }
-
-  @media (max-width: 862px) {
-    width: 60%;
-  }
-
-  @media (max-width: 780px) {
     width: 65%;
   }
 
-  @media (max-width: 730px) {
-    width: 68%;
-  }
-
-  @media (max-width: 711px) {
+  @media (max-width: 805px) {
     width: 70%;
   }
 
-  @media (max-width: 670px) {
-    width: 75%;
-  }
-
-  @media (max-width: 630px) {
+  @media (max-width: 500px) {
     width: 80%;
   }
 
-  @media (max-width: 588px) {
-    width: 90%;
+  @media (max-width: 457px) {
+    width: 85%;
   }
 `
 

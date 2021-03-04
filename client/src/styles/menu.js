@@ -5,11 +5,14 @@ export const Container = styled.div`
   background: ${props => (props.dark ? '#0e141b' : '#fff')};
   height: 100vh;
   width: 100%;
+  position: relative;
+  z-index: 6;
 `
 
 export const MenuBox = styled.div`
   width: 90%;
   margin: 0 auto;
+  position: relative;
 `
 
 export const List = styled.ul`
@@ -32,10 +35,12 @@ export const Icon = styled.i`
 `
 
 export const IconClose = styled.i`
-  font-size: ${props => (props.type === 'close' ? '4.5rem' : '3rem')};
-  color: #ff5d5d;
+  font-size: ${props => (props.type === 'close' ? '3.5rem' : '3rem')};
+  color: ${props => (props.dark ? '#cdcdcd' : '#434343')};
 `
 
 export const Exit = styled.span`
-  margin-top: 15%;
+  position: absolute;
+  right: 0%;
+  top: 5%;
 `

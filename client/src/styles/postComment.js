@@ -50,4 +50,8 @@ export const Button = styled.button`
     padding: 3%;
     margin-bottom: 3%;
   }
+
+  @media (max-width: 520px) {
+    width: 100%;
+  }
 `

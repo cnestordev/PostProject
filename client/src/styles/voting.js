@@ -23,9 +23,9 @@ export const Container = styled.div`
   }
 
   @media (max-width: 767px) {
-    width: 45%;
+    width: 60%;
     flex-flow: wrap;
-    margin: 3% auto 3% auto;
+    margin: 5% auto 3% auto;
   }
 `
 

@@ -7,9 +7,10 @@ export const Nav = styled.nav`
   align-items: center;
   background: ${props => (props.dark ? '#003157' : '#0a5c8b')};
   height: 6vh;
+  padding: 0.5% 0;
 
-  @media (max-width: 767px) {
-    justify-content: flex-end;
+  @media (max-width: 768px) {
+    justify-content: space-between;
   }
 `
 
@@ -116,4 +117,16 @@ export const Hamburger = styled.div`
   @media (max-width: 768px) {
     display: block;
   }
+`
+export const LogoContainer = styled.div`
+  @media (max-width: 768px) {
+    margin-left: 5%;
+  }
+`
+
+export const Logo = styled.span`
+  color: #eaeaea;
+  font-size: 2rem;
+  width: 20%;
+  height: 30px;
 `

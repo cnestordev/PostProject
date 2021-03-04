@@ -69,6 +69,20 @@ export const EditContainer = styled.div`
   justify-content: space-evenly;
   width: 10%;
   margin: 0.5% auto;
+
+  @media (max-width: 992px) {
+    width: 15%;
+  }
+
+  @media (max-width: 992px) {
+    margin: 3% auto;
+    width: 18%;
+  }
+
+  @media (max-width: 400px) {
+    width: 25%;
+    margin: 5% auto;
+  }
 `
 
 export const PostLink = styled(Link)`
@@ -84,9 +98,9 @@ export const EditPara = styled.p`
     font-size: 1.5rem;
   }
 
-  @media (max-width: 767px) {
+  /* @media (max-width: 767px) {
     padding: 50%;
-  }
+  } */
 `
 
 export const DelPara = styled.p`
@@ -97,10 +111,6 @@ export const DelPara = styled.p`
 
   @media (max-width: 992px) {
     font-size: 1.5rem;
-  }
-
-  @media (max-width: 767px) {
-    padding: 50%;
   }
 `
 

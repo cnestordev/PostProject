@@ -20,6 +20,8 @@ import {
   ValidationError,
 } from '../styles/login'
 
+import { Section } from '../styles'
+
 const Register = props => {
   const history = useHistory()
 
@@ -99,53 +101,55 @@ const Register = props => {
   }
 
   return (
-    <Container>
-      <Header>Reigster User:</Header>
-      {serverError.length > 0 && <ServerError>{serverError}</ServerError>}
-      <Form autoComplete="off" onSubmit={handleSubmit}>
-        <Input
-          type="text"
-          name="username"
-          placeholder="username*"
-          onChange={handleChange}
-        />
-        <Input
-          type="email"
-          name="email"
-          placeholder="email"
-          onChange={handleChange}
-        />
-        <Input
-          type="password"
-          name="password"
-          placeholder="password*"
-          onChange={handleChange}
-        />
-        <p style={{ fontSize: '1.4rem' }}>* required field</p>
-        <p style={{ fontSize: '1.2rem' }}>
-          By entering your email, you agree to receive a confirmation email.
-        </p>
-        <Button registerBtn={true} disabled={disabled}>
-          Register
-        </Button>
-      </Form>
-      <ErrorContainer>
-        {errors.username.length > 0 && (
-          <ValidationError>{errors.username}</ValidationError>
-        )}
-        {errors.password.length > 0 && (
-          <ValidationError>{errors.password}</ValidationError>
-        )}
-        {errors.email.length > 0 && (
-          <ValidationError>{errors.email}</ValidationError>
-        )}
-      </ErrorContainer>
-      <RedirectContainer>
-        <RedirectLink className="accountRedirect" to="/login">
-          Already have an account? Log in
-        </RedirectLink>
-      </RedirectContainer>
-    </Container>
+    <Section>
+      <Container>
+        <Header>Reigster User:</Header>
+        {serverError.length > 0 && <ServerError>{serverError}</ServerError>}
+        <Form autoComplete="off" onSubmit={handleSubmit}>
+          <Input
+            type="text"
+            name="username"
+            placeholder="username*"
+            onChange={handleChange}
+          />
+          <Input
+            type="email"
+            name="email"
+            placeholder="email"
+            onChange={handleChange}
+          />
+          <Input
+            type="password"
+            name="password"
+            placeholder="password*"
+            onChange={handleChange}
+          />
+          <p style={{ fontSize: '1.4rem' }}>* required field</p>
+          <p style={{ fontSize: '1.2rem' }}>
+            By entering your email, you agree to receive a confirmation email.
+          </p>
+          <Button registerBtn={true} disabled={disabled}>
+            Register
+          </Button>
+        </Form>
+        <ErrorContainer>
+          {errors.username.length > 0 && (
+            <ValidationError>{errors.username}</ValidationError>
+          )}
+          {errors.password.length > 0 && (
+            <ValidationError>{errors.password}</ValidationError>
+          )}
+          {errors.email.length > 0 && (
+            <ValidationError>{errors.email}</ValidationError>
+          )}
+        </ErrorContainer>
+        <RedirectContainer>
+          <RedirectLink className="accountRedirect" to="/login">
+            Already have an account? Log in
+          </RedirectLink>
+        </RedirectContainer>
+      </Container>
+    </Section>
   )
 }
 

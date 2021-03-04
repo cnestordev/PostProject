@@ -30,6 +30,8 @@ import {
 
 import { TagsContainer } from '../styles/post'
 
+import { Section } from '../styles'
+
 const PostDetails = ({ user, match, dark }) => {
   const id = match.params.id
 
@@ -81,7 +83,7 @@ const PostDetails = ({ user, match, dark }) => {
 
   if (Object.keys(postData).length > 0) {
     return (
-      <>
+      <Section>
         <Container dark={dark}>
           <Title dark={dark}>{postData.title}</Title>
           <Author dark={dark}>Posted by {postData.author.username}</Author>
@@ -115,7 +117,7 @@ const PostDetails = ({ user, match, dark }) => {
             postId={postData['_id']}
           />
         </CommentSection>
-      </>
+      </Section>
     )
   } else {
     return <h1>Loading......</h1>

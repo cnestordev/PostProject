@@ -21,6 +21,8 @@ import {
   ServerMessage,
 } from '../styles/createPost'
 
+import { Section } from '../styles'
+
 const CreatePost = ({ user, dark }) => {
   const [data, setData] = useState({
     title: '',
@@ -139,60 +141,64 @@ const CreatePost = ({ user, dark }) => {
   }
 
   return (
-    <Container dark={dark}>
-      <Header dark={dark}>Create Post</Header>
-      {serverError.hasError && (
-        <ServerMessage>{serverError.message}</ServerMessage>
-      )}
-      <Form autoComplete="off" onSubmit={handleSubmit}>
-        <InputText
-          onChange={handleChange}
-          type="text"
-          name="title"
-          placeholder="Title"
-          value={data.title}
-          dark={dark}
-        />
-        <TextArea
-          dark={dark}
-          onChange={handleChange}
-          name="body"
-          value={data.body}
-        />
-        <File
-          type="file"
-          name="image"
-          onChange={handleImage}
-          accept="image/x-png,image/gif,image/jpeg"
-          dark={dark}
-        />
-        <InputText
-          onChange={handleChange}
-          type="text"
-          placeholder="tags"
-          name="tags"
-          value={data.tags}
-          dark={dark}
-        />
-        <Button dark={dark} disabled={disabled || sending}>
-          {sending ? (
-            <Loader
-              type="ThreeDots"
-              color="#c3c3c3"
-              height={11}
-              width={100}
-              timeout={5000} //5 secs
-            />
-          ) : (
-            'Create'
+    <Section>
+      <Container dark={dark}>
+        <Header dark={dark}>Create Post</Header>
+        {serverError.hasError && (
+          <ServerMessage>{serverError.message}</ServerMessage>
+        )}
+        <Form autoComplete="off" onSubmit={handleSubmit}>
+          <InputText
+            onChange={handleChange}
+            type="text"
+            name="title"
+            placeholder="Title"
+            value={data.title}
+            dark={dark}
+          />
+          <TextArea
+            dark={dark}
+            onChange={handleChange}
+            name="body"
+            value={data.body}
+          />
+          <File
+            type="file"
+            name="image"
+            onChange={handleImage}
+            accept="image/x-png,image/gif,image/jpeg"
+            dark={dark}
+          />
+          <InputText
+            onChange={handleChange}
+            type="text"
+            placeholder="tags"
+            name="tags"
+            value={data.tags}
+            dark={dark}
+          />
+          <Button dark={dark} disabled={disabled || sending}>
+            {sending ? (
+              <Loader
+                type="ThreeDots"
+                color="#c3c3c3"
+                height={11}
+                width={100}
+                timeout={5000} //5 secs
+              />
+            ) : (
+              'Create'
+            )}
+          </Button>
+        </Form>
+        <ErrorContainer>
+          {errors.title.length > 0 && (
+            <ErrorMessage>{errors.title}</ErrorMessage>
           )}
-        </Button>
-      </Form>
-      <ErrorContainer>
-        {errors.title.length > 0 && <ErrorMessage>{errors.title}</ErrorMessage>}
-        {errors.tags.length > 0 && <ErrorMessage>{errors.tags}</ErrorMessage>}
-      </ErrorContainer>
-    </Container>
+          {errors.tags.length > 0 && <ErrorMessage>{errors.tags}</ErrorMessage>}
+        </ErrorContainer>
+      </Container>
+    </Section>
   )
 }
 

@@ -14,6 +14,10 @@ export const Container = styled.div`
   @media (max-width: 992px) {
     width: 70%;
   }
+
+  @media (max-width: 500px) {
+    width: 90%;
+  }
 `
 
 export const IconHeader = styled.h1`
@@ -70,5 +74,9 @@ export const Btn = styled.button`
   @media (max-width: 992px) {
     width: 25%;
     font-size: 1.8rem;
+  }
+
+  @media (max-width: 500px) {
+    width: 50%;
   }
 `

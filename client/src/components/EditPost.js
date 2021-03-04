@@ -22,6 +22,8 @@ import {
 } from '../styles/createPost'
 import ImageEdit from './ImageEdit'
 
+import { Section } from '../styles'
+
 const EditPost = ({ user, match, dark }) => {
   const id = match.params.id
 
@@ -165,55 +167,59 @@ const EditPost = ({ user, match, dark }) => {
   }
 
   return (
-    <Container dark={dark}>
-      <Header dark={dark}>Edit Form</Header>
-      {serverError.hasError && (
-        <ServerMessage>{serverError.message}</ServerMessage>
-      )}
-      <Form autoComplete="off" onSubmit={handleSubmit}>
-        <InputText
-          onChange={handleChange}
-          type="text"
-          name="title"
-          placeholder="Title"
-          value={data.title}
-          dark={dark}
-        />
-        <TextArea
-          dark={dark}
-          onChange={handleChange}
-          name="body"
-          value={data.body}
-        />
-        <ImageEdit
-          dark={dark}
-          handler={handleImage}
-          postId={data._id}
-          image={data.image}
-          setData={setData}
-          data={data}
-        />
-        <InputText
-          dark={dark}
-          onChange={handleChange}
-          type="text"
-          placeholder="tags"
-          name="tags"
-          value={data.tags}
-        />
-        <Button dark={dark} disabled={disabled || sending}>
-          {sending ? (
-            <Loader type="ThreeDots" color="c3c3c3" height={11} width={100} />
-          ) : (
-            'Update'
+    <Section>
+      <Container dark={dark}>
+        <Header dark={dark}>Edit Form</Header>
+        {serverError.hasError && (
+          <ServerMessage>{serverError.message}</ServerMessage>
+        )}
+        <Form autoComplete="off" onSubmit={handleSubmit}>
+          <InputText
+            onChange={handleChange}
+            type="text"
+            name="title"
+            placeholder="Title"
+            value={data.title}
+            dark={dark}
+          />
+          <TextArea
+            dark={dark}
+            onChange={handleChange}
+            name="body"
+            value={data.body}
+          />
+          <ImageEdit
+            dark={dark}
+            handler={handleImage}
+            postId={data._id}
+            image={data.image}
+            setData={setData}
+            data={data}
+          />
+          <InputText
+            dark={dark}
+            onChange={handleChange}
+            type="text"
+            placeholder="tags"
+            name="tags"
+            value={data.tags}
+          />
+          <Button dark={dark} disabled={disabled || sending}>
+            {sending ? (
+              <Loader type="ThreeDots" color="c3c3c3" height={11} width={100} />
+            ) : (
+              'Update'
+            )}
+          </Button>
+        </Form>
+        <ErrorContainer>
+          {errors.title.length > 0 && (
+            <ErrorMessage>{errors.title}</ErrorMessage>
           )}
-        </Button>
-      </Form>
-      <ErrorContainer>
-        {errors.title.length > 0 && <ErrorMessage>{errors.title}</ErrorMessage>}
-        {errors.tags.length > 0 && <ErrorMessage>{errors.tags}</ErrorMessage>}
-      </ErrorContainer>
-    </Container>
+          {errors.tags.length > 0 && <ErrorMessage>{errors.tags}</ErrorMessage>}
+        </ErrorContainer>
+      </Container>
+    </Section>
   )
 }
 

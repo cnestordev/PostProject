@@ -16,6 +16,8 @@ import {
   NavDropLi,
   AccLink,
   Hamburger,
+  LogoContainer,
+  Logo,
 } from '../styles/navigation'
 
 const NavigationBar = ({ user, logInUser, dark, toggler }) => {
@@ -31,8 +33,11 @@ const NavigationBar = ({ user, logInUser, dark, toggler }) => {
     }
   }, [])
   return (
-    <header>
+    <header style={{ position: 'fixed', width: '100%', top: '0', zIndex: '5' }}>
       <Nav dark={dark} className="navbarContainer">
+        <LogoContainer>
+          <Logo>MemeIt</Logo>
+        </LogoContainer>
         <Ul className="navbarList">
           <li>
             <NavLink to="/" className="navbarItem">

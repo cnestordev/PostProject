@@ -12,6 +12,8 @@ import {
   AdminFlair,
 } from '../styles/account'
 
+import { Section } from '../styles'
+
 const Account = ({ user, dark, toggler }) => {
   const handleAcctDelete = async () => {
     const response = await axiosCall.delete(`/${user._id}/delete`)
@@ -19,19 +21,21 @@ const Account = ({ user, dark, toggler }) => {
   }
 
   return (
-    <Container dark={dark}>
-      <Header dark={dark}>Hello, {user.username}</Header>
-      {user.isAdmin && <AdminFlair dark={dark}>Admin</AdminFlair>}
-      <ThemeContainer>
-        <IconBox dark={dark} onClick={() => toggler(false)}>
-          <Icon className="fas fa-sun"></Icon>
-        </IconBox>
-        <IconBox dark={dark} onClick={() => toggler(true)}>
-          <Icon className="fas fa-moon"></Icon>
-        </IconBox>
-      </ThemeContainer>
-      <Button onClick={handleAcctDelete}>DELETE ACCOUNT</Button>
-    </Container>
+    <Section>
+      <Container dark={dark}>
+        <Header dark={dark}>Hello, {user.username}</Header>
+        {user.isAdmin && <AdminFlair dark={dark}>Admin</AdminFlair>}
+        <ThemeContainer dark={dark}>
+          <IconBox dark={dark} onClick={() => toggler(false)}>
+            <Icon className="fas fa-lightbulb"></Icon>
+          </IconBox>
+          <IconBox dark={dark} onClick={() => toggler(true)}>
+            <Icon className="fas fa-moon"></Icon>
+          </IconBox>
+        </ThemeContainer>
+        <Button onClick={handleAcctDelete}>DELETE ACCOUNT</Button>
+      </Container>
+    </Section>
   )
 }
 

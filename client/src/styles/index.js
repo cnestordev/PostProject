@@ -1,3 +1,5 @@
+import styled from 'styled-components'
+
 // nav bar
 export const navBgDark = '#003157'
 export const navBgLight = '#0a5c8b'
@@ -54,3 +56,31 @@ export const commentBtnColorDark = '#fff'
 
 export const commentFormLight = '##d9d9d9'
 export const commentBtnColorLight = '#fff'
+
+export const Section = styled.section`
+  margin-top: 7%;
+
+  @media (max-width: 1400px) {
+    margin-top: 8%;
+  }
+
+  @media (max-width: 1130px) {
+    margin-top: 10%;
+  }
+
+  @media (max-width: 883px) {
+    margin-top: 12%;
+  }
+
+  @media (max-width: 675px) {
+    margin-top: 14%;
+  }
+
+  @media (max-width: 555px) {
+    margin-top: 16%;
+  }
+
+  @media (max-width: 480px) {
+    margin-top: 18%;
+  }
+`

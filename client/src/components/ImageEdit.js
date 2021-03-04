@@ -3,6 +3,14 @@ import axiosCall from '../api/axiosCall'
 
 import { File } from '../styles/createPost'
 
+import {
+  Container,
+  ImageContainer,
+  Image,
+  Overlay,
+  Icon,
+} from '../styles/imageEdit'
+
 const ImageEdit = ({ image, postId, handler, dark, data, setData }) => {
   const [deleted, hasDeleted] = useState(false)
 
@@ -34,31 +42,14 @@ const ImageEdit = ({ image, postId, handler, dark, data, setData }) => {
 
   if (Object.keys(image).length) {
     return (
-      <div style={{ position: 'relative' }}>
-        <div style={{ textAlign: 'left' }}>
-          <img style={{ width: '15%', borderRadius: '5px' }} src={image.url} />
-        </div>
-        <div
-          style={{
-            position: 'absolute',
-            width: '15%',
-            height: '100%',
-            background: 'rgba(250, 250, 250, 0.7)',
-            borderRadius: '5px',
-            top: '0',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            cursor: 'pointer',
-          }}
-          onClick={() => handleImgDel(image.id)}
-        >
-          <i
-            style={{ fontSize: '2rem', color: '#ff5c50' }}
-            className="fas fa-trash"
-          ></i>
-        </div>
-      </div>
+      <Container>
+        <ImageContainer>
+          <Image src={image.url} />
+        </ImageContainer>
+        <Overlay onClick={() => handleImgDel(image.id)}>
+          <Icon className="fas fa-trash"></Icon>
+        </Overlay>
+      </Container>
     )
   } else {
     return (

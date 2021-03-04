@@ -20,6 +20,7 @@ import Login from './Login'
 import Logout from './Logout'
 import Account from './Account'
 import Menu from './Menu'
+import ErrorPage from './ErrorPage'
 
 const App = ({ user }) => {
   const [theme, setTheme] = useState(user.darkMode)
@@ -48,7 +49,9 @@ const App = ({ user }) => {
 
   return (
     <Router>
-      {display && <Menu toggler={toggleMenu} user={user} dark={theme} />}
+      {display && (
+        <Menu display={display} toggler={toggleMenu} user={user} dark={theme} />
+      )}
       <NavigationBar toggler={toggleMenu} dark={theme} />
       <Switch>
         <Route
@@ -112,7 +115,7 @@ const App = ({ user }) => {
             <PrivateRoute dark={theme} component={EditPost} {...props} />
           )}
         />
-        <Route path="*" component={Error404} />
+        <Route path="*" component={ErrorPage} />
       </Switch>
     </Router>
   )
