@@ -42,7 +42,7 @@ const Account = ({ user, dark, toggler, logOutUser }) => {
   return (
     <Section>
       <Container dark={dark}>
-        <Header dark={dark}>Hello, {user.username}</Header>
+        <Header dark={dark}>Hello, {user.username_full}</Header>
         {user.isAdmin && <AdminFlair dark={dark}>Admin</AdminFlair>}
         <div>
           <Link to="/account/posts">My Posts</Link>

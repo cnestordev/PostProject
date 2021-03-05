@@ -32,7 +32,7 @@ const UserComments = ({ user, dark }) => {
 
   return (
     <Section>
-      <Header dark={dark}>{`${user.username}'s comment history`}</Header>
+      <Header dark={dark}>{`${user.username_full}'s comment history`}</Header>
       <div>{commentsArr}</div>
     </Section>
   )

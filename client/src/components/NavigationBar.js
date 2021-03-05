@@ -69,7 +69,7 @@ const NavigationBar = ({ user, logInUser, dark, toggler }) => {
               </NavLink>
             ) : (
               <NavAccountContainer>
-                <NavButton>{user.username}</NavButton>
+                <NavButton>{user.username_full}</NavButton>
                 <Dropbox>
                   <NavDropUl dark={dark}>
                     <NavDropLi>

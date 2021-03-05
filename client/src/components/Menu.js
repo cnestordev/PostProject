@@ -45,7 +45,7 @@ const Menu = ({ dark, user, toggler, display }) => {
                 My Account
               </NavLink>
               <NavLink onClick={() => toggler(false)} dark={dark} to="/logout">
-                Logout {user.username}
+                Logout {user.username_full}
               </NavLink>
             </>
           )}
