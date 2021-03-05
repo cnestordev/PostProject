@@ -83,7 +83,7 @@ const deletePostById = async (req, res) => {
     const response = await Post.findByIdAndDelete(id)
     const imgageId = response.image.id
     try {
-      const response = await cloudinary.uploader.destroy(imgageId)
+      await cloudinary.uploader.destroy(imgageId)
     } catch (err) {}
     res.status(201).json({ message: response })
   } catch (err) {

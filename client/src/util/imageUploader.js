@@ -14,7 +14,11 @@ const imageUploader = async (image, directory = 'main') => {
           process.env.REACT_APP_CLOUDINARY_URL,
           formData
         )
-        return { url: res.data['secure_url'], id: res.data['public_id'] }
+        return {
+          url: res.data['secure_url'],
+          id: res.data['public_id'],
+          thumbnail: res.data['secure_url'].replace('/upload', '/upload/w_350'),
+        }
       } catch (err) {
         console.log('CATTCH')
         return new Error({
