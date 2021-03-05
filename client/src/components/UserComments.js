@@ -30,14 +30,6 @@ const UserComments = ({ user, dark }) => {
       })
   )
 
-  if (commentsData.length === 0) {
-    return (
-      <Section>
-        <h2>You haven't posted any comments.</h2>
-      </Section>
-    )
-  }
-
   return (
     <Section>
       <Header dark={dark}>{`${user.username}'s comment history`}</Header>

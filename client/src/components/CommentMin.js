@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import axiosCall from '../api/axiosCall'
 
 import { IconContainer, Icon, P } from '../styles/postMin'
-import { Container, Body } from '../styles/commentMin'
+import { Container, Body, PostLink } from '../styles/commentMin'
 
 const CommentMin = ({ user, comment, dark }) => {
   const [toggleDelete, setToggleDelete] = useState(false)
@@ -52,6 +53,14 @@ const CommentMin = ({ user, comment, dark }) => {
           <Icon dark={dark} className="fas fa-trash"></Icon>
           {!toggleDelete ? 'Delete' : 'Confirm'}
         </P>
+        <PostLink
+          to={`/posts/${comment.originated}`}
+          pointer={true}
+          dark={dark}
+        >
+          <Icon dark={dark} className="fas fa-external-link-square-alt"></Icon>{' '}
+          Post
+        </PostLink>
       </IconContainer>
     </Container>
   )

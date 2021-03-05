@@ -47,3 +47,11 @@ export const Body = styled.p`
   line-height: 1.5;
   padding: 1%;
 `
+
+export const PostLink = styled(Link)`
+  color: ${props => (props.dark ? '#a5a9ac' : '#000')};
+  cursor: ${props => (props.pointer ? 'pointer' : 'default')};
+  font-size: 1.8rem;
+  display: flex;
+  text-decoration: none;
+`

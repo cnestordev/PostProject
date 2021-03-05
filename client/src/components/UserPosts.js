@@ -29,14 +29,6 @@ const UserPosts = ({ user, dark }) => {
       })
   )
 
-  if (postsData.length === 0) {
-    return (
-      <Section>
-        <h1 style={{ fontSize: '100px' }}>You haven't posted anything yet.</h1>
-      </Section>
-    )
-  }
-
   return (
     <Section>
       <Header dark={dark}>{`${user.username}'s posts`}</Header>
