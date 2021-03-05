@@ -80,8 +80,9 @@ export const EditContainer = styled.div`
   }
 
   @media (max-width: 400px) {
-    width: 25%;
+    width: 40%;
     margin: 5% auto;
+    justify-content: space-between;
   }
 `
 
@@ -98,19 +99,28 @@ export const EditPara = styled.p`
     font-size: 1.5rem;
   }
 
-  /* @media (max-width: 767px) {
-    padding: 50%;
-  } */
+  @media (max-width: 767px) {
+    font-size: 1.8rem;
+  }
 `
 
 export const DelPara = styled.p`
+  display: inline;
   color: rgb(255, 58, 58);
   font-size: 1.4rem;
   margin-left: 12%;
   cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 
   @media (max-width: 992px) {
     font-size: 1.5rem;
+  }
+
+  @media (max-width: 767px) {
+    font-size: 1.8rem;
   }
 `
 

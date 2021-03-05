@@ -181,7 +181,7 @@ const CreatePost = ({ user, dark }) => {
             {sending ? (
               <Loader
                 type="ThreeDots"
-                color="#c3c3c3"
+                color="#777"
                 height={11}
                 width={100}
                 timeout={5000} //5 secs

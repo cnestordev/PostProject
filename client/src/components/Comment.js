@@ -11,10 +11,13 @@ import {
   Body,
   DeleteLink,
   DeleteCommentContainer,
+  Icon,
 } from '../styles/comment'
 
 const Comment = ({ comment, postId, user, dark }) => {
   const [hasDeleted, setHasDeleted] = useState(false)
+
+  const [toDelete, setToDelete] = useState(false)
 
   const handleDelete = async id => {
     try {
@@ -26,6 +29,10 @@ const Comment = ({ comment, postId, user, dark }) => {
       console.log('comment deleting error')
       console.dir(err)
     }
+  }
+
+  const toggleDelete = val => {
+    setToDelete(val)
   }
 
   if (hasDeleted) {
@@ -46,9 +53,23 @@ const Comment = ({ comment, postId, user, dark }) => {
         />
         {(user._id === comment.authorId || user.isAdmin) && (
           <DeleteCommentContainer>
-            <DeleteLink onClick={() => handleDelete(comment['_id'])}>
-              Delete
-            </DeleteLink>
+            {!toDelete ? (
+              <DeleteLink onClick={() => toggleDelete(true)}>
+                <Icon className="fas fa-ellipsis-h"></Icon>
+              </DeleteLink>
+            ) : (
+              <>
+                <DeleteLink onClick={() => handleDelete(comment['_id'])}>
+                  Delete
+                </DeleteLink>
+                <DeleteLink
+                  theme={'normal'}
+                  onClick={() => toggleDelete(false)}
+                >
+                  Cancel
+                </DeleteLink>
+              </>
+            )}
           </DeleteCommentContainer>
         )}
       </Box>

@@ -9,6 +9,7 @@ export const Box = styled.div`
   width: 98%;
   margin: 2% auto;
   padding: 1.5%;
+  position: relative;
 
   @media (max-width: 767px) {
     width: 98%;
@@ -82,7 +83,9 @@ export const Rating = styled.p`
 `
 
 export const Icon = styled.i`
-  font-size: 1.8rem;
+  font-size: 1.5rem;
+  color: #808080;
+  user-select: none;
 
   @media (max-width: 992px) {
     font-size: 2rem;
@@ -92,15 +95,62 @@ export const Icon = styled.i`
 export const DeleteCommentContainer = styled.div`
   color: rgb(255, 97, 97);
   text-align: right;
+  position: absolute;
+  top: 2%;
+  right: 1%;
+  width: 15%;
+  height: 20px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  @media (max-width: 1120px) {
+    width: 20%;
+  }
+
+  @media (max-width: 820px) {
+    width: 23%;
+  }
+
+  @media (max-width: 515px) {
+    width: 28%;
+  }
+
+  @media (max-width: 436px) {
+    width: 32%;
+  }
 `
 
 export const DeleteLink = styled.p`
   display: inline;
-  color: rgb(255, 97, 97);
-  font-size: 1.2rem;
+  color: ${props =>
+    props.theme === 'normal' ? '#282828' : 'rgb(255, 97, 97)'};
+  font-size: 1.4rem;
   cursor: pointer;
+  margin-right: 7%;
+  user-select: none;
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+
+  @media (max-width: 1120px) {
+    margin-right: 8%;
+  }
+
+  @media (max-width: 1040px) {
+    margin-right: 10%;
+  }
 
   @media (max-width: 992px) {
     font-size: 1.35rem;
+  }
+
+  @media (max-width: 820px) {
+    margin-right: 12%;
+  }
+
+  @media (max-width: 515px) {
+    margin-right: 15%;
   }
 `

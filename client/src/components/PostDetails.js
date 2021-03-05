@@ -39,6 +39,8 @@ const PostDetails = ({ user, match, dark }) => {
 
   const [postData, setPostData] = useState({})
 
+  const [toDelete, setToDelete] = useState(false)
+
   const [error, setError] = useState(false)
 
   useEffect(async () => {
@@ -53,11 +55,12 @@ const PostDetails = ({ user, match, dark }) => {
       if (err.response.data.status === 400) {
         return setError(true)
       }
+      console.log(err.response.data)
+      setError(true)
       setPostData({
         message: err.response.data.message,
         status: err.response.status,
       })
-      setError(true)
     }
   }, [])
 
@@ -71,6 +74,10 @@ const PostDetails = ({ user, match, dark }) => {
     } catch (err) {
       console.log(err)
     }
+  }
+
+  const toggleDelete = val => {
+    setToDelete(val)
   }
 
   if (error) {
@@ -98,9 +105,20 @@ const PostDetails = ({ user, match, dark }) => {
                   <EditPara>Edit</EditPara>
                 </PostLink>
               )}
-              <DelPara onClick={() => handleDelete(postData._id)}>
-                Delete
-              </DelPara>
+              <div>
+                {!toDelete ? (
+                  <DelPara onClick={() => toggleDelete(true)}>Delete</DelPara>
+                ) : (
+                  <>
+                    <DelPara onClick={() => toggleDelete(false)}>
+                      Cancel
+                    </DelPara>
+                    <DelPara onClick={() => handleDelete(postData._id)}>
+                      Confirm
+                    </DelPara>
+                  </>
+                )}
+              </div>
             </EditContainer>
           ) : null}
           <Hr dark={dark} />

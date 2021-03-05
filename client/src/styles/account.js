@@ -122,23 +122,36 @@ export const Icon = styled.i`
 `
 
 export const Button = styled.button`
-  border: 1px solid #f43636;
+  border: 1px solid
+    ${props => (props.theme === 'cancel' ? '#414141' : '#f43636')};
   border-radius: 3px;
-  background: #f43636;
-  color: #fff;
+  background: transparent;
+  color: ${props => (props.theme === 'cancel' ? '#414141' : '#f43636')};
   font-size: 1.3rem;
   padding: 1% 2%;
   transition: 300ms;
+  margin-top: 1.5%;
+  margin-right: 5%;
 
   &:hover {
-    border-color: #ca2929;
-    background: #ca2929;
+    border-color: ${props =>
+      props.theme === 'cancel' ? '#414141' : '#f43636'};
+    background: ${props => (props.theme === 'cancel' ? '#414141' : '#f43636')};
+    color: #fff;
     transition: 300ms;
     cursor: pointer;
+  }
+
+  &:last-of-type {
+    margin-right: 0;
   }
 
   @media (max-width: 992px) {
     font-size: 1.5rem;
     margin-top: 3%;
   }
+`
+
+export const P = styled.p`
+  font-size: 2.2rem;
 `

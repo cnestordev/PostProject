@@ -34,9 +34,7 @@ const getReddit = async () => {
   }
 
   // create seed posts
-  const response = await axios.get(
-    'http://www.reddit.com/r/BikiniBottomTwitter.json'
-  )
+  const response = await axios.get('http://www.reddit.com/r/BeAmazed.json')
   for (let i = 1; i < 11; i++) {
     const user = usersSeed[Math.floor(Math.random() * 10)]
     links.push(

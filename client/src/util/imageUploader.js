@@ -17,7 +17,7 @@ const imageUploader = async (image, directory = 'main') => {
         return {
           url: res.data['secure_url'],
           id: res.data['public_id'],
-          thumbnail: res.data['secure_url'].replace('/upload', '/upload/w_350'),
+          thumbnail: res.data['secure_url'].replace('/upload', '/upload/w_500'),
         }
       } catch (err) {
         console.log('CATTCH')
