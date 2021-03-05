@@ -93,7 +93,7 @@ const PostDetails = ({ user, match, dark }) => {
       <Section>
         <Container dark={dark}>
           <Title dark={dark}>{postData.title}</Title>
-          <Author dark={dark}>Posted by {postData.author.username_full}</Author>
+          <Author dark={dark}>Posted by {postData.author.username}</Author>
           <Time dark={dark}>
             {timeago((postData.timestamp || 1610849840) * 1000)}
           </Time>

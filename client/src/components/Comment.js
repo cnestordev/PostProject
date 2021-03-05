@@ -42,7 +42,7 @@ const Comment = ({ comment, postId, user, dark }) => {
   return (
     <>
       <Box dark={dark} key={comment['_id']}>
-        <Author dark={dark}>By {comment.author.username_full}</Author>
+        <Author dark={dark}>By {comment.author.username}</Author>
         <Timestamp dark={dark}>{timeago(comment.timestamp * 1000)}</Timestamp>
         <Body dark={dark}>{comment.body}</Body>
         <VotingComment

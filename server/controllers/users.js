@@ -34,11 +34,7 @@ const isLoggedOn = (req, res) => {
 }
 
 const register = async (req, res, next) => {
-  let { username, password, email } = req.body
-
-  const originalUsername = username
-
-  username = username.toLowerCase()
+  const { username, password, email } = req.body
 
   for (const property in words) {
     if (words[property].includes(username)) {
@@ -62,7 +58,6 @@ const register = async (req, res, next) => {
         likedComments: user.likedComments,
         isAdmin: user.isAdmin,
         darkMode: user.darkMode,
-        username_full: originalUsername,
       }
       if (userData.email) {
         console.log('sending email')
@@ -70,8 +65,8 @@ const register = async (req, res, next) => {
           to: userData.email, // Change to your recipient
           from: 'nestor@nestordev.com', // Change to your verified sender
           subject: 'Thanks for visiting!',
-          text: `Hello, ${userData.username_full}! Thank you for visiting one of my applications!  Feel free to respond to this email, if you have any further questions.`,
-          html: `<p>Hello, ${userData.username_full}, Thank you for visiting one of my applications.  Feel free to respond to this email, if you have any questions.</p>`,
+          text: `Hello, ${userData.username}! Thank you for visiting one of my applications!  Feel free to respond to this email, if you have any further questions.`,
+          html: `<p>Hello, ${userData.username}, Thank you for visiting one of my applications.  Feel free to respond to this email, if you have any questions.</p>`,
         }
         sgMail
           .send(msg)

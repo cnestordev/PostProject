@@ -31,7 +31,7 @@ const UserPosts = ({ user, dark }) => {
 
   return (
     <Section>
-      <Header dark={dark}>{`${user.username_full}'s posts`}</Header>
+      <Header dark={dark}>{`${user.username}'s posts`}</Header>
       <div>{postsArr}</div>
     </Section>
   )

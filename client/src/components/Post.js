@@ -21,7 +21,7 @@ const Post = ({ data, user, dark }) => {
     <Container dark={dark}>
       <Title dark={dark}>{data.title}</Title>
       <NavLink className="postLink" to={`/posts/${data['_id']}`}>
-        <Author dark={dark}>Posted by {data.author.username_full}</Author>
+        <Author dark={dark}>Posted by {data.author.username}</Author>
         <Time dark={dark}>
           {timeago(data.timestamp * 1000)}{' '}
           {data.editCount > 0 && <Flair>| Edited</Flair>}
