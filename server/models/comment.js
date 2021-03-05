@@ -21,6 +21,11 @@ const commentSchema = Schema(
       type: String,
       required: true,
     },
+    originated: {
+      type: Schema.Types.ObjectId,
+      ref: 'Post',
+      required: true,
+    },
     likes: [
       {
         type: Schema.Types.ObjectId,

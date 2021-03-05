@@ -14,6 +14,7 @@ const index = async (req, res) => {
       author,
       authorId,
       timestamp,
+      originated: post._id,
       likes: [],
       dislikes: [],
     })
@@ -183,9 +184,19 @@ const dislikeComment = async (req, res, next) => {
   }
 }
 
+const getUsersComments = async (req, res, next) => {
+  try {
+    const response = await Comment.find({ authorId: req.user._id })
+    res.status(201).json({ message: response, status: 500 })
+  } catch (err) {
+    return next({ message: err.message, status: 500 })
+  }
+}
+
 module.exports = {
   index,
   deleteComment,
   likeComment,
   dislikeComment,
+  getUsersComments,
 }

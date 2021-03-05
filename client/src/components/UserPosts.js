@@ -25,7 +25,6 @@ const UserPosts = ({ user, dark }) => {
         return y.timestamp - x.timestamp
       })
       .map(post => {
-        console.log(post)
         return <PostMin user={user} dark={dark} post={post} />
       })
   )
@@ -33,7 +32,7 @@ const UserPosts = ({ user, dark }) => {
   if (postsData.length === 0) {
     return (
       <Section>
-        <h1 style={{ fontSize: '100px' }}>User Posts</h1>
+        <h1 style={{ fontSize: '100px' }}>You haven't posted anything yet.</h1>
       </Section>
     )
   }

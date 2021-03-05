@@ -83,6 +83,7 @@ const getReddit = async () => {
         body: response.data[1].data.children[j].data.body || 'blank',
         author: user['_id'],
         authorId: user['_id'],
+        originated: postsSeed[i]['_id'],
         timestamp: Math.round(new Date().getTime() / 1000),
         likes: [],
         dislikes: [],

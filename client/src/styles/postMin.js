@@ -88,6 +88,7 @@ export const PostLink = styled(Link)`
 
 export const P = styled.p`
   color: ${props => (props.dark ? '#a5a9ac' : '#000')};
+  cursor: ${props => (props.pointer ? 'pointer' : 'default')};
   font-size: 1.8rem;
   display: flex;
 `

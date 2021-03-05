@@ -5,6 +5,7 @@ const {
   validateComment,
   isLoggedIn,
   commentAuthor,
+  isUser,
 } = require('../middleware')
 
 const {
@@ -12,6 +13,7 @@ const {
   deleteComment,
   likeComment,
   dislikeComment,
+  getUsersComments,
 } = require('../controllers/comments')
 
 // create a comment
@@ -25,5 +27,8 @@ router.post('/:commentId/like', isLoggedIn, likeComment)
 
 // dislike a comment
 router.post('/:commentId/dislike', isLoggedIn, dislikeComment)
+
+// view all user's comments
+router.get('/all/:userId', isLoggedIn, isUser, getUsersComments)
 
 module.exports = router

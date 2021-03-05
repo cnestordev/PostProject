@@ -20,6 +20,7 @@ module.exports.commentSchema = Joi.object({
   author: Joi.string().required(),
   authorId: Joi.string().required(),
   timestamp: Joi.number().required(),
+  originated: Joi.allow(),
   likes: Joi.array().allow(),
   dislikes: Joi.array().allow(),
   _id: Joi.allow(),
