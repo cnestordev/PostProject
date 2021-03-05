@@ -36,6 +36,17 @@ const getReddit = async () => {
   // create seed posts
   const response = await axios.get('http://www.reddit.com/r/BeAmazed.json')
   for (let i = 1; i < 11; i++) {
+    const format = response.data.data.children[i].data.url.slice(-3)
+
+    if (
+      format !== 'jpg' &&
+      format !== 'gif' &&
+      format !== 'jpeg' &&
+      format !== 'svg'
+    ) {
+      continue
+    }
+
     const user = usersSeed[Math.floor(Math.random() * 10)]
     links.push(
       `https://www.reddit.com${response.data.data.children[i].data.permalink}.json`
@@ -63,7 +74,7 @@ const getReddit = async () => {
   }
 
   // seed comments
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < postsSeed.length; i++) {
     const response = await axios.get(links[i])
     const size = response.data[1].data.children.length
     for (let j = 0; j < (size <= 5 ? size : 5); j++) {

@@ -23,8 +23,11 @@ const seedDB = async () => {
   await Post.deleteMany({})
   const response = await getReddit()
 
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < response.posts.length; i++) {
     await response.posts[i].save()
+  }
+
+  for (let i = 0; i < response.users.length; i++) {
     await response.users[i].save()
   }
 

@@ -124,7 +124,7 @@ export const DeleteCommentContainer = styled.div`
 export const DeleteLink = styled.p`
   display: inline;
   color: ${props =>
-    props.theme === 'normal' ? '#282828' : 'rgb(255, 97, 97)'};
+    props.theme === 'normal' ? '#ffc307' : 'rgb(255, 97, 97)'};
   font-size: 1.4rem;
   cursor: pointer;
   margin-right: 7%;
