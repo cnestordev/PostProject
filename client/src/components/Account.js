@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import axiosCall from '../api/axiosCall'
 import { useHistory } from 'react-router-dom'
 import { logOutUser } from '../redux/actions/users.actions'
@@ -43,6 +44,10 @@ const Account = ({ user, dark, toggler, logOutUser }) => {
       <Container dark={dark}>
         <Header dark={dark}>Hello, {user.username}</Header>
         {user.isAdmin && <AdminFlair dark={dark}>Admin</AdminFlair>}
+        <div>
+          <Link to="/account/posts">My Posts</Link>
+          <Link to="/account/comments">My Comments</Link>
+        </div>
         <ThemeContainer dark={dark}>
           <IconBox dark={dark} onClick={() => toggler(false)}>
             <Icon className="fas fa-lightbulb"></Icon>

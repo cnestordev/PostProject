@@ -237,6 +237,15 @@ const searchPost = async (req, res, next) => {
   }
 }
 
+const getUsersPosts = async (req, res, next) => {
+  try {
+    const response = await Post.find({ authorId: req.user._id })
+    res.status(201).json({ message: response, status: 201 })
+  } catch (err) {
+    return next({ message: err.message, status: 500 })
+  }
+}
+
 module.exports = {
   index,
   getPostById,
@@ -248,4 +257,5 @@ module.exports = {
   dislikePost,
   deleteImage,
   searchPost,
+  getUsersPosts,
 }

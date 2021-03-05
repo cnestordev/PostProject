@@ -6,6 +6,7 @@ const {
   addMetaData,
   validatePost,
   isAuthorized,
+  isUser,
 } = require('../middleware')
 const Post = require('../models/post')
 const {
@@ -19,6 +20,7 @@ const {
   dislikePost,
   deleteImage,
   searchPost,
+  getUsersPosts,
 } = require('../controllers/posts')
 
 const cloudinary = require('../cloudinary')
@@ -42,5 +44,7 @@ router.post('/:id/like', isLoggedIn, likePost)
 router.post('/:id/dislike', isLoggedIn, dislikePost)
 
 router.delete('/:id/main/:imageId', deleteImage)
+
+router.get('/all/:userId', isLoggedIn, isUser, getUsersPosts)
 
 module.exports = router

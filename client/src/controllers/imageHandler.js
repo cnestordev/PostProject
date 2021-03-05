@@ -1,5 +1,4 @@
 import React from 'react'
-import { Image, Transformation, CloudinaryContext } from 'cloudinary-react'
 
 import { Container, Text } from '../styles/noImage'
 import { PostImg } from '../styles/post'

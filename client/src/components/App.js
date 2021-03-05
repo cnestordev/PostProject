@@ -21,6 +21,8 @@ import Logout from './Logout'
 import Account from './Account'
 import Menu from './Menu'
 import ErrorPage from './ErrorPage'
+import UserPosts from './UserPosts'
+import UserComments from './UserComments'
 
 const App = ({ user }) => {
   const [theme, setTheme] = useState(user.darkMode)
@@ -60,6 +62,7 @@ const App = ({ user }) => {
           render={props => <Home dark={theme} {...props} />}
         />
         <Route
+          exact
           path="/account"
           render={props => (
             <PrivateRoute
@@ -68,6 +71,18 @@ const App = ({ user }) => {
               component={Account}
               {...props}
             />
+          )}
+        />
+        <Route
+          path="/account/posts"
+          render={props => (
+            <PrivateRoute dark={theme} component={UserPosts} {...props} />
+          )}
+        />
+        <Route
+          path="/account/comments"
+          render={props => (
+            <PrivateRoute dark={theme} component={UserComments} {...props} />
           )}
         />
         <Route
