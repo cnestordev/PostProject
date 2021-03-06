@@ -10,6 +10,7 @@ const RestrictedRoute = ({ component: Component, user, ...rest }) => {
         if (!user._id) {
           return <Component {...props} />
         } else {
+          // no user found, redirect to /posts
           return (
             <Redirect
               to={{

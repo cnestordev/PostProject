@@ -27,7 +27,6 @@ const SearchBar = ({
     await removePosts()
     try {
       const response = await axiosCall.get(`/posts/search/${query}`)
-      console.log(response.data.message)
       getFilteredPosts(response.data.message)
     } catch (err) {
       console.dir(err)

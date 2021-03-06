@@ -71,12 +71,11 @@ app.use('/posts/:id/comments', commentsRouter)
 app.use('/', usersRouter)
 
 app.all('*', (req, res) => {
-  // console.log('404 NO PAGE EXISTS')
   res.status(404).json({ message: 'Invalid URL' })
 })
 
 app.use((err, req, res, next) => {
-  console.log('triggered')
+  console.log('triggered error')
   const { status, message } = err
   res.status(status).json({ message, status })
 })

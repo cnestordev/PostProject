@@ -19,6 +19,7 @@ const UserPosts = ({ user, dark }) => {
     }
   }, [])
 
+  // sorts, maps, and assigns keys to PostMin components
   const postsArr = React.Children.toArray(
     postsData
       .sort(function (x, y) {

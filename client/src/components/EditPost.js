@@ -24,7 +24,7 @@ import ImageEdit from './ImageEdit'
 
 import { Section } from '../styles'
 
-const EditPost = ({ user, match, dark }) => {
+const EditPost = ({ match, dark }) => {
   const id = match.params.id
 
   const defaultErrorValues = {
@@ -54,12 +54,11 @@ const EditPost = ({ user, match, dark }) => {
 
   const [imageData, setImageData] = useState(null)
 
-  // const [loading, setLoading] = useState(false)
-
   const [sending, setSending] = useState(false)
 
   const [disabled, setDisabled] = useState(true)
 
+  // use to trigger the useEffect, the useEffect will complete the update to MongoDb.
   const [edited, setHasEdited] = useState(false)
 
   const [serverError, setServerError] = useState(defaultErrorValues)
@@ -69,7 +68,6 @@ const EditPost = ({ user, match, dark }) => {
   useEffect(async () => {
     try {
       const response = await axiosCall.get(`/posts/${id}/edit`)
-      // console.log(response.data.data)
       const { data } = response.data
       setData({
         title: data.title,
@@ -83,8 +81,6 @@ const EditPost = ({ user, match, dark }) => {
         editCount: data.editCount,
       })
     } catch (err) {
-      console.log('ENTERING CATCH, failure to populate edit form')
-      console.dir(err.response.data.message)
       setServerError({
         hasError: true,
         message: err.response.data.message,
@@ -106,8 +102,6 @@ const EditPost = ({ user, match, dark }) => {
         setSending(false)
         history.push(`/posts/${id}`)
       } catch (err) {
-        console.log('EDIT POST ERROR')
-        console.dir(err)
         setSending(false)
         setServerError({
           hasError: true,

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
 import tagsHandler from '../controllers/tagsHandler'
 
@@ -10,7 +9,6 @@ import ErrorPage from './ErrorPage'
 
 import PostComment from './PostComment'
 import axiosCall from '../api/axiosCall'
-import Comments from './Comments'
 import Voting from './Voting'
 
 import {
@@ -39,23 +37,20 @@ const PostDetails = ({ user, match, dark }) => {
 
   const [postData, setPostData] = useState({})
 
+  // toggles delete confirmation message
   const [toDelete, setToDelete] = useState(false)
 
   const [error, setError] = useState(false)
 
   useEffect(async () => {
-    // console.log('fetching............')
     try {
       const response = await axiosCall.get(`/posts/${id}`)
       const { data } = response.data
-      // console.log('successfully fetched post data')
       setPostData(data)
     } catch (err) {
-      console.log('CATCH post details')
       if (err.response.data.status === 400) {
         return setError(true)
       }
-      console.log(err.response.data)
       setError(true)
       setPostData({
         message: err.response.data.message,
@@ -65,14 +60,11 @@ const PostDetails = ({ user, match, dark }) => {
   }, [])
 
   const handleDelete = async id => {
-    // console.log(id)
     try {
-      const response = await axiosCall.delete(`/posts/${id}/delete`)
-      // console.log('successfully deleted post')
-      // console.dir(response)
+      await axiosCall.delete(`/posts/${id}/delete`)
       history.push('/posts')
     } catch (err) {
-      console.log(err)
+      console.dir(err)
     }
   }
 

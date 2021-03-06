@@ -23,7 +23,7 @@ export const TextArea = styled.textarea`
   padding: 1%;
 
   &::placeholder {
-    color: rgb(226, 50, 50);
+    color: #c3c3c3;
     font-weight: bold;
   }
 `
@@ -41,8 +41,8 @@ export const Button = styled.button`
   cursor: pointer;
 
   &:disabled {
-    border: 1px solid ${props => (props.dark ? 'transparent' : '#d9d9d9')};
-    background: ${props => (props.dark ? '#17212c' : '#262626')};
+    border: 1px solid ${props => (props.dark ? 'transparent' : '#ababab')};
+    background: ${props => (props.dark ? '#17212c' : '#ababab')};
   }
 
   @media (max-width: 767px) {

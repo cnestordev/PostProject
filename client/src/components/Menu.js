@@ -10,13 +10,15 @@ import {
   Exit,
 } from '../styles/menu'
 
-const Menu = ({ dark, user, toggler, display }) => {
+const Menu = ({ dark, user, toggler }) => {
   const position = window.scrollY
 
   useEffect(() => {
+    // prevent user from scrolling when Menu mounts
     document.body.style.overflow = 'hidden'
     window.scrollTo(0, 0)
     return () => {
+      // return user to their previous spot on the page and re-enable scrolling when Menu unmounts
       window.scrollTo(0, position)
       document.body.style.overflow = 'scroll'
     }

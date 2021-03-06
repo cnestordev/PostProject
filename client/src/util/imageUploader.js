@@ -3,8 +3,10 @@ import axiosCall from '../api/axiosCall'
 
 const imageUploader = async (image, directory = 'main') => {
   const { data: isLoggedIn } = await axiosCall.get('/isloggedin')
+  // check if user is logged in first by calling the server
   if (isLoggedIn) {
     if (image) {
+      // create formData for Cloudinary
       const formData = new FormData()
       formData.append('file', image)
       formData.append('upload_preset', process.env.REACT_APP_CLOUDINARY_NAME)
@@ -20,16 +22,14 @@ const imageUploader = async (image, directory = 'main') => {
           thumbnail: res.data['secure_url'].replace('/upload', '/upload/w_500'),
         }
       } catch (err) {
-        console.log('CATTCH')
         return new Error({
           message: 'There was a problem uploading your image',
         })
       }
     }
-    console.log('NO image has been entered')
     return {}
   }
-  return {}
+  return
 }
 
 export default imageUploader

@@ -4,6 +4,7 @@ import Comment from './Comment'
 import { Container, Header } from '../styles/comments'
 
 const Comments = ({ data, postId, dark }) => {
+  // sorts, maps, and assgins keys to children components
   const commentArr = React.Children.toArray(
     data
       .sort(function (x, y) {

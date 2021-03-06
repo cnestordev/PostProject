@@ -29,7 +29,6 @@ const getPostById = async (req, res, next) => {
     }
     res.status(200).json({ data: post })
   } catch (error) {
-    console.log('ERROR!!!')
     return next({ message: 'Invalid URL', status: 400 })
   }
 }
@@ -39,8 +38,6 @@ const createNewPost = async (req, res, next) => {
   try {
     const post = new Post(req.body)
     const result = await post.save()
-    // console.log(result._id)
-    // console.log('successfully posted')
     const postId = result._id
     // add post reference to the User schema
     try {
@@ -48,15 +45,12 @@ const createNewPost = async (req, res, next) => {
       user.posts.push(result._id)
       await user.save()
     } catch (err) {
-      console.log('woops!')
-      console.log(err)
       return next({ message: err.message, status: 500 })
     }
     res
       .status(201)
       .json({ message: 'post was successfully uploaded', postId, status: 201 })
   } catch (err) {
-    console.log('There is a problem!')
     return next({ message: err.message, status: 500 })
   }
 }

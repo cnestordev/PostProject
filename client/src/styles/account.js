@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 export const Container = styled.div`
   background: ${props => (props.dark ? '#151f28' : '#fff')};
@@ -124,11 +125,11 @@ export const Icon = styled.i`
 export const Button = styled.button`
   border: 1px solid
     ${props => (props.theme === 'cancel' ? '#414141' : '#f43636')};
-  border-radius: 3px;
+  border-radius: 50px;
   background: transparent;
   color: ${props => (props.theme === 'cancel' ? '#414141' : '#f43636')};
   font-size: 1.3rem;
-  padding: 1% 2%;
+  padding: 0.5% 1%;
   transition: 300ms;
   margin-top: 1.5%;
   margin-right: 5%;
@@ -150,8 +151,41 @@ export const Button = styled.button`
     font-size: 1.5rem;
     margin-top: 3%;
   }
+
+  @media (max-width: 470px) {
+    padding: 1% 2%;
+  }
 `
 
 export const P = styled.p`
   font-size: 2.2rem;
+`
+export const LinksContainer = styled.div`
+  margin: 5% auto;
+
+  @media (max-width: 540px) {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    margin: 3% auto;
+  }
+`
+
+export const PostLink = styled(Link)`
+  color: ${props => (props.dark ? '#cbcbcb' : '#000')};
+  border: 1px solid ${props => (props.dark ? '#cbcbcb' : '#000')};
+  border-radius: 50px;
+  padding: 0.5% 1%;
+  text-decoration: none;
+  font-size: 1.5rem;
+  margin-right: 3%;
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+
+  @media (max-width: 767px) {
+    font-size: 1.8rem;
+    margin-top: 12%;
+  }
 `

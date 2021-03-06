@@ -6,7 +6,9 @@ import { IconContainer, Icon, P } from '../styles/postMin'
 import { Container, Body, PostLink } from '../styles/commentMin'
 
 const CommentMin = ({ user, comment, dark }) => {
+  // toggles the confirmation message
   const [toggleDelete, setToggleDelete] = useState(false)
+  // if successfully deleted, this removes comment from DOM
   const [hasDeleted, setHasDeleted] = useState(false)
 
   function truncate(str, n) {
@@ -15,11 +17,7 @@ const CommentMin = ({ user, comment, dark }) => {
 
   const handleDelete = async id => {
     try {
-      const response = await axiosCall.delete(
-        `/posts/${comment.originated}/comments/${id}`
-      )
-      // console.log('successfully deleted')
-      // console.dir(response)
+      await axiosCall.delete(`/posts/${comment.originated}/comments/${id}`)
       setHasDeleted(true)
     } catch (err) {
       console.log('comment deleting error')

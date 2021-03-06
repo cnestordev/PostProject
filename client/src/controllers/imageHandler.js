@@ -9,6 +9,8 @@ const imageHandler = (img, scale, text, dark) => {
   }
 
   if (img.url) {
+    // if an image url exists, render Img tag, use "scale" argument to determine if it
+    // should render the thumbnail url or regular url.
     return <PostImg src={scale === 'thumbnail' ? img.thumbnail : img.url} />
   } else if (text) {
     return (

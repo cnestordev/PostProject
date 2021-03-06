@@ -10,8 +10,6 @@ import LoginPrompt from './LoginPrompt'
 import { Container, Form, TextArea, Button } from '../styles/postComment'
 
 const PostComment = props => {
-  const history = useHistory()
-
   const commentDataValues = {
     body: '',
     author: 'tbd',
@@ -25,17 +23,11 @@ const PostComment = props => {
     body: '',
   }
 
-  const errorData = {
-    hasError: false,
-    message: '',
-    status: '',
-  }
-
   const [errors, setErrors] = useState(initialErrorValues)
 
   const [disabled, setDisabled] = useState(true)
 
-  const [serverError, setServerError] = useState(errorData)
+  const [serverError, setServerError] = useState('')
 
   const [comments, setComments] = useState(props.postData.comments)
 
@@ -75,19 +67,16 @@ const PostComment = props => {
 
   const handleSubmit = async e => {
     e.preventDefault()
-    // console.log('making POST request to comments')
     const id = props.postId
     try {
       const response = await axiosCall.post(
         `/posts/${id}/comments`,
         commentData
       )
-      // console.log('success')
       setCommentData(commentDataValues)
-      // console.log(response.data)
       setComments(response.data.data.comments)
     } catch (err) {
-      console.log('entering error on POST comments')
+      setServerError(err.response.data.message)
     }
   }
 
@@ -105,8 +94,30 @@ const PostComment = props => {
               onChange={handleChange}
               name="body"
               value={commentData.body}
-              placeholder={errors.body}
+              placeholder={'post a comment'}
             />
+            {serverError && (
+              <p
+                style={{
+                  fontSize: '1.5rem',
+                  color: 'red',
+                  textAlign: 'center',
+                }}
+              >
+                {serverError}
+              </p>
+            )}
+            {errors.body && (
+              <p
+                style={{
+                  fontSize: '1.5rem',
+                  color: 'red',
+                  textAlign: 'center',
+                }}
+              >
+                {errors.body}
+              </p>
+            )}
             <Button dark={props.dark} disabled={disabled}>
               comment
             </Button>

@@ -35,8 +35,6 @@ const index = async (req, res) => {
       user.comments.push(savedComment._id)
       await user.save()
     } catch (err) {
-      console.log('something went wrong...')
-      console.log(err)
       return next({ message: err.message, status: 500 })
     }
     res.status(201).json({
@@ -45,7 +43,6 @@ const index = async (req, res) => {
       status: 201,
     })
   } catch (err) {
-    console.log(err)
     res.status(404).json({ message: 'Post Not Found', status: 404 })
   }
 }
@@ -71,14 +68,12 @@ const likeComment = async (req, res, next) => {
 
   // 1. If user has disliked, remove it
   if (comment.dislikes.includes(userId)) {
-    // console.log('user has preivously disliked')
     const updatedDislikes = comment.dislikes.filter(obj => {
       return obj.toString() !== userId.toString()
     })
     comment.set('dislikes', updatedDislikes)
     comment.markModified('dislikes')
     await comment.save()
-    // console.log('dislike was removed')
   }
 
   // 2. If user hasn't liked, it likes
@@ -86,14 +81,12 @@ const likeComment = async (req, res, next) => {
     try {
       comment.likes.push(userId)
       const result = await comment.save()
-      // console.log('user has liked comment')
       const metrics = {
         likes: result.likes.length,
         dislikes: result.dislikes.length,
         liked: true,
         disliked: false,
       }
-      // console.log(metrics)
       return res.status(201).json({ message: metrics, status: 201 })
     } catch (err) {
       return next({ message: err.message, status: 500 })
@@ -115,7 +108,6 @@ const likeComment = async (req, res, next) => {
         liked: false,
         disliked: false,
       }
-      // console.log(metrics)
       return res.status(201).json({ message: metrics, status: 201 })
     } catch (err) {
       return next({ message: err.message, status: 500 })
@@ -124,7 +116,6 @@ const likeComment = async (req, res, next) => {
 }
 
 const dislikeComment = async (req, res, next) => {
-  // console.log('dislike comment hit')
   const commentId = mongoose.Types.ObjectId(req.params.commentId)
   const userId = req.user._id
 
@@ -139,7 +130,6 @@ const dislikeComment = async (req, res, next) => {
     comment.set('likes', updatedLikes)
     comment.markModified('likes')
     await comment.save()
-    // console.log('removed like')
   }
 
   // 1. If user hasn't disliked, it dislikes.
@@ -147,14 +137,12 @@ const dislikeComment = async (req, res, next) => {
     try {
       comment.dislikes.push(userId)
       const result = await comment.save()
-      // console.log('user disliked the post!!')
       const metrics = {
         likes: result.likes.length,
         dislikes: result.dislikes.length,
         liked: false,
         disliked: true,
       }
-      // console.log(metrics)
       return res.status(201).json({ message: metrics, status: 201 })
     } catch (err) {
       return next({ message: err.message, status: 500 })
@@ -176,7 +164,6 @@ const dislikeComment = async (req, res, next) => {
         disliked: false,
         liked: false,
       }
-      // console.log(metrics)
       return res.status(201).json({ message: metrics, status: 201 })
     } catch (err) {
       return next({ message: err.message, status: 500 })

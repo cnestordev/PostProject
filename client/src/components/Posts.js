@@ -16,6 +16,7 @@ const Posts = props => {
     }
   }, [filter])
 
+  // sorts, maps, and assigns key to each Post component
   const postArr = React.Children.toArray(
     props.posts.posts
       .sort(function (x, y) {

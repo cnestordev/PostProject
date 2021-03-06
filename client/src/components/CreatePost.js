@@ -23,7 +23,7 @@ import {
 
 import { Section } from '../styles'
 
-const CreatePost = ({ user, dark }) => {
+const CreatePost = ({ dark }) => {
   const [data, setData] = useState({
     title: '',
     author: 'predefined',
@@ -52,6 +52,7 @@ const CreatePost = ({ user, dark }) => {
 
   const [imageData, setImageData] = useState(null)
 
+  // used to trigger the useEffect after image uploaded to Cloudinary, the useEffect will complete the upload to MongoDB.
   const [querying, setQuerying] = useState(false)
 
   const [sending, setSending] = useState(false)
@@ -68,18 +69,12 @@ const CreatePost = ({ user, dark }) => {
 
   useEffect(async () => {
     if (data.title || data.tags.length > 0) {
-      // console.log('sending post to server, data sending:')
-      // console.log(data)
       try {
-        // console.log('entering try')
         const response = await axiosCall.post('/posts/new', data)
-        // console.log(response)
         const { postId } = response.data
         setSending(false)
         history.push(`/posts/${postId}`)
       } catch (err) {
-        console.log('ERROR, entering catch')
-        console.log(err.response.data.message)
         setSending(false)
         setServerError({
           hasError: true,
@@ -125,13 +120,10 @@ const CreatePost = ({ user, dark }) => {
   }
 
   const handleSubmit = async e => {
-    // console.log('creating NEW post...')
     e.preventDefault()
     setServerError(defaultErrorValues)
     setSending(true)
-    // console.log('starting upload image function')
     const img = await imageUploader(imageData, 'main')
-    // console.log('image function has been returned, url is: ', img)
     setData({
       ...data,
       image: img,

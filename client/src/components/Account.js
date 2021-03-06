@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 import axiosCall from '../api/axiosCall'
 import { useHistory } from 'react-router-dom'
 import { logOutUser } from '../redux/actions/users.actions'
@@ -16,11 +15,14 @@ import {
   Button,
   AdminFlair,
   P,
+  LinksContainer,
+  PostLink,
 } from '../styles/account'
 
 import { Section } from '../styles'
 
 const Account = ({ user, dark, toggler, logOutUser }) => {
+  // toggles the confirmation message for deleting
   const [toDelete, setToDelete] = useState(false)
 
   const [deleting, setDeleting] = useState(false)
@@ -29,10 +31,13 @@ const Account = ({ user, dark, toggler, logOutUser }) => {
 
   const handleAcctDelete = async () => {
     setDeleting(true)
-    const response = await axiosCall.delete(`/${user._id}/delete`)
-    logOutUser()
-    history.push('/posts')
-    // console.log(response.data)
+    try {
+      await axiosCall.delete(`/${user._id}/delete`)
+      logOutUser()
+      history.push('/posts')
+    } catch (err) {
+      setDeleting(false)
+    }
   }
 
   const toggleDelete = val => {
@@ -44,10 +49,14 @@ const Account = ({ user, dark, toggler, logOutUser }) => {
       <Container dark={dark}>
         <Header dark={dark}>Hello, {user.username}</Header>
         {user.isAdmin && <AdminFlair dark={dark}>Admin</AdminFlair>}
-        <div>
-          <Link to="/account/posts">My Posts</Link>
-          <Link to="/account/comments">My Comments</Link>
-        </div>
+        <LinksContainer>
+          <PostLink dark={dark} to="/account/posts">
+            My Posts
+          </PostLink>
+          <PostLink dark={dark} to="/account/comments">
+            My Comments
+          </PostLink>
+        </LinksContainer>
         <ThemeContainer dark={dark}>
           <IconBox dark={dark} onClick={() => toggler(false)}>
             <Icon className="fas fa-lightbulb"></Icon>

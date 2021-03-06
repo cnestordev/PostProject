@@ -17,8 +17,6 @@ const addMetaData = (req, res, next) => {
 const validatePost = (req, res, next) => {
   const validation = postSchema.validate(req.body)
   if (validation.error) {
-    // console.log('-----------------------------')
-    // console.log(validation.error.details[0].message)
     return next({ message: validation.error.details[0].message, status: 400 })
   }
   next()
@@ -27,8 +25,6 @@ const validatePost = (req, res, next) => {
 const validateComment = (req, res, next) => {
   const validation = commentSchema.validate(req.body)
   if (validation.error) {
-    // console.log('-----------------------------')
-    // console.log(validation.error.details[0].message)
     return next({ message: validation.error.details[0].message, status: 400 })
   }
   next()

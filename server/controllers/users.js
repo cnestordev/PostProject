@@ -5,10 +5,6 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 const words = require('naughty-words')
 
 const index = (req, res) => {
-  // console.log('hit root route')
-  // console.log(req.headers.host)
-  // console.log(req.isAuthenticated())
-  // console.log(req.user)
   res
     .json({
       user: req.user,
@@ -38,7 +34,6 @@ const register = async (req, res, next) => {
 
   for (const property in words) {
     if (words[property].includes(username)) {
-      console.log('FOUND')
       return next({ message: 'That username is not allowed', status: 500 })
     }
   }
@@ -60,7 +55,6 @@ const register = async (req, res, next) => {
         darkMode: user.darkMode,
       }
       if (userData.email) {
-        console.log('sending email')
         const msg = {
           to: userData.email, // Change to your recipient
           from: 'nestor@nestordev.com', // Change to your verified sender
@@ -81,7 +75,6 @@ const register = async (req, res, next) => {
       res.status(201).json({ userData, status: 201 })
     })
   } catch (err) {
-    console.log('REGISTER CATCH')
     res.status(401).json({ message: err.message, status: 401 })
   }
 }
@@ -98,14 +91,14 @@ const logoutUser = async (req, res) => {
 const loginUser = (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
     if (err) {
-      return next(err)
+      return next({ message: err.message, status: 401 })
     }
     if (info) {
       return next({ message: info.message, status: 401 })
     }
     if (user) {
       req.logIn(user, err => {
-        if (err) console.log(err)
+        if (err) return next({ message: err.message, status: 401 })
         const {
           posts,
           likedPosts,

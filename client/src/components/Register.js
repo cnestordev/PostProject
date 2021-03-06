@@ -5,7 +5,6 @@ import registerSchema from '../validation/registerSchema'
 import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { logInUser } from '../redux/actions/users.actions'
-import { Link } from 'react-router-dom'
 
 import {
   Container,
@@ -25,11 +24,10 @@ import { Section } from '../styles'
 const Register = props => {
   const history = useHistory()
 
+  // finds user's last page location, otherwise defaults to /posts
   const prevPage = props.location.state
     ? props.location.state.from.pathname
     : '/posts'
-  // console.log(prevPage)
-  // console.log(props)
 
   const initialValues = {
     username: '',
@@ -89,13 +87,9 @@ const Register = props => {
     e.preventDefault()
     try {
       const response = await axiosCall.post('/register', formData)
-      // console.log('successful try for REGISTER')
-      // console.log(response.data.userData)
       await props.logInUser(response.data.userData)
       history.push(prevPage)
     } catch (err) {
-      console.log('entering CATCH for REGISTER')
-      console.log(err.response.data.message)
       setServerError(err.response.data.message)
     }
   }

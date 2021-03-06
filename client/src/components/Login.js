@@ -5,7 +5,6 @@ import loginSchema from '../validation/loginSchema'
 import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { logInUser } from '../redux/actions/users.actions'
-import { Link } from 'react-router-dom'
 
 import {
   Container,
@@ -23,6 +22,7 @@ import {
 import { Section } from '../styles'
 
 const Login = props => {
+  // Find the previous page user visited, or default to /posts
   const prevPage = props.location.state
     ? props.location.state.from.pathname
     : '/posts'
@@ -46,6 +46,7 @@ const Login = props => {
 
   const [serverError, setServerError] = useState('')
 
+  // Yup validation
   useEffect(() => {
     loginSchema.isValid(formData).then(valid => {
       setDisabled(!valid)
@@ -87,9 +88,6 @@ const Login = props => {
       props.logInUser(response.data)
       history.push(prevPage)
     } catch (err) {
-      console.log('entering CATCH for LOGIN')
-      console.dir(err)
-      console.dir(err.response.data.message)
       setServerError(err.response.data.message)
     }
   }

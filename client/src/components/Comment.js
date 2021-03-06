@@ -15,15 +15,15 @@ import {
 } from '../styles/comment'
 
 const Comment = ({ comment, postId, user, dark }) => {
+  // removes comment from DOM once deleted
   const [hasDeleted, setHasDeleted] = useState(false)
 
+  // toggles the confirmation message
   const [toDelete, setToDelete] = useState(false)
 
   const handleDelete = async id => {
     try {
-      const response = await axiosCall.delete(`/posts/${postId}/comments/${id}`)
-      // console.log('successfully deleted')
-      // console.dir(response)
+      await axiosCall.delete(`/posts/${postId}/comments/${id}`)
       setHasDeleted(true)
     } catch (err) {
       console.log('comment deleting error')

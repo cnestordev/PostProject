@@ -20,6 +20,7 @@ const UserComments = ({ user, dark }) => {
     }
   }, [])
 
+  // sorts, maps, and assigns keys to CommentMin components
   const commentsArr = React.Children.toArray(
     commentsData
       .sort(function (x, y) {

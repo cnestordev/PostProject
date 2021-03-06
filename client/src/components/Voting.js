@@ -5,6 +5,8 @@ import { connect } from 'react-redux'
 import { Container, Icon, Paragraph } from '../styles/voting'
 
 const Voting = ({ data, user, dark }) => {
+  // When Voting component first mounts, it will read the .length of the array, but once a
+  // user casts a vote, the server will send back the length of the array rather than the entire array itself.
   const [metrics, setMetrics] = useState({
     likes: data.likes.length,
     dislikes: data.dislikes.length,
@@ -24,7 +26,6 @@ const Voting = ({ data, user, dark }) => {
   const handleDisike = async () => {
     try {
       const response = await axiosCall.post(`/posts/${data._id}/dislike`)
-      // console.log(response.data.message)
       setMetrics(response.data.message)
     } catch (err) {
       console.dir(err)

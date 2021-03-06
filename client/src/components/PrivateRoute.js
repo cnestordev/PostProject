@@ -18,8 +18,7 @@ const PrivateRoute = ({
         if (user._id || user.id) {
           return <Component dark={dark} toggler={toggler} {...props} />
         } else {
-          console.log('user NOT found')
-          console.log(user)
+          // No user found, redirect to login
           return (
             <Redirect
               to={{

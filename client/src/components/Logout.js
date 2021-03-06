@@ -7,6 +7,7 @@ import { logOutUser } from '../redux/actions/users.actions'
 const Logout = props => {
   const history = useHistory()
 
+  // determine use's last visted page or default to /posts
   const prevPage = props.location.state
     ? props.location.state.from.pathname
     : '/posts'

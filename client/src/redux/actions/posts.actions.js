@@ -2,7 +2,6 @@ import axios from 'axios'
 import axiosCall from '../../api/axiosCall'
 
 export const getPosts = () => async dispatch => {
-  // console.log('GET POST ACTION DEPLOYED')
   try {
     const response = await axiosCall.get(`/posts`)
     dispatch({
@@ -21,7 +20,6 @@ export const removePosts = () => async dispatch => {
 }
 
 export const getFilteredPosts = data => async dispatch => {
-  console.log('filter action deployed')
   dispatch({
     type: 'FILTER_POSTS',
     payload: data,

@@ -27,6 +27,7 @@ const ImageEdit = ({ image, postId, handler, dark, data, setData }) => {
     }
   }
 
+  // if image was deleted by user on Edit, it will display the File input
   if (deleted) {
     return (
       <File
@@ -40,6 +41,7 @@ const ImageEdit = ({ image, postId, handler, dark, data, setData }) => {
     )
   }
 
+  // If there is an existing image, it will display the thumbnail with the delete-icon overlay
   if (Object.keys(image).length) {
     return (
       <Container>
@@ -52,6 +54,7 @@ const ImageEdit = ({ image, postId, handler, dark, data, setData }) => {
       </Container>
     )
   } else {
+    // if no image exists, it will display the File input
     return (
       <File
         dark={dark}

@@ -20,7 +20,6 @@ const users = [
 let links = []
 
 const getReddit = async () => {
-  var t0 = performance.now()
   usersSeed = []
   postsSeed = []
   commentsSeed = []
@@ -93,9 +92,6 @@ const getReddit = async () => {
       commentsSeed.push(comment)
     }
   }
-
-  var t1 = performance.now()
-  console.log('Call to doSomething took ' + (t1 - t0) + ' milliseconds.')
 
   return {
     users: usersSeed,
