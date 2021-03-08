@@ -69,7 +69,11 @@ store.on('error', err => {
 
 app.use(
   session({
-    store,
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGO_DB_URL,
+      secret: process.env.MONGO_SECRET,
+      touchAfter: 24 * 60 * 60,
+    }),
     name: 'rfts',
     secret: 'secretcode',
     resave: false,
