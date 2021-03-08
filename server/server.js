@@ -57,19 +57,18 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 // express session middleware
 
-const store = MongoStore.create({
-  mongoUrl: url,
-  secret: process.env.MONGO_SECRET,
-  touchAfter: 24 * 60 * 60,
-})
+// const store = MongoStore.create({
+//   mongoUrl: url,
+//   secret: process.env.MONGO_SECRET,
+//   touchAfter: 24 * 60 * 60,
+// })
 
-store.on('error', err => {
-  console.log(err)
-})
+// store.on('error', err => {
+//   console.log(err)
+// })
 
 app.use(
   session({
-    store,
     name: 'rfts',
     secret: process.env.MONGO_SECRET,
     resave: false,
