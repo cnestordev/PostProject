@@ -51,7 +51,7 @@ app.use(helmet())
 app.use(express.json())
 app.use(
   cors({
-    origin: 'https://memeit-client.vercel.app/',
+    origin: 'https://memeit-backend.herokuapp.com/',
     credentials: true,
   })
 )
