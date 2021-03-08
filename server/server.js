@@ -17,6 +17,8 @@ const User = require('./models/user')
 
 const MongoStore = require('connect-mongo').default
 
+const PORT = process.env.PORT || 3001
+
 //----------------------------------------------- Connect to MongoDB ------------------------------------------------
 
 const url = process.env.MONGO_DB_URL
@@ -49,7 +51,7 @@ app.use(helmet())
 app.use(express.json())
 app.use(
   cors({
-    origin: 'http://192.168.1.14:3000',
+    origin: PORT || 'http://192.168.1.14:3000',
     credentials: true,
   })
 )
@@ -82,12 +84,12 @@ app.use(
       expires: Date.now() + 1000 * 60 * 60 * 24 * 3,
       maxAge: 1000 * 60 * 60 * 24 * 3,
       httpOnly: true,
-      secure: false, //change this later on
+      secure: true, //change this later on
     },
   })
 )
 
-app.use(cookieParser('secretcode'))
+app.use(cookieParser(process.env.COOKIE_SECRET))
 
 // passport middleware
 app.use(passport.initialize())
@@ -109,8 +111,6 @@ app.use((err, req, res, next) => {
   const { status, message } = err
   res.status(status).json({ message, status })
 })
-
-const PORT = process.env.PORT || 3001
 
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`)
