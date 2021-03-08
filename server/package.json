@@ -6,9 +6,9 @@
     "node": "14.9.0",
     "npm": "6.14.8"
   },
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
