@@ -83,7 +83,7 @@ app.use(
   })
 )
 
-app.use(cookieParser(process.env.COOKIE_SECRET))
+app.use(cookieParser(process.env.MONGO_SECRET))
 
 // passport middleware
 app.use(passport.initialize())
