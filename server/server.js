@@ -47,12 +47,7 @@ app.use(
 )
 app.use(helmet())
 app.use(express.json())
-app.use(
-  cors({
-    origin: ['http://192.168.1.14:3000', 'https://memeit-client.vercel.app'],
-    credentials: true,
-  })
-)
+app.use(cors())
 app.use(express.static(path.join(__dirname, 'public')))
 
 // express session middleware
@@ -83,7 +78,7 @@ app.use(
   })
 )
 
-app.use(cookieParser(process.env.MONGO_SECRET))
+app.use(cookieParser(process.env.COOKIE_SECRET))
 
 // passport middleware
 app.use(passport.initialize())
