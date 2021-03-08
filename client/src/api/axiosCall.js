@@ -6,7 +6,6 @@ const localUrl = 'http://localhost:3001'
 
 const axiosCall = axios.create({
   baseURL: localUrl,
-  withCredentials: true,
 })
 
 export default axiosCall
