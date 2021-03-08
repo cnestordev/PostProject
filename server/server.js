@@ -53,7 +53,8 @@ app.use(
   cors({
     origin: [
       'https://memeit-client.vercel.app',
-      'https://memeit-client.vercel.app/user',
+      'memeit-client-40n8jszc7-cnestordev.vercel.app',
+      '192.164.1.14:3000',
     ],
     credentials: true,
   })
@@ -70,17 +71,6 @@ const store = MongoStore.create({
 
 store.on('error', err => {
   console.log(err)
-})
-
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://memeit-client.vercel.app')
-  res.header('Access-Control-Allow-Headers', true)
-  res.header('Access-Control-Allow-Credentials', true)
-  res.header(
-    'Access-Control-Allow-Methods',
-    'GET, POST, OPTIONS, PUT, PATCH, DELETE'
-  )
-  next()
 })
 
 app.use(
