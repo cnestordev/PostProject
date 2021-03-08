@@ -1,4 +1,5 @@
 require('dotenv').config()
+
 const express = require('express')
 const cors = require('cors')
 const mongoose = require('mongoose')
@@ -14,8 +15,16 @@ const mongoSanitize = require('express-mongo-sanitize')
 const helmet = require('helmet')
 const User = require('./models/user')
 
+const MongoStore = require('connect-mongo').default
+
 //----------------------------------------------- Connect to MongoDB ------------------------------------------------
-mongoose.connect('mongodb://localhost:27017/reddit-clone', {
+
+const url =
+  process.env.NODE_ENV === 'production'
+    ? process.env.MONGO_DB_URL
+    : 'mongodb://localhost:27017/reddit-clone'
+
+mongoose.connect(url, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useUnifiedTopology: true,
@@ -50,8 +59,20 @@ app.use(
 app.use(express.static(path.join(__dirname, 'public')))
 
 // express session middleware
+
+const store = MongoStore.create({
+  mongoUrl: url,
+  secret: process.env.MONGO_SECRET,
+  touchAfter: 24 * 60 * 60,
+})
+
+store.on('error', err => {
+  console.log(err)
+})
+
 app.use(
   session({
+    store,
     name: 'rfts',
     secret: 'secretcode',
     resave: false,

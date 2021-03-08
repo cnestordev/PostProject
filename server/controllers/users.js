@@ -59,8 +59,8 @@ const register = async (req, res, next) => {
           to: userData.email, // Change to your recipient
           from: 'nestor@nestordev.com', // Change to your verified sender
           subject: 'Thanks for visiting!',
-          text: `Hello, ${userData.username}! Thank you for visiting one of my applications!  Feel free to respond to this email, if you have any further questions.`,
-          html: `<p>Hello, ${userData.username}, Thank you for visiting one of my applications.  Feel free to respond to this email, if you have any questions.</p>`,
+          text: `Hello, ${userData.username}! Thank you for visiting one of my applications!  To get in touch with me, please feel free to respond to this email.  I'll get back to you ASAP`,
+          html: `Hello, ${userData.username}! Thank you for visiting one of my applications!  To get in touch with me, please feel free to respond to this email.  I'll get back to you ASAP`,
         }
         sgMail
           .send(msg)
