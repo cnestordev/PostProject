@@ -29,7 +29,7 @@ const NavigationBar = ({ user, logInUser, dark, toggler }) => {
       logInUser(user.data)
     } catch (err) {
       console.log('ERROR getting user')
-      console.log(err.message)
+      console.dir(err)
     }
   }, [])
   return (
