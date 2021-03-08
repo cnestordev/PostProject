@@ -70,7 +70,7 @@ store.on('error', err => {
 app.use(
   session({
     store: MongoStore.create({
-      mongoUrl: process.env.MONGO_DB_URL,
+      mongoUrl: url,
       secret: process.env.MONGO_SECRET,
       touchAfter: 24 * 60 * 60,
     }),
