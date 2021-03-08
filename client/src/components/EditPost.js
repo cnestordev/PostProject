@@ -8,6 +8,8 @@ import Loader from 'react-loader-spinner'
 import imageUploader from '../util/imageUploader'
 import axiosCall from '../api/axiosCall'
 
+import Popup from './Popup'
+
 import {
   Container,
   Header,
@@ -26,12 +28,6 @@ import { Section } from '../styles'
 
 const EditPost = ({ match, dark }) => {
   const id = match.params.id
-
-  const defaultErrorValues = {
-    hasError: false,
-    message: '',
-    status: '',
-  }
 
   const [data, setData] = useState({
     title: '',
@@ -61,7 +57,8 @@ const EditPost = ({ match, dark }) => {
   // use to trigger the useEffect, the useEffect will complete the update to MongoDb.
   const [edited, setHasEdited] = useState(false)
 
-  const [serverError, setServerError] = useState(defaultErrorValues)
+  // network errors
+  const [error, setError] = useState('')
 
   const history = useHistory()
 
@@ -81,11 +78,8 @@ const EditPost = ({ match, dark }) => {
         editCount: data.editCount,
       })
     } catch (err) {
-      setServerError({
-        hasError: true,
-        message: err.response.data.message,
-        status: err.response.data.status,
-      })
+      setError(err.response.data.message)
+      setDisabled(true)
     }
   }, [])
 
@@ -98,16 +92,12 @@ const EditPost = ({ match, dark }) => {
   useEffect(async () => {
     if (data.title || data.tags.length > 0) {
       try {
-        const response = await axiosCall.put(`/posts/${id}/edit`, data)
+        await axiosCall.put(`/posts/${id}/edit`, data)
         setSending(false)
         history.push(`/posts/${id}`)
       } catch (err) {
         setSending(false)
-        setServerError({
-          hasError: true,
-          message: err.response.data.message,
-          status: err.response.data.status,
-        })
+        setError(err.response.data.message)
       }
     }
   }, [edited])
@@ -149,24 +139,26 @@ const EditPost = ({ match, dark }) => {
   const handleSubmit = async e => {
     e.preventDefault()
     setSending(true)
-    let img = await imageUploader(imageData, 'main')
-    img = Object.keys(img).length ? img : data.image
-    setData({
-      ...data,
-      image: img,
-      editCount: data.editCount + 1,
-    })
-    setHasEdited(true)
-    return
+    try {
+      let img = await imageUploader(imageData, 'main')
+      img = Object.keys(img).length ? img : data.image
+      setData({
+        ...data,
+        image: img,
+        editCount: data.editCount + 1,
+      })
+      setHasEdited(true)
+      return
+    } catch (err) {
+      setError(err.response.data.message || 'Something went wrong')
+    }
   }
 
   return (
     <Section>
+      {error && <Popup message={error} />}
       <Container dark={dark}>
         <Header dark={dark}>Edit Form</Header>
-        {serverError.hasError && (
-          <ServerMessage>{serverError.message}</ServerMessage>
-        )}
         <Form autoComplete="off" onSubmit={handleSubmit}>
           <InputText
             onChange={handleChange}
@@ -189,6 +181,7 @@ const EditPost = ({ match, dark }) => {
             image={data.image}
             setData={setData}
             data={data}
+            alertToggler={setError}
           />
           <InputText
             dark={dark}

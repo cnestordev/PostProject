@@ -29,7 +29,7 @@ const getPostById = async (req, res, next) => {
     }
     res.status(200).json({ data: post })
   } catch (error) {
-    return next({ message: 'Invalid URL', status: 400 })
+    return next({ message: 'No Post Found', status: 400 })
   }
 }
 
@@ -219,8 +219,8 @@ const searchPost = async (req, res, next) => {
   const searchKey = new RegExp(query, 'i')
   try {
     Post.find({ title: searchKey }, function (err, doc) {
-      if (err) return next({ message: err.message, status: 500 })
-      if (!doc) return next({ message: err.message, status: 404 })
+      if (err) return next({ message: 'No Results', status: 500 })
+      if (!doc) return next({ message: 'No Results', status: 404 })
       if (doc) return res.status(201).json({ message: doc, status: 201 })
     }).populate({
       path: 'author',

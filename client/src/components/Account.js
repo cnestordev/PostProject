@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import axiosCall from '../api/axiosCall'
 import { useHistory } from 'react-router-dom'
 import { logOutUser } from '../redux/actions/users.actions'
+import Popup from './Popup'
 
 import Loader from 'react-loader-spinner'
 
@@ -21,11 +22,14 @@ import {
 
 import { Section } from '../styles'
 
-const Account = ({ user, dark, toggler, logOutUser }) => {
+const Account = ({ user, dark, toggler, logOutUser, errorMsg }) => {
   // toggles the confirmation message for deleting
   const [toDelete, setToDelete] = useState(false)
 
   const [deleting, setDeleting] = useState(false)
+
+  // network errors
+  const [error, setError] = useState(null)
 
   const history = useHistory()
 
@@ -37,6 +41,7 @@ const Account = ({ user, dark, toggler, logOutUser }) => {
       history.push('/posts')
     } catch (err) {
       setDeleting(false)
+      setError('something went wrong!')
     }
   }
 
@@ -46,6 +51,7 @@ const Account = ({ user, dark, toggler, logOutUser }) => {
 
   return (
     <Section>
+      {error && <Popup message={error} />}
       <Container dark={dark}>
         <Header dark={dark}>Hello, {user.username}</Header>
         {user.isAdmin && <AdminFlair dark={dark}>Admin</AdminFlair>}
@@ -86,6 +92,13 @@ const Account = ({ user, dark, toggler, logOutUser }) => {
                 />
               )}
             </Button>
+            {/* {error && (
+              <p
+                style={{ color: '#ff2c2c', fontSize: '2rem', marginTop: '2%' }}
+              >
+                {error}
+              </p>
+            )} */}
           </>
         )}
       </Container>

@@ -14,7 +14,7 @@ import {
   Icon,
 } from '../styles/comment'
 
-const Comment = ({ comment, postId, user, dark }) => {
+const Comment = ({ comment, postId, user, dark, alertToggler }) => {
   // removes comment from DOM once deleted
   const [hasDeleted, setHasDeleted] = useState(false)
 
@@ -26,8 +26,7 @@ const Comment = ({ comment, postId, user, dark }) => {
       await axiosCall.delete(`/posts/${postId}/comments/${id}`)
       setHasDeleted(true)
     } catch (err) {
-      console.log('comment deleting error')
-      console.dir(err)
+      alertToggler(err.response.data.message)
     }
   }
 
@@ -50,6 +49,7 @@ const Comment = ({ comment, postId, user, dark }) => {
           comment={comment}
           postId={postId}
           user={user}
+          alertToggler={alertToggler}
         />
         {(user._id === comment.authorId || user.isAdmin) && (
           <DeleteCommentContainer>

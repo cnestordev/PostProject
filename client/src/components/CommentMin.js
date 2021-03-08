@@ -5,7 +5,7 @@ import axiosCall from '../api/axiosCall'
 import { IconContainer, Icon, P } from '../styles/postMin'
 import { Container, Body, PostLink } from '../styles/commentMin'
 
-const CommentMin = ({ user, comment, dark }) => {
+const CommentMin = ({ user, comment, dark, alertToggler }) => {
   // toggles the confirmation message
   const [toggleDelete, setToggleDelete] = useState(false)
   // if successfully deleted, this removes comment from DOM
@@ -20,8 +20,7 @@ const CommentMin = ({ user, comment, dark }) => {
       await axiosCall.delete(`/posts/${comment.originated}/comments/${id}`)
       setHasDeleted(true)
     } catch (err) {
-      console.log('comment deleting error')
-      console.dir(err)
+      alertToggler(err.response.data.message)
     }
   }
 

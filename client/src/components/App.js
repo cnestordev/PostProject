@@ -28,6 +28,9 @@ const App = ({ user }) => {
 
   const [display, setDisplay] = useState(false)
 
+  // network errors
+  const [error, setError] = useState('')
+
   const handleThemeToggle = async theme => {
     try {
       const response = await axiosCall.post(`/${user._id}/themeToggle/${theme}`)
@@ -35,7 +38,7 @@ const App = ({ user }) => {
       setTheme(val)
       document.body.style.backgroundColor = val ? '#0e141b' : '#f2f2f2'
     } catch (err) {
-      console.dir(err)
+      setError(err.response.data.message)
     }
   }
 
@@ -65,6 +68,7 @@ const App = ({ user }) => {
           path="/account"
           render={props => (
             <PrivateRoute
+              errorMsg={error}
               toggler={handleThemeToggle}
               dark={theme}
               component={Account}

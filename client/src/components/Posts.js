@@ -4,10 +4,15 @@ import { getPosts, removePosts } from '../redux/actions/posts.actions'
 import Post from './Post'
 import SearchBar from './SearchBar'
 
+import Popup from './Popup'
+
 import { Section } from '../styles/index'
 
 const Posts = props => {
   const [filter, setFilter] = useState('timestamp')
+
+  // network errors
+  const [error, setError] = useState('')
 
   useEffect(() => {
     props.getPosts()
@@ -24,13 +29,19 @@ const Posts = props => {
         return y[filter].length - x[filter].length
       })
       .map(post => {
-        return <Post dark={props.dark} data={post} />
+        return <Post alertToggler={setError} dark={props.dark} data={post} />
       })
   )
 
   return (
     <Section>
-      <SearchBar dark={props.dark} filter={filter} toggler={setFilter} />
+      {error && <Popup message={error} />}
+      <SearchBar
+        alertToggler={setError}
+        dark={props.dark}
+        filter={filter}
+        toggler={setFilter}
+      />
       {postArr}
     </Section>
   )

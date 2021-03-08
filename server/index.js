@@ -10,6 +10,8 @@ const session = require('express-session')
 const passport = require('passport')
 var cookieParser = require('cookie-parser')
 const LocalStrategy = require('passport-local')
+const mongoSanitize = require('express-mongo-sanitize')
+const helmet = require('helmet')
 const User = require('./models/user')
 
 //----------------------------------------------- Connect to MongoDB ------------------------------------------------
@@ -32,6 +34,12 @@ const app = express()
 
 app.set('views', path.join(__dirname, 'views'))
 
+app.use(
+  mongoSanitize({
+    replaceWith: '_',
+  })
+)
+app.use(helmet())
 app.use(express.json())
 app.use(
   cors({
@@ -44,7 +52,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 // express session middleware
 app.use(
   session({
-    name: 'postsits',
+    name: 'rfts',
     secret: 'secretcode',
     resave: false,
     saveUninitialized: true, // this should be default || GDPR compliance
@@ -71,7 +79,7 @@ app.use('/posts/:id/comments', commentsRouter)
 app.use('/', usersRouter)
 
 app.all('*', (req, res) => {
-  res.status(404).json({ message: 'Invalid URL' })
+  res.status(404).json({ message: 'Invalid search term' })
 })
 
 app.use((err, req, res, next) => {

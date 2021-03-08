@@ -8,6 +8,8 @@ import Loader from 'react-loader-spinner'
 import imageUploader from '../util/imageUploader'
 import axiosCall from '../api/axiosCall'
 
+import Popup from './Popup'
+
 import {
   Container,
   Header,
@@ -42,12 +44,6 @@ const CreatePost = ({ dark }) => {
     tags: '',
   })
 
-  const defaultErrorValues = {
-    hasError: false,
-    message: '',
-    status: '',
-  }
-
   const history = useHistory()
 
   const [imageData, setImageData] = useState(null)
@@ -59,7 +55,8 @@ const CreatePost = ({ dark }) => {
 
   const [disabled, setDisabled] = useState(true)
 
-  const [serverError, setServerError] = useState(defaultErrorValues)
+  // network errors
+  const [error, setError] = useState('')
 
   useEffect(() => {
     formSchema.isValid(data).then(valid => {
@@ -76,11 +73,8 @@ const CreatePost = ({ dark }) => {
         history.push(`/posts/${postId}`)
       } catch (err) {
         setSending(false)
-        setServerError({
-          hasError: true,
-          message: err.response.data.message,
-          status: err.response.data.status,
-        })
+        setError(err.response.data.message)
+        setDisabled(true)
       }
     }
   }, [querying])
@@ -121,7 +115,6 @@ const CreatePost = ({ dark }) => {
 
   const handleSubmit = async e => {
     e.preventDefault()
-    setServerError(defaultErrorValues)
     setSending(true)
     const img = await imageUploader(imageData, 'main')
     setData({
@@ -134,11 +127,9 @@ const CreatePost = ({ dark }) => {
 
   return (
     <Section>
+      {error && <Popup message={error} />}
       <Container dark={dark}>
         <Header dark={dark}>Create Post</Header>
-        {serverError.hasError && (
-          <ServerMessage>{serverError.message}</ServerMessage>
-        )}
         <Form autoComplete="off" onSubmit={handleSubmit}>
           <InputText
             onChange={handleChange}

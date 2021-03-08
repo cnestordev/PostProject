@@ -84,7 +84,17 @@ export const Rating = styled.p`
 
 export const Icon = styled.i`
   font-size: 1.5rem;
-  color: #808080;
+  color: ${props => {
+    if (!props.active && !props.dark) {
+      return '#262626'
+    } else if (!props.active && props.dark) {
+      return '#a5a9ac'
+    } else if (props.active && !props.dark) {
+      return '#ff6635'
+    } else if (props.active && props.dark) {
+      return '#44ff4c'
+    }
+  }};
   user-select: none;
 
   @media (max-width: 992px) {

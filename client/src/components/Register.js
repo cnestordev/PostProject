@@ -20,6 +20,7 @@ import {
 } from '../styles/login'
 
 import { Section } from '../styles'
+import Popup from './Popup'
 
 const Register = props => {
   const history = useHistory()
@@ -47,7 +48,7 @@ const Register = props => {
 
   const [disabled, setDisabled] = useState(true)
 
-  const [serverError, setServerError] = useState('')
+  const [error, setError] = useState('')
 
   useEffect(() => {
     registerSchema.isValid(formData).then(valid => {
@@ -90,15 +91,15 @@ const Register = props => {
       await props.logInUser(response.data.userData)
       history.push(prevPage)
     } catch (err) {
-      setServerError(err.response.data.message)
+      setError(err.response.data.message)
     }
   }
 
   return (
     <Section>
+      {error && <Popup message={error} />}
       <Container>
         <Header>Reigster User:</Header>
-        {serverError.length > 0 && <ServerError>{serverError}</ServerError>}
         <Form autoComplete="off" onSubmit={handleSubmit}>
           <Input
             type="text"

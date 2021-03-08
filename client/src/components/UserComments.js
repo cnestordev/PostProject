@@ -2,12 +2,16 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import axiosCall from '../api/axiosCall'
 import CommentMin from './CommentMin'
+import Popup from './Popup'
 
 import { Section } from '../styles'
 import { Header } from '../styles/postMin'
 
 const UserComments = ({ user, dark }) => {
   const [commentsData, setCommentsData] = useState([])
+
+  // network errors
+  const [error, setError] = useState('')
 
   useEffect(async () => {
     try {
@@ -16,7 +20,7 @@ const UserComments = ({ user, dark }) => {
       )
       setCommentsData(response.data.message)
     } catch (err) {
-      console.dir(err)
+      setError(err.response.data.message)
     }
   }, [])
 
@@ -27,12 +31,20 @@ const UserComments = ({ user, dark }) => {
         return y.timestamp - x.timestamp
       })
       .map(comment => {
-        return <CommentMin user={user} dark={dark} comment={comment} />
+        return (
+          <CommentMin
+            alertToggler={setError}
+            user={user}
+            dark={dark}
+            comment={comment}
+          />
+        )
       })
   )
 
   return (
     <Section>
+      {error && <Popup message={error} />}
       <Header dark={dark}>{`${user.username}'s comment history`}</Header>
       <div>{commentsArr}</div>
     </Section>

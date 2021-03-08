@@ -11,19 +11,27 @@ import {
   Icon,
 } from '../styles/imageEdit'
 
-const ImageEdit = ({ image, postId, handler, dark, data, setData }) => {
+const ImageEdit = ({
+  image,
+  postId,
+  handler,
+  dark,
+  data,
+  setData,
+  alertToggler,
+}) => {
   const [deleted, hasDeleted] = useState(false)
 
   const handleImgDel = async img => {
     try {
-      const response = await axiosCall.delete(`/posts/${postId}/${image.id}`)
+      await axiosCall.delete(`/posts/${postId}/${image.id}`)
       hasDeleted(true)
       setData({
         ...data,
         image: {},
       })
     } catch (err) {
-      console.log(err)
+      alertToggler(err.response.data.message)
     }
   }
 

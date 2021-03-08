@@ -3,7 +3,7 @@ import axiosCall from '../api/axiosCall'
 
 import { CommentSocialContainer, Rating, Icon } from '../styles/comment'
 
-const VotingComment = ({ comment, postId, user, dark }) => {
+const VotingComment = ({ comment, postId, user, dark, alertToggler }) => {
   // when VotingComment first mounts, it will read the length of the likes/dislikes arrays
   // but when user casts a vote, the server will return the length of the array rather than the entire array itself.
   const [metrics, setMetrics] = useState({
@@ -20,7 +20,7 @@ const VotingComment = ({ comment, postId, user, dark }) => {
       )
       setMetrics(response.data.message)
     } catch (err) {
-      console.dir(err)
+      alertToggler(err.response.data.message)
     }
   }
 
@@ -31,7 +31,7 @@ const VotingComment = ({ comment, postId, user, dark }) => {
       )
       setMetrics(response.data.message)
     } catch (err) {
-      console.dir(err)
+      alertToggler(err.response.data.message)
     }
   }
 
@@ -39,10 +39,20 @@ const VotingComment = ({ comment, postId, user, dark }) => {
     <>
       <CommentSocialContainer>
         <Rating dark={dark} active={metrics.liked} onClick={handleLike}>
-          <Icon className="far fa-thumbs-up"></Icon> {metrics.likes}
+          <Icon
+            dark={dark}
+            active={metrics.liked}
+            className="far fa-thumbs-up"
+          ></Icon>{' '}
+          {metrics.likes}
         </Rating>
         <Rating dark={dark} active={metrics.disliked} onClick={handleDislike}>
-          <Icon className="far fa-thumbs-down"></Icon> {metrics.dislikes}
+          <Icon
+            dark={dark}
+            active={metrics.disliked}
+            className="far fa-thumbs-down"
+          ></Icon>{' '}
+          {metrics.dislikes}
         </Rating>
       </CommentSocialContainer>
     </>

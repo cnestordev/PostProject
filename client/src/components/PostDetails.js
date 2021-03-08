@@ -10,6 +10,7 @@ import ErrorPage from './ErrorPage'
 import PostComment from './PostComment'
 import axiosCall from '../api/axiosCall'
 import Voting from './Voting'
+import Popup from './Popup'
 
 import {
   Container,
@@ -42,6 +43,9 @@ const PostDetails = ({ user, match, dark }) => {
 
   const [error, setError] = useState(false)
 
+  // network errors
+  const [alert, setAlert] = useState('')
+
   useEffect(async () => {
     try {
       const response = await axiosCall.get(`/posts/${id}`)
@@ -64,7 +68,7 @@ const PostDetails = ({ user, match, dark }) => {
       await axiosCall.delete(`/posts/${id}/delete`)
       history.push('/posts')
     } catch (err) {
-      console.dir(err)
+      setAlert(err.response.data.message)
     }
   }
 
@@ -83,6 +87,7 @@ const PostDetails = ({ user, match, dark }) => {
   if (Object.keys(postData).length > 0) {
     return (
       <Section>
+        {alert && <Popup message={alert} />}
         <Container dark={dark}>
           <Title dark={dark}>{postData.title}</Title>
           <Author dark={dark}>Posted by {postData.author.username}</Author>
@@ -117,11 +122,12 @@ const PostDetails = ({ user, match, dark }) => {
           <PostBody dark={dark}>{postData.body}</PostBody>
           {imageHandler(postData.image, 'full', null)}
           <VoteContainer>
-            <Voting dark={dark} data={postData} />
+            <Voting alertToggler={setAlert} dark={dark} data={postData} />
           </VoteContainer>
         </Container>
         <CommentSection>
           <PostComment
+            alertToggler={setAlert}
             dark={dark}
             postData={postData}
             postId={postData['_id']}

@@ -3,7 +3,7 @@ import Comment from './Comment'
 
 import { Container, Header } from '../styles/comments'
 
-const Comments = ({ data, postId, dark }) => {
+const Comments = ({ data, postId, dark, alertToggler }) => {
   // sorts, maps, and assgins keys to children components
   const commentArr = React.Children.toArray(
     data
@@ -11,7 +11,14 @@ const Comments = ({ data, postId, dark }) => {
         return y.timestamp - x.timestamp
       })
       .map(comment => {
-        return <Comment dark={dark} postId={postId} comment={comment} />
+        return (
+          <Comment
+            alertToggler={alertToggler}
+            dark={dark}
+            postId={postId}
+            comment={comment}
+          />
+        )
       })
   )
   return (

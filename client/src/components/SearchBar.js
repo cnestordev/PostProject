@@ -11,6 +11,7 @@ const SearchBar = ({
   dark,
   getFilteredPosts,
   removePosts,
+  alertToggler,
 }) => {
   const [query, setQuery] = useState('')
 
@@ -29,7 +30,8 @@ const SearchBar = ({
       const response = await axiosCall.get(`/posts/search/${query}`)
       getFilteredPosts(response.data.message)
     } catch (err) {
-      console.dir(err)
+      alertToggler(err.response.data.message)
+      setQuery('')
     }
   }
 

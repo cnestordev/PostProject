@@ -7,15 +7,19 @@ import { Header } from '../styles/postMin'
 
 import PostMin from './PostMin'
 
-const UserPosts = ({ user, dark }) => {
+import Popup from './Popup'
+
+const UserPosts = ({ user, dark, blah }) => {
   const [postsData, setPostsData] = useState([])
+  // network errors
+  const [error, setError] = useState('')
 
   useEffect(async () => {
     try {
       const response = await axiosCall.get(`/posts/all/${user._id}`)
       setPostsData(response.data.message)
     } catch (err) {
-      console.dir(err)
+      setError(err.response.data.message)
     }
   }, [])
 
@@ -32,6 +36,7 @@ const UserPosts = ({ user, dark }) => {
 
   return (
     <Section>
+      {error && <Popup message={error} />}
       <Header dark={dark}>{`${user.username}'s posts`}</Header>
       <div>{postsArr}</div>
     </Section>

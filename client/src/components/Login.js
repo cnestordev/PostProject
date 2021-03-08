@@ -6,6 +6,8 @@ import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { logInUser } from '../redux/actions/users.actions'
 
+import Popup from './Popup'
+
 import {
   Container,
   Header,
@@ -44,7 +46,8 @@ const Login = props => {
 
   const [disabled, setDisabled] = useState(true)
 
-  const [serverError, setServerError] = useState('')
+  // network errors
+  const [error, setError] = useState('')
 
   // Yup validation
   useEffect(() => {
@@ -88,19 +91,15 @@ const Login = props => {
       props.logInUser(response.data)
       history.push(prevPage)
     } catch (err) {
-      setServerError(err.response.data.message)
+      setError(err.response.data.message)
     }
   }
 
   return (
     <Section>
+      {error && <Popup message={error} />}
       <Container>
         <Header>Login User:</Header>
-        {serverError.length > 0 && (
-          <ServerError className="serverErrorMessage">
-            {serverError}
-          </ServerError>
-        )}
         <Form autoComplete="off" onSubmit={handleSubmit}>
           <Input
             type="text"

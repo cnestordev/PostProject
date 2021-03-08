@@ -16,7 +16,7 @@ import {
   TagsContainer,
 } from '../styles/post'
 
-const Post = ({ data, user, dark }) => {
+const Post = ({ data, dark, alertToggler }) => {
   return (
     <Container dark={dark}>
       <Title dark={dark}>{data.title}</Title>
@@ -39,7 +39,7 @@ const Post = ({ data, user, dark }) => {
           backdropFilter: 'blur(0px)',
         }}
       >
-        <Voting dark={dark} data={data} />
+        <Voting alertToggler={alertToggler} dark={dark} data={data} />
       </div>
     </Container>
   )

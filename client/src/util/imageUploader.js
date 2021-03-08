@@ -29,7 +29,7 @@ const imageUploader = async (image, directory = 'main') => {
     }
     return {}
   }
-  return
+  return {}
 }
 
 export default imageUploader

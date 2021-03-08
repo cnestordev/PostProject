@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
 import axiosCall from '../api/axiosCall'
 import * as yup from 'yup'
@@ -26,8 +25,6 @@ const PostComment = props => {
   const [errors, setErrors] = useState(initialErrorValues)
 
   const [disabled, setDisabled] = useState(true)
-
-  const [serverError, setServerError] = useState('')
 
   const [comments, setComments] = useState(props.postData.comments)
 
@@ -76,7 +73,7 @@ const PostComment = props => {
       setCommentData(commentDataValues)
       setComments(response.data.data.comments)
     } catch (err) {
-      setServerError(err.response.data.message)
+      props.alertToggler(err.response.data.message)
     }
   }
 
@@ -96,17 +93,6 @@ const PostComment = props => {
               value={commentData.body}
               placeholder={'post a comment'}
             />
-            {serverError && (
-              <p
-                style={{
-                  fontSize: '1.5rem',
-                  color: 'red',
-                  textAlign: 'center',
-                }}
-              >
-                {serverError}
-              </p>
-            )}
             {errors.body && (
               <p
                 style={{
@@ -126,7 +112,12 @@ const PostComment = props => {
           <LoginPrompt />
         )}
       </Container>
-      <Comments dark={props.dark} postId={props.postId} data={comments} />
+      <Comments
+        alertToggler={props.alertToggler}
+        dark={props.dark}
+        postId={props.postId}
+        data={comments}
+      />
     </>
   )
 }

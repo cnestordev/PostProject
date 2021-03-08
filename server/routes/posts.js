@@ -25,17 +25,33 @@ const {
 
 const cloudinary = require('../cloudinary')
 
+const { body: check } = require('express-validator')
+
 router.get('/', index)
 
 router.get('/search/:query', searchPost)
 
 router.get('/:id', getPostById)
 
-router.post('/new', isLoggedIn, addMetaData, validatePost, createNewPost)
+router.post(
+  '/new',
+  isLoggedIn,
+  [check('body').escape().trim(), check('title').trim().escape()],
+  addMetaData,
+  validatePost,
+  createNewPost
+)
 
 router.get('/:id/edit', isLoggedIn, isAuthorized, getPostFormById)
 
-router.put('/:id/edit', isLoggedIn, isAuthorized, validatePost, editFormById)
+router.put(
+  '/:id/edit',
+  isLoggedIn,
+  [check('body').escape().trim(), check('title').trim().escape()],
+  isAuthorized,
+  validatePost,
+  editFormById
+)
 
 router.delete('/:id/delete', isLoggedIn, isAuthOrAdmin, deletePostById)
 

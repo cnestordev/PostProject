@@ -9,8 +9,9 @@ import {
   Subheader,
   Icon,
   P,
-  PostLink,
 } from '../styles/postMin'
+
+import { PostLink } from '../styles/commentMin'
 
 const PostMin = ({ post, dark }) => {
   return (
@@ -33,6 +34,13 @@ const PostMin = ({ post, dark }) => {
             <Icon dark={dark} className="fas fa-comment"></Icon>{' '}
             {post.comments.length}
           </P>
+          <PostLink to={`/posts/${post._id}`} pointer={true} dark={dark}>
+            <Icon
+              dark={dark}
+              className="fas fa-external-link-square-alt"
+            ></Icon>{' '}
+            Post
+          </PostLink>
         </IconContainer>
       </InfoContainer>
     </Container>

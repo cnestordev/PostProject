@@ -14,6 +14,8 @@ const {
   toggleTheme,
 } = require('../controllers/users')
 
+const { body: check } = require('express-validator')
+
 router.get('/', index)
 
 //route for development only
@@ -22,9 +24,14 @@ router.get('/user', userData)
 //  dev only
 router.get('/isloggedin', isLoggedOn)
 
-router.post('/register', validateUser, register)
+router.post(
+  '/register',
+  [check('username').trim().escape()],
+  validateUser,
+  register
+)
 
-router.post('/login', loginUser)
+router.post('/login', [check('username').trim().escape()], loginUser)
 
 router.get('/logout', logoutUser)
 

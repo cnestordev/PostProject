@@ -16,8 +16,17 @@ const {
   getUsersComments,
 } = require('../controllers/comments')
 
+const { body: check } = require('express-validator')
+
 // create a comment
-router.post('/', isLoggedIn, addMetaData, validateComment, index)
+router.post(
+  '/',
+  isLoggedIn,
+  [check('body').trim().escape().isAlphanumeric()],
+  addMetaData,
+  validateComment,
+  index
+)
 
 // delete a comment
 router.delete('/:commentId/', isLoggedIn, commentAuthor, deleteComment)
