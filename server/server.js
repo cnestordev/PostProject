@@ -75,14 +75,14 @@ app.use(
       touchAfter: 24 * 60 * 60,
     }),
     name: 'rfts',
-    secret: 'secretcode',
+    secret: process.env.MONGO_SECRET,
     resave: false,
     saveUninitialized: true, // this should be default || GDPR compliance
     cookie: {
       expires: Date.now() + 1000 * 60 * 60 * 24 * 3,
       maxAge: 1000 * 60 * 60 * 24 * 3,
       httpOnly: true,
-      secure: false, //change this later on
+      secure: true, //change this later on
     },
   })
 )
