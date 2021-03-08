@@ -19,10 +19,7 @@ const MongoStore = require('connect-mongo').default
 
 //----------------------------------------------- Connect to MongoDB ------------------------------------------------
 
-const url =
-  process.env.NODE_ENV === 'production'
-    ? process.env.MONGO_DB_URL
-    : 'mongodb://localhost:27017/reddit-clone'
+const url = process.env.MONGO_DB_URL
 
 mongoose.connect(url, {
   useNewUrlParser: true,
