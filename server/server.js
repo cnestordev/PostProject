@@ -47,23 +47,29 @@ app.use(
 )
 app.use(helmet())
 app.use(express.json())
-app.use(cors())
+app.use(
+  cors({
+    origin: ['http://192.168.1.14:3000', 'https://memeit-client.vercel.app'],
+    credentials: true,
+  })
+)
 app.use(express.static(path.join(__dirname, 'public')))
 
 // express session middleware
 
-// const store = MongoStore.create({
-//   mongoUrl: url,
-//   secret: process.env.MONGO_SECRET,
-//   touchAfter: 24 * 60 * 60,
-// })
+const store = MongoStore.create({
+  mongoUrl: url,
+  secret: process.env.MONGO_SECRET,
+  touchAfter: 24 * 60 * 60,
+})
 
-// store.on('error', err => {
-//   console.log(err)
-// })
+store.on('error', err => {
+  console.log(err)
+})
 
 app.use(
   session({
+    store,
     name: 'rfts',
     secret: process.env.MONGO_SECRET,
     resave: false,
