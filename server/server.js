@@ -55,7 +55,17 @@ const allowedOrigins = [
   'http://192.168.1.14:3000',
   'http://localhost:3000',
 ]
-app.use(cors())
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (allowedOrigins.indexOf(origin) === -1 || !origin) {
+        return callback(new Error('not allowed'), false)
+      }
+      return callback(null, true)
+    },
+    credentials: true,
+  })
+)
 
 // app.use(
 //   cors({
