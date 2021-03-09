@@ -51,14 +51,12 @@ app.use(helmet())
 app.use(express.json())
 app.use(
   cors({
-    origin: [
-      'https://memeit-client.vercel.app',
-      'memeit-client-40n8jszc7-cnestordev.vercel.app',
-      '192.164.1.14:3000',
-    ],
+    origin: ['https://memeit-client.vercel.app', 'http://192.168.1.14:3000'],
     credentials: true,
+    methods: ['GET', 'PUT', 'POST', 'OPTIONS', 'DELETE'],
   })
 )
+
 app.use(express.static(path.join(__dirname, 'public')))
 
 // express session middleware
