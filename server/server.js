@@ -17,6 +17,8 @@ const User = require('./models/user')
 
 const MongoStore = require('connect-mongo').default
 
+const PORT = process.env.PORT || 3001
+
 //----------------------------------------------- Connect to MongoDB ------------------------------------------------
 
 const url = process.env.MONGO_DB_URL
@@ -49,7 +51,11 @@ app.use(helmet())
 app.use(express.json())
 app.use(
   cors({
-    origin: ['http://192.168.1.14:3000', 'https://memeit-client.vercel.app'],
+    origin: [
+      'https://memeit-client.vercel.app',
+      'memeit-client-40n8jszc7-cnestordev.vercel.app',
+      '192.164.1.14:3000',
+    ],
     credentials: true,
   })
 )
@@ -78,7 +84,7 @@ app.use(
       expires: Date.now() + 1000 * 60 * 60 * 24 * 3,
       maxAge: 1000 * 60 * 60 * 24 * 3,
       httpOnly: true,
-      secure: true, //change this later on
+      secure: false, //change this later on
     },
   })
 )
@@ -105,8 +111,6 @@ app.use((err, req, res, next) => {
   const { status, message } = err
   res.status(status).json({ message, status })
 })
-
-const PORT = process.env.PORT || 3001
 
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`)
