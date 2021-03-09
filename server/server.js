@@ -81,7 +81,7 @@ app.use(
     cookie: {
       expires: Date.now() + 1000 * 60 * 60 * 24 * 3,
       maxAge: 1000 * 60 * 60 * 24 * 3,
-      httpOnly: true,
+      httpOnly: false,
       secure: true, //change this later on
       sameSite: 'none',
     },
