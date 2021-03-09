@@ -49,13 +49,30 @@ app.use(
 )
 app.use(helmet())
 app.use(express.json())
+
+const allowedOrigins = [
+  'https://memeit-client.vercel.app',
+  'http://192.168.1.14:3000',
+]
 app.use(
   cors({
-    origin: 'https://memeit-client.vercel.app',
+    origin: function (origin, callback) {
+      if (allowedOrigins.indexOf(origin) === -1 || !origin) {
+        return callback(new Error('not allowed'), false)
+      }
+      return callback(null, true)
+    },
     credentials: true,
-    methods: ['GET', 'PUT', 'POST', 'OPTIONS', 'DELETE'],
   })
 )
+
+// app.use(
+//   cors({
+//     origin: 'https://memeit-client.vercel.app',
+//     credentials: true,
+//     methods: ['GET', 'PUT', 'POST', 'OPTIONS', 'DELETE'],
+//   })
+// )
 
 app.use(express.static(path.join(__dirname, 'public')))
 
