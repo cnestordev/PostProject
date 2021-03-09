@@ -74,7 +74,7 @@ store.on('error', err => {
 app.use(
   session({
     store,
-    name: 'rfts',
+    name: 'pfil',
     secret: process.env.MONGO_SECRET,
     resave: false,
     saveUninitialized: true, // this should be default || GDPR compliance
