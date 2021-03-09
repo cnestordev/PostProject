@@ -73,7 +73,6 @@ store.on('error', err => {
 
 app.use(
   session({
-    store,
     name: 'pfil',
     secret: process.env.MONGO_SECRET,
     resave: false,
