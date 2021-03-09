@@ -50,30 +50,30 @@ app.use(
 app.use(helmet())
 app.use(express.json())
 
-const allowedOrigins = [
-  'https://memeit-client.vercel.app',
-  'http://192.168.1.14:3000',
-  'http://localhost:3000',
-]
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      if (allowedOrigins.indexOf(origin) === -1 || !origin) {
-        return callback(new Error('not allowed'), false)
-      }
-      return callback(null, true)
-    },
-    credentials: true,
-  })
-)
-
+// const allowedOrigins = [
+//   'https://memeit-client.vercel.app',
+//   'http://192.168.1.14:3000',
+//   'http://localhost:3000',
+// ]
 // app.use(
 //   cors({
-//     origin: 'https://memeit-client.vercel.app',
+//     origin: function (origin, callback) {
+//       if (allowedOrigins.indexOf(origin) === -1 || !origin) {
+//         return callback(new Error('not allowed'), false)
+//       }
+//       return callback(null, true)
+//     },
 //     credentials: true,
-//     methods: ['GET', 'PUT', 'POST', 'OPTIONS', 'DELETE'],
 //   })
 // )
+
+app.use(
+  cors({
+    origin: 'https://memeit-client.vercel.app',
+    credentials: true,
+    methods: ['GET', 'PUT', 'POST', 'OPTIONS', 'DELETE'],
+  })
+)
 
 app.use(express.static(path.join(__dirname, 'public')))
 
@@ -124,7 +124,9 @@ app.all('*', (req, res) => {
 })
 
 app.use((err, req, res, next) => {
-  console.log('triggered error')
+  console.log('triggered error.')
+  console.log(req.session)
+  console.log(req.user)
   const { status, message } = err
   res.status(status).json({ message, status })
 })
