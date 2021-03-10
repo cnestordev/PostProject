@@ -47,6 +47,5 @@
   },
   "devDependencies": {
     "yup": "^0.32.9"
-  },
-  "proxy": "https://memeit-client.herokuapp.com"
+  }
 }
