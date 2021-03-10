@@ -83,8 +83,8 @@ app.use(
       expires: Date.now() + 1000 * 60 * 60 * 24 * 3,
       maxAge: 1000 * 60 * 60 * 24 * 3,
       httpOnly: true,
-      secure: false, //change this later on
-      // sameSite: 'none',
+      secure: true, //change this later on
+      sameSite: 'none',
     },
   })
 )
