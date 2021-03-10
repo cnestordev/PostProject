@@ -50,7 +50,13 @@ app.use(
 app.use(helmet())
 app.use(express.json())
 
-app.use(cors())
+app.use(
+  cors({
+    origin: 'https://memeit-client.herokuapp.com',
+    credentials: true,
+    methods: ['GET', 'PUT', 'POST', 'OPTIONS', 'DELETE'],
+  })
+)
 
 app.use(express.static(path.join(__dirname, 'public')))
 
