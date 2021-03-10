@@ -69,7 +69,7 @@ app.use(express.json())
 
 app.use(
   cors({
-    origin: 'https://memeit-client.vercel.app',
+    origin: 'https://memeit-client.herokuapp.com/',
     credentials: true,
     methods: ['GET', 'PUT', 'POST', 'OPTIONS', 'DELETE'],
   })
