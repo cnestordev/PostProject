@@ -56,6 +56,15 @@ const Login = props => {
     })
   }, [formData])
 
+  // unmount popup after 5 seconds
+  useEffect(() => {
+    if (error !== '') {
+      setTimeout(() => {
+        setError('')
+      }, [5000])
+    }
+  }, [error])
+
   const handleChange = e => {
     const { name, value } = e.target
 

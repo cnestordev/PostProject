@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import axiosCall from '../api/axiosCall'
 import { useHistory } from 'react-router-dom'
@@ -32,6 +32,15 @@ const Account = ({ user, dark, toggler, logOutUser, errorMsg }) => {
   const [error, setError] = useState(null)
 
   const history = useHistory()
+
+  // unmount popup after 5 seconds
+  useEffect(() => {
+    if (error !== '') {
+      setTimeout(() => {
+        setError('')
+      }, [5000])
+    }
+  }, [error])
 
   const handleAcctDelete = async () => {
     setDeleting(true)

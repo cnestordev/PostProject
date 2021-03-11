@@ -24,6 +24,15 @@ const UserComments = ({ user, dark }) => {
     }
   }, [])
 
+  // unmount popup after 5 seconds
+  useEffect(() => {
+    if (error !== '') {
+      setTimeout(() => {
+        setError('')
+      }, [5000])
+    }
+  }, [error])
+
   // sorts, maps, and assigns keys to CommentMin components
   const commentsArr = React.Children.toArray(
     commentsData

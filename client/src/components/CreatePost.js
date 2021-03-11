@@ -58,6 +58,15 @@ const CreatePost = ({ dark }) => {
   // network errors
   const [error, setError] = useState('')
 
+  // unmount popup after 5 seconds
+  useEffect(() => {
+    if (error !== '') {
+      setTimeout(() => {
+        setError('')
+      }, [5000])
+    }
+  }, [error])
+
   useEffect(() => {
     formSchema.isValid(data).then(valid => {
       setDisabled(!valid)

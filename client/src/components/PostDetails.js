@@ -46,6 +46,15 @@ const PostDetails = ({ user, match, dark }) => {
   // network errors
   const [alert, setAlert] = useState('')
 
+  // unmount popup after 5 seconds
+  useEffect(() => {
+    if (alert !== '') {
+      setTimeout(() => {
+        setAlert('')
+      }, [5000])
+    }
+  }, [alert])
+
   useEffect(async () => {
     try {
       const response = await axiosCall.get(`/api/posts/${id}`)

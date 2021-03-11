@@ -23,6 +23,15 @@ const UserPosts = ({ user, dark, blah }) => {
     }
   }, [])
 
+  // unmount popup after 5 seconds
+  useEffect(() => {
+    if (error !== '') {
+      setTimeout(() => {
+        setError('')
+      }, [5000])
+    }
+  }, [error])
+
   // sorts, maps, and assigns keys to PostMin components
   const postsArr = React.Children.toArray(
     postsData

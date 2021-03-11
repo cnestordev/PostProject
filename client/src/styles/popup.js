@@ -11,9 +11,20 @@ const moveUp = keyframes`
     }
 `
 
+const fadeOut = keyframes`
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+`
+
 export const Box = styled.div`
   animation: ${moveUp} 300ms ease;
   animation-iteration-count: 1;
+  animation: ${fadeOut} 1s ease-out 4.5s;
   background: white;
   position: fixed;
   right: 2%;

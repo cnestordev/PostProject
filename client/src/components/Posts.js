@@ -21,6 +21,15 @@ const Posts = props => {
     }
   }, [filter])
 
+  // unmount popup after 5 seconds
+  useEffect(() => {
+    if (error !== '') {
+      setTimeout(() => {
+        setError('')
+      }, [5000])
+    }
+  }, [error])
+
   // sorts, maps, and assigns key to each Post component
   const postArr = React.Children.toArray(
     props.posts.posts
