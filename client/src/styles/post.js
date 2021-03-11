@@ -18,7 +18,7 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   width: 40%;
-  margin: 1% auto;
+  margin: 2% auto;
   padding: 1% 0;
   word-break: break-word;
 
@@ -36,6 +36,7 @@ export const Container = styled.div`
 
   @media (max-width: 945px) {
     width: 65%;
+    margin: 2.5% auto;
   }
 
   @media (max-width: 805px) {
@@ -44,10 +45,12 @@ export const Container = styled.div`
 
   @media (max-width: 600px) {
     width: 85%;
+    margin: 3.5% auto;
   }
 
   @media (max-width: 457px) {
     width: 90%;
+    margin: 4% auto;
   }
 `
 
