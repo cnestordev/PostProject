@@ -17,7 +17,7 @@ const CommentMin = ({ user, comment, dark, alertToggler }) => {
 
   const handleDelete = async id => {
     try {
-      await axiosCall.delete(`/posts/${comment.originated}/comments/${id}`)
+      await axiosCall.delete(`/api/posts/${comment.originated}/comments/${id}`)
       setHasDeleted(true)
     } catch (err) {
       alertToggler(err.response.data.message)

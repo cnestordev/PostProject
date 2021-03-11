@@ -16,7 +16,7 @@ const UserComments = ({ user, dark }) => {
   useEffect(async () => {
     try {
       const response = await axiosCall.get(
-        `/posts/null/comments/all/${user._id}`
+        `/api/posts/null/comments/all/${user._id}`
       )
       setCommentsData(response.data.message)
     } catch (err) {

@@ -1,5 +1,4 @@
 require('dotenv').config()
-
 const express = require('express')
 const cors = require('cors')
 const mongoose = require('mongoose')
@@ -41,24 +40,30 @@ db.once('open', () => {
 const app = express()
 
 app.set('views', path.join(__dirname, 'views'))
+app.use(express.static(path.join(__dirname, 'client', 'build')))
+app.use(express.static(path.join(__dirname, 'public')))
 
 app.use(
   mongoSanitize({
     replaceWith: '_',
   })
 )
-app.use(helmet())
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  })
+)
 app.use(express.json())
+
+const herokuUrl = 'https://memeit-full.herokuapp.com'
 
 app.use(
   cors({
-    origin: 'https://memeit-client.herokuapp.com',
+    origin: herokuUrl,
     credentials: true,
     methods: ['GET', 'PUT', 'POST', 'OPTIONS', 'DELETE'],
   })
 )
-
-app.use(express.static(path.join(__dirname, 'public')))
 
 // express session middleware
 
@@ -78,12 +83,12 @@ app.use(
     name: 'pfil',
     secret: process.env.MONGO_SECRET,
     resave: false,
-    saveUninitialized: true, // this should be default || GDPR compliance
+    saveUninitialized: true,
     cookie: {
       expires: Date.now() + 1000 * 60 * 60 * 24 * 3,
       maxAge: 1000 * 60 * 60 * 24 * 3,
       httpOnly: true,
-      secure: false, //change this later on
+      secure: false,
     },
   })
 )
@@ -97,9 +102,9 @@ passport.use(new LocalStrategy(User.authenticate()))
 passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
 
-app.use('/posts', postsRouter)
-app.use('/posts/:id/comments', commentsRouter)
-app.use('/', usersRouter)
+app.use('/api/posts', postsRouter)
+app.use('/api/posts/:id/comments', commentsRouter)
+app.use('/api/', usersRouter)
 
 app.all('*', (req, res) => {
   res.status(404).json({ message: 'Invalid search term' })
@@ -113,6 +118,10 @@ app.use((err, req, res, next) => {
   res.status(status).json({ message, status })
 })
 
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'))
+})
+
 app.listen(PORT, () => {
-  console.log(`listening on port ${PORT}`)
+  console.log(`running on port ${PORT}`)
 })

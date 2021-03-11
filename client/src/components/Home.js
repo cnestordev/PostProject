@@ -5,7 +5,7 @@ import axiosCall from '../api/axiosCall'
 const Home = () => {
   useEffect(async () => {
     try {
-      const res = await axiosCall.get('/', {
+      const res = await axiosCall.get('/api/', {
         withCredentials: true,
       })
     } catch (err) {

@@ -24,7 +24,7 @@ const ImageEdit = ({
 
   const handleImgDel = async img => {
     try {
-      await axiosCall.delete(`/posts/${postId}/${image.id}`)
+      await axiosCall.delete(`/api/posts/${postId}/${image.id}`)
       hasDeleted(true)
       setData({
         ...data,

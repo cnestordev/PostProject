@@ -67,7 +67,7 @@ const PostComment = props => {
     const id = props.postId
     try {
       const response = await axiosCall.post(
-        `/posts/${id}/comments`,
+        `/api/posts/${id}/comments`,
         commentData
       )
       setCommentData(commentDataValues)

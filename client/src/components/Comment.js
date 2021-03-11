@@ -23,7 +23,7 @@ const Comment = ({ comment, postId, user, dark, alertToggler }) => {
 
   const handleDelete = async id => {
     try {
-      await axiosCall.delete(`/posts/${postId}/comments/${id}`)
+      await axiosCall.delete(`/api/posts/${postId}/comments/${id}`)
       setHasDeleted(true)
     } catch (err) {
       alertToggler(err.response.data.message)

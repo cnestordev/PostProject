@@ -23,6 +23,18 @@ export const Box = styled.div`
   text-align: center;
   background: #88ff81;
   border-radius: 3px;
+
+  @media (max-width: 637px) {
+    width: 28%;
+  }
+
+  @media (max-width: 480px) {
+    width: 35%;
+  }
+
+  @media (max-width: 410px) {
+    width: 45%;
+  }
 `
 export const Body = styled.p`
   font-size: 2rem;

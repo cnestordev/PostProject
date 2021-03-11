@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { HashRouter as Router, Switch, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import '../cssReset.css'
@@ -33,7 +33,9 @@ const App = ({ user }) => {
 
   const handleThemeToggle = async theme => {
     try {
-      const response = await axiosCall.post(`/${user._id}/themeToggle/${theme}`)
+      const response = await axiosCall.post(
+        `/api/${user._id}/themeToggle/${theme}`
+      )
       const val = response.data.message.darkMode
       setTheme(val)
       document.body.style.backgroundColor = val ? '#0e141b' : '#f2f2f2'

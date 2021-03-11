@@ -67,7 +67,7 @@ const CreatePost = ({ dark }) => {
   useEffect(async () => {
     if (data.title || data.tags.length > 0) {
       try {
-        const response = await axiosCall.post('/posts/new', data)
+        const response = await axiosCall.post('/api/posts/new', data)
         const { postId } = response.data
         setSending(false)
         history.push(`/posts/${postId}`)

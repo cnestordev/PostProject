@@ -64,7 +64,7 @@ const EditPost = ({ match, dark }) => {
 
   useEffect(async () => {
     try {
-      const response = await axiosCall.get(`/posts/${id}/edit`)
+      const response = await axiosCall.get(`/api/posts/${id}/edit`)
       const { data } = response.data
       setData({
         title: data.title,
@@ -92,7 +92,7 @@ const EditPost = ({ match, dark }) => {
   useEffect(async () => {
     if (data.title || data.tags.length > 0) {
       try {
-        await axiosCall.put(`/posts/${id}/edit`, data)
+        await axiosCall.put(`/api/posts/${id}/edit`, data)
         setSending(false)
         history.push(`/posts/${id}`)
       } catch (err) {

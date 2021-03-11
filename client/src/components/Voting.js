@@ -16,7 +16,7 @@ const Voting = ({ data, user, dark, alertToggler }) => {
 
   const handleLike = async () => {
     try {
-      const response = await axiosCall.post(`/posts/${data._id}/like`)
+      const response = await axiosCall.post(`/api/posts/${data._id}/like`)
       setMetrics(response.data.message)
     } catch (err) {
       alertToggler(err.response.data.message)
@@ -25,7 +25,7 @@ const Voting = ({ data, user, dark, alertToggler }) => {
 
   const handleDisike = async () => {
     try {
-      const response = await axiosCall.post(`/posts/${data._id}/dislike`)
+      const response = await axiosCall.post(`/api/posts/${data._id}/dislike`)
       setMetrics(response.data.message)
     } catch (err) {
       alertToggler(err.response.data.message)

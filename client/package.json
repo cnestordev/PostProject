@@ -47,5 +47,6 @@
   },
   "devDependencies": {
     "yup": "^0.32.9"
-  }
+  },
+  "proxy": "http://localhost:3001"
 }

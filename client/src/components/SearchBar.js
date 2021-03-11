@@ -27,7 +27,7 @@ const SearchBar = ({
     e.preventDefault()
     await removePosts()
     try {
-      const response = await axiosCall.get(`/posts/search/${query}`)
+      const response = await axiosCall.get(`/api/posts/search/${query}`)
       getFilteredPosts(response.data.message)
     } catch (err) {
       alertToggler(err.response.data.message)

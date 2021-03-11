@@ -48,7 +48,7 @@ const PostDetails = ({ user, match, dark }) => {
 
   useEffect(async () => {
     try {
-      const response = await axiosCall.get(`/posts/${id}`)
+      const response = await axiosCall.get(`/api/posts/${id}`)
       const { data } = response.data
       setPostData(data)
     } catch (err) {
@@ -65,7 +65,7 @@ const PostDetails = ({ user, match, dark }) => {
 
   const handleDelete = async id => {
     try {
-      await axiosCall.delete(`/posts/${id}/delete`)
+      await axiosCall.delete(`/api/posts/${id}/delete`)
       history.push('/posts')
     } catch (err) {
       setAlert(err.response.data.message)

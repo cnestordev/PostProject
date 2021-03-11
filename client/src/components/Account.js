@@ -36,7 +36,7 @@ const Account = ({ user, dark, toggler, logOutUser, errorMsg }) => {
   const handleAcctDelete = async () => {
     setDeleting(true)
     try {
-      await axiosCall.delete(`/${user._id}/delete`)
+      await axiosCall.delete(`/api/${user._id}/delete`)
       logOutUser()
       history.push('/posts')
     } catch (err) {

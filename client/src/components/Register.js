@@ -87,7 +87,7 @@ const Register = props => {
   const handleSubmit = async e => {
     e.preventDefault()
     try {
-      const response = await axiosCall.post('/register', formData)
+      const response = await axiosCall.post('/api/register', formData)
       await props.logInUser(response.data.userData)
       history.push(prevPage)
     } catch (err) {

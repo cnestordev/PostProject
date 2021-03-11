@@ -2,7 +2,7 @@ import axios from 'axios'
 import axiosCall from '../api/axiosCall'
 
 const imageUploader = async (image, directory = 'main') => {
-  const { data: isLoggedIn } = await axiosCall.get('/isloggedin')
+  const { data: isLoggedIn } = await axiosCall.get('/api/isloggedin')
   // check if user is logged in first by calling the server
   if (isLoggedIn) {
     if (image) {

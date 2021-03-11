@@ -16,7 +16,7 @@ const UserPosts = ({ user, dark, blah }) => {
 
   useEffect(async () => {
     try {
-      const response = await axiosCall.get(`/posts/all/${user._id}`)
+      const response = await axiosCall.get(`/api/posts/all/${user._id}`)
       setPostsData(response.data.message)
     } catch (err) {
       setError(err.response.data.message)

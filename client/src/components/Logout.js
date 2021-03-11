@@ -14,7 +14,7 @@ const Logout = props => {
 
   useEffect(async () => {
     try {
-      await axiosCall.get('/logout')
+      await axiosCall.get('/api/logout')
       props.logOutUser()
       props.toggler(false)
       history.push(prevPage)

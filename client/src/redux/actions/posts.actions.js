@@ -3,7 +3,7 @@ import axiosCall from '../../api/axiosCall'
 
 export const getPosts = () => async dispatch => {
   try {
-    const response = await axiosCall.get(`/posts`)
+    const response = await axiosCall.get(`/api/posts`)
     dispatch({
       type: 'GET_POSTS',
       payload: response.data.data,

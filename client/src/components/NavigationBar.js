@@ -25,7 +25,7 @@ const NavigationBar = ({ user, logInUser, dark, toggler }) => {
 
   useEffect(async () => {
     try {
-      const user = await axiosCall.get('/user')
+      const user = await axiosCall.get('/api/user')
       logInUser(user.data)
     } catch (err) {
       console.log('ERROR getting user')
