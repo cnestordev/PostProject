@@ -20,6 +20,7 @@ export const Container = styled.div`
   width: 40%;
   margin: 1% auto;
   padding: 1% 0;
+  word-break: break-word;
 
   @media (max-width: 1300px) {
     width: 47%;
@@ -119,7 +120,7 @@ export const PostImg = styled.img`
   }
 
   @media (max-width: 945px) {
-    width: ${props => (props.scale === 'full' ? '95%' : '85%')};
+    width: ${props => (props.scale === 'full' ? '95%' : '90%')};
   }
 `
 

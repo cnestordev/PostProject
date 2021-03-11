@@ -11,6 +11,7 @@ export const Container = styled.div`
   margin: 2% auto;
   text-align: center;
   padding: 2% 1%;
+  word-break: break-word;
 
   @media (max-width: 992px) {
     width: 68%;

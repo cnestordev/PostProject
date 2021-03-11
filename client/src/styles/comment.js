@@ -10,6 +10,7 @@ export const Box = styled.div`
   margin: 2% auto;
   padding: 1.5%;
   position: relative;
+  word-break: break-word;
 
   @media (max-width: 767px) {
     width: 98%;

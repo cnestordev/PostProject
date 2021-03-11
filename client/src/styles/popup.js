@@ -15,7 +15,7 @@ export const Box = styled.div`
   animation: ${moveUp} 300ms ease;
   animation-iteration-count: 1;
   background: white;
-  position: absolute;
+  position: fixed;
   right: 2%;
   width: 15%;
   transition: 200ms;
@@ -23,6 +23,7 @@ export const Box = styled.div`
   text-align: center;
   background: #88ff81;
   border-radius: 3px;
+  z-index: 4;
 
   @media (max-width: 637px) {
     width: 28%;
