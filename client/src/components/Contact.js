@@ -65,6 +65,7 @@ const Contact = ({ dark, toggler }) => {
     try {
       await axiosCall.post('/api/contact', formData)
       toggler('Your email was sent!  Thank you!')
+      setFormData(defaultFormValues)
     } catch (err) {
       toggler('There was a problem with the server.  Please try again.')
       setFormData(defaultFormValues)
