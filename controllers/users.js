@@ -149,6 +149,23 @@ const toggleTheme = async (req, res, next) => {
   }
 }
 
+const sendEmail = async (req, res, next) => {
+  const { name, email, body } = req.body
+  const msg = {
+    to: 'nestor@nestordev.com', // Change to your recipient
+    from: 'nestor@nestordev.com', // Change to your verified sender
+    subject: 'RE: MemeIt Inquiry',
+    text: `<p>Name: ${name} </p> <p>email: ${email} </p>  <p>${body}</p>`,
+    html: `<p>name: ${name} </p> <p>email: ${email} </p>  <p>${body}</p>`,
+  }
+  try {
+    await sgMail.send(msg)
+    res.status(201).json({ message: 'email sent', status: 201 })
+  } catch (err) {
+    res.status(500).end()
+  }
+}
+
 module.exports = {
   index,
   userData,
@@ -158,4 +175,5 @@ module.exports = {
   loginUser,
   deleteUser,
   toggleTheme,
+  sendEmail,
 }

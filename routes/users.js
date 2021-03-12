@@ -12,6 +12,7 @@ const {
   loginUser,
   deleteUser,
   toggleTheme,
+  sendEmail,
 } = require('../controllers/users')
 
 const { body: check } = require('express-validator')
@@ -38,5 +39,15 @@ router.get('/logout', logoutUser)
 router.post('/:userId/themeToggle/:theme', isLoggedIn, isUser, toggleTheme)
 
 router.delete('/:userId/delete', isLoggedIn, isUser, deleteUser)
+
+router.post(
+  '/contact',
+  [
+    (check('email').isEmail(),
+    check('name').trim().escape(),
+    check('body').trim().escape()),
+  ],
+  sendEmail
+)
 
 module.exports = router

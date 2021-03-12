@@ -5,8 +5,9 @@ import contactSchema from '../validation/contactSchema'
 import { Container, Header } from '../styles/box'
 import { Form, Input, Textarea, Button, P } from '../styles/contact'
 import loginSchema from '../validation/contactSchema'
+import axiosCall from '../api/axiosCall'
 
-const Contact = ({ dark }) => {
+const Contact = ({ dark, toggler }) => {
   const defaultFormValues = {
     name: '',
     email: '',
@@ -59,9 +60,20 @@ const Contact = ({ dark }) => {
     })
   }
 
+  const handleSubmit = async e => {
+    e.preventDefault()
+    try {
+      await axiosCall.post('/api/contact', formData)
+      toggler('Your email was sent!  Thank you!')
+    } catch (err) {
+      toggler('There was a problem with the server.  Please try again.')
+      setFormData(defaultFormValues)
+    }
+  }
+
   return (
     <Container dark={dark}>
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <Header override={true}>Questions? Get in touch.</Header>
         <Input
           onChange={handleChange}

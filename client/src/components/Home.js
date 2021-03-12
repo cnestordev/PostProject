@@ -1,9 +1,10 @@
 import axios from 'axios'
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import axiosCall from '../api/axiosCall'
 
 import Box from './Box'
 import Contact from './Contact'
+import Popup from './Popup'
 
 import { view, account, engage, share, manage } from '../util/messages'
 
@@ -20,6 +21,17 @@ import {
 } from '../styles/home'
 
 const Home = ({ dark }) => {
+  // email provider error
+  const [error, setError] = useState('')
+
+  useEffect(() => {
+    if (error !== '') {
+      setTimeout(() => {
+        setError('')
+      }, [5000])
+    }
+  }, [error])
+
   useEffect(async () => {
     try {
       const res = await axiosCall.get('/api/', {
@@ -33,6 +45,7 @@ const Home = ({ dark }) => {
 
   return (
     <Section>
+      {error && <Popup message={error} />}
       <Container>
         <Top dark={dark}>
           <Header dark={dark}>Hello</Header>
@@ -46,7 +59,7 @@ const Home = ({ dark }) => {
           <Box dark={dark} data={engage} />
           <Box dark={dark} data={share} />
           <Box dark={dark} data={manage} />
-          <Contact dark={dark} />
+          <Contact toggler={setError} dark={dark} />
         </Bottom>
       </Container>
     </Section>
