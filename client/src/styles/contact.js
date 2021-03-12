@@ -6,8 +6,10 @@ export const Form = styled.form`
 `
 
 export const Input = styled.input`
-  border: 1px solid #313131;
+  background: ${props => (props.dark ? '#0a0a0a' : '#fff')};
+  border: 1px solid ${props => (props.dark ? 'transparent' : '#313131')};
   border-radius: 3px;
+  color: ${props => (props.dark ? '#f1f1f1' : '#313131')};
   padding: 2%;
   font-size: 2rem;
   margin-top: 3%;
@@ -18,6 +20,10 @@ export const Input = styled.input`
 `
 
 export const Textarea = styled.textarea`
+  background: ${props => (props.dark ? '#0a0a0a' : '#fff')};
+  color: ${props => (props.dark ? '#f1f1f1' : '#313131')};
+  border-color: ${props => (props.dark ? 'transparent' : '#313131')};
+  border-radius: 3px;
   margin-top: 3%;
   height: 15vh;
   font-size: 2.1rem;
@@ -27,9 +33,10 @@ export const Textarea = styled.textarea`
 `
 
 export const Button = styled.button`
-  border: 2px solid #313131;
+  border: 2px solid ${props => (props.dark ? 'transparent' : '#313131')};
   font-size: 1.5rem;
-  background: #fff;
+  background: ${props => (props.dark ? '#25d069' : '#fff')};
+  color: ${props => (props.dark ? '#fff' : '#000')};
   padding: 2%;
   width: 40%;
   margin: 2% auto;
@@ -37,18 +44,25 @@ export const Button = styled.button`
   cursor: pointer;
 
   &:hover {
-    background: #313131;
+    background: ${props => (props.dark ? '#1ea252' : '#313131')};
     color: #fff;
     transition: 300ms;
   }
 
   &:disabled {
-    border-color: #d6d6d6;
-    color: #d6d6d6;
+    border-color: ${props => (props.dark ? 'transparent' : '#d6d6d6')};
+    color: ${props => (props.dark ? 'gray' : '#fff')};
+    background: ${props => (props.dark ? '#1a2732' : '#d6d6d6')};
 
     &:hover {
       background: #fff;
       color: #d6d6d6;
+
+      &:disabled {
+        border-color: ${props => (props.dark ? 'transparent' : '#d6d6d6')};
+        color: ${props => (props.dark ? 'gray' : '#d6d6d6')};
+        background: ${props => (props.dark ? '#1a2732' : '#d6d6d6')};
+      }
     }
   }
 `

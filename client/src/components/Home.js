@@ -35,7 +35,7 @@ const Home = ({ dark }) => {
     <Section>
       <Container>
         <Top dark={dark}>
-          <Header>Hello</Header>
+          <Header dark={dark}>Hello</Header>
           <Icon className="fas fa-smile" />
           <Subheader dark={dark}>Welcome to my app</Subheader>
           <P dark={dark}>Take a look at what it's about</P>
@@ -46,7 +46,7 @@ const Home = ({ dark }) => {
           <Box dark={dark} data={engage} />
           <Box dark={dark} data={share} />
           <Box dark={dark} data={manage} />
-          <Contact />
+          <Contact dark={dark} />
         </Bottom>
       </Container>
     </Section>

@@ -52,7 +52,10 @@ export const Header = styled.div`
   font-weight: 700;
   font-size: 72px;
   margin-right: 3%;
-  background: -webkit-linear-gradient(#16c94e, #3b80ff);
+  background: ${props =>
+    props.dark
+      ? '-webkit-linear-gradient(#16c94e, #3b80ff)'
+      : '-webkit-linear-gradient(#0095ff, #4229ce)'};
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 

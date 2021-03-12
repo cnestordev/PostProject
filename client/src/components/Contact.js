@@ -6,7 +6,7 @@ import { Container, Header } from '../styles/box'
 import { Form, Input, Textarea, Button, P } from '../styles/contact'
 import loginSchema from '../validation/contactSchema'
 
-const Contact = () => {
+const Contact = ({ dark }) => {
   const defaultFormValues = {
     name: '',
     email: '',
@@ -60,15 +60,16 @@ const Contact = () => {
   }
 
   return (
-    <Container>
+    <Container dark={dark}>
       <Form>
-        <Header>Questions? Get in touch.</Header>
+        <Header override={true}>Questions? Get in touch.</Header>
         <Input
           onChange={handleChange}
           value={formData.name}
           type="text"
           name="name"
           placeholder="name"
+          dark={dark}
         />
         {errors.name && <P>{errors.name}</P>}
         <Input
@@ -77,11 +78,19 @@ const Contact = () => {
           type="email"
           name="email"
           placeholder="email"
+          dark={dark}
         />
         {errors.email && <P>{errors.email}</P>}
-        <Textarea onChange={handleChange} value={formData.body} name="body" />
+        <Textarea
+          dark={dark}
+          onChange={handleChange}
+          value={formData.body}
+          name="body"
+        />
         {errors.body && <P>{errors.body}</P>}
-        <Button disabled={disabled}>Send</Button>
+        <Button dark={dark} disabled={disabled}>
+          Send
+        </Button>
       </Form>
     </Container>
   )
