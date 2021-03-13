@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import DarkModeToggle from 'react-dark-mode-toggle'
 
 import {
   Container,
@@ -8,9 +9,12 @@ import {
   Icon,
   IconClose,
   Exit,
+  ListItem,
 } from '../styles/menu'
 
-const Menu = ({ dark, user, toggler }) => {
+import { Item } from '../styles/navigation'
+
+const Menu = ({ dark, user, toggler, themeToggler }) => {
   const position = window.scrollY
 
   useEffect(() => {
@@ -46,6 +50,13 @@ const Menu = ({ dark, user, toggler }) => {
               <NavLink onClick={() => toggler(false)} dark={dark} to="/account">
                 My Account
               </NavLink>
+              <ListItem>
+                <DarkModeToggle
+                  onChange={() => themeToggler(!dark)}
+                  size={65}
+                  checked={dark}
+                />
+              </ListItem>
               <NavLink onClick={() => toggler(false)} dark={dark} to="/logout">
                 Logout {user.username}
               </NavLink>

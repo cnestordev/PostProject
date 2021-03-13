@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { HashRouter as Router, Switch, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { updateUser } from '../redux/actions/users.actions'
 
 import '../cssReset.css'
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
@@ -23,7 +24,7 @@ import ErrorPage from './ErrorPage'
 import UserPosts from './UserPosts'
 import UserComments from './UserComments'
 
-const App = ({ user }) => {
+const App = ({ user, updateUser }) => {
   const [theme, setTheme] = useState(user.darkMode)
 
   const [display, setDisplay] = useState(false)
@@ -32,15 +33,27 @@ const App = ({ user }) => {
   const [error, setError] = useState('')
 
   const handleThemeToggle = async theme => {
+    // id will be used to fetch user id
+    let id = ''
     try {
-      const response = await axiosCall.post(
-        `/api/${user._id}/themeToggle/${theme}`
-      )
-      const val = response.data.message.darkMode
-      setTheme(val)
-      document.body.style.backgroundColor = val ? '#0e141b' : '#f2f2f2'
+      // fetch user id
+      const userObj = await axiosCall.get('/api/getUserId')
+      id = userObj.data.message
+      try {
+        // use id to fetch user id from the server
+        const response = await axiosCall.post(`/api/${id}/themeToggle/${theme}`)
+        const val = response.data.message.darkMode
+        updateUser(response.data.message)
+        // setTheme(val)
+        // document.body.style.backgroundColor = val ? '#0e141b' : '#f2f2f2'
+      } catch (err) {
+        // if there is a server error
+        setError(err.response.data.message)
+      }
     } catch (err) {
-      setError(err.response.data.message)
+      // if unable to fetch user id (user not logged on)
+      // change the "guest" dark mode
+      updateUser({ darkMode: !user.darkMode })
     }
   }
 
@@ -56,9 +69,19 @@ const App = ({ user }) => {
   return (
     <Router>
       {display && (
-        <Menu display={display} toggler={toggleMenu} user={user} dark={theme} />
+        <Menu
+          themeToggler={handleThemeToggle}
+          display={display}
+          toggler={toggleMenu}
+          user={user}
+          dark={theme}
+        />
       )}
-      <NavigationBar toggler={toggleMenu} dark={theme} />
+      <NavigationBar
+        themeToggler={handleThemeToggle}
+        toggler={toggleMenu}
+        dark={theme}
+      />
       <Switch>
         <Route
           exact
@@ -145,4 +168,4 @@ const mapStateToProps = state => ({
   user: state.usersReducer,
 })
 
-export default connect(mapStateToProps, null)(App)
+export default connect(mapStateToProps, { updateUser })(App)

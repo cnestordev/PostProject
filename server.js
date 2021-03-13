@@ -112,8 +112,6 @@ app.all('*', (req, res) => {
 
 app.use((err, req, res, next) => {
   console.log('triggered error.')
-  console.log(req.session)
-  console.log(req.user)
   const { status, message } = err
   res.status(status).json({ message, status })
 })

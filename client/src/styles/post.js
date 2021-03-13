@@ -62,7 +62,7 @@ export const NavLink = styled(Link)`
 `
 
 export const Title = styled.h3`
-  color: ${props => (props.dark ? '#a5a9ac' : '#313131')};
+  color: ${props => (props.dark ? '#cacaca' : '#313131')};
   font-size: 3.2rem;
   text-decoration: none;
   padding: 1%;

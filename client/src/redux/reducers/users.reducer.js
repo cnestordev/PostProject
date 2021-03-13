@@ -6,6 +6,8 @@ const reducer = (state = initialState, action) => {
       return action.payload
     case 'LOGOUT_USER':
       return initialState
+    case 'UPDATE_USER':
+      return action.payload
     default:
       return state
   }

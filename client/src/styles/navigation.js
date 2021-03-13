@@ -1,133 +1,69 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
+const size = '4rem'
+
 export const Nav = styled.nav`
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5% 10%;
+  position: relative;
+`
+
+export const NavLogo = styled.div`
+  color: ${props => (props.dark ? '#ececec' : '#313131')};
+  font-size: ${size};
   display: flex;
   justify-content: center;
   align-items: center;
-  background: ${props => (props.dark ? '#003157' : '#0a5c8b')};
-  height: 6vh;
-  padding: 0.5% 0;
-
-  @media (max-width: 768px) {
-    justify-content: space-between;
-  }
 `
 
-export const Ul = styled.ul`
+export const NavMenu = styled.div``
+
+export const Hamburger = styled.div`
+  padding: 10%;
+`
+
+export const List = styled.ul`
+  color: ${props => (props.dark ? '#c7c7c7' : '#313131')};
+`
+
+export const Item = styled.li`
+  border-radius: 7px;
+  font-size: ${size};
+  margin: 30% auto;
+  text-align: center;
+  padding: 4% 2%;
   display: flex;
-  justify-content: space-around;
-  width: 50%;
-  font-size: 3rem;
+  justify-content: center;
+  align-items: center;
 
-  @media (max-width: 992px) {
-    width: 70%;
-  }
+  &:hover {
+    background: ${props => (props.dark ? '#1c2d35' : '#f1eded')};
 
-  @media (max-width: 767px) {
-    display: none;
+    &:last-of-type {
+      background: transparent;
+    }
   }
 `
 
-export const NavLink = styled(Link)`
-  color: #f1f1f1;
-  text-decoration: none;
-  font-size: 1.5rem;
-  font-weight: 700;
-
-  @media (max-width: 992px) {
-    font-size: 1.8rem;
-  }
+export const Menu = styled.div`
+  background: ${props => (props.dark ? '#16242b' : '#fff')};
+  border-radius: 5px;
+  display: ${props => (props.display ? 'block' : 'none')};
+  opacity: 0.95;
+  position: absolute;
+  right: 5%;
+  top: 100%;
+  padding: 0 2%;
 `
 
 export const Icon = styled.i`
-  font-size: 1.8rem;
+  color: ${props => (props.dark ? '#696969' : '#313131')};
+  font-size: 3rem;
 `
 
-export const Dropbox = styled.div`
-  display: none;
-  position: absolute;
-
-  &:hover {
-    display: block;
-  }
-`
-
-export const NavAccountContainer = styled.div`
-  position: relative;
-
-  &:hover ${Dropbox} {
-    display: block;
-  }
-`
-
-export const NavButton = styled.button`
-  border: none;
-  box-sizing: border-box;
-  background: transparent;
-  font-size: 1.7rem;
-  font-family: inherit;
-  color: white;
-  outline: none;
-`
-
-export const NavDropUl = styled.ul`
-  background: ${props => (props.dark ? '#003157' : '#0a5c8b')};
-  border-top: none;
-  box-sizing: border-box;
-  display: block;
-  text-align: center;
-  width: 10vw;
-  padding: 5%;
-
-  @media (max-width: 992px) {
-    width: 16vh;
-  }
-`
-
-export const NavDropLi = styled.li`
-  padding: 10% 5%;
-`
-
-export const AccLink = styled(Link)`
-  font-size: 1.4rem;
+export const LinkItem = styled(Link)`
   text-decoration: none;
-  border: 1px solid #fff;
-  border-radius: 50px;
-  color: #fff;
-  cursor: pointer;
-  padding: 5%;
-  transition: 300ms;
-
-  &:hover {
-    background: #fff;
-    color: #0a5c8b;
-    transition: 300ms;
-  }
-
-  @media (max-width: 992px) {
-    font-size: 1.55rem;
-  }
-`
-export const Hamburger = styled.div`
-  display: none;
-  margin-right: 5%;
-  font-size: 4rem;
-  color: ${props => (props.dark ? '#a0a0a0' : '#fff')};
-
-  @media (max-width: 768px) {
-    display: block;
-  }
-`
-export const LogoContainer = styled.div`
-  @media (max-width: 768px) {
-    margin-left: 5%;
-  }
-`
-
-export const Logo = styled.span`
-  color: #eaeaea;
-  font-size: 2rem;
-  width: 20%;
-  height: 30px;
+  color: inherit;
 `

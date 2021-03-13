@@ -1,27 +1,29 @@
-import React, { useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import { connect } from 'react-redux'
 import axiosCall from '../api/axiosCall'
 import { logInUser } from '../redux/actions/users.actions'
 
+import DarkModeToggle from 'react-dark-mode-toggle'
+
 import {
   Nav,
-  Ul,
-  NavLink,
-  Icon,
-  NavAccountContainer,
-  NavButton,
-  Dropbox,
-  NavDropUl,
-  NavDropLi,
-  AccLink,
+  NavLogo,
+  NavMenu,
   Hamburger,
-  LogoContainer,
-  Logo,
+  List,
+  Item,
+  Menu,
+  Icon,
+  LinkItem,
 } from '../styles/navigation'
 
-const NavigationBar = ({ user, logInUser, dark, toggler }) => {
+const NavigationBar = ({ user, logInUser, dark, toggler, themeToggler }) => {
+  const [display, setDisplay] = useState(false)
+
   const location = useLocation()
+
+  const isUserLoggedIn = Object.keys(user).length > 1
 
   useEffect(async () => {
     try {
@@ -33,76 +35,65 @@ const NavigationBar = ({ user, logInUser, dark, toggler }) => {
     }
   }, [])
   return (
-    <header style={{ position: 'fixed', width: '100%', top: '0', zIndex: '5' }}>
-      <Nav dark={dark} className="navbarContainer">
-        <LogoContainer>
-          <Logo>MemeIt</Logo>
-        </LogoContainer>
-        <Ul className="navbarList">
-          <li>
-            <NavLink to="/" className="navbarItem">
-              Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/posts" className="navbarItem">
-              Posts
-            </NavLink>
-          </li>
-          <li>
-            <div>
-              <NavLink to="/posts/new" className="navbarItem">
-                <Icon className="fas fa-plus"></Icon>
-              </NavLink>
-            </div>
-          </li>
-          <li>
-            {user.username === undefined ? (
-              <NavLink
-                to={{
-                  pathname: '/login',
-                  state: { from: { pathname: location.pathname } },
-                }}
-                className="navbarItem"
-              >
-                Login
-              </NavLink>
-            ) : (
-              <NavAccountContainer>
-                <NavButton>{user.username}</NavButton>
-                <Dropbox>
-                  <NavDropUl dark={dark}>
-                    <NavDropLi>
-                      <AccLink
-                        to={{
-                          pathname: '/account',
-                          state: { from: { pathname: location.pathname } },
-                        }}
-                        className="navbarItem"
-                      >
-                        My Account
-                      </AccLink>
-                    </NavDropLi>
-                    <NavDropLi>
-                      <AccLink
-                        to={{
-                          pathname: '/logout',
-                          state: { from: { pathname: location.pathname } },
-                        }}
-                        className="navbarItem"
-                      >
-                        Logout
-                      </AccLink>
-                    </NavDropLi>
-                  </NavDropUl>
-                </Dropbox>
-              </NavAccountContainer>
-            )}
-          </li>
-        </Ul>
-        <Hamburger onClick={() => toggler(true)} dark={dark}>
-          <i className="fas fa-bars"></i>
-        </Hamburger>
+    <header>
+      <Nav>
+        <NavLogo dark={dark}>
+          <p>MemeIt</p>
+        </NavLogo>
+        <NavMenu>
+          <Hamburger
+            onClick={() => {
+              if (window.innerWidth >= 946) {
+                return setDisplay(!display)
+              }
+              return toggler(true)
+            }}
+          >
+            <Icon
+              dark={dark}
+              className={`fas fa-${display ? 'times' : 'bars'}`}
+            />
+          </Hamburger>
+          <Menu dark={dark} display={display}>
+            <List dark={dark}>
+              <Item dark={dark} onClick={() => setDisplay(false)}>
+                <LinkItem to="/">Home</LinkItem>
+              </Item>
+              <Item dark={dark} onClick={() => setDisplay(false)}>
+                <LinkItem to="/posts">Posts</LinkItem>
+              </Item>
+              <Item dark={dark} onClick={() => setDisplay(false)}>
+                <LinkItem to="/posts/new">New</LinkItem>
+              </Item>
+              {isUserLoggedIn ? (
+                <Item dark={dark} onClick={() => setDisplay(false)}>
+                  <LinkItem to="/account">Account</LinkItem>
+                </Item>
+              ) : (
+                <>
+                  <Item dark={dark} onClick={() => setDisplay(false)}>
+                    <LinkItem to="/login">Login</LinkItem>
+                  </Item>
+                  <Item dark={dark} onClick={() => setDisplay(false)}>
+                    <LinkItem to="/register">Register</LinkItem>
+                  </Item>
+                </>
+              )}
+              {isUserLoggedIn && (
+                <Item dark={dark} onClick={() => setDisplay(false)}>
+                  <LinkItem to="/logout">Logout {user.username}</LinkItem>
+                </Item>
+              )}
+              <Item>
+                <DarkModeToggle
+                  onChange={() => themeToggler(!dark)}
+                  size={65}
+                  checked={dark}
+                />
+              </Item>
+            </List>
+          </Menu>
+        </NavMenu>
       </Nav>
     </header>
   )

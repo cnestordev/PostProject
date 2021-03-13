@@ -12,3 +12,10 @@ export const logOutUser = () => async dispatch => {
     type: 'LOGOUT_USER',
   })
 }
+
+export const updateUser = user => async dispatch => {
+  dispatch({
+    type: 'UPDATE_USER',
+    payload: user,
+  })
+}

@@ -29,6 +29,10 @@ export const NavLink = styled(Link)`
   text-decoration: none;
 `
 
+export const ListItem = styled.li`
+  margin-top: 15%;
+`
+
 export const Icon = styled.i`
   font-size: ${props => (props.type === 'close' ? '4.5rem' : '3rem')};
   color: ${props => (props.dark ? '#fff' : '#222')};

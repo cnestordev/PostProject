@@ -119,7 +119,7 @@ export const IconBox = styled.div`
 `
 
 export const Icon = styled.i`
-  font-size: 6rem;
+  font-size: 4rem;
 `
 
 export const Button = styled.button`
