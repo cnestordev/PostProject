@@ -109,7 +109,7 @@ const PostComment = props => {
             </Button>
           </Form>
         ) : (
-          <LoginPrompt />
+          <LoginPrompt dark={props.dark} />
         )}
       </Container>
       <Comments

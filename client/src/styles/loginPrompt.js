@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
 export const Container = styled.div`
-  background: rgb(199, 199, 199);
+  background: ${props => (props.dark ? '#19232b' : 'rgb(199,199,199)')};
   border-radius: 2px;
   text-align: center;
   padding: 1%;

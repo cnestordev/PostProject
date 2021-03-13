@@ -7,10 +7,11 @@ export const Nav = styled.nav`
   background: ${props => (props.dark ? '#0e141b' : '#f2f2f2')};
   display: flex;
   justify-content: space-between;
-  padding: 0.5% 10%;
+  padding: 1.5% 10%;
   position: fixed;
   top: 0;
   width: 80%;
+  z-index: 5;
 `
 
 export const NavLogo = styled.div`

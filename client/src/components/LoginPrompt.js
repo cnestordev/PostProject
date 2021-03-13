@@ -8,11 +8,11 @@ import {
   PromptLink,
 } from '../styles/loginPrompt'
 
-const LoginPrompt = () => {
+const LoginPrompt = ({ dark }) => {
   const location = useLocation()
 
   return (
-    <Container>
+    <Container dark={dark}>
       <Header>You must be logged in to post a comment</Header>
       <PromptLinkContainer>
         <PromptLink
