@@ -42,7 +42,7 @@ const Menu = ({ dark, user, toggler, themeToggler }) => {
             <Icon dark={dark} className="fas fa-plus"></Icon>
           </NavLink>
           {user.username === undefined ? (
-            <NavLink onClick={() => toggler(false)} to="/login">
+            <NavLink dark={dark} onClick={() => toggler(false)} to="/login">
               Login
             </NavLink>
           ) : (
@@ -50,18 +50,18 @@ const Menu = ({ dark, user, toggler, themeToggler }) => {
               <NavLink onClick={() => toggler(false)} dark={dark} to="/account">
                 My Account
               </NavLink>
-              <ListItem>
-                <DarkModeToggle
-                  onChange={() => themeToggler(!dark)}
-                  size={65}
-                  checked={dark}
-                />
-              </ListItem>
               <NavLink onClick={() => toggler(false)} dark={dark} to="/logout">
                 Logout {user.username}
               </NavLink>
             </>
           )}
+          <ListItem>
+            <DarkModeToggle
+              onChange={() => themeToggler(!dark)}
+              size={65}
+              checked={dark}
+            />
+          </ListItem>
           <Exit onClick={() => toggler(false)}>
             <IconClose
               dark={dark}

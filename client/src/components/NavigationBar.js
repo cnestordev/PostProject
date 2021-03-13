@@ -36,7 +36,7 @@ const NavigationBar = ({ user, logInUser, dark, toggler, themeToggler }) => {
   }, [])
   return (
     <header>
-      <Nav>
+      <Nav dark={dark}>
         <NavLogo dark={dark}>
           <p>MemeIt</p>
         </NavLogo>

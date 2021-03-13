@@ -40,11 +40,11 @@ export const Icon = styled.i`
 
 export const IconClose = styled.i`
   font-size: ${props => (props.type === 'close' ? '3.5rem' : '3rem')};
-  color: ${props => (props.dark ? '#cdcdcd' : '#434343')};
+  color: ${props => (props.dark ? '#696969' : '#434343')};
 `
 
 export const Exit = styled.span`
   position: absolute;
-  right: 0%;
-  top: 5%;
+  right: 8%;
+  top: 1%;
 `
