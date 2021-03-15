@@ -69,7 +69,9 @@ const NavigationBar = ({ user, logInUser, dark, toggler, themeToggler }) => {
                 <LinkItem to="/posts">Posts</LinkItem>
               </Item>
               <Item dark={dark} onClick={() => setDisplay(false)}>
-                <LinkItem to="/posts/new">New</LinkItem>
+                <LinkItem to="/posts/new">
+                  <Icon dark={dark} className="fas fa-plus"></Icon>
+                </LinkItem>
               </Item>
               {isUserLoggedIn ? (
                 <Item dark={dark} onClick={() => setDisplay(false)}>
