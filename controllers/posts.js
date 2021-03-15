@@ -2,6 +2,7 @@ const Post = require('../models/post')
 const User = require('../models/user')
 const mongoose = require('mongoose')
 const cloudinary = require('../cloudinary')
+const seedData = require('../seeds')
 
 const index = async (req, res) => {
   const posts = await Post.find({}).populate({
@@ -240,6 +241,16 @@ const getUsersPosts = async (req, res, next) => {
   }
 }
 
+const seedPosts = async (req, res, next) => {
+  const { domain } = req.params
+  try {
+    await seedData(domain)
+    res.status(201).end()
+  } catch (err) {
+    res.status(500).json({ message: 'something went wrong', status: 500 })
+  }
+}
+
 module.exports = {
   index,
   getPostById,
@@ -252,4 +263,5 @@ module.exports = {
   deleteImage,
   searchPost,
   getUsersPosts,
+  seedPosts,
 }

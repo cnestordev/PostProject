@@ -22,7 +22,7 @@ for (let i = 0; i < 10; i++) {
 
 let links = []
 
-const getReddit = async () => {
+const getReddit = async domain => {
   usersSeed = []
   postsSeed = []
   commentsSeed = []
@@ -37,7 +37,7 @@ const getReddit = async () => {
   }
 
   // create seed posts
-  const response = await axios.get('http://www.reddit.com/r/BeAmazed.json')
+  const response = await axios.get(`http://www.reddit.com/r/${domain}.json`)
   for (let i = 1; i < 20; i++) {
     const format = response.data.data.children[i].data.url.slice(-3)
 
@@ -54,15 +54,20 @@ const getReddit = async () => {
     links.push(
       `https://www.reddit.com${response.data.data.children[i].data.permalink}.json`
     )
-    const { title, url, selftext, thumbnail } = response.data.data.children[
-      i
-    ].data
+    const {
+      title,
+      url,
+      selftext,
+      thumbnail,
+      subreddit,
+    } = response.data.data.children[i].data
     const newPost = await new Post({
       title,
       author: user['_id'],
       authorId: user['_id'],
       timestamp: Math.round(new Date().getTime() / 1000),
       body: selftext,
+      tags: subreddit,
       image: {
         url,
         id: '',

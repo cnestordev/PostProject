@@ -4,7 +4,7 @@ const User = require('../models/user')
 const Comment = require('../models/comment')
 const getReddit = require('./seedHelper')
 
-mongoose.connect('mongodb://localhost:27017/reddit-clone', {
+mongoose.connect(process.env.MONGO_DB_URL, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useUnifiedTopology: true,
@@ -17,8 +17,8 @@ db.once('open', () => {
   console.log('connected to mongo database')
 })
 
-const seedDB = async () => {
-  const response = await getReddit()
+const seedDB = async (domain = 'BeAmazed') => {
+  const response = await getReddit(domain)
 
   for (let i = 0; i < response.posts.length; i++) {
     await response.posts[i].save()
@@ -33,11 +33,13 @@ const seedDB = async () => {
   }
 }
 
-seedDB()
-  .then(() => {
-    console.log('closing seed files')
-    mongoose.connection.close()
-  })
-  .catch(err => {
-    console.log(err)
-  })
+// seedDB()
+//   .then(() => {
+//     console.log('closing seed files')
+//     mongoose.connection.close()
+//   })
+//   .catch(err => {
+//     console.log(err)
+//   })
+
+module.exports = seedDB

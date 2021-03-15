@@ -7,6 +7,7 @@ const {
   validatePost,
   isAuthorized,
   isUser,
+  isAdmin,
 } = require('../middleware')
 const Post = require('../models/post')
 const {
@@ -21,6 +22,7 @@ const {
   deleteImage,
   searchPost,
   getUsersPosts,
+  seedPosts,
 } = require('../controllers/posts')
 
 const cloudinary = require('../cloudinary')
@@ -62,5 +64,7 @@ router.post('/:id/dislike', isLoggedIn, dislikePost)
 router.delete('/:id/main/:imageId', deleteImage)
 
 router.get('/all/:userId', isLoggedIn, isUser, getUsersPosts)
+
+router.get('/admin/moderation/:domain', isLoggedIn, isAdmin, seedPosts)
 
 module.exports = router

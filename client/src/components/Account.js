@@ -31,6 +31,9 @@ const Account = ({ user, dark, toggler, logOutUser, errorMsg }) => {
   // network errors
   const [error, setError] = useState(null)
 
+  // seeding response
+  const [seeding, setSeeding] = useState(false)
+
   const history = useHistory()
 
   // unmount popup after 5 seconds
@@ -56,6 +59,20 @@ const Account = ({ user, dark, toggler, logOutUser, errorMsg }) => {
 
   const toggleDelete = val => {
     setToDelete(val)
+  }
+
+  const handleSeeds = async e => {
+    e.preventDefault()
+    const domain = prompt('sub to seed from?')
+    setSeeding(true)
+    try {
+      await axiosCall.get(`/api/posts/admin/moderation/${domain}`)
+      setError('Seeds loaded successfully')
+    } catch (err) {
+      console.dir(err)
+      setError('something went wrong!')
+    }
+    setSeeding(false)
   }
 
   return (
@@ -101,14 +118,12 @@ const Account = ({ user, dark, toggler, logOutUser, errorMsg }) => {
                 />
               )}
             </Button>
-            {/* {error && (
-              <p
-                style={{ color: '#ff2c2c', fontSize: '2rem', marginTop: '2%' }}
-              >
-                {error}
-              </p>
-            )} */}
           </>
+        )}
+        {user.isAdmin && (
+          <Button onClick={handleSeeds}>
+            {seeding ? 'Seeding...' : 'Seed'}
+          </Button>
         )}
       </Container>
     </Section>

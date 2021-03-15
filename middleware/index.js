@@ -72,6 +72,13 @@ const isAuthOrAdmin = async (req, res, next) => {
   return next()
 }
 
+const isAdmin = async (req, res, next) => {
+  if (!req.user.isAdmin) {
+    return next({ message: 'Unauthorized', status: 401 })
+  }
+  return next()
+}
+
 const commentAuthor = async (req, res, next) => {
   if (req.user.isAdmin) {
     return next()
@@ -110,4 +117,5 @@ module.exports = {
   commentAuthor,
   isUser,
   isAuthOrAdmin,
+  isAdmin,
 }

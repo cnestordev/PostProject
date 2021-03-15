@@ -61,6 +61,7 @@ export const Menu = styled.div`
   right: 5%;
   top: 100%;
   padding: 0 2%;
+  user-select: none;
 `
 
 export const Icon = styled.i`
