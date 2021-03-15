@@ -66,7 +66,6 @@ const Menu = ({ dark, user, toggler, themeToggler }) => {
               onChange={() => themeToggler(!dark)}
               size={65}
               checked={dark}
-              style={outline}
             />
           </ListItem>
           <Exit onClick={() => toggler(false)}>

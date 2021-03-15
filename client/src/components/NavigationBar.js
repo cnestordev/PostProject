@@ -92,7 +92,7 @@ const NavigationBar = ({ user, logInUser, dark, toggler, themeToggler }) => {
               )}
               <Item>
                 <DarkModeToggle
-                  style={{ display: 'none' }}
+                  className="themeToggler"
                   onChange={() => themeToggler(!dark)}
                   size={65}
                   checked={dark}
