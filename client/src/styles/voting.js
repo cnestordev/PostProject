@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 export const Container = styled.div`
   border: 1px solid ${props => (props.dark ? '#1b831f' : '#ff5722')};
@@ -65,6 +66,26 @@ export const Paragraph = styled.p`
   }
 `
 
-//   .selected {
-//     color: #ff5620;
-//   } */
+export const PLink = styled(Link)`
+  padding: 1%;
+  cursor: pointer;
+  font-size: 1.5rem;
+  position: relative;
+  z-index: 1;
+  text-decoration: none;
+  color: ${props => {
+    if (!props.active && !props.dark) {
+      return '#262626'
+    } else if (!props.active && props.dark) {
+      return '#a5a9ac'
+    } else if (props.active && !props.dark) {
+      return '#ff6635'
+    } else if (props.active && props.dark) {
+      return '#44ff4c'
+    }
+  }};
+
+  @media (max-width: 767px) {
+    font-size: 2rem;
+  }
+`

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import axiosCall from '../api/axiosCall'
 
 import Box from './Box'
@@ -24,6 +25,8 @@ const Home = ({ dark }) => {
   // email provider error
   const [error, setError] = useState('')
 
+  const location = useLocation()
+
   useEffect(() => {
     if (error !== '') {
       setTimeout(() => {
@@ -33,15 +36,15 @@ const Home = ({ dark }) => {
   }, [error])
 
   useEffect(async () => {
-    try {
-      const res = await axiosCall.get('/api/', {
-        withCredentials: true,
-      })
-    } catch (err) {
-      console.log('hit ERROR on Home component')
-      console.dir(err)
+    if (location.hash) {
+      let elem = document.getElementById(location.hash.slice(1))
+      if (elem) {
+        elem.scrollIntoView({ behavior: 'smooth' })
+      }
+    } else {
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
     }
-  }, [])
+  }, [location])
 
   return (
     <Section>

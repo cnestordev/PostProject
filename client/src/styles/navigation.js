@@ -14,7 +14,8 @@ export const Nav = styled.nav`
   z-index: 5;
 `
 
-export const NavLogo = styled.div`
+export const NavLogo = styled(Link)`
+  text-decoration: none;
   color: ${props => (props.dark ? '#ececec' : '#313131')};
   font-size: ${size};
   display: flex;

@@ -73,7 +73,7 @@ const Contact = ({ dark, toggler }) => {
   }
 
   return (
-    <Container dark={dark}>
+    <Container id="contact" dark={dark}>
       <Form onSubmit={handleSubmit}>
         <Header override={true}>Questions? Get in touch.</Header>
         <Input

@@ -43,7 +43,7 @@ const NavigationBar = ({ user, logInUser, dark, toggler, themeToggler }) => {
   return (
     <header>
       <Nav dark={dark}>
-        <NavLogo dark={dark}>
+        <NavLogo to="/posts" dark={dark}>
           <p>Threaddit</p>
         </NavLogo>
         <NavMenu>
@@ -76,20 +76,18 @@ const NavigationBar = ({ user, logInUser, dark, toggler, themeToggler }) => {
                   <LinkItem to="/account">Account</LinkItem>
                 </Item>
               ) : (
-                <>
-                  <Item dark={dark} onClick={() => setDisplay(false)}>
-                    <LinkItem to="/login">Login</LinkItem>
-                  </Item>
-                  <Item dark={dark} onClick={() => setDisplay(false)}>
-                    <LinkItem to="/register">Register</LinkItem>
-                  </Item>
-                </>
+                <Item dark={dark} onClick={() => setDisplay(false)}>
+                  <LinkItem to="/login">Login</LinkItem>
+                </Item>
               )}
               {isUserLoggedIn && (
                 <Item dark={dark} onClick={() => setDisplay(false)}>
                   <LinkItem to="/logout">Logout {user.username}</LinkItem>
                 </Item>
               )}
+              <Item dark={dark} onClick={() => setDisplay(false)}>
+                <LinkItem to="/#contact">Contact me</LinkItem>
+              </Item>
               <Item>
                 <DarkModeToggle
                   className="themeToggler"

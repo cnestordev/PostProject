@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import axiosCall from '../api/axiosCall'
 import { connect } from 'react-redux'
 
-import { Container, Icon, Paragraph } from '../styles/voting'
+import { Container, Icon, Paragraph, PLink } from '../styles/voting'
 
 const Voting = ({ data, user, dark, alertToggler }) => {
   // When Voting component first mounts, it will read the .length of the array, but once a
@@ -41,9 +41,9 @@ const Voting = ({ data, user, dark, alertToggler }) => {
         <Paragraph dark={dark} onClick={handleDisike} active={metrics.disliked}>
           <Icon className="fas fa-chevron-down"></Icon> {metrics.dislikes}
         </Paragraph>
-        <Paragraph dark={dark}>
+        <PLink to={`/posts/${data._id}`} dark={dark}>
           <Icon className="fas fa-comments"></Icon> {data.comments.length}
-        </Paragraph>
+        </PLink>
       </Container>
     </>
   )
