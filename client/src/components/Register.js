@@ -107,22 +107,25 @@ const Register = props => {
   return (
     <Section>
       {error && <Popup message={error} />}
-      <Container>
-        <Header>Reigster User:</Header>
+      <Container dark={props.dark}>
+        <Header dark={props.dark}>Reigster User:</Header>
         <Form autoComplete="off" onSubmit={handleSubmit}>
           <Input
+            dark={props.dark}
             type="text"
             name="username"
             placeholder="username*"
             onChange={handleChange}
           />
           <Input
+            dark={props.dark}
             type="email"
             name="email"
             placeholder="email"
             onChange={handleChange}
           />
           <Input
+            dark={props.dark}
             type="password"
             name="password"
             placeholder="password*"
@@ -132,7 +135,7 @@ const Register = props => {
           <p style={{ fontSize: '1.2rem' }}>
             By entering your email, you agree to receive a confirmation email.
           </p>
-          <Button registerBtn={true} disabled={disabled}>
+          <Button dark={props.dark} registerBtn={true} disabled={disabled}>
             Register
           </Button>
         </Form>
@@ -148,7 +151,11 @@ const Register = props => {
           )}
         </ErrorContainer>
         <RedirectContainer>
-          <RedirectLink className="accountRedirect" to="/login">
+          <RedirectLink
+            dark={props.dark}
+            className="accountRedirect"
+            to="/login"
+          >
             Already have an account? Log in
           </RedirectLink>
         </RedirectContainer>

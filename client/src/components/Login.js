@@ -107,22 +107,26 @@ const Login = props => {
   return (
     <Section>
       {error && <Popup message={error} />}
-      <Container>
-        <Header>Login User:</Header>
+      <Container dark={props.dark}>
+        <Header dark={props.dark}>Login User:</Header>
         <Form autoComplete="off" onSubmit={handleSubmit}>
           <Input
+            dark={props.dark}
             type="text"
             name="username"
             placeholder="username"
             onChange={handleChange}
           />
           <Input
+            dark={props.dark}
             type="password"
             name="password"
             placeholder="password"
             onChange={handleChange}
           />
-          <Button disabled={disabled}>Login</Button>
+          <Button dark={props.dark} disabled={disabled}>
+            Login
+          </Button>
         </Form>
         <ErrorContainer className="validationErrorsContainer">
           {errors.username.length > 0 && (
@@ -134,7 +138,11 @@ const Login = props => {
         </ErrorContainer>
         <div>
           <RedirectContainer>
-            <RedirectLink className="accountRedirect" to="/register">
+            <RedirectLink
+              dark={props.dark}
+              className="accountRedirect"
+              to="/register"
+            >
               Don't have an account? Register here
             </RedirectLink>
           </RedirectContainer>

@@ -25,6 +25,12 @@ const NavigationBar = ({ user, logInUser, dark, toggler, themeToggler }) => {
 
   const isUserLoggedIn = Object.keys(user).length > 1
 
+  const outline = {
+    focus: {
+      outline: 'none',
+    },
+  }
+
   useEffect(async () => {
     try {
       const user = await axiosCall.get('/api/user')
@@ -38,7 +44,7 @@ const NavigationBar = ({ user, logInUser, dark, toggler, themeToggler }) => {
     <header>
       <Nav dark={dark}>
         <NavLogo dark={dark}>
-          <p>MemeIt</p>
+          <p>Threaddit</p>
         </NavLogo>
         <NavMenu>
           <Hamburger
@@ -86,6 +92,7 @@ const NavigationBar = ({ user, logInUser, dark, toggler, themeToggler }) => {
               )}
               <Item>
                 <DarkModeToggle
+                  style={{ display: 'none' }}
                   onChange={() => themeToggler(!dark)}
                   size={65}
                   checked={dark}

@@ -52,10 +52,8 @@ router.post(
 
 router.get('/getUserId', async (req, res) => {
   if (req.user) {
-    console.log(req.user)
     return res.status(201).json({ message: req.user._id, status: 201 })
   }
-  console.log(req.user)
   return res.status(404).end()
 })
 

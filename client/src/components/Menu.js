@@ -17,6 +17,12 @@ import { Item } from '../styles/navigation'
 const Menu = ({ dark, user, toggler, themeToggler }) => {
   const position = window.scrollY
 
+  const outline = {
+    focus: {
+      outline: 'none',
+    },
+  }
+
   useEffect(() => {
     // prevent user from scrolling when Menu mounts
     document.body.style.overflow = 'hidden'
@@ -60,6 +66,7 @@ const Menu = ({ dark, user, toggler, themeToggler }) => {
               onChange={() => themeToggler(!dark)}
               size={65}
               checked={dark}
+              style={outline}
             />
           </ListItem>
           <Exit onClick={() => toggler(false)}>

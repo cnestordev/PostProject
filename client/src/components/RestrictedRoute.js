@@ -2,13 +2,14 @@ import React from 'react'
 import { Redirect, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-const RestrictedRoute = ({ component: Component, user, ...rest }) => {
+const RestrictedRoute = ({ component: Component, user, dark, ...rest }) => {
   return (
     <Route
+      dark={dark}
       {...rest}
       render={props => {
         if (!user._id) {
-          return <Component {...props} />
+          return <Component dark={dark} {...props} />
         } else {
           // no user found, redirect to /posts
           return (

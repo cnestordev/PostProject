@@ -154,7 +154,7 @@ const sendEmail = async (req, res, next) => {
   const msg = {
     to: 'nestor@nestordev.com', // Change to your recipient
     from: 'nestor@nestordev.com', // Change to your verified sender
-    subject: 'RE: MemeIt Inquiry',
+    subject: 'RE: Threaddit Inquiry',
     text: `<p>Name: ${name} </p> <p>email: ${email} </p>  <p>${body}</p>`,
     html: `<p>name: ${name} </p> <p>email: ${email} </p>  <p>${body}</p>`,
   }
