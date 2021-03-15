@@ -71,17 +71,29 @@ export const EditContainer = styled.div`
   width: 10%;
   margin: 0.5% auto;
 
-  @media (max-width: 992px) {
+  @media (max-width: 1305px) {
     width: 15%;
   }
 
   @media (max-width: 992px) {
+    width: 15%;
+  }
+
+  @media (max-width: 737px) {
+    width: 20%;
+  }
+
+  @media (max-width: 630px) {
     margin: 3% auto;
-    width: 18%;
+    width: 23%;
+  }
+
+  @media (max-width: 500px) {
+    width: 30%;
   }
 
   @media (max-width: 400px) {
-    width: 40%;
+    width: 32%;
     margin: 5% auto;
     justify-content: space-between;
   }
@@ -109,7 +121,7 @@ export const DelPara = styled.p`
   display: inline;
   color: rgb(255, 58, 58);
   font-size: 1.4rem;
-  margin-left: 12%;
+  margin-left: 0;
   cursor: pointer;
   user-select: none;
   -webkit-user-select: none;

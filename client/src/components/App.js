@@ -25,10 +25,6 @@ import UserPosts from './UserPosts'
 import UserComments from './UserComments'
 
 const App = ({ user, updateUser }) => {
-  if (Object.keys(user).length <= 1) {
-    user.darkMode = localStorage.getItem('themePreference') === 'true'
-  }
-
   const [theme, setTheme] = useState(user.darkMode)
 
   const [display, setDisplay] = useState(false)
@@ -57,7 +53,6 @@ const App = ({ user, updateUser }) => {
     } catch (err) {
       // if unable to fetch user id (user not logged on)
       // change the "guest" dark mode
-      localStorage.setItem('themePreference', !user.darkMode)
       updateUser({ darkMode: !user.darkMode })
     }
   }

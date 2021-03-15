@@ -54,13 +54,16 @@ const Menu = ({ dark, user, toggler, themeToggler }) => {
           ) : (
             <>
               <NavLink onClick={() => toggler(false)} dark={dark} to="/account">
-                My Account
+                Account
               </NavLink>
               <NavLink onClick={() => toggler(false)} dark={dark} to="/logout">
                 Logout {user.username}
               </NavLink>
             </>
           )}
+          <NavLink onClick={() => toggler(false)} dark={dark} to="/#contact">
+            Contact me
+          </NavLink>
           <ListItem>
             <DarkModeToggle
               onChange={() => themeToggler(!dark)}

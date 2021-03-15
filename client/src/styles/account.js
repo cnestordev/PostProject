@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 export const Container = styled.div`
   background: ${props => (props.dark ? '#151f28' : '#fff')};
   text-align: center;
-  height: 50vh;
+  height: 55vh;
   padding-top: 3%;
 `
 
