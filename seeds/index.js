@@ -18,9 +18,6 @@ db.once('open', () => {
 })
 
 const seedDB = async () => {
-  await User.deleteMany({})
-  await Comment.deleteMany({})
-  await Post.deleteMany({})
   const response = await getReddit()
 
   for (let i = 0; i < response.posts.length; i++) {

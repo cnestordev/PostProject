@@ -3,19 +3,22 @@ const User = require('../models/user')
 const Post = require('../models/post')
 const Comment = require('../models/comment')
 const { performance } = require('perf_hooks')
+const {
+  uniqueNamesGenerator,
+  adjectives,
+  colors,
+  animals,
+} = require('unique-names-generator')
 
-const users = [
-  'red',
-  'blue',
-  'yellow',
-  'gold',
-  'silver',
-  'green',
-  'orange',
-  'purple',
-  'pink',
-  'cyan',
-]
+const users = []
+
+for (let i = 0; i < 10; i++) {
+  const randomName = uniqueNamesGenerator({
+    dictionaries: [adjectives, colors, animals],
+    length: 2,
+  })
+  users.push(randomName)
+}
 
 let links = []
 
@@ -25,8 +28,9 @@ const getReddit = async () => {
   commentsSeed = []
   // create seed users
 
-  for (let i = 0; i < 10; i++) {
-    const user = new User({ username: users[i], email: '' })
+  for (let i = 0; i < users.length; i++) {
+    const username = users[i].charAt(0).toUpperCase() + users[i].slice(1)
+    const user = new User({ username, email: '' })
     const password = users[i]
     const newUser = await User.register(user, password)
     usersSeed.push(newUser)
@@ -34,7 +38,7 @@ const getReddit = async () => {
 
   // create seed posts
   const response = await axios.get('http://www.reddit.com/r/BeAmazed.json')
-  for (let i = 1; i < 11; i++) {
+  for (let i = 1; i < 20; i++) {
     const format = response.data.data.children[i].data.url.slice(-3)
 
     if (
@@ -46,7 +50,7 @@ const getReddit = async () => {
       continue
     }
 
-    const user = usersSeed[Math.floor(Math.random() * 10)]
+    const user = usersSeed[Math.floor(Math.random() * users.length)]
     links.push(
       `https://www.reddit.com${response.data.data.children[i].data.permalink}.json`
     )
