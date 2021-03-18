@@ -132,9 +132,8 @@ export const TagsContainer = styled.div`
   flex-direction: row;
   justify-content: space-evenly;
   color: #fff;
-  width: 22%;
+  width: 45%;
   margin: 2% auto;
-
   @media (max-width: 992px) {
     width: 40%;
   }

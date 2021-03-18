@@ -36,7 +36,7 @@ export const List = styled.ul`
 export const Item = styled.li`
   border-radius: 7px;
   font-size: ${size};
-  margin: 30% auto;
+  margin: 15% auto;
   text-align: center;
   padding: 4% 2%;
   display: flex;
