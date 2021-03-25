@@ -19,6 +19,7 @@ import {
   Icon,
   Subheader,
   P,
+  Cta,
 } from '../styles/home'
 
 const Home = ({ dark }) => {
@@ -63,6 +64,9 @@ const Home = ({ dark }) => {
           <Box dark={dark} data={share} />
           <Box dark={dark} data={manage} />
           <Contact toggler={setError} dark={dark} />
+          <Cta dark={dark} to="/posts">
+            Get Started
+          </Cta>
         </Bottom>
       </Container>
     </Section>

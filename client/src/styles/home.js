@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 export const Container = styled.div`
   display: flex;
@@ -121,4 +122,39 @@ export const P = styled.p`
   }
 `
 
-export const Bottom = styled.div``
+export const Bottom = styled.div`
+  @media (max-width: 480px) {
+    padding-bottom: 18%;
+  }
+`
+
+export const Cta = styled(Link)`
+  font-size: 2rem;
+  background: ${props =>
+    props.dark
+      ? '-webkit-linear-gradient(#31d1a5, #0095ff)'
+      : '-webkit-linear-gradient(#7509ec, #092fec)'};
+  border: none;
+  border-radius: 7px;
+  padding: 1% 2.5%;
+  position: fixed;
+  text-decoration: none;
+  color: #fff;
+  top: 1.5%;
+  right: 18%;
+  z-index: 6;
+
+  @media (max-width: 480px) {
+    width: 100%;
+    border-radius: 0;
+    top: auto;
+    bottom: 0;
+    right: auto;
+    left: 0;
+    padding: 4% 0;
+  }
+`
+
+export const CtaLg = styled(Link)`
+  border: 1px solid red;
+`
