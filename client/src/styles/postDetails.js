@@ -89,11 +89,11 @@ export const EditContainer = styled.div`
   }
 
   @media (max-width: 500px) {
-    width: 30%;
+    width: 100%;
   }
 
   @media (max-width: 400px) {
-    width: 32%;
+    width: 100%;
     margin: 5% auto;
     justify-content: space-between;
   }
@@ -124,6 +124,7 @@ export const DelPara = styled.p`
   margin-left: 0;
   cursor: pointer;
   user-select: none;
+  margin-right: 2%;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;

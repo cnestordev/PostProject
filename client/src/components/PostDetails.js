@@ -111,7 +111,7 @@ const PostDetails = ({ user, match, dark }) => {
                   <EditPara>Edit</EditPara>
                 </PostLink>
               )}
-              <div>
+              <div style={{ width: '100%' }}>
                 {!toDelete ? (
                   <DelPara onClick={() => toggleDelete(true)}>Delete</DelPara>
                 ) : (
