@@ -2,21 +2,14 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
 export const Container = styled.div`
-  border: 1px solid ${props => (props.dark ? '#1b831f' : '#ff5722')};
-  border-radius: 50px;
   padding: 1% 2%;
   width: 30%;
   display: flex;
   justify-content: space-between;
-  margin-top: 1.5%;
+  margin-top: 3.5%;
   transition: 300ms;
   position: relative;
   z-index: 3;
-
-  &:hover {
-    box-shadow: 0 0 4px 2px ${props => (props.dark ? '#383838' : '#d1d1d1')};
-    transition: 300ms;
-  }
 
   @media (max-width: 992px) {
     width: 35%;

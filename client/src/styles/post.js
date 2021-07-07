@@ -4,14 +4,9 @@ import { Link } from 'react-router-dom'
 import { tablet, phone } from './index'
 
 export const Container = styled.div`
-  border: 1px solid ${props => (props.theme ? 'transparent' : '#e3e3e3')};
+  border: 1px solid ${props => (props.dark ? '#676767' : 'transparent')};
   border-radius: 5px;
-  background: ${props => {
-    if (props.dark) {
-      return '#151f28'
-    }
-    return '#fff'
-  }};
+  background: ${props => (props.dark ? 'transparent' : '#fff')};
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -63,7 +58,8 @@ export const NavLink = styled(Link)`
 
 export const Title = styled.h3`
   color: ${props => (props.dark ? '#cacaca' : '#313131')};
-  font-size: 3.2rem;
+  font-size: 3rem;
+  font-weight: 200;
   text-decoration: none;
   padding: 1%;
 
