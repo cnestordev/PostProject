@@ -4,15 +4,20 @@ import { Link } from 'react-router-dom'
 import { tablet, phone } from './index'
 
 export const Container = styled.div`
-  border: 1px solid ${props => (props.dark ? '#676767' : 'transparent')};
+  border: 1px solid ${props => (props.theme ? 'transparent' : '#e3e3e3')};
   border-radius: 5px;
-  background: ${props => (props.dark ? 'transparent' : '#fff')};
+  background: ${props => {
+    if (props.dark) {
+      return '#151f28'
+    }
+    return '#fff'
+  }};
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 40%;
+  width: 38%;
   margin: 2% auto;
   padding: 1% 0;
   word-break: break-word;
@@ -124,27 +129,20 @@ export const PostImg = styled.img`
 `
 
 export const TagsContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
   color: #fff;
-  width: 45%;
+  width: 100%;
   margin: 2% auto;
-  @media (max-width: 992px) {
-    width: 40%;
-  }
 `
 
 export const Hash = styled.p`
   background: ${props => (props.dark ? '#681bf0' : '#414141')};
   border-radius: 50px;
   display: inline-block;
-  padding: 4% 8%;
+  padding: 2% 4%;
   font-size: 1.3rem;
   margin: 0 1%;
 
   @media (max-width: 992px) {
     font-size: 1.4rem;
-    padding: 3% 6%;
   }
 `

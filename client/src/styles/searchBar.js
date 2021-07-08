@@ -8,7 +8,7 @@ export const Container = styled.div`
   padding: 1%;
   display: flex;
   justify-content: space-around;
-  width: 40%;
+  width: 38%;
   margin: 2% auto;
 
   @media (max-width: 1300px) {
