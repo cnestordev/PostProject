@@ -10,23 +10,22 @@ const {
   animals,
 } = require('unique-names-generator')
 
-const users = []
-
-for (let i = 0; i < 10; i++) {
-  const randomName = uniqueNamesGenerator({
-    dictionaries: [adjectives, colors, animals],
-    length: 2,
-  })
-  users.push(randomName)
-}
-
-let links = []
-
 const getReddit = async domain => {
   usersSeed = []
   postsSeed = []
   commentsSeed = []
+  users = []
+  links = []
   // create seed users
+
+  for (let i = 0; i < 10; i++) {
+    if (i === 0) console.log("creating new users")
+    const randomName = uniqueNamesGenerator({
+      dictionaries: [adjectives, colors, animals],
+      length: 2,
+    })
+    users.push(randomName)
+  }
 
   for (let i = 0; i < users.length; i++) {
     const username = users[i].charAt(0).toUpperCase() + users[i].slice(1)

@@ -2,7 +2,7 @@ const express = require('express')
 const passport = require('passport')
 const router = express.Router()
 const User = require('../models/user')
-const { validateUser, isUser, isLoggedIn } = require('../middleware')
+const { validateUser, isUser, isLoggedIn, isAdmin } = require('../middleware')
 const {
   index,
   userData,
@@ -11,6 +11,7 @@ const {
   logoutUser,
   loginUser,
   deleteUser,
+  deleteAllUsers,
   toggleTheme,
   sendEmail,
 } = require('../controllers/users')
@@ -39,6 +40,8 @@ router.get('/logout', logoutUser)
 router.post('/:userId/themeToggle/:theme', isLoggedIn, isUser, toggleTheme)
 
 router.delete('/:userId/delete', isLoggedIn, isUser, deleteUser)
+
+router.delete('/:userId/deleteAllUsers', isLoggedIn, isAdmin, deleteAllUsers)
 
 router.post(
   '/contact',

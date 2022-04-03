@@ -28,6 +28,12 @@ const Account = ({ user, dark, toggler, logOutUser, errorMsg }) => {
 
   const [deleting, setDeleting] = useState(false)
 
+  // for all users
+  const [deletingAll, setDeletingAll] = useState(false)
+  const [buttonMessage, setButtonMessage] = useState('DELETE ALL USERS')
+
+  const [confirm, setConfirming] = useState(false)
+
   // network errors
   const [error, setError] = useState(null)
 
@@ -57,8 +63,25 @@ const Account = ({ user, dark, toggler, logOutUser, errorMsg }) => {
     }
   }
 
+  const handleDeleteAllUsers = async () => {
+    setDeleting(true)
+    try {
+      await axiosCall.delete(`/api/${user._id}/deleteAllUsers`)
+      toggleConfirm(false)
+      setError('All users have been deleted from the database.')
+    } catch (err) {
+      setDeleting(false)
+      setError('something went wrong!')
+    }
+  }
+  
+
   const toggleDelete = val => {
     setToDelete(val)
+  }
+
+  const toggleConfirm = val => {
+    setConfirming(val)
   }
 
   const handleSeeds = async e => {
@@ -97,6 +120,29 @@ const Account = ({ user, dark, toggler, logOutUser, errorMsg }) => {
             <Icon className="fas fa-moon"></Icon>
           </IconBox>
         </ThemeContainer>
+        {!confirm ? (
+          <Button onClick={() => toggleConfirm(true)}>DELETE ALL USERS</Button>
+        ) : (
+          <>
+            <P>Are you sure?</P>
+            <Button theme={'cancel'} onClick={() => toggleConfirm(false)}>
+              Cancel
+            </Button>
+            <Button onClick={handleDeleteAllUsers}>
+              {!deletingAll ? (
+                'Confirm Deletion'
+              ) : (
+                <Loader
+                  type="ThreeDots"
+                  color="#f43636"
+                  height={11}
+                  width={100}
+                  timeout={5000} //5 secs
+                />
+              )}
+            </Button>
+          </>
+        )}
         {!toDelete ? (
           <Button onClick={() => toggleDelete(true)}>DELETE ACCOUNT</Button>
         ) : (

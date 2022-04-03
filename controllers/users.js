@@ -134,8 +134,21 @@ const deleteUser = async (req, res) => {
   }
 }
 
+const deleteAllUsers = async (req, res) => {
+  try {
+    const response = await User.find({})
+    response.forEach(async user => {
+      if (!user.isAdmin) {
+        const deleteRes = await User.findByIdAndDelete(user['_id'])
+      }
+    })
+  } catch (err) {
+    return next({ message: err.message, status: 500 })
+  }
+}
+
 const toggleTheme = async (req, res, next) => {
-  // theme is a boolean value
+  // theme is a boolean valuedeleteAllUser
   const { userId, theme } = req.params
   try {
     const response = await User.findByIdAndUpdate(
@@ -174,6 +187,7 @@ module.exports = {
   logoutUser,
   loginUser,
   deleteUser,
+  deleteAllUsers,
   toggleTheme,
   sendEmail,
 }
