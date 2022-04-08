@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 const size = '4rem'
 
 export const Nav = styled.nav`
-  background: ${props => (props.dark ? '#0e141b' : '#f2f2f2')};
+  background: ${props => (props.dark ? '#0e141b' : '#f9fbfc')};
   display: flex;
   justify-content: space-between;
   padding: 1.5% 10%;

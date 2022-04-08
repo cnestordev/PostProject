@@ -36,7 +36,7 @@ export const Container = styled.div`
   }
 
   @media (max-width: 600px) {
-    width: 85%;
+    width: 91%;
   }
 
   @media (max-width: 457px) {
