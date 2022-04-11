@@ -45,7 +45,7 @@ const App = ({ user, updateUser }) => {
         const val = response.data.message.darkMode
         updateUser(response.data.message)
         // setTheme(val)
-        // document.body.style.backgroundColor = val ? '#0e141b' : '#fff'
+        // document.body.style.backgroundColor = val ? '#0e141b' : '#f2f2f2'
       } catch (err) {
         // if there is a server error
         setError(err.response.data.message)
@@ -63,7 +63,7 @@ const App = ({ user, updateUser }) => {
 
   useEffect(() => {
     setTheme(user.darkMode)
-    document.body.style.backgroundColor = user.darkMode ? '#0e141b' : '#fff'
+    document.body.style.backgroundColor = user.darkMode ? '#0e141b' : '#f2f2f2'
   }, [user])
 
   return (

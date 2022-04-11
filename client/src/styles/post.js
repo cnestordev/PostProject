@@ -5,8 +5,7 @@ import { tablet, phone } from './index'
 
 export const Container = styled.div`
   border: 1px solid ${props => (props.theme ? 'transparent' : '#e3e3e3')};
-  border-radius: 9px;
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  border-radius: 5px;
   background: ${props => {
     if (props.dark) {
       return '#151f28'
@@ -20,7 +19,7 @@ export const Container = styled.div`
   justify-content: center;
   width: 38%;
   margin: 2% auto;
-  padding: 3%;
+  padding: 1% 0;
   word-break: break-word;
 
   @media (max-width: 1300px) {
