@@ -5,6 +5,7 @@ import loginSchema from '../validation/loginSchema'
 import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { logInUser } from '../redux/actions/users.actions'
+import { popup_timer } from '../util/shared'
 
 import Popup from './Popup'
 
@@ -61,7 +62,7 @@ const Login = props => {
     if (error !== '') {
       setTimeout(() => {
         setError('')
-      }, [5000])
+      }, [popup_timer])
     }
   }, [error])
 

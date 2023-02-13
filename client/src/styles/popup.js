@@ -22,18 +22,20 @@ const fadeOut = keyframes`
 `
 
 export const Box = styled.div`
-  animation: ${moveUp} 300ms ease;
   animation-iteration-count: 1;
   animation: ${fadeOut} 1s ease-out 4.5s;
   background: white;
   position: fixed;
-  right: 2%;
+  left: 50%;
+  top: 30%;
+  transform: translate(-50%, -50%);
   width: 15%;
   transition: 200ms;
-  padding: 0.65%;
+  padding: 8%;
   text-align: center;
-  background: #88ff81;
+  background: #fff;
   border-radius: 3px;
+  box-shadow: hsl(11deg 100% 86%) 0px 0px 0px 2px, rgb(255 153 0 / 86%) 0px 4px 6px -1px, rgb(255 200 0) 0px 1px 0px inset;
   z-index: 4;
 
   @media (max-width: 637px) {
@@ -50,5 +52,5 @@ export const Box = styled.div`
 `
 export const Body = styled.p`
   font-size: 2rem;
-  color: #ff125f;
+  color: #000;
 `

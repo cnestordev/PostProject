@@ -21,6 +21,7 @@ import {
 
 import { Section } from '../styles'
 import Popup from './Popup'
+import { popup_timer } from '../util/shared'
 
 const Register = props => {
   const history = useHistory()
@@ -61,7 +62,7 @@ const Register = props => {
     if (error !== '') {
       setTimeout(() => {
         setError('')
-      }, [5000])
+      }, [popup_timer])
     }
   }, [error])
 

@@ -30,6 +30,7 @@ import {
 import { TagsContainer } from '../styles/post'
 
 import { Section } from '../styles'
+import { popup_timer } from '../util/shared'
 
 const PostDetails = ({ user, match, dark }) => {
   const id = match.params.id
@@ -51,7 +52,7 @@ const PostDetails = ({ user, match, dark }) => {
     if (alert !== '') {
       setTimeout(() => {
         setAlert('')
-      }, [5000])
+      }, [popup_timer])
     }
   }, [alert])
 

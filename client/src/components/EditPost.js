@@ -7,6 +7,7 @@ import formSchema from '../validation/FormSchema'
 import Loader from 'react-loader-spinner'
 import imageUploader from '../util/imageUploader'
 import axiosCall from '../api/axiosCall'
+import { popup_timer } from '../util/shared'
 
 import Popup from './Popup'
 
@@ -107,7 +108,7 @@ const EditPost = ({ match, dark }) => {
     if (error !== '') {
       setTimeout(() => {
         setError('')
-      }, [5000])
+      }, [popup_timer])
     }
   }, [error])
 

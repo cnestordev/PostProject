@@ -6,6 +6,7 @@ import Popup from './Popup'
 
 import { Section } from '../styles'
 import { Header } from '../styles/postMin'
+import { popup_timer } from '../util/shared'
 
 const UserComments = ({ user, dark }) => {
   const [commentsData, setCommentsData] = useState([])
@@ -29,7 +30,7 @@ const UserComments = ({ user, dark }) => {
     if (error !== '') {
       setTimeout(() => {
         setError('')
-      }, [5000])
+      }, [popup_timer])
     }
   }, [error])
 

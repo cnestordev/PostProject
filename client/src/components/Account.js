@@ -4,6 +4,7 @@ import axiosCall from '../api/axiosCall'
 import { useHistory } from 'react-router-dom'
 import { logOutUser } from '../redux/actions/users.actions'
 import Popup from './Popup'
+import {popup_timer} from '../util/shared'
 
 import Loader from 'react-loader-spinner'
 
@@ -47,7 +48,7 @@ const Account = ({ user, dark, toggler, logOutUser, errorMsg }) => {
     if (error !== '') {
       setTimeout(() => {
         setError('')
-      }, [5000])
+      }, [popup_timer])
     }
   }, [error])
 

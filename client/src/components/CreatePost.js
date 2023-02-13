@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
 import * as yup from 'yup'
 import formSchema from '../validation/FormSchema'
+import { popup_timer } from '../util/shared'
 
 import Loader from 'react-loader-spinner'
 import imageUploader from '../util/imageUploader'
@@ -63,7 +64,7 @@ const CreatePost = ({ dark }) => {
     if (error !== '') {
       setTimeout(() => {
         setError('')
-      }, [5000])
+      }, [popup_timer])
     }
   }, [error])
 

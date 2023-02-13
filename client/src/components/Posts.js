@@ -7,6 +7,7 @@ import SearchBar from './SearchBar'
 import Popup from './Popup'
 
 import { Section } from '../styles/index'
+import { popup_timer } from '../util/shared'
 
 const Posts = props => {
   const [filter, setFilter] = useState('timestamp')
@@ -26,7 +27,7 @@ const Posts = props => {
     if (error !== '') {
       setTimeout(() => {
         setError('')
-      }, [5000])
+      }, [popup_timer])
     }
   }, [error])
 
